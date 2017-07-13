@@ -61,19 +61,34 @@ didApplyChangesWithPolygon:(nonnull SBSDKPolygon *)polygon
  */
 @interface SBSDKCropViewController : UIViewController
 
-/** The uncropped input image. **/
+/** 
+ The uncropped input image. If polygon is nil, the receiver tries to detect and set a polygon from the image.
+ Must be called on main-thread!
+ **/
 @property(nonatomic, strong, nonnull) UIImage *image;
 
-/** The current polygon. **/
-@property(nonatomic, copy, nonnull) SBSDKPolygon *polygon;
+/** 
+ The current polygon. If nil, the standard fully enclosing polygon is used.
+ Must be called on main-thread!
+ **/
+@property(nonatomic, copy, nullable) SBSDKPolygon *polygon;
 
-/** The rendered color of unsnapped edges. **/
+/** 
+ The rendered color of unsnapped edges.
+ Must be called on main-thread!
+ **/
 @property(nonatomic, strong, nonnull) UIColor *edgeColor;
 
-/** The rendered color of magnetically snapped edges. **/
+/** 
+ The rendered color of magnetically snapped edges. 
+ Must be called on main-thread!
+ **/
 @property(nonatomic, strong, nonnull) UIColor *magneticEdgeColor;
 
-/** Cropped image as result of applying polygon to image. **/
+/** 
+ Cropped image as result of applying polygon to image.
+ Must be called on main-thread!
+ **/
 @property(nonatomic, readonly, nonnull) UIImage *croppedImage;
 
 /** Delegate for result callback methods. **/

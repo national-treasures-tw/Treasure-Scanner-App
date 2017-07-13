@@ -251,6 +251,13 @@ shouldRotateInterfaceForDeviceOrientation:(UIDeviceOrientation)orientation
 @property (nonatomic, assign) CGFloat imageScale;
 
 /**
+ * Sensitivity factor for automatic capturing. Must be in the range [0.0...1.0].
+ * Invalid values are threated as 1.0. Defaults to 0.66 (1 sec).s
+ * A value of 1.0 triggers automatic capturing immediately, a value of 0.0 delays the automatic by 3 seconds.
+ */
+@property (nonatomic, assign) CGFloat autoCaptureSensitivity;
+
+/**
  * The minimum size in percent (0 - 100) of the screen size to accept a detected document.
  * It is sufficient that height or width match the score. Default is 80.0.
  * Warning: Lower values result in low resolution document images.

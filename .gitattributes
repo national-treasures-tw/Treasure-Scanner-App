@@ -1,2 +1,1 @@
 *.pbxproj -text
-ScanbotSDK filter=lfs diff=lfs merge=lfs -text

@@ -10,8 +10,8 @@
 @property (strong, nonatomic) SBSDKScannerViewController *scannerViewController;
 @property (assign, nonatomic) BOOL viewAppeared;
 
-- (IBAction) once: (RCTPromiseResolveBlock)resolve
-         rejecter: (RCTPromiseRejectBlock)reject;
+- (IBAction) resolve: (RCTPromiseResolveBlock)resolve
+							reject: (RCTPromiseRejectBlock)reject;
 
 @end
 

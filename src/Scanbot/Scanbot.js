@@ -18,6 +18,13 @@ export const SBSDKImageMode = {
   SBSDKImageModeColor
 };
 
+const { SBSDKShutterModeSmart, SBSDKShutterModeAlwaysAuto, SBSDKShutterModeAlwaysManual } = SBScanbot.SBSDKShutterMode;
+export const SBSDKShutterMode = {
+  SBSDKShutterModeSmart,
+  SBSDKShutterModeAlwaysAuto,
+  SBSDKShutterModeAlwaysManual
+};
+
 // Methods
 
 /**

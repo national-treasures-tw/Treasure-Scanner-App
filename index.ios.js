@@ -10,7 +10,8 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  StatusBar
 } from 'react-native';
 
 import * as Scanbot from './src/Scanbot/Scanbot';
@@ -27,14 +28,16 @@ export default class ScanbotExample extends Component {
 
   onPress = async () => {
     try {
+      StatusBar.setHidden(true, true);
       const images = await Scanbot.scan({
         imageScale: 1,
         autoCaptureSensitivity: 0.66,
         acceptedSizeScore: 80,
         acceptedAngleScore: 75,
-        imageMode: Scanbot.SBSDKImageMode.SBSDKImageModeColor,
+        initialImageMode: Scanbot.SBSDKImageMode.SBSDKImageModeColor,
+        initialShutterMode: Scanbot.SBSDKShutterMode.SBSDKShutterModeSmart,
       });
-
+      StatusBar.setHidden(false, true);
       this.setState({ images: images });
     } catch (ex) {
       this.setState({ error: `Scanning Failed ${ex}` });

@@ -2,29 +2,69 @@
 
 #import <React/RCTUtils.h>
 #import <React/RCTLog.h>
+#import <React/RCTConvert.h>
+#import "SBHud.h"
 
 @implementation SBScanbotViewController {
 	NSDictionary *_options;
 	RCTPromiseResolveBlock _resolve;
 	RCTPromiseRejectBlock _reject;
+
+	SBHud *hud;
 }
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
+	// Create an image storage to save the captured document images to
+	self.imageStorage = [[SBSDKImageStorage alloc] init];
+
 	// Create the SBSDKScannerViewController.
 	// We want it to be embedded into self.
 	// As we do not want automatic image storage we pass nil here for the image storage.
-	self.scannerViewController = [[SBSDKScannerViewController alloc] initWithParentViewController:self imageStorage:nil];
+	self.scannerViewController = [[SBSDKScannerViewController alloc] initWithParentViewController:self
+	                                                                                 imageStorage:nil];
 
 	// Set the delegate to self.
 	self.scannerViewController.delegate = self;
 
-	// We want unscaled images in full 5 or 8 MPixel size.
-	self.scannerViewController.imageScale = 1.0f;
+	if (_options[@"imageScale"]) {
+		self.scannerViewController.imageScale = [_options[@"imageScale"] floatValue];
+	}
+
+	if (_options[@"autoCaptureSensitivity"]) {
+		self.scannerViewController.autoCaptureSensitivity = [_options[@"autoCaptureSensitivity"] floatValue];
+	}
+
+	if (_options[@"acceptedSizeScore"]) {
+		self.scannerViewController.acceptedSizeScore = [_options[@"acceptedSizeScore"] doubleValue];
+	}
+
+	if (_options[@"acceptedAngleScore"]) {
+		self.scannerViewController.acceptedAngleScore = [_options[@"acceptedAngleScore"] doubleValue];
+	}
+
+	if (_options[@"imageMode"]) {
+		self.scannerViewController.imageMode = (SBSDKImageMode)[_options[@"imageMode"] integerValue];
+	}
+
+	[self setupHUD];
 }
 
-- (void)resolve: (RCTPromiseResolveBlock)resolve reject: (RCTPromiseRejectBlock)reject {
+- (void) setupHUD {
+	hud = [[[NSBundle mainBundle] loadNibNamed:@"SBHud" owner:self options:nil] firstObject];
+
+	[hud setBackgroundColor:[UIColor clearColor]];
+	[hud.documentCountLabel setText:@""];
+
+	[self.scannerViewController.HUDView addSubview:hud];
+}
+
+- (void) scan:(NSDictionary *)options
+			resolve:(RCTPromiseResolveBlock)resolve
+			 reject:(RCTPromiseRejectBlock)reject {
+
+	_options = options;
 	_resolve = resolve;
 	_reject = reject;
 
@@ -49,7 +89,7 @@
 	return NO;
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
 	// Only portrait.
 	return UIInterfaceOrientationMaskPortrait;
 }
@@ -59,6 +99,27 @@
 	return UIStatusBarStyleLightContent;
 }
 
+- (void)dismissController {
+	if (_resolve != nil) {
+
+		NSUInteger imageCount = [self.imageStorage imageCount];
+		NSMutableArray *images = [NSMutableArray arrayWithCapacity:imageCount];
+
+		for (int i = 0; i < imageCount; i++) {
+			UIImage *image = [self.imageStorage imageAtIndex:i];
+			NSData *data = UIImageJPEGRepresentation(image, 0.9);
+			[images addObject:[data base64EncodedStringWithOptions: NSDataBase64Encoding64CharacterLineLength]];
+		}
+
+		_resolve(images);
+		_resolve = nil;
+
+		[self dismissViewControllerAnimated:NO completion:nil];
+	}
+}
+
+
+
 #pragma mark - SBSDKScannerViewControllerDelegate
 
 - (BOOL)scannerControllerShouldAnalyseVideoFrame:(SBSDKScannerViewController *)controller {
@@ -66,26 +127,16 @@
 	return self.viewAppeared && self.presentedViewController == nil;
 }
 
-- (void)scannerController:(SBSDKScannerViewController *)controller didCaptureDocumentImage:(UIImage *)image {
-	if (_resolve != nil) {//
-		NSData *data = UIImageJPEGRepresentation(image, 0.9);
-		NSString *img = [data base64EncodedStringWithOptions: NSDataBase64Encoding64CharacterLineLength];
-		_resolve(img);
-		_resolve = nil;
-
-		[self dismissViewControllerAnimated:NO completion:nil];
-	}
-}
-
-- (void)scannerController:(SBSDKScannerViewController *)controller didCaptureImage:(CMSampleBufferRef)sampleBuffer {
-	// Here we get the full image from the camera. We could run another manual detection here or use the latest
-	// detected polygon from the video stream to process the image with.
-}
-
 - (void)scannerController:(SBSDKScannerViewController *)controller
-				 didDetectPolygon:(SBSDKPolygon *)polygon
-							 withStatus:(SBSDKDocumentDetectionStatus)status {
-	// Everytime the document detector finishes detection it calls this delegate method.
+	didCaptureDocumentImage:(UIImage *)image {
+
+	[self.imageStorage addImage:image];
+
+	NSUInteger imageCount = [self.imageStorage imageCount];
+	hud.documentCountLabel.text = [NSString stringWithFormat:@"%d Document%@", (int)imageCount, imageCount == 1 ? @"" : @"s"];
+	if(imageCount == 3) {
+		[self dismissController];
+	}
 }
 
 - (UIView *)scannerController:(SBSDKScannerViewController *)controller

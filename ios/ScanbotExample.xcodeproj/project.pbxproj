@@ -39,6 +39,9 @@
 		443238BC1F17AF1400B0FFD8 /* pdf.ttx in Sources */ = {isa = PBXBuildFile; fileRef = 443238A21F17AE5F00B0FFD8 /* pdf.ttx */; };
 		443238BD1F17AF1700B0FFD8 /* ScanbotSDKCreditCardData.bundle in Sources */ = {isa = PBXBuildFile; fileRef = 443238A91F17AE5F00B0FFD8 /* ScanbotSDKCreditCardData.bundle */; };
 		443238C01F17B06600B0FFD8 /* ScanbotSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4432386E1F17AE0300B0FFD8 /* ScanbotSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		444ED88A1F1CED4600F9C9FA /* SBHud.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444ED8891F1CED4600F9C9FA /* SBHud.xib */; };
+		444ED8A61F1CEF1000F9C9FA /* SBHud.m in Sources */ = {isa = PBXBuildFile; fileRef = 444ED8A51F1CEF1000F9C9FA /* SBHud.m */; };
+		4D0FAF4DE7FD42B7EED74A4C /* RCTConvert+Enums.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0FA7ADFFCB556E3E3F5498 /* RCTConvert+Enums.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
@@ -274,6 +277,11 @@
 		443238A11F17AE5F00B0FFD8 /* pdf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pdf.ttf; sourceTree = "<group>"; };
 		443238A21F17AE5F00B0FFD8 /* pdf.ttx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pdf.ttx; sourceTree = "<group>"; };
 		443238A91F17AE5F00B0FFD8 /* ScanbotSDKCreditCardData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ScanbotSDKCreditCardData.bundle; path = ScanbotSDK/AdditionalData/ScanbotSDKCreditCardData.bundle; sourceTree = "<group>"; };
+		444ED8891F1CED4600F9C9FA /* SBHud.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SBHud.xib; path = ScanbotExample/Scanbot/SBHud.xib; sourceTree = "<group>"; };
+		444ED8A41F1CEF1000F9C9FA /* SBHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBHud.h; sourceTree = "<group>"; };
+		444ED8A51F1CEF1000F9C9FA /* SBHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBHud.m; sourceTree = "<group>"; };
+		4D0FA7ADFFCB556E3E3F5498 /* RCTConvert+Enums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RCTConvert+Enums.m"; path = "ScanbotExample/Scanbot/RCTConvert+Enums.m"; sourceTree = "<group>"; };
+		4D0FAD2E3795E6751352AB80 /* RCTConvert+Enums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RCTConvert+Enums.h"; path = "ScanbotExample/Scanbot/RCTConvert+Enums.h"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -433,6 +441,11 @@
 				443238971F17AE5200B0FFD8 /* SBScanbot.m */,
 				443238981F17AE5200B0FFD8 /* SBScanbotViewController.h */,
 				443238991F17AE5200B0FFD8 /* SBScanbotViewController.m */,
+				4D0FA7ADFFCB556E3E3F5498 /* RCTConvert+Enums.m */,
+				4D0FAD2E3795E6751352AB80 /* RCTConvert+Enums.h */,
+				444ED8891F1CED4600F9C9FA /* SBHud.xib */,
+				444ED8A41F1CEF1000F9C9FA /* SBHud.h */,
+				444ED8A51F1CEF1000F9C9FA /* SBHud.m */,
 			);
 			name = Scanbot;
 			sourceTree = "<group>";
@@ -833,6 +846,7 @@
 				443238AC1F17AE5F00B0FFD8 /* eng.traineddata in Resources */,
 				443238AB1F17AE5F00B0FFD8 /* deu.traineddata in Resources */,
 				443238AA1F17AE5F00B0FFD8 /* deu-frak.traineddata in Resources */,
+				444ED88A1F1CED4600F9C9FA /* SBHud.xib in Resources */,
 				443238AE1F17AE5F00B0FFD8 /* pdf.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				443238AD1F17AE5F00B0FFD8 /* osd.traineddata in Resources */,
@@ -893,11 +907,13 @@
 				443238B91F17AF1400B0FFD8 /* eng.traineddata in Sources */,
 				443238BA1F17AF1400B0FFD8 /* osd.traineddata in Sources */,
 				443238BB1F17AF1400B0FFD8 /* pdf.ttf in Sources */,
+				444ED8A61F1CEF1000F9C9FA /* SBHud.m in Sources */,
 				443238BC1F17AF1400B0FFD8 /* pdf.ttx in Sources */,
 				4432389A1F17AE5200B0FFD8 /* SBScanbot.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				4432389B1F17AE5200B0FFD8 /* SBScanbotViewController.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				4D0FAF4DE7FD42B7EED74A4C /* RCTConvert+Enums.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

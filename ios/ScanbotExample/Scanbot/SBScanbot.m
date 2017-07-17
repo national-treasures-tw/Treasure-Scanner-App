@@ -20,8 +20,18 @@
 RCT_EXPORT_MODULE()
 
 - (NSDictionary *)constantsToExport {
-	return @{};
-}
+	return @{
+		@"SBSDKShutterMode": @{
+			@"SBSDKShutterModeSmart" : @(SBSDKShutterModeSmart),
+			@"SBSDKShutterModeAlwaysAuto" : @(SBSDKShutterModeAlwaysAuto),
+			@"SBSDKShutterModeAlwaysManual" : @(SBSDKShutterModeAlwaysManual)
+		},
+		@"SBSDKImageMode": @{
+			@"SBSDKImageModeColor" : @(SBSDKImageModeColor),
+			@"SBSDKImageModeGrayscale" : @(SBSDKImageModeGrayscale)
+		}
+	};
+};
 
 RCT_EXPORT_METHOD(setLicense:(NSString *)license) {
 	[ScanbotSDK setLicense: license];
@@ -31,7 +41,7 @@ RCT_EXPORT_METHOD(scan:(NSDictionary *)options
 									resolver:(RCTPromiseResolveBlock)resolve
 									rejecter:(RCTPromiseRejectBlock)reject) {
 	SBScanbotViewController* scanController = [[SBScanbotViewController alloc] init];
-	[scanController resolve:resolve reject:reject];
+	[scanController scan:options resolve:resolve reject:reject];
 }
 
 

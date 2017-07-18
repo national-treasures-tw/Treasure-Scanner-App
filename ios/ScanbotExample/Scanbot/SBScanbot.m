@@ -1,6 +1,7 @@
 #import "SBScanbot.h"
 
 #import "SBScanbotViewController.h"
+#import "SBConsts.h"
 
 @implementation SBScanbot
 
@@ -21,15 +22,22 @@ RCT_EXPORT_MODULE()
 
 - (NSDictionary *)constantsToExport {
 	return @{
-		@"SBSDKShutterMode": @{
-			@"SBSDKShutterModeSmart" : @(SBSDKShutterModeSmart),
-			@"SBSDKShutterModeAlwaysAuto" : @(SBSDKShutterModeAlwaysAuto),
-			@"SBSDKShutterModeAlwaysManual" : @(SBSDKShutterModeAlwaysManual)
-		},
-		@"SBSDKImageMode": @{
-			@"SBSDKImageModeColor" : @(SBSDKImageModeColor),
-			@"SBSDKImageModeGrayscale" : @(SBSDKImageModeGrayscale)
-		}
+		@"SBSDKImageModeColor" : @(SBSDKImageModeColor),
+		@"SBSDKImageModeGrayscale" : @(SBSDKImageModeGrayscale),
+
+		@"SBSDKShutterModeSmart" : @(SBSDKShutterModeSmart),
+		@"SBSDKShutterModeAlwaysAuto" : @(SBSDKShutterModeAlwaysAuto),
+		@"SBSDKShutterModeAlwaysManual" : @(SBSDKShutterModeAlwaysManual),
+
+		@"SBSDKDocumentDetectionStatusOK" : @(SBSDKDocumentDetectionStatusOK),
+		@"SBSDKDocumentDetectionStatusOK_SmallSize" : @(SBSDKDocumentDetectionStatusOK_SmallSize),
+		@"SBSDKDocumentDetectionStatusOK_BadAngles" : @(SBSDKDocumentDetectionStatusOK_BadAngles),
+		@"SBSDKDocumentDetectionStatusOK_BadAspectRatio" : @(SBSDKDocumentDetectionStatusOK_BadAspectRatio),
+		@"SBSDKDocumentDetectionStatusOK_Capturing" : @(SBSDKDocumentDetectionStatusOK_Capturing),
+
+		@"SBSDKDocumentDetectionStatusError_NothingDetected" : @(SBSDKDocumentDetectionStatusError_NothingDetected),
+		@"SBSDKDocumentDetectionStatusError_Brightness" : @(SBSDKDocumentDetectionStatusError_Brightness),
+		@"SBSDKDocumentDetectionStatusError_Noise" : @(SBSDKDocumentDetectionStatusError_Noise)
 	};
 };
 
@@ -38,9 +46,10 @@ RCT_EXPORT_METHOD(setLicense:(NSString *)license) {
 }
 
 RCT_EXPORT_METHOD(scan:(NSDictionary *)options
-									resolver:(RCTPromiseResolveBlock)resolve
-									rejecter:(RCTPromiseRejectBlock)reject) {
-	SBScanbotViewController* scanController = [[SBScanbotViewController alloc] init];
+		resolver:(RCTPromiseResolveBlock)resolve
+		rejecter:(RCTPromiseRejectBlock)reject) {
+
+	SBScanbotViewController* scanController = [[[NSBundle mainBundle] loadNibNamed:@"SBScanbotViewController" owner:self options:nil] firstObject];
 	[scanController scan:options resolve:resolve reject:reject];
 }
 

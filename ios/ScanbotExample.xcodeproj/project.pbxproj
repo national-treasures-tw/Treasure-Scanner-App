@@ -22,6 +22,8 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		442DF85F1F1E613800A26150 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 442DF85E1F1E613800A26150 /* UIColor+Hex.m */; };
+		442DF8621F1E613F00A26150 /* SBConsts.m in Sources */ = {isa = PBXBuildFile; fileRef = 442DF8611F1E613F00A26150 /* SBConsts.m */; };
 		4432389A1F17AE5200B0FFD8 /* SBScanbot.m in Sources */ = {isa = PBXBuildFile; fileRef = 443238971F17AE5200B0FFD8 /* SBScanbot.m */; };
 		4432389B1F17AE5200B0FFD8 /* SBScanbotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 443238991F17AE5200B0FFD8 /* SBScanbotViewController.m */; };
 		443238AA1F17AE5F00B0FFD8 /* deu-frak.traineddata in Resources */ = {isa = PBXBuildFile; fileRef = 4432389D1F17AE5F00B0FFD8 /* deu-frak.traineddata */; };
@@ -39,8 +41,8 @@
 		443238BC1F17AF1400B0FFD8 /* pdf.ttx in Sources */ = {isa = PBXBuildFile; fileRef = 443238A21F17AE5F00B0FFD8 /* pdf.ttx */; };
 		443238BD1F17AF1700B0FFD8 /* ScanbotSDKCreditCardData.bundle in Sources */ = {isa = PBXBuildFile; fileRef = 443238A91F17AE5F00B0FFD8 /* ScanbotSDKCreditCardData.bundle */; };
 		443238C01F17B06600B0FFD8 /* ScanbotSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4432386E1F17AE0300B0FFD8 /* ScanbotSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		444ED88A1F1CED4600F9C9FA /* SBHud.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444ED8891F1CED4600F9C9FA /* SBHud.xib */; };
-		444ED8A61F1CEF1000F9C9FA /* SBHud.m in Sources */ = {isa = PBXBuildFile; fileRef = 444ED8A51F1CEF1000F9C9FA /* SBHud.m */; };
+		444ED8A81F1D009400F9C9FA /* SBScanbotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444ED8A71F1D009400F9C9FA /* SBScanbotViewController.xib */; };
+		444ED8AC1F1D0B2C00F9C9FA /* SBHud.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444ED8AB1F1D0B2C00F9C9FA /* SBHud.xib */; };
 		4D0FAF4DE7FD42B7EED74A4C /* RCTConvert+Enums.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0FA7ADFFCB556E3E3F5498 /* RCTConvert+Enums.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -265,6 +267,10 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ScanbotExample/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ScanbotExample/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		442DF85D1F1E613800A26150 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Hex.h"; path = "ScanbotExample/UIColor+Hex.h"; sourceTree = "<group>"; };
+		442DF85E1F1E613800A26150 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Hex.m"; path = "ScanbotExample/UIColor+Hex.m"; sourceTree = "<group>"; };
+		442DF8601F1E613F00A26150 /* SBConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBConsts.h; path = ScanbotExample/Scanbot/SBConsts.h; sourceTree = "<group>"; };
+		442DF8611F1E613F00A26150 /* SBConsts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBConsts.m; path = ScanbotExample/Scanbot/SBConsts.m; sourceTree = "<group>"; };
 		4432386E1F17AE0300B0FFD8 /* ScanbotSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScanbotSDK.framework; path = ScanbotSDK/ScanbotSDK.framework; sourceTree = "<group>"; };
 		443238961F17AE5200B0FFD8 /* SBScanbot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBScanbot.h; path = ScanbotExample/Scanbot/SBScanbot.h; sourceTree = "<group>"; };
 		443238971F17AE5200B0FFD8 /* SBScanbot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBScanbot.m; path = ScanbotExample/Scanbot/SBScanbot.m; sourceTree = "<group>"; };
@@ -277,9 +283,8 @@
 		443238A11F17AE5F00B0FFD8 /* pdf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pdf.ttf; sourceTree = "<group>"; };
 		443238A21F17AE5F00B0FFD8 /* pdf.ttx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pdf.ttx; sourceTree = "<group>"; };
 		443238A91F17AE5F00B0FFD8 /* ScanbotSDKCreditCardData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ScanbotSDKCreditCardData.bundle; path = ScanbotSDK/AdditionalData/ScanbotSDKCreditCardData.bundle; sourceTree = "<group>"; };
-		444ED8891F1CED4600F9C9FA /* SBHud.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SBHud.xib; path = ScanbotExample/Scanbot/SBHud.xib; sourceTree = "<group>"; };
-		444ED8A41F1CEF1000F9C9FA /* SBHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBHud.h; sourceTree = "<group>"; };
-		444ED8A51F1CEF1000F9C9FA /* SBHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBHud.m; sourceTree = "<group>"; };
+		444ED8A71F1D009400F9C9FA /* SBScanbotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SBScanbotViewController.xib; path = ScanbotExample/Scanbot/SBScanbotViewController.xib; sourceTree = "<group>"; };
+		444ED8AB1F1D0B2C00F9C9FA /* SBHud.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SBHud.xib; path = ScanbotExample/Scanbot/SBHud.xib; sourceTree = "<group>"; };
 		4D0FA7ADFFCB556E3E3F5498 /* RCTConvert+Enums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RCTConvert+Enums.m"; path = "ScanbotExample/Scanbot/RCTConvert+Enums.m"; sourceTree = "<group>"; };
 		4D0FAD2E3795E6751352AB80 /* RCTConvert+Enums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RCTConvert+Enums.h"; path = "ScanbotExample/Scanbot/RCTConvert+Enums.h"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -404,6 +409,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				442DF85D1F1E613800A26150 /* UIColor+Hex.h */,
+				442DF85E1F1E613800A26150 /* UIColor+Hex.m */,
 				443238951F17AE3B00B0FFD8 /* Scanbot */,
 				443238941F17AE3500B0FFD8 /* Supporting Files */,
 			);
@@ -441,11 +448,12 @@
 				443238971F17AE5200B0FFD8 /* SBScanbot.m */,
 				443238981F17AE5200B0FFD8 /* SBScanbotViewController.h */,
 				443238991F17AE5200B0FFD8 /* SBScanbotViewController.m */,
-				4D0FA7ADFFCB556E3E3F5498 /* RCTConvert+Enums.m */,
+				444ED8A71F1D009400F9C9FA /* SBScanbotViewController.xib */,
+				444ED8AB1F1D0B2C00F9C9FA /* SBHud.xib */,
 				4D0FAD2E3795E6751352AB80 /* RCTConvert+Enums.h */,
-				444ED8891F1CED4600F9C9FA /* SBHud.xib */,
-				444ED8A41F1CEF1000F9C9FA /* SBHud.h */,
-				444ED8A51F1CEF1000F9C9FA /* SBHud.m */,
+				4D0FA7ADFFCB556E3E3F5498 /* RCTConvert+Enums.m */,
+				442DF8601F1E613F00A26150 /* SBConsts.h */,
+				442DF8611F1E613F00A26150 /* SBConsts.m */,
 			);
 			name = Scanbot;
 			sourceTree = "<group>";
@@ -583,7 +591,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = QQ4W3267EQ;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = QQ4W3267EQ;
 					};
 				};
 			};
@@ -845,10 +857,11 @@
 				443238B61F17AE5F00B0FFD8 /* ScanbotSDKCreditCardData.bundle in Resources */,
 				443238AC1F17AE5F00B0FFD8 /* eng.traineddata in Resources */,
 				443238AB1F17AE5F00B0FFD8 /* deu.traineddata in Resources */,
+				444ED8A81F1D009400F9C9FA /* SBScanbotViewController.xib in Resources */,
 				443238AA1F17AE5F00B0FFD8 /* deu-frak.traineddata in Resources */,
-				444ED88A1F1CED4600F9C9FA /* SBHud.xib in Resources */,
 				443238AE1F17AE5F00B0FFD8 /* pdf.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				444ED8AC1F1D0B2C00F9C9FA /* SBHud.xib in Resources */,
 				443238AD1F17AE5F00B0FFD8 /* osd.traineddata in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				443238AF1F17AE5F00B0FFD8 /* pdf.ttx in Resources */,
@@ -907,13 +920,14 @@
 				443238B91F17AF1400B0FFD8 /* eng.traineddata in Sources */,
 				443238BA1F17AF1400B0FFD8 /* osd.traineddata in Sources */,
 				443238BB1F17AF1400B0FFD8 /* pdf.ttf in Sources */,
-				444ED8A61F1CEF1000F9C9FA /* SBHud.m in Sources */,
 				443238BC1F17AF1400B0FFD8 /* pdf.ttx in Sources */,
 				4432389A1F17AE5200B0FFD8 /* SBScanbot.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				4432389B1F17AE5200B0FFD8 /* SBScanbotViewController.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				4D0FAF4DE7FD42B7EED74A4C /* RCTConvert+Enums.m in Sources */,
+				442DF8621F1E613F00A26150 /* SBConsts.m in Sources */,
+				442DF85F1F1E613800A26150 /* UIColor+Hex.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -944,7 +958,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = QQ4W3267EQ;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -966,7 +980,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = QQ4W3267EQ;
 				INFOPLIST_FILE = ScanbotExampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -985,7 +999,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = QQ4W3267EQ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/ScanbotSDK/**",
 					"$(PROJECT_DIR)/ScanbotSDK",
@@ -1010,7 +1024,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = QQ4W3267EQ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/ScanbotSDK/**",
 					"$(PROJECT_DIR)/ScanbotSDK",

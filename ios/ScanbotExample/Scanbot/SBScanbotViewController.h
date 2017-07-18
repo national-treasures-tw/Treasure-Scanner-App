@@ -7,13 +7,9 @@
 
 @interface SBScanbotViewController : UIViewController<SBSDKScannerViewControllerDelegate>
 
-@property (strong, nonatomic) SBSDKScannerViewController *scannerViewController;
-@property (strong, nonatomic) SBSDKImageStorage *imageStorage;
-@property (assign, nonatomic) BOOL viewAppeared;
-
 - (void) scan:(NSDictionary *)options
-			resolve:(RCTPromiseResolveBlock)resolve
-			 reject:(RCTPromiseRejectBlock)reject;
+			resolve:(RCTPromiseResolveBlock)resolver
+			 reject:(RCTPromiseRejectBlock)rejecter;
 
 @end
 

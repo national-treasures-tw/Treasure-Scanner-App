@@ -11,31 +11,17 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SBHud">
-            <rect key="frame" x="0.0" y="0.0" width="515" height="667"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Document" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sfp-e7-3Da">
-                    <rect key="frame" x="20" y="44" width="112" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="oQU-SG-wXM"/>
-                        <constraint firstAttribute="width" constant="112" id="t6x-vf-2l4"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="USX-Xy-nAJ">
+                    <rect key="frame" x="0.0" y="567" width="375" height="100"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.24646832190000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <constraints>
-                <constraint firstItem="Sfp-e7-3Da" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="44" id="9Dc-LM-rj5"/>
-                <constraint firstItem="Sfp-e7-3Da" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="BFE-k6-Me3"/>
-            </constraints>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outlet property="documentCountLabel" destination="Sfp-e7-3Da" id="YgG-IA-CqE"/>
-            </connections>
-            <point key="canvasLocation" x="86.5" y="27.5"/>
+            <point key="canvasLocation" x="32.5" y="98.5"/>
         </view>
     </objects>
 </document>

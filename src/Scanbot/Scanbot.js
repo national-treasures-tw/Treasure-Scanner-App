@@ -88,6 +88,26 @@ const Scanbot = {
     PropTypes.checkPropTypes(scanPropTypes, options, 'prop', 'scan');
     return SBScanbot.scan(options);
   },
+
+  /**
+   * SBScanbot.scan(document);
+   *
+   * Document:
+   *
+   * - image:
+   *    Base64 encoded image (Cropped)
+   *
+   * - originalImage:
+   *    Base64 encoded image (Not cropped)
+   *
+   * - polygons:
+   *    An array of 8 floats containing the normalized coordinates of the crop
+   *    in the form [x1, y1, x2, y2, x3, y3, x4, y4].
+   */
+  crop: (document) => {
+    PropTypes.checkPropTypes(documentPropTypes, document, 'prop', 'scan');
+    return SBScanbot.crop(document);
+  },
 };
 
 const rangeProptype = (min, max) => (props, propName, componentName) => {
@@ -97,6 +117,12 @@ const rangeProptype = (min, max) => (props, propName, componentName) => {
       `${props[propName]} is not in ${min}...${max} range.`
     );
   }
+};
+
+const documentPropTypes = {
+  image: PropTypes.string.isRequired,
+  originalImage: PropTypes.string.isRequired,
+  polygons: PropTypes.arrayOf(PropTypes.number),
 };
 
 const scanPropTypes = {

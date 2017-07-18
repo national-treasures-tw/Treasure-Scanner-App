@@ -1,6 +1,7 @@
 #import "SBScanbot.h"
 
 #import "SBScanbotViewController.h"
+#import "SBScanbotCropViewController.h"
 #import "SBConsts.h"
 
 @implementation SBScanbot
@@ -46,11 +47,29 @@ RCT_EXPORT_METHOD(setLicense:(NSString *)license) {
 }
 
 RCT_EXPORT_METHOD(scan:(NSDictionary *)options
-		resolver:(RCTPromiseResolveBlock)resolve
-		rejecter:(RCTPromiseRejectBlock)reject) {
+									resolver:(RCTPromiseResolveBlock)resolve
+									rejecter:(RCTPromiseRejectBlock)reject) {
 
 	SBScanbotViewController* scanController = [[[NSBundle mainBundle] loadNibNamed:@"SBScanbotViewController" owner:self options:nil] firstObject];
 	[scanController scan:options resolve:resolve reject:reject];
+
+	dispatch_async(dispatch_get_main_queue(), ^{
+		UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
+		[rootViewController presentViewController:scanController animated:YES completion:NULL];
+	});
+}
+
+RCT_EXPORT_METHOD(crop:(NSDictionary *)document
+									resolver:(RCTPromiseResolveBlock)resolve
+									rejecter:(RCTPromiseRejectBlock)reject) {
+
+	SBScanbotCropViewController* cropController = [[[NSBundle mainBundle] loadNibNamed:@"SBScanbotCropViewController" owner:self options:nil] firstObject];
+	[cropController crop:document resolve:resolve reject:reject];
+
+	dispatch_async(dispatch_get_main_queue(), ^{
+		UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
+		[rootViewController presentViewController:cropController animated:YES completion:NULL];
+	});
 }
 
 

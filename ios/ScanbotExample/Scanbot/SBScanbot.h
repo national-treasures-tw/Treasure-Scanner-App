@@ -4,4 +4,4 @@
 @interface SBScanbot : NSObject <RCTBridgeModule>
 
 @end
-  
+

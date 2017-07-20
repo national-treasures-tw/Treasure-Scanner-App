@@ -161,6 +161,15 @@ export default class DocumentScanner extends Component {
     }
   };
 
+  onRotate = () => {
+    const { documents, scrollIndex } = this.state;
+    const newDocuments = [...documents];
+    newDocuments[scrollIndex] = Object.assign({}, documents[scrollIndex], {
+      rotation: (documents[scrollIndex].rotation || 0) + 90
+    });
+    this.updateDocuments(newDocuments);
+  };
+
   onDelete = () => {
     const { documents, scrollIndex } = this.state;
     this.updateDocuments([
@@ -213,7 +222,11 @@ export default class DocumentScanner extends Component {
                 key={index}
               >
                 <Image
-                  style={styles.image}
+                  style={[
+                    styles.image,
+                    document.rotation ? { transform: [{ rotate: `${document.rotation}deg`}] } : {},
+                    (document.rotation % 90 === 0) ? styles.rotatedImage : {}
+                  ]}
                   source={{ uri: `data:image/jpeg;base64,${document.image}` }}
                 />
               </View>
@@ -234,6 +247,11 @@ export default class DocumentScanner extends Component {
               style={styles.button}
               onPress={() => this.onCrop()}
               title="Crop"
+            />
+            <Button
+              style={styles.button}
+              onPress={this.onRotate}
+              title="Rotate"
             />
             <Button
               style={styles.button}
@@ -268,6 +286,10 @@ const styles = StyleSheet.create({
     width: winSize.width - 40,
     height: winSize.height - 50,
     resizeMode: Image.resizeMode.contain,
+  },
+  rotatedImage: {
+    width: winSize.height - 50,
+    height: winSize.width - 40,
   },
   errorContainer: {
     flex: 1,

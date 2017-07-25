@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -37,13 +38,14 @@
                             <action selector="onCancel:" destination="paA-s9-LJ8" eventType="touchUpInside" id="O5Z-8i-dNo"/>
                         </connections>
                     </button>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rfK-E2-Qse">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rfK-E2-Qse">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gke-xx-RFV">
-                                <rect key="frame" x="225" y="0.0" width="150" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gke-xx-RFV">
+                                <rect key="frame" x="251.5" y="0.0" width="123.5" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="AqA-Wc-sbr"/>
+                                </constraints>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
                                 <state key="normal" title="## Automatic">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -52,9 +54,11 @@
                                     <action selector="onChangeShutterMode:" destination="paA-s9-LJ8" eventType="touchUpInside" id="9Y3-mL-gGQ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGp-Vq-ENq">
-                                <rect key="frame" x="0.0" y="0.0" width="150" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGp-Vq-ENq">
+                                <rect key="frame" x="0.0" y="0.0" width="124" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="c44-fz-Nu3"/>
+                                </constraints>
                                 <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="## Color">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -63,8 +67,32 @@
                                     <action selector="onImageMode:" destination="paA-s9-LJ8" eventType="touchUpInside" id="0Ua-0a-RfR"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Za-VO-V9f">
+                                <rect key="frame" x="126" y="0.0" width="123" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="bqY-e9-uoc"/>
+                                </constraints>
+                                <state key="normal" title="📄">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTypeChange:" destination="paA-s9-LJ8" eventType="touchUpInside" id="h6o-y0-fRI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.24646832190000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="VGp-Vq-ENq" firstAttribute="width" secondItem="rfK-E2-Qse" secondAttribute="width" multiplier="0.33" id="4PZ-RW-O1J"/>
+                            <constraint firstItem="VGp-Vq-ENq" firstAttribute="leading" secondItem="rfK-E2-Qse" secondAttribute="leading" id="AA2-KG-RvF"/>
+                            <constraint firstAttribute="height" constant="40" id="Kjc-Q8-Wqe"/>
+                            <constraint firstItem="1Za-VO-V9f" firstAttribute="top" secondItem="rfK-E2-Qse" secondAttribute="top" id="L9V-2e-Rqu"/>
+                            <constraint firstAttribute="trailing" secondItem="Gke-xx-RFV" secondAttribute="trailing" id="Mkh-zl-HRv"/>
+                            <constraint firstItem="1Za-VO-V9f" firstAttribute="width" secondItem="rfK-E2-Qse" secondAttribute="width" multiplier="0.33" id="VGc-Fx-G3u"/>
+                            <constraint firstItem="Gke-xx-RFV" firstAttribute="top" secondItem="rfK-E2-Qse" secondAttribute="top" id="eoO-g8-BPi"/>
+                            <constraint firstItem="1Za-VO-V9f" firstAttribute="centerX" secondItem="rfK-E2-Qse" secondAttribute="centerX" id="oOe-jI-qM3"/>
+                            <constraint firstItem="Gke-xx-RFV" firstAttribute="width" secondItem="rfK-E2-Qse" secondAttribute="width" multiplier="0.33" id="sO7-ot-Dbn"/>
+                            <constraint firstItem="VGp-Vq-ENq" firstAttribute="top" secondItem="rfK-E2-Qse" secondAttribute="top" id="xPA-kR-vQH"/>
+                        </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDh-pr-pPW">
                         <rect key="frame" x="255" y="567" width="120" height="100"/>
@@ -86,7 +114,10 @@
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="lDh-pr-pPW" secondAttribute="trailing" constant="-16" id="9ab-F5-Ocl"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="rfK-E2-Qse" secondAttribute="trailing" constant="-16" id="Me4-zW-ZZP"/>
                     <constraint firstItem="6SZ-8g-utU" firstAttribute="top" secondItem="PWj-8p-kEd" secondAttribute="bottom" constant="-1" id="ee2-Z5-sZ4"/>
+                    <constraint firstItem="rfK-E2-Qse" firstAttribute="leading" secondItem="siS-hS-d7S" secondAttribute="leadingMargin" constant="-16" id="kMZ-2Q-i0i"/>
+                    <constraint firstItem="rfK-E2-Qse" firstAttribute="top" secondItem="ojI-Ej-Oqf" secondAttribute="bottom" id="m3E-o7-w9s"/>
                     <constraint firstItem="PWj-8p-kEd" firstAttribute="leading" secondItem="siS-hS-d7S" secondAttribute="leadingMargin" constant="-16" id="rvd-eD-UOf"/>
                     <constraint firstItem="6SZ-8g-utU" firstAttribute="top" secondItem="lDh-pr-pPW" secondAttribute="bottom" id="wSI-16-81x"/>
                 </constraints>
@@ -97,6 +128,7 @@
                 <outlet property="doneButton" destination="lDh-pr-pPW" id="TSp-Ir-Kns"/>
                 <outlet property="imageModeButton" destination="VGp-Vq-ENq" id="PjH-18-YA6"/>
                 <outlet property="shutterModeButton" destination="Gke-xx-RFV" id="IR8-V6-IFs"/>
+                <outlet property="typeButton" destination="1Za-VO-V9f" id="9mu-ja-Qwh"/>
             </connections>
             <point key="canvasLocation" x="-466.5" y="-363.5"/>
         </viewController>

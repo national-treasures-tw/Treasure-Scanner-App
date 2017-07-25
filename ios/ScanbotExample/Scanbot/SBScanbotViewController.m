@@ -17,15 +17,18 @@
 @property (strong, nonatomic) SBSDKScannerViewController *scannerViewController;
 @property (strong, nonatomic) SBSDKImageStorage *imageStorage;
 @property (strong, nonatomic) SBSDKImageStorage *originalImageStorage;
-@property (strong, nonatomic) NSMutableArray *polygonStorage;
+@property (strong, nonatomic) NSMutableArray <NSDictionary *> *metaDataStorage;
 
 @property (assign, nonatomic) BOOL viewAppeared;
 @property (assign, nonatomic) BOOL isCapturing;
+@property (assign, nonatomic) BOOL nextIsNonDocument;
+@property (assign, nonatomic) SBSDKShutterMode previousShutterMode;
 
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (weak, nonatomic) IBOutlet UIButton *shutterModeButton;
 @property (weak, nonatomic) IBOutlet UIButton *imageModeButton;
+@property (weak, nonatomic) IBOutlet UIButton *typeButton;
 
 @end
 
@@ -52,8 +55,8 @@
 	// Image storage to save originals to
 	self.originalImageStorage = [[SBSDKImageStorage alloc] init];
 
-	// Array for storing polygons
-	self.polygonStorage = [NSMutableArray new];
+	// Storage for polygons meta data
+	self.metaDataStorage = [NSMutableArray new];
 
 	// Embed in this viewcontroller. No automatic image storage.
 	self.scannerViewController = [[SBSDKScannerViewController alloc] initWithParentViewController:self
@@ -123,6 +126,9 @@
 										 forState:UIControlStateNormal];
 		self.doneButton.hidden = false;
 	}
+
+	self.doneButton.enabled = !self.isCapturing;
+	self.doneButton.alpha = self.isCapturing ? 0.5 : 1;
 }
 
 - (void) updateImageModeButton {
@@ -131,6 +137,9 @@
 	} else {
 		[self.imageModeButton setTitle:[self translationLabelForKey:@"imageMode" enumValue:SBSDKImageModeGrayscale] forState:UIControlStateNormal];
 	}
+
+	self.imageModeButton.enabled = !self.isCapturing;
+	self.imageModeButton.alpha = self.isCapturing ? 0.5 : 1;
 }
 
 - (void) updateShutterModeButton {
@@ -141,6 +150,30 @@
 	} else {
 		[self.shutterModeButton setTitle:[self translationLabelForKey:@"shutterMode" enumValue:SBSDKShutterModeAlwaysManual] forState:UIControlStateNormal];
 	}
+
+	self.shutterModeButton.enabled = !self.isCapturing;
+	self.shutterModeButton.alpha = self.isCapturing ? 0.5 : 1;
+}
+
+- (void) updateTypeButton {
+	if(self.nextIsNonDocument) {
+		[self.typeButton setTitle:@"📦" forState:UIControlStateNormal];
+	} else {
+		[self.typeButton setTitle:@"📄" forState:UIControlStateNormal];
+	}
+
+	self.typeButton.enabled = !self.isCapturing;
+	self.typeButton.alpha = self.isCapturing ? 0.5 : 1;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	self.viewAppeared = NO;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	self.viewAppeared = YES;
 }
 
 #pragma mark - User actions
@@ -157,17 +190,7 @@
 	[self updateDoneButton];
 	[self updateImageModeButton];
 	[self updateShutterModeButton];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-	self.viewAppeared = NO;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-	self.viewAppeared = YES;
-	
+	[self updateTypeButton];
 }
 
 - (IBAction)onChangeShutterMode:(UIButton *)sender {
@@ -191,6 +214,17 @@
 
 	[self updateImageModeButton];
 }
+
+- (IBAction)onTypeChange:(UIButton *)sender {
+	self.previousShutterMode = self.scannerViewController.shutterMode;
+	self.scannerViewController.shutterMode = SBSDKShutterModeAlwaysManual;
+	[self updateShutterModeButton];
+
+	self.nextIsNonDocument = !self.nextIsNonDocument;
+	[self updateTypeButton];
+}
+
+#pragma mark - Done / Cancel
 
 - (IBAction)onDone:(id)sender {
 	NSError *error;
@@ -257,15 +291,13 @@
 			continue;
 		}
 
-		SBSDKPolygon* polygon;
-		if(self.polygonStorage.count > i) {
-			polygon = [self.polygonStorage objectAtIndex:i];
-		}
+		NSDictionary *metaData = [self.metaDataStorage objectAtIndex:i];
 
 		[images addObject:@{
 												@"image": imgDest,
 												@"originalImage": origDest,
-												@"polygon": polygon ? [polygon normalizedDoubleValues] : [NSNull null],
+												@"polygon": metaData[@"polygon"],
+												@"isNotDocument": metaData[@"isNotDocument"]
 												}];
 	}
 
@@ -318,22 +350,6 @@
 
 #pragma mark - SBSDKScannerViewControllerDelegate
 
-/**
- * Tells the delegate that a document detection has been occured on the current video frame. Optional.
- * Here you can update your custom shutter button if needed and your HUD data.
- * @param controller The calling SBSDKScannerViewController.
- * @param polygon The polygon data describing where in the image the document was detected if any. Otherwise nil.
- * @param status The status of the detection.
- */
-- (void)scannerController:(nonnull SBSDKScannerViewController *)controller
-				 didDetectPolygon:(nullable SBSDKPolygon *)polygon
-							 withStatus:(SBSDKDocumentDetectionStatus)status {
-
-	if(self.isCapturing && (self.polygonStorage.count <= self.imageStorage.imageCount + 1) && polygon) {
-		[self.polygonStorage addObject:polygon];
-	}
-}
-
 
 /**
  * Asks the delegate whether the camera UI, shutter button and guidance UI, should be rotated to
@@ -370,8 +386,12 @@ shouldRotateInterfaceForDeviceOrientation:(UIDeviceOrientation)orientation
  */
 - (void)scannerControllerWillCaptureStillImage:(SBSDKScannerViewController *)controller {
 
-	//NSLog(@"	 willCapture");
+	// NSLog(@"willCapture");
 	self.isCapturing = true;
+	[self updateDoneButton];
+	[self updateImageModeButton];
+	[self updateShutterModeButton];
+	[self updateTypeButton];
 
 	// Flash screen
 	[UIView animateWithDuration:0.2 animations:^{
@@ -387,12 +407,27 @@ shouldRotateInterfaceForDeviceOrientation:(UIDeviceOrientation)orientation
  * Tells the delegate that a still image has been captured and its orientation has been corrected. Optional.
  * @param controller The calling SBSDKScannerViewController.
  * @param image The captured original image, rotated depending on the device orientation.
+ * @param polygon The polygon that was detected on the image.
+ * @param properties The properties of the camera and lens. Useful to calculate the aspect ratio of the cropped image.
  */
-- (void)scannerController:(SBSDKScannerViewController *)controller didCaptureImage:(UIImage *)image {
-	//NSLog(@"	didCaptureImage");
+- (void)scannerController:(nonnull SBSDKScannerViewController *)controller didCaptureImage:(nullable UIImage *)image
+			withDetectedPolygon:(nullable SBSDKPolygon *)polygon
+		 lensCameraProperties:(nullable SBSDKLensCameraProperties *)properties {
+	//NSLog(@"didCapture");
+	
+	[self.metaDataStorage addObject:@{
+																		@"isNotDocument": @(self.nextIsNonDocument),
+																		@"polygon": polygon ? [polygon normalizedDoubleValues] : [NSNull null],
+																	 }];
 
 	// Save non cropped image
 	[self.originalImageStorage addImage:image];
+
+	// Change UI back to normal if this was a Non-Document
+	if(self.nextIsNonDocument) {
+		self.nextIsNonDocument = false;
+		self.scannerViewController.shutterMode = self.previousShutterMode;
+	}
 }
 
 /**
@@ -401,11 +436,14 @@ shouldRotateInterfaceForDeviceOrientation:(UIDeviceOrientation)orientation
  * @param documentImage The cropped and perspective corrected documents image, rotated depending on the device orientation.
  */
 - (void)scannerController:(SBSDKScannerViewController *)controller didCaptureDocumentImage:(UIImage *)documentImage {
-	//NSLog(@"	didCaptureDocumentImage");
+	//NSLog(@"didCaptureDocumentImage");
 	// Save cropped image
 	[self.imageStorage addImage:documentImage];
 	self.isCapturing = false;
 	[self updateDoneButton];
+	[self updateImageModeButton];
+	[self updateShutterModeButton];
+	[self updateTypeButton];
 }
 
 /**
@@ -414,8 +452,13 @@ shouldRotateInterfaceForDeviceOrientation:(UIDeviceOrientation)orientation
  * @param error The reason for the failure.
  */
 - (void)scannerController:(SBSDKScannerViewController *)controller didFailCapturingImage:(NSError *)error {
+	NSLog(@"%@", [error localizedDescription]);
 	// TODO: Display the error ?
 	self.isCapturing = false;
+	[self updateDoneButton];
+	[self updateImageModeButton];
+	[self updateShutterModeButton];
+	[self updateTypeButton];
 }
 
 /**

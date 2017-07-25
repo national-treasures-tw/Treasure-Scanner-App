@@ -183,7 +183,7 @@ class DocumentReviewList extends Component {
         {documents.length > 0 && document && (
           <View style={styles.bottomTabBar}>
             <Button
-              disabled={!document.originalImage}
+              disabled={!document.originalImage || document.isNotDocument}
               style={styles.button}
               onPress={() => this.onCrop()}
               title="Crop"

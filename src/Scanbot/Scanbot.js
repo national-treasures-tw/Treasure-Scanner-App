@@ -103,6 +103,9 @@ const Scanbot = {
    * - polygons:
    *    An array of 8 floats containing the normalized coordinates of the crop
    *    in the form [x1, y1, x2, y2, x3, y3, x4, y4].
+   *
+   * - rotation:
+   *    rotation of image in degrees
    */
   crop: (document) => {
     PropTypes.checkPropTypes(documentPropTypes, document, 'prop', 'scan');
@@ -123,6 +126,7 @@ const documentPropTypes = {
   image: PropTypes.string.isRequired,
   originalImage: PropTypes.string.isRequired,
   polygons: PropTypes.arrayOf(PropTypes.number),
+  rotation: PropTypes.number,
 };
 
 const scanPropTypes = {

@@ -9,65 +9,46 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity,
   StatusBar,
-  FlatList,
   ListView,
   Dimensions, Button,
 } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import Scanbot, {
-  SBSDKImageModeColor,
-  SBSDKImageModeGrayscale,
-  SBSDKShutterModeSmart,
-  SBSDKShutterModeAlwaysAuto,
-  SBSDKShutterModeAlwaysManual,
-  SBSDKDocumentDetectionStatusOK,
-  SBSDKDocumentDetectionStatusOK_SmallSize,
-  SBSDKDocumentDetectionStatusOK_BadAngles,
-  SBSDKDocumentDetectionStatusOK_BadAspectRatio,
-  SBSDKDocumentDetectionStatusOK_Capturing,
-  SBSDKDocumentDetectionStatusError_NothingDetected,
-  SBSDKDocumentDetectionStatusError_Brightness,
-  SBSDKDocumentDetectionStatusError_Noise,
-} from './Scanbot/Scanbot';
-import { TabBarBottom } from 'react-navigation';
+import Scanbot from '../Scanbot/Scanbot';
 
-// These can be translated to Mandrin
-const labelTranslations = {
-  "cancelButton": "Cancel",
-  "singularDocument": "1 Page",
-  "pluralDocuments": "%d Pages",
+import getScanSession from '../selectors/getScanSession';
 
-  "imageMode": {
-    [SBSDKImageModeColor]: "Color",
-    [SBSDKImageModeGrayscale]: "Grayscale",
-  },
-
-  "shutterMode": {
-    [SBSDKShutterModeSmart]: "Smart",
-    [SBSDKShutterModeAlwaysAuto]: "Automatic",
-    [SBSDKShutterModeAlwaysManual]: "Manual",
-  },
-
-  "detectionStatus": {
-    "capturing": "Capturing",
-    [SBSDKDocumentDetectionStatusOK]: "Don't move... capturing!",
-    [SBSDKDocumentDetectionStatusOK_SmallSize]: "Move closer.",
-    [SBSDKDocumentDetectionStatusOK_BadAngles]: "Turn your device a bit.",
-    [SBSDKDocumentDetectionStatusOK_BadAspectRatio]: "Rotate your device.",
-    [SBSDKDocumentDetectionStatusOK_Capturing]: "Saving Document...",
-    [SBSDKDocumentDetectionStatusError_NothingDetected]: "Searching for document...",
-    [SBSDKDocumentDetectionStatusError_Brightness]: "Not enough light!",
-    [SBSDKDocumentDetectionStatusError_Noise]:"Background too noisy!"
-  },
-};
+import * as actions from '../actions/actions';
 
 export const winSize = Dimensions.get('window');
 
-export default class DocumentScanner extends Component {
+class DocumentReviewList extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state;
+
+    const headerRight = params.scan ? (
+      <Button
+        title="Next Scan"
+        onPress={() => {
+          navigation.goBack();
+          setTimeout(() => {
+            params.scan();
+          }, 200);
+        }}
+      />
+    ) : undefined;
+
+    return {
+      title: `Documents`,
+      headerRight
+    };
+  };
+
   constructor(props, context) {
     super(props, context);
+    const { documents } = this.props;
 
     const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => (r1 !== r2)
@@ -75,71 +56,36 @@ export default class DocumentScanner extends Component {
 
     this.state = {
       error: false,
-      documents: [],
       scrollIndex: 0,
-      dataSource: dataSource.cloneWithRows([]),
+      documents: documents,
+      dataSource: dataSource.cloneWithRows(documents),
     };
   };
 
-  static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
+  componentWillReceiveProps(newProps) {
+    const { params, documents } = this.props;
 
-    return {
-      title: `Documents`,
-      headerRight: <Button title="Scan" onPress={() => params.scan()} />,
-    };
-  };
-
-  componentDidMount = () => {
-    const { documents } = this.state;
-    if(documents.length === 0) {
-      this.scan();
+    if(!params.sessionId) {
+      return;
     }
 
-    this.props.navigation.setParams({ scan: this.scan })
-  };
-
-  updateDocuments = (newDocuments) => {
     const { dataSource } = this.state;
     this.setState({
-      documents: newDocuments,
-      dataSource: dataSource.cloneWithRows(newDocuments),
+      documents: documents,
+      dataSource: dataSource.cloneWithRows(newProps.documents),
     });
-  };
+  }
 
-  scan = async () => {
-    try {
-      StatusBar.setHidden(true, true);
-      // See 'Scanbot/Scanbot.js' for all options and documentation
-      const documents = await Scanbot.scan({
-        imageScale: 1,
-        autoCaptureSensitivity: 0.83, // delay of 0.5s
-        acceptedSizeScore: 50,
-        acceptedAngleScore: 70,
-        initialImageMode: SBSDKImageModeColor,
-        initialShutterMode: SBSDKShutterModeSmart,
-        labelTranslations: labelTranslations,
-      });
-      StatusBar.setHidden(false, true);
-
-      if(!documents || documents.length === 0) {
-        // User cancelled
-        return;
-      }
-
-      // Just to be sure only use documents that contain am image
-      const newDocuments = documents.filter(document =>
-        document && document.image
-      );
-
-      this.updateDocuments(newDocuments);
-    } catch (ex) {
-      this.setState({ error: `Scanning Failed ${ex}` });
+  componentDidMount = () => {
+    const { documents } = this.props;
+    if(documents.length === 0) {
+      this.scan();
     }
   };
 
   onCrop = async () => {
-    const { documents, scrollIndex } = this.state;
+    const { scrollIndex } = this.state;
+    const { documents, cropDocument } = this.props;
 
     try {
       StatusBar.setHidden(true, true);
@@ -152,9 +98,11 @@ export default class DocumentScanner extends Component {
         return;
       }
 
-      const newDocuments = [...documents];
-      newDocuments[scrollIndex] = croppedDocument;
-      this.updateDocuments(newDocuments);
+      cropDocument(
+        documents[scrollIndex].id,
+        croppedDocument.image,
+        croppedDocument.polygon
+      );
 
     } catch (ex) {
       this.setState({ error: `Scanning Failed ${ex}` });
@@ -162,37 +110,31 @@ export default class DocumentScanner extends Component {
   };
 
   onRotate = () => {
-    const { documents, scrollIndex } = this.state;
-    const newDocuments = [...documents];
-    newDocuments[scrollIndex] = Object.assign({}, documents[scrollIndex], {
-      rotation: (documents[scrollIndex].rotation || 0) + 90
-    });
-    this.updateDocuments(newDocuments);
+    const { scrollIndex } = this.state;
+    const { documents, rotateDocument } = this.props;
+    rotateDocument(documents[scrollIndex].id);
   };
 
   onDelete = () => {
-    const { documents, scrollIndex } = this.state;
-    this.updateDocuments([
-      ...documents.slice(0, scrollIndex),
-      ...documents.slice(scrollIndex + 1)
-    ]);
+    const { scrollIndex } = this.state;
+    const { documents, deleteDocument } = this.props;
+    deleteDocument(documents[scrollIndex].id);
   };
 
   onScroll = (event) => {
-    const { x } = event.nativeEvent.contentOffset;
-    const { documents } = this.state;
+    const { documents } = this.props;
 
     this.setState({
       // User might have scrolled or bounced before beginning or end
       scrollIndex: Math.min(
         Math.max(documents.length - 1, 0),
-        Math.round(Math.max(0, x) / winSize.width)
+        Math.round(Math.max(0, event.nativeEvent.contentOffset.x) / winSize.width)
       )
     });
   };
 
   render() {
-    const { error, documents, scrollIndex } = this.state;
+    const { error, scrollIndex, documents } = this.state;
 
     const document = documents[scrollIndex];
 
@@ -206,11 +148,10 @@ export default class DocumentScanner extends Component {
 
         {!error && documents.length > 0 && (
           <ListView
+            enableEmptySections={true}
             dataSource={this.state.dataSource}
             style={styles.list}
-            data={documents}
             onScroll={this.onScroll}
-            extraData={this.state}
             horizontal={true}
             pagingEnabled={true}
             directionalLockEnabled={true}
@@ -318,3 +259,16 @@ const styles = StyleSheet.create({
     borderWidth: 1
   },
 });
+
+function mapStateToProps(state) {
+  const params = state.nav.routes[state.nav.index].params || {};
+  return {
+    params,
+    documents: getScanSession(state, params).documents,
+  };
+}
+
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(DocumentReviewList);
+

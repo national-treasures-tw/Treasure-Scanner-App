@@ -4,13 +4,23 @@
 	"private": true,
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
+		"test": "jest --watch"
 	},
 	"dependencies": {
+		"babel-plugin-transform-strict-mode": "^6.24.1",
+		"deep-freeze": "^0.0.1",
 		"prop-types": "^15.5.10",
 		"react": "16.0.0-alpha.6",
 		"react-native": "0.44.0",
-		"react-navigation": "^1.0.0-beta.11"
+		"react-navigation": "^1.0.0-beta.11",
+		"react-redux": "^5.0.5",
+		"redux": "^3.7.2",
+		"redux-devtools": "^3.4.0",
+		"redux-logger": "^3.0.6",
+		"redux-persist": "^4.8.2",
+		"redux-thunk": "^2.2.0",
+		"remote-redux-devtools": "^0.5.12",
+		"reselect": "^3.0.1"
 	},
 	"devDependencies": {
 		"babel-jest": "20.0.3",
@@ -19,6 +29,10 @@
 		"react-test-renderer": "16.0.0-alpha.6"
 	},
 	"jest": {
-		"preset": "react-native"
+		"preset": "react-native",
+		"verbose": true,
+		"testPathIgnorePatterns": [
+			"assets/*"
+		]
 	}
 }

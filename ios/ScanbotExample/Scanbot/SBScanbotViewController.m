@@ -17,6 +17,7 @@
 @property (strong, nonatomic) SBSDKScannerViewController *scannerViewController;
 @property (strong, nonatomic) SBSDKImageStorage *imageStorage;
 @property (strong, nonatomic) SBSDKImageStorage *originalImageStorage;
+@property (strong, nonatomic) NSMutableArray *polygonStorage;
 
 @property (assign, nonatomic) BOOL viewAppeared;
 @property (assign, nonatomic) BOOL isCapturing;
@@ -25,7 +26,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (weak, nonatomic) IBOutlet UIButton *shutterModeButton;
 @property (weak, nonatomic) IBOutlet UIButton *imageModeButton;
-
 
 @end
 
@@ -41,30 +41,25 @@
 	return UIInterfaceOrientationMaskPortrait;
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-	// White statusbar.
-	return UIStatusBarStyleLightContent;
-}
-
 #pragma mark - Lifecycle methods
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
-	// Create an image storage to save the cropped and captured document images to
+	// Image storage to save the cropped and captured document images to
 	self.imageStorage = [[SBSDKImageStorage alloc] init];
 
-	// Create an image storage to save originals to
+	// Image storage to save originals to
 	self.originalImageStorage = [[SBSDKImageStorage alloc] init];
+
+	// Array for storing polygons
+	self.polygonStorage = [NSMutableArray new];
 
 	// Embed in this viewcontroller. No automatic image storage.
 	self.scannerViewController = [[SBSDKScannerViewController alloc] initWithParentViewController:self
 																																									 imageStorage:nil];
 
 	self.scannerViewController.delegate = self;
-
-	// Passed in options from react native
-	[self setScannerOptions];
 
 	// Set initial UI elements
 	[self setHud];
@@ -101,7 +96,7 @@
 	}
 
 	if (self.options[@"labelTranslations"]) {
-		[self.cancelButton setTitle:[self.options[@"labelTranslations"][@"cancelButton"] stringValue] forState:UIControlStateNormal];
+		[self.cancelButton setTitle:[self translationLabelForKey:@"cancelButton"] forState:UIControlStateNormal];
 	}
 }
 
@@ -111,17 +106,12 @@
 	self.doneButton.backgroundColor = [UIColor clearColor];
 
 	// Customize this xib file to add some UI between the scanner preview and the shutter button
-	UIView *hud = [[[NSBundle mainBundle] loadNibNamed:@"SBHud" owner:self options:nil] firstObject];
-	[self.scannerViewController.HUDView addSubview:hud];
+	UIView *grayBG = [[[NSBundle mainBundle] loadNibNamed:@"SBHud" owner:self options:nil] firstObject];
+	[self.scannerViewController.HUDView addSubview:grayBG];
 }
 
-- (void) viewWillAppear:(BOOL)animated {
-	[self updateUI];
-}
-
-- (void) updateUI {
-	NSUInteger imageCount = [self.imageStorage imageCount];
-
+- (void) updateDoneButton {
+	NSUInteger imageCount = [self.originalImageStorage imageCount];
 	if(imageCount == 0) {
 		self.doneButton.hidden = true;
 	} else if(imageCount == 1) {
@@ -133,19 +123,23 @@
 										 forState:UIControlStateNormal];
 		self.doneButton.hidden = false;
 	}
+}
 
+- (void) updateImageModeButton {
+	if(self.scannerViewController.imageMode == SBSDKImageModeColor) {
+		[self.imageModeButton setTitle:[self translationLabelForKey:@"imageMode" enumValue:SBSDKImageModeColor] forState:UIControlStateNormal];
+	} else {
+		[self.imageModeButton setTitle:[self translationLabelForKey:@"imageMode" enumValue:SBSDKImageModeGrayscale] forState:UIControlStateNormal];
+	}
+}
+
+- (void) updateShutterModeButton {
 	if(self.scannerViewController.shutterMode == SBSDKShutterModeSmart) {
 		[self.shutterModeButton setTitle:[self translationLabelForKey:@"shutterMode" enumValue:SBSDKShutterModeSmart] forState:UIControlStateNormal];
 	} else if(self.scannerViewController.shutterMode == SBSDKShutterModeAlwaysAuto) {
 		[self.shutterModeButton setTitle:[self translationLabelForKey:@"shutterMode" enumValue:SBSDKShutterModeAlwaysAuto] forState:UIControlStateNormal];
 	} else {
 		[self.shutterModeButton setTitle:[self translationLabelForKey:@"shutterMode" enumValue:SBSDKShutterModeAlwaysManual] forState:UIControlStateNormal];
-	}
-
-	if(self.scannerViewController.imageMode == SBSDKImageModeColor) {
-		[self.imageModeButton setTitle:[self translationLabelForKey:@"imageMode" enumValue:SBSDKImageModeColor] forState:UIControlStateNormal];
-	} else {
-		[self.imageModeButton setTitle:[self translationLabelForKey:@"imageMode" enumValue:SBSDKImageModeGrayscale] forState:UIControlStateNormal];
 	}
 }
 
@@ -159,10 +153,10 @@
 	self.resolve = resolver;
 	self.reject = rejecter;
 
-	dispatch_async(dispatch_get_main_queue(), ^{
-		UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
-		[rootViewController presentViewController:self animated:YES completion:NULL];
-	});
+	[self setScannerOptions];
+	[self updateDoneButton];
+	[self updateImageModeButton];
+	[self updateShutterModeButton];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -173,6 +167,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	self.viewAppeared = YES;
+	
 }
 
 - (IBAction)onChangeShutterMode:(UIButton *)sender {
@@ -184,7 +179,7 @@
 		self.scannerViewController.shutterMode = SBSDKShutterModeAlwaysManual;
 	}
 
-	[self updateUI];
+	[self updateShutterModeButton];
 }
 
 - (IBAction)onImageMode:(UIButton *)sender {
@@ -194,43 +189,111 @@
 		self.scannerViewController.imageMode = SBSDKImageModeColor;
 	}
 
-	[self updateUI];
+	[self updateImageModeButton];
 }
 
-
 - (IBAction)onDone:(id)sender {
-	if (self.resolve != nil) {
-		[self close:[self baseEncodeImages]];
+	NSError *error;
+	NSMutableArray *images = [self saveImages:&error];
+	if(images.count == 0 && error) {
+		NSLog(@"Scanning images failed %@", error);
+		[self onError:@"Scanning images failed" message:[error localizedDescription]];
+		return;
 	}
+
+	[self close:images];
 }
 
 - (IBAction)onCancel:(UIButton *)sender {
-	if (self.resolve != nil) {
-		[self close:[NSMutableArray arrayWithCapacity:0]];
-	}
+	[self close:[NSMutableArray arrayWithCapacity:0]];
 }
 
-- (NSMutableArray *) baseEncodeImages {
+- (NSMutableArray *) saveImages:(NSError **)saveError {
+
 	NSUInteger imageCount = [self.imageStorage imageCount];
+	NSUInteger originalCount = [self.originalImageStorage imageCount];
+
+	if(imageCount != originalCount) {
+		NSLog(@"Image counts do not match: %d %d", (int)self.imageStorage.imageCount, (int)self.originalImageStorage.imageCount);
+		#ifdef DEBUG
+			@throw [NSError new];
+		#endif
+	}
+
+	NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+	NSString *scansPath = [documentsDirectory stringByAppendingPathComponent:@"/Scans"];
+
+	NSError *error;
+	// Create folder if we need to
+	if (![[NSFileManager defaultManager] fileExistsAtPath:scansPath]) {
+		[[NSFileManager defaultManager] createDirectoryAtPath:scansPath withIntermediateDirectories:NO attributes:nil error:&error];
+		if(error) {
+			NSLog(@"Creating folder failed %@", error);
+			*saveError = error;
+			return [NSMutableArray arrayWithCapacity:0];
+		}
+	}
+
 	NSMutableArray *images = [NSMutableArray arrayWithCapacity:imageCount];
 
-	for (int i = 0; i < imageCount; i++) {
-		UIImage *image = [self.imageStorage imageAtIndex:i];
-		NSData *data = UIImageJPEGRepresentation(image, 0.9);
-		[images addObject:[data base64EncodedStringWithOptions: NSDataBase64Encoding64CharacterLineLength]];
+	for (int i = 0; i < MIN(imageCount, originalCount); i++) {
+
+		NSError *imgErr;
+		NSString *imgSource = [[[[self imageStorage] imageURLs] objectAtIndex:i] relativePath];
+		NSString *imgDest = [scansPath stringByAppendingPathComponent:[imgSource lastPathComponent]];
+		[[NSFileManager defaultManager] copyItemAtPath:imgSource toPath:imgDest error:&imgErr];
+
+		NSError *origErr;
+		NSString *origSource = [[[[self originalImageStorage] imageURLs] objectAtIndex:i] relativePath];
+		NSString *origDest = [scansPath stringByAppendingPathComponent:[origSource lastPathComponent]];
+		[[NSFileManager defaultManager] copyItemAtPath:origSource toPath:origDest error:&origErr];
+
+		if (imgErr || origErr) {
+			if(imgErr) {
+				*saveError = imgErr;
+			} else {
+				*saveError = origErr;
+			}
+			continue;
+		}
+
+		SBSDKPolygon* polygon;
+		if(self.polygonStorage.count > i) {
+			polygon = [self.polygonStorage objectAtIndex:i];
+		}
+
+		[images addObject:@{
+												@"image": imgDest,
+												@"originalImage": origDest,
+												@"polygon": polygon ? [polygon normalizedDoubleValues] : [NSNull null],
+												}];
 	}
 
 	return images;
 }
 
 - (void) close:(NSMutableArray*) images {
-	self.resolve(images);
+	if(self.resolve) {
+		self.resolve(images);
+	}
 
 	self.resolve = nil;
 	self.reject = nil;
 
-	[self dismissViewControllerAnimated:NO completion:nil];
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (void) onError:(NSString *)code message:(NSString *)message {
+	if(self.reject) {
+		self.reject(code, message, nil);
+	}
+
+	self.resolve = nil;
+	self.reject = nil;
+
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 #pragma mark - Translation / Label helper functions
 
@@ -254,6 +317,23 @@
 }
 
 #pragma mark - SBSDKScannerViewControllerDelegate
+
+/**
+ * Tells the delegate that a document detection has been occured on the current video frame. Optional.
+ * Here you can update your custom shutter button if needed and your HUD data.
+ * @param controller The calling SBSDKScannerViewController.
+ * @param polygon The polygon data describing where in the image the document was detected if any. Otherwise nil.
+ * @param status The status of the detection.
+ */
+- (void)scannerController:(nonnull SBSDKScannerViewController *)controller
+				 didDetectPolygon:(nullable SBSDKPolygon *)polygon
+							 withStatus:(SBSDKDocumentDetectionStatus)status {
+
+	if(self.isCapturing && (self.polygonStorage.count <= self.imageStorage.imageCount + 1) && polygon) {
+		[self.polygonStorage addObject:polygon];
+	}
+}
+
 
 /**
  * Asks the delegate whether the camera UI, shutter button and guidance UI, should be rotated to
@@ -289,27 +369,17 @@ shouldRotateInterfaceForDeviceOrientation:(UIDeviceOrientation)orientation
  * @param controller The calling SBSDKScannerViewController.
  */
 - (void)scannerControllerWillCaptureStillImage:(SBSDKScannerViewController *)controller {
-	// Change your UI to visualize that we are busy now.
+
+	//NSLog(@"	 willCapture");
 	self.isCapturing = true;
-	[UIView animateWithDuration:0.2 animations:^{
-		controller.HUDView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.75];
-	}];
-}
 
-/**
- * Tells the delegate that a document image has been cropped out of an orientation corrected still image.
- * @param controller The calling SBSDKScannerViewController.
- * @param documentImage The cropped and perspective corrected documents image, rotated depending on the device orientation.
- */
-- (void)scannerController:(SBSDKScannerViewController *)controller didCaptureDocumentImage:(UIImage *)documentImage {
-	// Save cropped image
-	[self.imageStorage addImage:documentImage];
-
-	// Not busy any more
-	[self updateUI];
-	self.isCapturing = false;
+	// Flash screen
 	[UIView animateWithDuration:0.2 animations:^{
-		controller.HUDView.backgroundColor = [UIColor clearColor];
+		controller.HUDView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.75];
+	} completion:^(BOOL finished) {
+		[UIView animateWithDuration:0.2 animations:^{
+			controller.HUDView.backgroundColor = [UIColor clearColor];
+		}];
 	}];
 }
 
@@ -319,8 +389,23 @@ shouldRotateInterfaceForDeviceOrientation:(UIDeviceOrientation)orientation
  * @param image The captured original image, rotated depending on the device orientation.
  */
 - (void)scannerController:(SBSDKScannerViewController *)controller didCaptureImage:(UIImage *)image {
+	//NSLog(@"	didCaptureImage");
+
 	// Save non cropped image
 	[self.originalImageStorage addImage:image];
+}
+
+/**
+ * Tells the delegate that a document image has been cropped out of an orientation corrected still image.
+ * @param controller The calling SBSDKScannerViewController.
+ * @param documentImage The cropped and perspective corrected documents image, rotated depending on the device orientation.
+ */
+- (void)scannerController:(SBSDKScannerViewController *)controller didCaptureDocumentImage:(UIImage *)documentImage {
+	//NSLog(@"	didCaptureDocumentImage");
+	// Save cropped image
+	[self.imageStorage addImage:documentImage];
+	self.isCapturing = false;
+	[self updateDoneButton];
 }
 
 /**
@@ -330,12 +415,7 @@ shouldRotateInterfaceForDeviceOrientation:(UIDeviceOrientation)orientation
  */
 - (void)scannerController:(SBSDKScannerViewController *)controller didFailCapturingImage:(NSError *)error {
 	// TODO: Display the error ?
-
 	self.isCapturing = false;
-	// Not busy any more
-	[UIView animateWithDuration:0.2 animations:^{
-		controller.HUDView.backgroundColor = [UIColor clearColor];
-	}];
 }
 
 /**

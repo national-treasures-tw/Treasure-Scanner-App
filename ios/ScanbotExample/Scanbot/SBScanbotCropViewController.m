@@ -42,9 +42,18 @@
 	self.reject = rejecter;
 
 	NSString *originalImage = self.document[@"originalImage"];
-	NSData *imageData = [[NSData alloc] initWithBase64EncodedString:originalImage options:NSDataBase64DecodingIgnoreUnknownCharacters];
+	if (![[NSFileManager defaultManager] fileExistsAtPath:originalImage]) {
+		[self onError:@"File does not exist" message:[NSString stringWithFormat:@"At location %@", originalImage]];
+		return;
+	}
 
+	NSData *imageData = [NSData dataWithContentsOfFile:originalImage];
 	self.cropController.image = [UIImage imageWithData:imageData];
+
+	if (!self.cropController.image) {
+		[self onError:@"Something went wrong loading the image" message:[NSString stringWithFormat:@"At location %@", originalImage]];
+		return;
+	}
 
 	if([self.document[@"polygon"] isKindOfClass:[NSArray class]]) {
 		self.cropController.polygon = [[SBSDKPolygon alloc] initWithNormalizedDoubleValues:self.document[@"polygon"]];
@@ -52,31 +61,53 @@
 }
 
 - (IBAction)onDone:(id)sender {
-	if(!self.resolve) {
+	NSData *data = UIImageJPEGRepresentation(self.cropController.croppedImage, 0.9);
+
+	NSURL *path = [NSURL fileURLWithPath:self.document[@"image"]];
+	path = [path URLByDeletingLastPathComponent];
+	path = [path URLByAppendingPathComponent:[[NSUUID UUID] UUIDString]];
+	path = [path URLByAppendingPathExtension:@"jpg"];
+
+	NSError *error;
+	[data writeToFile:[path relativePath] options:NSDataWritingAtomic error:&error];
+	if (error) {
+		[self onError:@"Cropping failed, could not write image" message:[NSString stringWithFormat:@"At location %@", path]];
 		return;
 	}
 
-	NSData *data = UIImageJPEGRepresentation(self.cropController.croppedImage, 0.9);
+	// Delete old file
+	[[NSFileManager defaultManager] removeItemAtPath:self.document[@"image"] error:&error];
 
 	NSMutableDictionary *newDocument = self.document.mutableCopy;
-	newDocument[@"image"] = [data base64EncodedStringWithOptions: NSDataBase64Encoding64CharacterLineLength];
+	newDocument[@"image"] = [path relativePath];
 	newDocument[@"polygon"] = [self.cropController.polygon normalizedDoubleValues];
 	[self close:newDocument];
 }
 
 - (IBAction)onCancel:(id)sender {
-	if (self.resolve != nil) {
-		[self close:@{}];
-	}
+	[self close:self.document];
 }
 
 - (void) close:(NSDictionary *) document {
-	self.resolve(document);
+	if(self.resolve) {
+		self.resolve(document);
+	}
 
 	self.resolve = nil;
 	self.reject = nil;
 
-	[self dismissViewControllerAnimated:NO completion:nil];
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) onError:(NSString *)code message:(NSString *)message {
+	if(self.reject) {
+		self.reject(code, message, nil);
+	}
+
+	self.resolve = nil;
+	self.reject = nil;
+
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

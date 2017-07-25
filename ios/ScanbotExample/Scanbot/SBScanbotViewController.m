@@ -192,46 +192,79 @@
 	[self updateImageModeButton];
 }
 
-
 - (IBAction)onDone:(id)sender {
-	if (self.resolve != nil) {
-		[self close:[self baseEncodeImages]];
+	NSError *error;
+	NSMutableArray *images = [self saveImages:&error];
+	if(images.count == 0 && error) {
+		NSLog(@"Scanning images failed %@", error);
+		[self onError:@"Scanning images failed" message:[error localizedDescription]];
+		return;
 	}
+
+	[self close:images];
 }
 
 - (IBAction)onCancel:(UIButton *)sender {
-	if (self.resolve != nil) {
-		[self close:[NSMutableArray arrayWithCapacity:0]];
-	}
+	[self close:[NSMutableArray arrayWithCapacity:0]];
 }
 
-- (NSMutableArray *) baseEncodeImages {
+- (NSMutableArray *) saveImages:(NSError **)saveError {
+
 	NSUInteger imageCount = [self.imageStorage imageCount];
 	NSUInteger originalCount = [self.originalImageStorage imageCount];
 
 	if(imageCount != originalCount) {
-		NSLog(@"Image counts do not match!");
-		NSLog(@"%lu %lu image counts", (unsigned long)self.imageStorage.imageCount, (unsigned long)self.originalImageStorage.imageCount);
-		@throw [NSError new];
+		NSLog(@"Image counts do not match: %d %d", (int)self.imageStorage.imageCount, (int)self.originalImageStorage.imageCount);
+		#ifdef DEBUG
+			@throw [NSError new];
+		#endif
+	}
+
+	NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+	NSString *scansPath = [documentsDirectory stringByAppendingPathComponent:@"/Scans"];
+
+	NSError *error;
+	// Create folder if we need to
+	if (![[NSFileManager defaultManager] fileExistsAtPath:scansPath]) {
+		[[NSFileManager defaultManager] createDirectoryAtPath:scansPath withIntermediateDirectories:NO attributes:nil error:&error];
+		if(error) {
+			NSLog(@"Creating folder failed %@", error);
+			*saveError = error;
+			return [NSMutableArray arrayWithCapacity:0];
+		}
 	}
 
 	NSMutableArray *images = [NSMutableArray arrayWithCapacity:imageCount];
 
-	for (int i = 0; i < imageCount; i++) {
-		UIImage *image = [self.imageStorage imageAtIndex:i];
-		NSData *data = UIImageJPEGRepresentation(image, 0.9);
+	for (int i = 0; i < MIN(imageCount, originalCount); i++) {
 
-		UIImage *origImage = [self.originalImageStorage imageAtIndex:i];
-		NSData *origData = UIImageJPEGRepresentation(origImage, 0.9);
+		NSError *imgErr;
+		NSString *imgSource = [[[[self imageStorage] imageURLs] objectAtIndex:i] relativePath];
+		NSString *imgDest = [scansPath stringByAppendingPathComponent:[imgSource lastPathComponent]];
+		[[NSFileManager defaultManager] copyItemAtPath:imgSource toPath:imgDest error:&imgErr];
+
+		NSError *origErr;
+		NSString *origSource = [[[[self originalImageStorage] imageURLs] objectAtIndex:i] relativePath];
+		NSString *origDest = [scansPath stringByAppendingPathComponent:[origSource lastPathComponent]];
+		[[NSFileManager defaultManager] copyItemAtPath:origSource toPath:origDest error:&origErr];
+
+		if (imgErr || origErr) {
+			if(imgErr) {
+				*saveError = imgErr;
+			} else {
+				*saveError = origErr;
+			}
+			continue;
+		}
 
 		SBSDKPolygon* polygon;
 		if(self.polygonStorage.count > i) {
-			 polygon = [self.polygonStorage objectAtIndex:i];
+			polygon = [self.polygonStorage objectAtIndex:i];
 		}
 
 		[images addObject:@{
-												@"image": [data base64EncodedStringWithOptions: NSDataBase64Encoding64CharacterLineLength],
-												@"originalImage": [origData base64EncodedStringWithOptions: NSDataBase64Encoding64CharacterLineLength],
+												@"image": imgDest,
+												@"originalImage": origDest,
 												@"polygon": polygon ? [polygon normalizedDoubleValues] : [NSNull null],
 												}];
 	}
@@ -240,13 +273,27 @@
 }
 
 - (void) close:(NSMutableArray*) images {
-	self.resolve(images);
+	if(self.resolve) {
+		self.resolve(images);
+	}
 
 	self.resolve = nil;
 	self.reject = nil;
 
-	[self dismissViewControllerAnimated:NO completion:nil];
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (void) onError:(NSString *)code message:(NSString *)message {
+	if(self.reject) {
+		self.reject(code, message, nil);
+	}
+
+	self.resolve = nil;
+	self.reject = nil;
+
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 #pragma mark - Translation / Label helper functions
 
@@ -357,7 +404,6 @@ shouldRotateInterfaceForDeviceOrientation:(UIDeviceOrientation)orientation
 	//NSLog(@"	didCaptureDocumentImage");
 	// Save cropped image
 	[self.imageStorage addImage:documentImage];
-
 	self.isCapturing = false;
 	[self updateDoneButton];
 }
@@ -369,7 +415,6 @@ shouldRotateInterfaceForDeviceOrientation:(UIDeviceOrientation)orientation
  */
 - (void)scannerController:(SBSDKScannerViewController *)controller didFailCapturingImage:(NSError *)error {
 	// TODO: Display the error ?
-
 	self.isCapturing = false;
 }
 

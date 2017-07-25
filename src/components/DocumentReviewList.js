@@ -13,6 +13,7 @@ import {
   ListView,
   Dimensions, Button,
 } from 'react-native';
+
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -35,7 +36,7 @@ class DocumentReviewList extends Component {
           navigation.goBack();
           setTimeout(() => {
             params.scan();
-          }, 200);
+          }, 400);
         }}
       />
     ) : undefined;
@@ -93,7 +94,7 @@ class DocumentReviewList extends Component {
       const croppedDocument = await Scanbot.crop(documents[scrollIndex]);
       StatusBar.setHidden(false, true);
 
-      if (!croppedDocument || !croppedDocument.image) {
+      if (documents[scrollIndex].image === croppedDocument.image) {
         // user canceled the crop
         return;
       }
@@ -135,9 +136,7 @@ class DocumentReviewList extends Component {
 
   render() {
     const { error, scrollIndex, documents } = this.state;
-
     const document = documents[scrollIndex];
-
     return (
       <View style={styles.viewport}>
         {error && (
@@ -168,7 +167,7 @@ class DocumentReviewList extends Component {
                     document.rotation ? { transform: [{ rotate: `${document.rotation}deg`}] } : {},
                     (document.rotation % 90 === 0) ? styles.rotatedImage : {}
                   ]}
-                  source={{ uri: `data:image/jpeg;base64,${document.image}` }}
+                  source={{ uri: `file://${document.image}`, scale: 1 }}
                 />
               </View>
             )}

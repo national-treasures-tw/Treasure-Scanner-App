@@ -139,15 +139,17 @@ operator+=
 size
 reserve
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/G8Tesseract/TesseractOCR/G8Tesseract.h
+CGSizeMake
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CGGeometry.h
 set_deadline_msecs
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/G8Tesseract/TesseractOCR/include/tesseract/ocrclass.h
 invalid_argument
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/stdexcept
+CGRectMake
 AnalyseLayout
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/G8Tesseract/TesseractOCR/include/tesseract/baseapi.h
 __23-[G8Tesseract setRect:]_block_invoke
 __CGSizeEqualToSize
-/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CGGeometry.h
 __destroy_helper_block_
 __copy_helper_block_
 __28-[G8Tesseract loadVariables]_block_invoke
@@ -161,6 +163,7 @@ init
 tesseractCancelCallbackFunction
 ETEXT_DESC
 +[SBSDKScannerViewController initialize]
+-[SBSDKScannerViewController initWithParentViewController:parentView:imageStorage:enableQRCodeDetection:]
 -[SBSDKScannerViewController initWithParentViewController:imageStorage:]
 -[SBSDKScannerViewController init]
 -[SBSDKScannerViewController commonInit]
@@ -173,6 +176,7 @@ ETEXT_DESC
 -[SBSDKScannerViewController setAutoCaptureSensitivity:]
 -[SBSDKScannerViewController viewDidLoad]
 -[SBSDKScannerViewController viewWillAppear:]
+-[SBSDKScannerViewController viewDidAppear:]
 -[SBSDKScannerViewController viewWillDisappear:]
 -[SBSDKScannerViewController viewDidDisappear:]
 -[SBSDKScannerViewController viewDidLayoutSubviews]
@@ -191,50 +195,66 @@ ___52-[SBSDKScannerViewController setAutoShutterEnabled:]_block_invoke
 -[SBSDKScannerViewController playFlashAnimation]
 ___48-[SBSDKScannerViewController playFlashAnimation]_block_invoke
 ___48-[SBSDKScannerViewController playFlashAnimation]_block_invoke_2
-___copy_helper_block_.317
-___destroy_helper_block_.318
-___48-[SBSDKScannerViewController playFlashAnimation]_block_invoke.322
-___copy_helper_block_.323
-___destroy_helper_block_.324
-___48-[SBSDKScannerViewController playFlashAnimation]_block_invoke.326
-___copy_helper_block_.327
-___destroy_helper_block_.328
-___copy_helper_block_.330
-___destroy_helper_block_.331
-___48-[SBSDKScannerViewController playFlashAnimation]_block_invoke.333
-___copy_helper_block_.334
-___destroy_helper_block_.335
+___copy_helper_block_.342
+___destroy_helper_block_.343
+___48-[SBSDKScannerViewController playFlashAnimation]_block_invoke.347
+___copy_helper_block_.348
+___destroy_helper_block_.349
+___48-[SBSDKScannerViewController playFlashAnimation]_block_invoke.351
+___copy_helper_block_.352
+___destroy_helper_block_.353
+___copy_helper_block_.355
+___destroy_helper_block_.356
+___48-[SBSDKScannerViewController playFlashAnimation]_block_invoke.358
+___copy_helper_block_.359
+___destroy_helper_block_.360
 -[SBSDKScannerViewController captureStillImage]
 -[SBSDKScannerViewController captureStillImageWithCompletionHandler:]
 ___69-[SBSDKScannerViewController captureStillImageWithCompletionHandler:]_block_invoke
 ___69-[SBSDKScannerViewController captureStillImageWithCompletionHandler:]_block_invoke_2
-___copy_helper_block_.370
-___destroy_helper_block_.371
-___copy_helper_block_.373
-___destroy_helper_block_.374
+___copy_helper_block_.401
+___destroy_helper_block_.402
+___69-[SBSDKScannerViewController captureStillImageWithCompletionHandler:]_block_invoke.404
+___copy_helper_block_.406
+___destroy_helper_block_.407
+___69-[SBSDKScannerViewController captureStillImageWithCompletionHandler:]_block_invoke.409
+___copy_helper_block_.410
+___destroy_helper_block_.411
+___copy_helper_block_.413
+___destroy_helper_block_.414
 -[SBSDKScannerViewController shutterPressed:]
 -[SBSDKScannerViewController configureStatusLabelForDetectorResult:]
 -[SBSDKScannerViewController visualizeDetectionResult:]
+-[SBSDKScannerViewController captureOutput:didOutputMetadataObjects:fromConnection:]
+___84-[SBSDKScannerViewController captureOutput:didOutputMetadataObjects:fromConnection:]_block_invoke
+___copy_helper_block_.489
+___destroy_helper_block_.490
+___84-[SBSDKScannerViewController captureOutput:didOutputMetadataObjects:fromConnection:]_block_invoke.494
+___copy_helper_block_.498
+___destroy_helper_block_.499
+___84-[SBSDKScannerViewController captureOutput:didOutputMetadataObjects:fromConnection:]_block_invoke.505
+___copy_helper_block_.506
+___destroy_helper_block_.507
 -[SBSDKScannerViewController captureOutput:didOutputSampleBuffer:fromConnection:]
 ___81-[SBSDKScannerViewController captureOutput:didOutputSampleBuffer:fromConnection:]_block_invoke
-___copy_helper_block_.448
-___destroy_helper_block_.449
-___81-[SBSDKScannerViewController captureOutput:didOutputSampleBuffer:fromConnection:]_block_invoke.461
-___copy_helper_block_.467
-___destroy_helper_block_.468
+___copy_helper_block_.510
+___destroy_helper_block_.511
+___81-[SBSDKScannerViewController captureOutput:didOutputSampleBuffer:fromConnection:]_block_invoke.523
+___copy_helper_block_.529
+___destroy_helper_block_.530
 -[SBSDKScannerViewController updateAutoSnap:andPolygon:]
 -[SBSDKScannerViewController scheduleAutoSnap]
 -[SBSDKScannerViewController cancelScheduledAutoSnap]
 -[SBSDKScannerViewController performAutoSnap]
 ___45-[SBSDKScannerViewController performAutoSnap]_block_invoke
-___copy_helper_block_.492
-___destroy_helper_block_.493
+___copy_helper_block_.556
+___destroy_helper_block_.557
 -[SBSDKScannerViewController significantMotionDetected]
 -[SBSDKScannerViewController noSignificantMotionDetected]
 -[SBSDKScannerViewController startMotionDetection]
 ___50-[SBSDKScannerViewController startMotionDetection]_block_invoke
-___copy_helper_block_.513
-___destroy_helper_block_.514
+___copy_helper_block_.577
+___destroy_helper_block_.578
 -[SBSDKScannerViewController endMotionDetection]
 -[SBSDKScannerViewController updateMotionData:]
 -[SBSDKScannerViewController timeSinceLastMotion]
@@ -244,13 +264,15 @@ ___destroy_helper_block_.514
 -[SBSDKScannerViewController transformForDeviceOrientation]
 -[SBSDKScannerViewController changeDeviceOrientationAnimated:]
 ___62-[SBSDKScannerViewController changeDeviceOrientationAnimated:]_block_invoke
-___copy_helper_block_.554
-___destroy_helper_block_.555
+___copy_helper_block_.616
+___destroy_helper_block_.617
 -[SBSDKScannerViewController deviceOrientationDidChange]
 -[SBSDKScannerViewController delegate]
 -[SBSDKScannerViewController setDelegate:]
 -[SBSDKScannerViewController cameraSession]
 -[SBSDKScannerViewController setCameraSession:]
+-[SBSDKScannerViewController stopsCameraSessionWhenDisappeared]
+-[SBSDKScannerViewController setStopsCameraSessionWhenDisappeared:]
 -[SBSDKScannerViewController imageStorage]
 -[SBSDKScannerViewController setImageStorage:]
 -[SBSDKScannerViewController imageScale]
@@ -304,9 +326,12 @@ ___destroy_helper_block_.555
 -[SBSDKScannerViewController setHUDView:]
 -[SBSDKScannerViewController usePhotoDetector]
 -[SBSDKScannerViewController setUsePhotoDetector:]
+-[SBSDKScannerViewController qrCodeEnabled]
+-[SBSDKScannerViewController setQrCodeEnabled:]
 -[SBSDKScannerViewController .cxx_destruct]
 __ZNSt3__124__put_character_sequenceIcNS_11char_traitsIcEEEERNS_13basic_ostreamIT_T0_EES7_PKS4_m
 __ZNSt3__116__pad_and_outputIcNS_11char_traitsIcEEEENS_19ostreambuf_iteratorIT_T0_EES6_PKS4_S8_S8_RNS_8ios_baseES4_
+_OBJC_IVAR_$_SBSDKScannerViewController._qrCodeEnabled
 _OBJC_IVAR_$_SBSDKScannerViewController._imageStorage
 l_OBJC_PROTOCOL_$_NSObject
 l_OBJC_LABEL_PROTOCOL_$_NSObject
@@ -319,22 +344,28 @@ _OBJC_IVAR_$_SBSDKScannerViewController._imageScale
 _OBJC_IVAR_$_SBSDKScannerViewController._imageMode
 _OBJC_IVAR_$_SBSDKScannerViewController._shutterMode
 _OBJC_IVAR_$_SBSDKScannerViewController._scannerStatus
+_OBJC_IVAR_$_SBSDKScannerViewController._stopsCameraSessionWhenDisappeared
 _OBJC_IVAR_$_SBSDKScannerViewController._HUDView
 _OBJC_IVAR_$_SBSDKScannerViewController._detectionStatusHidden
 _OBJC_IVAR_$_SBSDKScannerViewController._shutterButtonHidden
 _OBJC_IVAR_$_SBSDKScannerViewController._autoShutterEnabled
-___block_descriptor_tmp.319
-___block_descriptor_tmp.325
-___block_descriptor_tmp.329
-___block_descriptor_tmp.332
-___block_descriptor_tmp.337
-___block_descriptor_tmp.372
-___block_descriptor_tmp.376
-___block_descriptor_tmp.450
-___block_descriptor_tmp.469
-___block_descriptor_tmp.494
-___block_descriptor_tmp.516
-___block_descriptor_tmp.556
+___block_descriptor_tmp.344
+___block_descriptor_tmp.350
+___block_descriptor_tmp.354
+___block_descriptor_tmp.357
+___block_descriptor_tmp.362
+___block_descriptor_tmp.403
+___block_descriptor_tmp.408
+___block_descriptor_tmp.412
+___block_descriptor_tmp.416
+___block_descriptor_tmp.491
+___block_descriptor_tmp.501
+___block_descriptor_tmp.508
+___block_descriptor_tmp.512
+___block_descriptor_tmp.531
+___block_descriptor_tmp.558
+___block_descriptor_tmp.580
+___block_descriptor_tmp.618
 _OBJC_IVAR_$_SBSDKScannerViewController._cameraSession
 _OBJC_IVAR_$_SBSDKScannerViewController._videoOrientation
 _OBJC_IVAR_$_SBSDKScannerViewController._previewContainer
@@ -372,6 +403,7 @@ sputn
 data
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string
 __get_pointer
+__get_short_pointer
 __get_long_pointer
 __is_long
 basic_string
@@ -396,26 +428,29 @@ operator bool
 __62-[SBSDKScannerViewController changeDeviceOrientationAnimated:]_block_invoke
 __50-[SBSDKScannerViewController startMotionDetection]_block_invoke
 __45-[SBSDKScannerViewController performAutoSnap]_block_invoke
-__81-[SBSDKScannerViewController captureOutput:didOutputSampleBuffer:fromConnection:]_block_invoke.461
+__81-[SBSDKScannerViewController captureOutput:didOutputSampleBuffer:fromConnection:]_block_invoke.523
 isDetectionStatusOK
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/EdgeDetectionSDK/Common/SBSDKDocumentDetectionStatus.h
 __81-[SBSDKScannerViewController captureOutput:didOutputSampleBuffer:fromConnection:]_block_invoke
 operator<<
 endl<char, std::__1::char_traits<char> >
 operator<<<std::__1::char_traits<char> >
+__84-[SBSDKScannerViewController captureOutput:didOutputMetadataObjects:fromConnection:]_block_invoke.505
+__84-[SBSDKScannerViewController captureOutput:didOutputMetadataObjects:fromConnection:]_block_invoke.494
+__84-[SBSDKScannerViewController captureOutput:didOutputMetadataObjects:fromConnection:]_block_invoke
+CGPointMake
+__69-[SBSDKScannerViewController captureStillImageWithCompletionHandler:]_block_invoke.409
+__69-[SBSDKScannerViewController captureStillImageWithCompletionHandler:]_block_invoke.404
 __69-[SBSDKScannerViewController captureStillImageWithCompletionHandler:]_block_invoke_2
 __69-[SBSDKScannerViewController captureStillImageWithCompletionHandler:]_block_invoke
-__48-[SBSDKScannerViewController playFlashAnimation]_block_invoke.333
-__48-[SBSDKScannerViewController playFlashAnimation]_block_invoke.326
-__48-[SBSDKScannerViewController playFlashAnimation]_block_invoke.322
+__48-[SBSDKScannerViewController playFlashAnimation]_block_invoke.358
+__48-[SBSDKScannerViewController playFlashAnimation]_block_invoke.351
+__48-[SBSDKScannerViewController playFlashAnimation]_block_invoke.347
 __48-[SBSDKScannerViewController playFlashAnimation]_block_invoke_2
 __48-[SBSDKScannerViewController playFlashAnimation]_block_invoke
 __52-[SBSDKScannerViewController setAutoShutterEnabled:]_block_invoke
-__ZTSN3doo2CC14FieldValidatorE
-__ZTIN3doo2CC14FieldValidatorE
 ../Common/CreditCardRecognizer/src/main/validation/ValidDateValidator.cpp
 operator+<char, std::__1::char_traits<char>, std::__1::allocator<char> >
-__get_short_pointer
 __get_short_size
 __get_long_size
 __zero
@@ -494,16 +529,11 @@ channels
 __ZN3doo2CC12RoiExtractor3ROIC2ERKS2_
 __ZNSt3__120__shared_ptr_pointerIPN3doo2CC11PrintedDateENS_14default_deleteIS3_EENS_9allocatorIS3_EEED1Ev
 __ZNSt3__120__shared_ptr_pointerIPN3doo2CC11PrintedDateENS_14default_deleteIS3_EENS_9allocatorIS3_EEED0Ev
-__ZTSNSt3__120__shared_ptr_pointerIPN3doo2CC11PrintedDateENS_14default_deleteIS3_EENS_9allocatorIS3_EEEE
-__ZTINSt3__120__shared_ptr_pointerIPN3doo2CC11PrintedDateENS_14default_deleteIS3_EENS_9allocatorIS3_EEEE
-__ZTSNSt3__114default_deleteIN3doo2CC11PrintedDateEEE
 ../Common/CreditCardRecognizer/src/main/CreditCardRecognizer.cpp
 __on_zero_shared_weak
 __get_deleter
 operator==
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/typeinfo
-__compare_nonunique_names
-name
 __on_zero_shared
 ~__shared_ptr_pointer
 shared_ptr<doo::CC::PrintedDate>
@@ -612,8 +642,6 @@ l_OBJC_LABEL_PROTOCOL_$_SBSDKOCROperationProtocol
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Private/Operations/SBSDKOCRImageOperation.mm
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Private/Operations/SBSDKOCRImageOperation.h
 __ZN2cv7MatExprD2Ev
-__ZTSN3doo16FeatureExtractorE
-__ZTIN3doo16FeatureExtractorE
 ../Common/CreditCardRecognizer/src/main/recognition/HOGFeatureExtractor.cpp
 ~MatExpr
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/OpenCV/opencv2.framework/Headers/core/mat.hpp
@@ -635,8 +663,6 @@ __ZN9XSplitter12splitSymbolsEv
 __ZN9XSplitter18findPossibleSplitsEv
 __ZN9XSplitter14splitToSymbolsENS_5SplitE
 __ZN9XSplitter8fillCutsERNS_5SplitEiii
-__ZTSN3doo2CC14SymbolSplitterE
-__ZTIN3doo2CC14SymbolSplitterE
 ../Common/CreditCardRecognizer/src/main/recognition/OpenCvSymbolSplitter.cpp
 destroy<XSplitter::Split>
 __destroy<XSplitter::Split>
@@ -712,7 +738,7 @@ getDerivativesXY
 split
 XSplitter
 calculateColumnIntensities
-_ZTv0_n24_N3doo2CC20OpenCvSymbolSplitter12splitSymbolsEN2cv3MatE
+_ZTv0_n12_N3doo2CC20OpenCvSymbolSplitter12splitSymbolsEN2cv3MatE
 cropByX
 prepareImageForSplitting
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/OpenCV/opencv2.framework/Headers/core/matx.hpp
@@ -837,34 +863,68 @@ ___destroy_helper_block_.83
 ___31-[SBSDKImageStorage imageCount]_block_invoke
 ___copy_helper_block_.85
 ___destroy_helper_block_.86
+-[SBSDKImageStorage addImageFromURL:moveFile:]
+___46-[SBSDKImageStorage addImageFromURL:moveFile:]_block_invoke
+___copy_helper_block_.100
+___destroy_helper_block_.101
 -[SBSDKImageStorage addImage:]
 ___30-[SBSDKImageStorage addImage:]_block_invoke
-___copy_helper_block_.104
-___destroy_helper_block_.105
+___copy_helper_block_.117
+___destroy_helper_block_.118
+-[SBSDKImageStorage addImageFromURL:]
+___37-[SBSDKImageStorage addImageFromURL:]_block_invoke
+___copy_helper_block_.129
+___destroy_helper_block_.130
 -[SBSDKImageStorage removeImageAtIndex:]
 ___40-[SBSDKImageStorage removeImageAtIndex:]_block_invoke
-___copy_helper_block_.119
-___destroy_helper_block_.120
+___copy_helper_block_.142
+___destroy_helper_block_.143
 -[SBSDKImageStorage imageAtIndex:]
 ___34-[SBSDKImageStorage imageAtIndex:]_block_invoke
-___copy_helper_block_.128
-___destroy_helper_block_.129
+___copy_helper_block_.151
+___destroy_helper_block_.152
 -[SBSDKImageStorage imageURLAtIndex:]
 ___37-[SBSDKImageStorage imageURLAtIndex:]_block_invoke
-___copy_helper_block_.131
-___destroy_helper_block_.132
+___copy_helper_block_.154
+___destroy_helper_block_.155
 -[SBSDKImageStorage removeAllImages]
 ___36-[SBSDKImageStorage removeAllImages]_block_invoke
-___copy_helper_block_.138
-___destroy_helper_block_.139
+___copy_helper_block_.161
+___destroy_helper_block_.162
 -[SBSDKImageStorage thumbnailForImageAtIndex:ofSize:]
 ___53-[SBSDKImageStorage thumbnailForImageAtIndex:ofSize:]_block_invoke
-___copy_helper_block_.143
-___destroy_helper_block_.144
+___copy_helper_block_.166
+___destroy_helper_block_.167
+-[SBSDKImageStorage imageForKey:]
+___33-[SBSDKImageStorage imageForKey:]_block_invoke
+___copy_helper_block_.169
+___destroy_helper_block_.170
+-[SBSDKImageStorage setImage:forKey:]
+___37-[SBSDKImageStorage setImage:forKey:]_block_invoke
+___copy_helper_block_.172
+___destroy_helper_block_.173
+-[SBSDKImageStorage setImageFromURL:forKey:moveFile:]
+___53-[SBSDKImageStorage setImageFromURL:forKey:moveFile:]_block_invoke
+___copy_helper_block_.177
+___destroy_helper_block_.178
+-[SBSDKImageStorage imageURLForKey:]
+___36-[SBSDKImageStorage imageURLForKey:]_block_invoke
+___copy_helper_block_.182
+___destroy_helper_block_.183
+-[SBSDKImageStorage thumbnailOfImageForKey:ofSize:]
+___51-[SBSDKImageStorage thumbnailOfImageForKey:ofSize:]_block_invoke
+___copy_helper_block_.185
+___destroy_helper_block_.186
+-[SBSDKImageStorage removeImageForKey:]
+___39-[SBSDKImageStorage removeImageForKey:]_block_invoke
+___copy_helper_block_.188
+___destroy_helper_block_.189
+-[SBSDKImageStorage waitUntilWritingCompleted]
+___46-[SBSDKImageStorage waitUntilWritingCompleted]_block_invoke
 -[SBSDKImageStorage cacheThumbnail:withIdentifier:forKey:]
 ___58-[SBSDKImageStorage cacheThumbnail:withIdentifier:forKey:]_block_invoke
-___copy_helper_block_.150
-___destroy_helper_block_.151
+___copy_helper_block_.196
+___destroy_helper_block_.197
 -[SBSDKImageStorage cacheKeyForID:andSize:]
 -[SBSDKImageStorage createThumbnailFromImage:fittingIntoSize:]
 +[SBSDKImageStorage createID]
@@ -876,8 +936,8 @@ ___destroy_helper_block_.151
 -[SBSDKImageStorage urlWithID:]
 -[SBSDKImageStorage validatedIndexSetForIndexSet:]
 ___50-[SBSDKImageStorage validatedIndexSetForIndexSet:]_block_invoke
-___copy_helper_block_.200
-___destroy_helper_block_.201
+___copy_helper_block_.246
+___destroy_helper_block_.247
 -[SBSDKImageStorage isAutomaticThumbnailCreationEnabled]
 -[SBSDKImageStorage setEnableAutomaticThumbnailCreation:]
 -[SBSDKImageStorage automaticThumbnailSize]
@@ -910,27 +970,43 @@ ___block_descriptor_tmp.78
 ___block_descriptor_tmp.81
 ___block_descriptor_tmp.84
 ___block_descriptor_tmp.87
-___block_descriptor_tmp.106
-___block_descriptor_tmp.121
-___block_descriptor_tmp.130
-___block_descriptor_tmp.133
-___block_descriptor_tmp.140
-___block_descriptor_tmp.145
-___block_descriptor_tmp.152
-___block_descriptor_tmp.203
+___block_descriptor_tmp.102
+___block_descriptor_tmp.119
+___block_descriptor_tmp.131
+___block_descriptor_tmp.144
+___block_descriptor_tmp.153
+___block_descriptor_tmp.156
+___block_descriptor_tmp.163
+___block_descriptor_tmp.168
+___block_descriptor_tmp.171
+___block_descriptor_tmp.174
+___block_descriptor_tmp.179
+___block_descriptor_tmp.184
+___block_descriptor_tmp.187
+___block_descriptor_tmp.190
+___block_descriptor_tmp.191
+___block_descriptor_tmp.198
+___block_descriptor_tmp.249
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Public/Utils/SBSDKImageStorage.mm
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Public/Utils/SBSDKImageStorage.h
 __50-[SBSDKImageStorage validatedIndexSetForIndexSet:]_block_invoke
-NSMakeRange
-/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSRange.h
 SizeFitInSize
 __58-[SBSDKImageStorage cacheThumbnail:withIdentifier:forKey:]_block_invoke
+__46-[SBSDKImageStorage waitUntilWritingCompleted]_block_invoke
+__39-[SBSDKImageStorage removeImageForKey:]_block_invoke
+__51-[SBSDKImageStorage thumbnailOfImageForKey:ofSize:]_block_invoke
+__36-[SBSDKImageStorage imageURLForKey:]_block_invoke
+__53-[SBSDKImageStorage setImageFromURL:forKey:moveFile:]_block_invoke
+__37-[SBSDKImageStorage setImage:forKey:]_block_invoke
+__33-[SBSDKImageStorage imageForKey:]_block_invoke
 __53-[SBSDKImageStorage thumbnailForImageAtIndex:ofSize:]_block_invoke
 __36-[SBSDKImageStorage removeAllImages]_block_invoke
 __37-[SBSDKImageStorage imageURLAtIndex:]_block_invoke
 __34-[SBSDKImageStorage imageAtIndex:]_block_invoke
 __40-[SBSDKImageStorage removeImageAtIndex:]_block_invoke
+__37-[SBSDKImageStorage addImageFromURL:]_block_invoke
 __30-[SBSDKImageStorage addImage:]_block_invoke
+__46-[SBSDKImageStorage addImageFromURL:moveFile:]_block_invoke
 __31-[SBSDKImageStorage imageCount]_block_invoke
 __37-[SBSDKImageStorage imageIdentifiers]_block_invoke
 __37-[SBSDKImageStorage setImageQuality:]_block_invoke
@@ -938,8 +1014,6 @@ __33-[SBSDKImageStorage imageQuality]_block_invoke
 __30-[SBSDKImageStorage imageURLs]_block_invoke
 __28-[SBSDKImageStorage dealloc]_block_invoke
 __34-[SBSDKImageStorage copyWithZone:]_block_invoke
-__ZTSN3doo6search16BinaryClassifierE
-__ZTIN3doo6search16BinaryClassifierE
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Invoice/src/cpp/modules/MachineLearningTools/TextSearcher/src/cpp/searcher/classification/StatModelBinaryClassifier.cpp
 classify
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/OpenCV/opencv2.framework/Headers/core/ptr.inl.hpp
@@ -955,18 +1029,16 @@ Contour
 ImageCroppingProcessor
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/EdgeDetectionSDK/Common/ImageCroppingProcessor.hpp
 CameraPerspectiveParameters
-__ZTSN3doo2CC13FieldDetectorE
-__ZTIN3doo2CC13FieldDetectorE
 ../Common/CreditCardRecognizer/src/main/detection/OpenCvFieldDetector.cpp
 swap<doo::CC::DetectedField *>
 __construct_backward<doo::CC::DetectedField *>
 construct<doo::CC::DetectedField, const doo::CC::DetectedField &>
 __construct<doo::CC::DetectedField, const doo::CC::DetectedField &>
 __push_back_slow_path<const doo::CC::DetectedField &>
-_ZTv0_n32_N3doo2CC19OpenCvFieldDetector16detectBackFieldsEN2cv3MatE
+_ZTv0_n16_N3doo2CC19OpenCvFieldDetector16detectBackFieldsEN2cv3MatE
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/CreditCardRecognizer/src/main/detection/OpenCvFieldDetector.cpp
 detectBackFields
-_ZTv0_n24_N3doo2CC19OpenCvFieldDetector17detectFrontFieldsEN2cv3MatE
+_ZTv0_n12_N3doo2CC19OpenCvFieldDetector17detectFrontFieldsEN2cv3MatE
 detectHolder
 detectValidDate
 detectCardNumber
@@ -981,18 +1053,12 @@ ___103+[SBSDKPDFRenderer renderImageStorage:copyImageStorage:indexSet:withPageSi
 __103+[SBSDKPDFRenderer renderImageStorage:copyImageStorage:indexSet:withPageSize:output:completionHandler:]_block_invoke
 __ZNSt3__114basic_ifstreamIcNS_11char_traitsIcEEED1Ev
 __ZN3doo14LicenseManagerD1Ev
-__ZTv0_n24_NSt3__114basic_ifstreamIcNS_11char_traitsIcEEED1Ev
+__ZTv0_n12_NSt3__114basic_ifstreamIcNS_11char_traitsIcEEED1Ev
 __ZNSt3__114basic_ifstreamIcNS_11char_traitsIcEEED0Ev
-__ZTv0_n24_NSt3__114basic_ifstreamIcNS_11char_traitsIcEEED0Ev
+__ZTv0_n12_NSt3__114basic_ifstreamIcNS_11char_traitsIcEEED0Ev
 __ZNSt3__114__thread_proxyINS_5tupleIJZN3doo14LicenseManagerC1EvE3$_0EEEEEPvS6_
 __GLOBAL__sub_I_LicenseManager.cpp
 __ZL14sharedInstance
-__ZTINSt3__113basic_istreamIcNS_11char_traitsIcEEEE
-__ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE
-__ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE
-__ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE
-__ZTINSt3__115basic_streambufIcNS_11char_traitsIcEEEE
-__ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Licensing/LicenseManager.cpp
 _GLOBAL__sub_I_LicenseManager.cpp
 LicenseManager
@@ -1005,9 +1071,9 @@ getloc
 has_facet<std::__1::codecvt<char, char, mbstate_t> >
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/thread
 get
-__thread_proxy<std::__1::tuple<(lambda at /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Licensing/LicenseManager.cpp:40:17)> >
-__thread_execute<(lambda at /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Licensing/LicenseManager.cpp:40:17)>
-__invoke<(lambda at /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Licensing/LicenseManager.cpp:40:17)>
+__thread_proxy<std::__1::tuple<(lambda at /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Licensing/LicenseManager.cpp:39:17)> >
+__thread_execute<(lambda at /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Licensing/LicenseManager.cpp:39:17)>
+__invoke<(lambda at /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Licensing/LicenseManager.cpp:39:17)>
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__functional_base
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/atomic
 load
@@ -1044,15 +1110,13 @@ fpos
 operator long long
 seekoff
 setbuf
-max<long>
-max<long, std::__1::__less<long, long> >
 imbue
 ~basic_filebuf
 close
-_ZTv0_n24_NSt3__114basic_ifstreamIcNS_11char_traitsIcEEED0Ev
+_ZTv0_n12_NSt3__114basic_ifstreamIcNS_11char_traitsIcEEED0Ev
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iosfwd
 ~basic_ifstream
-_ZTv0_n24_NSt3__114basic_ifstreamIcNS_11char_traitsIcEEED1Ev
+_ZTv0_n12_NSt3__114basic_ifstreamIcNS_11char_traitsIcEEED1Ev
 enableLogging
 isFeatureEnabled
 operator<<<char, std::__1::char_traits<char>, std::__1::allocator<char> >
@@ -1082,11 +1146,11 @@ basic_ifstream
 basic_istream
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/istream
 basic_ios
-thread<(lambda at /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Licensing/LicenseManager.cpp:40:17), void>
-tuple<(lambda at /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Licensing/LicenseManager.cpp:40:17), false>
+thread<(lambda at /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Licensing/LicenseManager.cpp:39:17), void>
+tuple<(lambda at /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Licensing/LicenseManager.cpp:39:17), false>
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/tuple
-__tuple_impl<0, (lambda at /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Licensing/LicenseManager.cpp:40:17), (lambda at /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Licensing/LicenseManager.cpp:40:17)>
-__tuple_leaf<(lambda at /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Licensing/LicenseManager.cpp:40:17), void>
+__tuple_impl<0, (lambda at /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Licensing/LicenseManager.cpp:39:17), (lambda at /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Licensing/LicenseManager.cpp:39:17)>
+__tuple_leaf<(lambda at /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Licensing/LicenseManager.cpp:39:17), void>
 atomic
 __atomic_base
 -[SBSDKPDFRenderingOperation main]
@@ -1119,8 +1183,6 @@ ___block_literal_global.15
 __53+[SBSDKProcessingQueueFactory concurrentNetworkQueue]_block_invoke
 __56+[SBSDKProcessingQueueFactory serialTextProcessingQueue]_block_invoke
 __57+[SBSDKProcessingQueueFactory serialImageProcessingQueue]_block_invoke
-__ZTSN3doo2CC15FieldRecognizerE
-__ZTIN3doo2CC15FieldRecognizerE
 ../Common/CreditCardRecognizer/src/main/recognition/OpenCvFieldRecognizer.cpp
 swap<doo::CC::RecognizedField *>
 __construct_backward<doo::CC::RecognizedField *>
@@ -1130,7 +1192,7 @@ __push_back_slow_path<const doo::CC::RecognizedField &>
 __annotate_shrink
 validatorForField
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/CreditCardRecognizer/src/main/recognition/OpenCvFieldRecognizer.cpp
-_ZTv0_n24_N3doo2CC21OpenCvFieldRecognizer15recognizeFieldsERKN2cv3MatENSt3__16vectorINS0_13DetectedFieldENS6_9allocatorIS8_EEEE
+_ZTv0_n12_N3doo2CC21OpenCvFieldRecognizer15recognizeFieldsERKN2cv3MatENSt3__16vectorINS0_13DetectedFieldENS6_9allocatorIS8_EEEE
 recognizeAndValidateOtherFields
 operator!=<const doo::CC::DetectedField *>
 ~ValidatedField
@@ -1188,6 +1250,7 @@ ___55-[SBSDKSynchronousOpticalTextRecognizer processImages:]_block_invoke
 -[SBSDKSynchronousOpticalTextRecognizer beginPDFRendering:]
 -[SBSDKSynchronousOpticalTextRecognizer renderImageToPDF:error:]
 -[SBSDKSynchronousOpticalTextRecognizer endPDFRendering:]
++[SBSDKSynchronousOpticalTextRecognizer preprocessImage:]
 -[SBSDKSynchronousOpticalTextRecognizer preprocessedImageForTesseract:sourceImage:]
 -[SBSDKSynchronousOpticalTextRecognizer progressImageRecognitionForTesseract:]
 -[SBSDKSynchronousOpticalTextRecognizer shouldCancelImageRecognitionForTesseract:]
@@ -1305,9 +1368,6 @@ _OBJC_IVAR_$_SBSDKPayFormDetectionResult._polygon
 _OBJC_IVAR_$_SBSDKPayFormDetectionResult._detectedBoxes
 _OBJC_IVAR_$_SBSDKPayFormRecognitionResult._recognizedFields
 _OBJC_IVAR_$_SBSDKPayFormScanner._recognizer
-__ZTSNSt3__120__shared_ptr_pointerIPN3doo17PayFormRecognizerENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE
-__ZTINSt3__120__shared_ptr_pointerIPN3doo17PayFormRecognizerENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE
-__ZTSNSt3__114default_deleteIN3doo17PayFormRecognizerEEE
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Public/PayFormScanner/SBSDKPayFormScanner.mm
 ~DocumentImageProcessor
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/EdgeDetectionSDK/Common/DocumentImageProcessor.hpp
@@ -1445,6 +1505,11 @@ __36+[SBSDKDeviceInformation deviceName]_block_invoke
 -[SBSDKCameraSession startSession]
 -[SBSDKCameraSession stopSession]
 -[SBSDKCameraSession isSessionRunning]
+-[SBSDKCameraSession pauseDetection]
+-[SBSDKCameraSession resumeDetection]
+-[SBSDKCameraSession isDetectionPaused]
+-[SBSDKCameraSession connectDelegates]
+-[SBSDKCameraSession disconnectDelegates]
 -[SBSDKCameraSession isCameraAdjusting]
 -[SBSDKCameraSession torchLightAvailable]
 -[SBSDKCameraSession isTorchLightEnabled]
@@ -1463,19 +1528,19 @@ __36+[SBSDKDeviceInformation deviceName]_block_invoke
 -[SBSDKCameraSession captureStillImage:completionHandler:]
 ___58-[SBSDKCameraSession captureStillImage:completionHandler:]_block_invoke
 ___58-[SBSDKCameraSession captureStillImage:completionHandler:]_block_invoke_2
-___58-[SBSDKCameraSession captureStillImage:completionHandler:]_block_invoke.195
-___copy_helper_block_.198
-___destroy_helper_block_.199
-___copy_helper_block_.201
-___destroy_helper_block_.202
+___58-[SBSDKCameraSession captureStillImage:completionHandler:]_block_invoke_3
+___copy_helper_block_.213
+___destroy_helper_block_.214
+___copy_helper_block_.216
+___destroy_helper_block_.217
 -[SBSDKCameraSession captureStillImageWithCompletionHandler:]
 ___61-[SBSDKCameraSession captureStillImageWithCompletionHandler:]_block_invoke
-___copy_helper_block_.207
-___destroy_helper_block_.208
+___copy_helper_block_.222
+___destroy_helper_block_.223
 -[SBSDKCameraSession captureJPEGStillImageWithCompletionHandler:]
 ___65-[SBSDKCameraSession captureJPEGStillImageWithCompletionHandler:]_block_invoke
-___copy_helper_block_.212
-___destroy_helper_block_.213
+___copy_helper_block_.227
+___destroy_helper_block_.228
 -[SBSDKCameraSession previewLayer]
 -[SBSDKCameraSession setPreviewLayer:]
 -[SBSDKCameraSession videoDelegate]
@@ -1499,12 +1564,14 @@ ___destroy_helper_block_.213
 -[SBSDKCameraSession setMetaDataCaptureQueue:]
 -[SBSDKCameraSession deviceObserversInstalled]
 -[SBSDKCameraSession setDeviceObserversInstalled:]
+-[SBSDKCameraSession pausedCount]
+-[SBSDKCameraSession setPausedCount:]
 -[SBSDKCameraSession .cxx_destruct]
 _OBJC_IVAR_$_SBSDKCameraSession._videoDelegate
-___block_descriptor_tmp.200
-___block_descriptor_tmp.204
-___block_descriptor_tmp.209
-___block_descriptor_tmp.214
+___block_descriptor_tmp.215
+___block_descriptor_tmp.219
+___block_descriptor_tmp.224
+___block_descriptor_tmp.229
 _OBJC_IVAR_$_SBSDKCameraSession._previewLayer
 _OBJC_IVAR_$_SBSDKCameraSession._isCapturingStillImage
 _OBJC_IVAR_$_SBSDKCameraSession._updateTorchlightBlock
@@ -1516,11 +1583,12 @@ _OBJC_IVAR_$_SBSDKCameraSession._captureMetaDataOutput
 _OBJC_IVAR_$_SBSDKCameraSession._videoCaptureQueue
 _OBJC_IVAR_$_SBSDKCameraSession._metaDataCaptureQueue
 _OBJC_IVAR_$_SBSDKCameraSession._deviceObserversInstalled
+_OBJC_IVAR_$_SBSDKCameraSession._pausedCount
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Public/Camera/SBSDKCameraSession.mm
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Public/Camera/SBSDKCameraSession.h
 __65-[SBSDKCameraSession captureJPEGStillImageWithCompletionHandler:]_block_invoke
 __61-[SBSDKCameraSession captureStillImageWithCompletionHandler:]_block_invoke
-__58-[SBSDKCameraSession captureStillImage:completionHandler:]_block_invoke.195
+__58-[SBSDKCameraSession captureStillImage:completionHandler:]_block_invoke_3
 __58-[SBSDKCameraSession captureStillImage:completionHandler:]_block_invoke_2
 __58-[SBSDKCameraSession captureStillImage:completionHandler:]_block_invoke
 +[ScanbotSDK setLicense:]
@@ -1562,8 +1630,6 @@ __ZN3doo22DocumentImageProcessor19applyDetectorResultENS_32RectangularFeatureDet
 __ZN3doo32RectangularFeatureDetectorResultC2ERKS0_
 __ZN3doo17DetectorDebugInfoC2ERKS0_
 __ZN3doo3ROID2Ev
-__ZTSN3doo12RoiExtractorE
-__ZTIN3doo12RoiExtractorE
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/PayFormDetection/RoiExtractor.cpp
 destroy<doo::DetectedQuad>
 __destroy<doo::DetectedQuad>
@@ -1622,6 +1688,8 @@ __49+[SBSDKOCRLanguageInformation availableLanguages]_block_invoke
 __69+[SBSDKOCRLanguageInformation twoLetterCodeForTesseractLanguageCode:]_block_invoke
 __ZNSt3__13mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEiNS_4lessIS6_EENS4_INS_4pairIKS6_iEEEEED1Ev
 __ZN3doo22DocumentImageProcessorC2Eb
+__ZN3doo26RectangularFeatureDetectoraSEOS0_
+__ZN2cv3MataSEOS0_
 __ZNSt3__127__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_
 __ZZ11isIBANValidRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE12countrycodes
 __ZGVZ11isIBANValidRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE12countrycodes
@@ -1660,14 +1728,14 @@ __sort<ltrTextComparator &, cv::Rect_<int> *>
 __push_back_slow_path<const cv::Rect_<int> &>
 __emplace_unique_key_args<std::__1::basic_string<char>, const std::__1::piecewise_construct_t &, std::__1::tuple<std::__1::basic_string<char> &&>, std::__1::tuple<> >
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tree
+pair<std::__1::__tree_iterator<std::__1::__value_type<std::__1::basic_string<char>, int>, std::__1::__tree_node<std::__1::__value_type<std::__1::basic_string<char>, int>, void *> *, int>, bool &, void>
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/utility
 __tree_iterator
 __construct_node<const std::__1::piecewise_construct_t &, std::__1::tuple<std::__1::basic_string<char> &&>, std::__1::tuple<> >
 construct<std::__1::pair<const std::__1::basic_string<char>, int>, const std::__1::piecewise_construct_t &, std::__1::tuple<std::__1::basic_string<char> &&>, std::__1::tuple<> >
 __construct<std::__1::pair<const std::__1::basic_string<char>, int>, const std::__1::piecewise_construct_t &, std::__1::tuple<std::__1::basic_string<char> &&>, std::__1::tuple<> >
 pair<std::__1::basic_string<char> &&>
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/utility
 pair<std::__1::basic_string<char> &&, 0>
-__get_ptr
 __lower_bound<std::__1::basic_string<char> >
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map
 operator<<char, std::__1::char_traits<char>, std::__1::allocator<char> >
@@ -1693,9 +1761,9 @@ __construct<std::__1::pair<const std::__1::basic_string<char>, int>, const std::
 pair
 __tree_node_destructor
 __node_alloc
-next<std::__1::__tree_const_iterator<std::__1::__value_type<std::__1::basic_string<char>, int>, std::__1::__tree_node<std::__1::__value_type<std::__1::basic_string<char>, int>, void *> *, long> >
-advance<std::__1::__tree_const_iterator<std::__1::__value_type<std::__1::basic_string<char>, int>, std::__1::__tree_node<std::__1::__value_type<std::__1::basic_string<char>, int>, void *> *, long> >
-__advance<std::__1::__tree_const_iterator<std::__1::__value_type<std::__1::basic_string<char>, int>, std::__1::__tree_node<std::__1::__value_type<std::__1::basic_string<char>, int>, void *> *, long> >
+next<std::__1::__tree_const_iterator<std::__1::__value_type<std::__1::basic_string<char>, int>, std::__1::__tree_node<std::__1::__value_type<std::__1::basic_string<char>, int>, void *> *, int> >
+advance<std::__1::__tree_const_iterator<std::__1::__value_type<std::__1::basic_string<char>, int>, std::__1::__tree_node<std::__1::__value_type<std::__1::basic_string<char>, int>, void *> *, int> >
+__advance<std::__1::__tree_const_iterator<std::__1::__value_type<std::__1::basic_string<char>, int>, std::__1::__tree_node<std::__1::__value_type<std::__1::basic_string<char>, int>, void *> *, int> >
 __tree_next_iter<std::__1::__tree_end_node<std::__1::__tree_node_base<void *> *> *, std::__1::__tree_node_base<void *> *>
 __tree_min<std::__1::__tree_node_base<void *> *>
 operator--
@@ -1732,7 +1800,6 @@ base
 find_if<std::__1::reverse_iterator<std::__1::__wrap_iter<char *> >, std::__1::unary_negate<std::__1::pointer_to_unary_function<int, int> > >
 operator!=<std::__1::__wrap_iter<char *>, std::__1::__wrap_iter<char *> >
 rbegin
-reverse_iterator
 step1
 elemSize1
 type
@@ -1776,6 +1843,7 @@ __insert_unique
 __get_key<const std::__1::pair<const std::__1::basic_string<char>, int> >
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/initializer_list
 __tree
+__tree_end_node
 pair<char const (&)[3], int, void>
 +[SBSDKLog setLoggingEnabled:]
 +[SBSDKLog logInfo:]
@@ -1866,6 +1934,7 @@ insert<std::__1::__wrap_iter<doo::Line2D *> >
 __make_iter
 __construct_at_end<std::__1::__wrap_iter<doo::Line2D *> >
 operator!=<doo::Line2D *>
+operator==<doo::Line2D *, doo::Line2D *>
 copy<std::__1::__wrap_iter<doo::Line2D *>, doo::Line2D *>
 __copy<std::__1::__wrap_iter<doo::Line2D *>, doo::Line2D *>
 __construct_range_forward<std::__1::__wrap_iter<doo::Line2D *>, doo::Line2D *>
@@ -1958,15 +2027,6 @@ __ZNSt3__120__shared_ptr_emplaceIN2cv17CascadeClassifierENS_9allocatorIS2_EEED1E
 __ZNSt3__120__shared_ptr_emplaceIN2cv17CascadeClassifierENS_9allocatorIS2_EEED0Ev
 __ZNSt3__120__shared_ptr_emplaceIN3doo22DocumentImageProcessorENS_9allocatorIS2_EEED1Ev
 __ZNSt3__120__shared_ptr_emplaceIN3doo22DocumentImageProcessorENS_9allocatorIS2_EEED0Ev
-__ZTSNSt3__120__shared_ptr_pointerIPN3doo16ChequeRecognizer6ResultENS_14default_deleteIS3_EENS_9allocatorIS3_EEEE
-__ZTINSt3__120__shared_ptr_pointerIPN3doo16ChequeRecognizer6ResultENS_14default_deleteIS3_EENS_9allocatorIS3_EEEE
-__ZTSNSt3__114default_deleteIN3doo16ChequeRecognizer6ResultEEE
-__ZTSNSt3__120__shared_ptr_emplaceIN9tesseract11TessBaseAPIENS_9allocatorIS2_EEEE
-__ZTINSt3__120__shared_ptr_emplaceIN9tesseract11TessBaseAPIENS_9allocatorIS2_EEEE
-__ZTSNSt3__120__shared_ptr_emplaceIN2cv17CascadeClassifierENS_9allocatorIS2_EEEE
-__ZTINSt3__120__shared_ptr_emplaceIN2cv17CascadeClassifierENS_9allocatorIS2_EEEE
-__ZTSNSt3__120__shared_ptr_emplaceIN3doo22DocumentImageProcessorENS_9allocatorIS2_EEEE
-__ZTINSt3__120__shared_ptr_emplaceIN3doo22DocumentImageProcessorENS_9allocatorIS2_EEEE
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Cheque/src/library/ChequeRecognizer.cpp
 ~__shared_ptr_emplace
 ~__compressed_pair
@@ -1979,10 +2039,10 @@ __shared_ptr_emplace
 shared_ptr<doo::ChequeRecognizer::Result>
 Result
 __insertion_sort_incomplete<XComparator &, std::__1::reverse_iterator<std::__1::__wrap_iter<cv::Rect_<int> *> > >
-operator!=<std::__1::__wrap_iter<cv::Rect_<int> *>, std::__1::__wrap_iter<cv::Rect_<int> *> >
-operator!=<cv::Rect_<int> *>
 operator==<std::__1::__wrap_iter<cv::Rect_<int> *>, std::__1::__wrap_iter<cv::Rect_<int> *> >
 operator==<cv::Rect_<int> *, cv::Rect_<int> *>
+operator!=<std::__1::__wrap_iter<cv::Rect_<int> *>, std::__1::__wrap_iter<cv::Rect_<int> *> >
+operator!=<cv::Rect_<int> *>
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Cheque/src/library/utils.h
 operator-<std::__1::__wrap_iter<cv::Rect_<int> *>, std::__1::__wrap_iter<cv::Rect_<int> *> >
 operator-<cv::Rect_<int> *, cv::Rect_<int> *>
@@ -2055,10 +2115,18 @@ make_shared<tesseract::TessBaseAPI>
 ___44-[SBSDKShutterButton hideAnimatedImageViews]_block_invoke
 -[SBSDKShutterButton showAnimatedImageViews]
 ___44-[SBSDKShutterButton showAnimatedImageViews]_block_invoke
+___copy_helper_block_.149
+___destroy_helper_block_.150
 -[SBSDKShutterButton updateImageViewColors]
 -[SBSDKShutterButton updateButtonStatus]
 -[SBSDKShutterButton takingPhoto]
 -[SBSDKShutterButton scannerStatus]
+-[SBSDKShutterButton buttonSearchingColor]
+-[SBSDKShutterButton setButtonSearchingColor:]
+-[SBSDKShutterButton buttonDetectedColor]
+-[SBSDKShutterButton setButtonDetectedColor:]
+-[SBSDKShutterButton indicatorColor]
+-[SBSDKShutterButton setIndicatorColor:]
 -[SBSDKShutterButton needUpdateButtonImages]
 -[SBSDKShutterButton setNeedUpdateButtonImages:]
 -[SBSDKShutterButton activityIndicator]
@@ -2073,10 +2141,6 @@ ___44-[SBSDKShutterButton showAnimatedImageViews]_block_invoke
 -[SBSDKShutterButton setNormalImageView:]
 -[SBSDKShutterButton animatedImagesHidden]
 -[SBSDKShutterButton setAnimatedImagesHidden:]
--[SBSDKShutterButton buttonSearchingColor]
--[SBSDKShutterButton setButtonSearchingColor:]
--[SBSDKShutterButton buttonDetectedColor]
--[SBSDKShutterButton setButtonDetectedColor:]
 -[SBSDKShutterButton .cxx_destruct]
 _OBJC_IVAR_$_SBSDKShutterButton._scannerStatus
 _OBJC_IVAR_$_SBSDKShutterButton._takingPhoto
@@ -2086,9 +2150,11 @@ _OBJC_IVAR_$_SBSDKShutterButton._outerRingImageView
 _OBJC_IVAR_$_SBSDKShutterButton._outerArcImageView
 _OBJC_IVAR_$_SBSDKShutterButton._innerArcImageView
 _OBJC_IVAR_$_SBSDKShutterButton._animatedImagesHidden
-_OBJC_IVAR_$_SBSDKShutterButton._needUpdateButtonImages
+___block_descriptor_tmp.151
 _OBJC_IVAR_$_SBSDKShutterButton._buttonSearchingColor
 _OBJC_IVAR_$_SBSDKShutterButton._buttonDetectedColor
+_OBJC_IVAR_$_SBSDKShutterButton._indicatorColor
+_OBJC_IVAR_$_SBSDKShutterButton._needUpdateButtonImages
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Public/Camera/SBSDKShutterButton.mm
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Public/Camera/SBSDKShutterButton.h
 __44-[SBSDKShutterButton showAnimatedImageViews]_block_invoke
@@ -2139,15 +2205,13 @@ _GLOBAL__sub_I_logger.cpp
 logImage
 printResult
 setLoggerPath
-__ZTSN3doo7StorageE
-__ZTIN3doo7StorageE
 ../Common/CreditCardRecognizer/src/main/storage/OpenCvStorage.cpp
-_ZTv0_n40_N3doo2CC13OpenCvStorage6existsENSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE
+_ZTv0_n20_N3doo2CC13OpenCvStorage6existsENSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/CreditCardRecognizer/src/main/storage/OpenCvStorage.cpp
 exists
-_ZTv0_n32_N3doo2CC13OpenCvStorage9saveImageEN2cv3MatENSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEE
+_ZTv0_n16_N3doo2CC13OpenCvStorage9saveImageEN2cv3MatENSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEE
 saveImage
-_ZTv0_n24_N3doo2CC13OpenCvStorage9loadImageENSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE
+_ZTv0_n12_N3doo2CC13OpenCvStorage9loadImageENSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE
 loadImage
 -[SBSDKProcessingOperation initWithProgress:]
 ___45-[SBSDKProcessingOperation initWithProgress:]_block_invoke
@@ -2283,10 +2347,6 @@ __ZZN3doo16applyColorFilterERN2cv3MatEE5range
 __ZZN3doo16applyColorFilterERN2cv3MatEE11lookupTable
 __ZZ19createBGRHistogramsRN2cv3MatEE5range
 __ZZN3doo20applyGrayscaleFilterERN2cv3MatEE5range
-__ZTSNSt3__120__shared_ptr_emplaceIN3doo14ImageProcessorENS_9allocatorIS2_EEEE
-__ZTINSt3__120__shared_ptr_emplaceIN3doo14ImageProcessorENS_9allocatorIS2_EEEE
-__ZTSNSt3__120__shared_ptr_emplaceIN3doo12SkinDetectorENS_9allocatorIS2_EEEE
-__ZTINSt3__120__shared_ptr_emplaceIN3doo12SkinDetectorENS_9allocatorIS2_EEEE
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/ImageFilterSDK/Common/ImageFilters.cpp
 __construct_at_end<cv::Mat *>
 __construct_range_forward<cv::Mat *, cv::Mat *>
@@ -2306,6 +2366,8 @@ __construct_backward<cv::Mat *>
 construct<cv::Mat, const cv::Mat &>
 __construct<cv::Mat, const cv::Mat &>
 __push_back_slow_path<const cv::Mat &>
+__construct_at_end<std::__1::move_iterator<cv::Rect_<int> *> >
+operator!=<cv::Rect_<int> *, cv::Rect_<int> *>
 __construct_forward<cv::Rect_<int> *>
 move_backward<cv::Rect_<int> *, cv::Rect_<int> *>
 __move_backward<cv::Rect_<int> *, cv::Rect_<int> *>
@@ -2338,6 +2400,7 @@ applyPhotoBW2Filter
 applyPhotoBW1Filter
 applyGrayscaleFilter
 isContinuous
+applyLuminosityFilter
 sharpen
 applyPhotoFilter
 scaleAndShift
@@ -2420,12 +2483,12 @@ __construct<std::__1::pair<const std::__1::basic_string<char>, std::__1::shared_
 pair<const std::__1::basic_string<char> &>
 pair<const std::__1::basic_string<char> &, 0>
 __emplace_unique_key_args<std::__1::basic_string<char>, const std::__1::piecewise_construct_t &, std::__1::tuple<const std::__1::basic_string<char> &>, std::__1::tuple<> >
+pair<std::__1::__tree_iterator<std::__1::__value_type<std::__1::basic_string<char>, std::__1::shared_ptr<doo::search::BinaryClassifier> >, std::__1::__tree_node<std::__1::__value_type<std::__1::basic_string<char>, std::__1::shared_ptr<doo::search::BinaryClassifier> >, void *> *, int>, bool &, void>
 destroy<std::__1::pair<const std::__1::basic_string<char>, std::__1::shared_ptr<doo::search::BinaryClassifier> > >
 __destroy<std::__1::pair<const std::__1::basic_string<char>, std::__1::shared_ptr<doo::search::BinaryClassifier> > >
 buildDictionaryOfClassifiers
 operator!=<std::__1::basic_string<char> *>
 swap<doo::search::BinaryClassifier *>
-__tree_end_node
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/PayFormDetection/PatternDetector.cpp
 detectPattern
 RotatedRect
@@ -2463,17 +2526,16 @@ ___85+[SBSDKImageProcessor(NSURL) rotateImage:counterClockwise:outputImageURL:co
 ___76+[SBSDKImageProcessor(NSURL) rotateImage:degrees:outputImageURL:completion:]_block_invoke
 +[SBSDKImageProcessor(NSURL) warpImage:polygon:outputImageURL:completion:]
 ___74+[SBSDKImageProcessor(NSURL) warpImage:polygon:outputImageURL:completion:]_block_invoke
-___copy_helper_block_.66
-___destroy_helper_block_.67
+___copy_helper_block_.65
+___destroy_helper_block_.66
 +[SBSDKImageProcessor(NSURL) customFilterImage:processingBlock:outputImageURL:completion:]
 ___block_descriptor_tmp.13
 ___block_descriptor_tmp.17
 ___block_descriptor_tmp.24
-___block_descriptor_tmp.57
-___block_descriptor_tmp.61
-___block_descriptor_tmp.63
-___block_descriptor_tmp.65
-___block_descriptor_tmp.68
+___block_descriptor_tmp.56
+___block_descriptor_tmp.62
+___block_descriptor_tmp.64
+___block_descriptor_tmp.67
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Public/ImageProcessing/SBSDKImageProcessor.mm
 __74+[SBSDKImageProcessor(NSURL) warpImage:polygon:outputImageURL:completion:]_block_invoke
 __76+[SBSDKImageProcessor(NSURL) rotateImage:degrees:outputImageURL:completion:]_block_invoke
@@ -2616,13 +2678,11 @@ DistanceOfLines
 __38-[SBSDKCropView setVerticalSnapEdges:]_block_invoke
 __40-[SBSDKCropView setHorizontalSnapEdges:]_block_invoke
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/G8Tesseract/TesseractOCR/G8TesseractParameters.m
-__ZTSN3doo2CC16SymbolClassifierE
-__ZTIN3doo2CC16SymbolClassifierE
 ../Common/CreditCardRecognizer/src/main/recognition/OpenCvSymbolClassifier.cpp
-_ZTv0_n24_N3doo2CC22OpenCvSymbolClassifier8classifyERKN2cv3MatENS2_5Rect_IiEE
+_ZTv0_n12_N3doo2CC22OpenCvSymbolClassifier8classifyERKN2cv3MatENS2_5Rect_IiEE
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/CreditCardRecognizer/src/main/recognition/OpenCvSymbolClassifier.cpp
 +[SBSDKImageConverter UIImageFromCVMat:copyData:]
-+[SBSDKImageConverter UIImageFromCVMat:copyData:compression:]
++[SBSDKImageConverter UIImageFromCVMat:copyData:compression:metadata:]
 +[SBSDKImageConverter NSDataFromCVMat:copyData:]
 +[SBSDKImageConverter NSDataFromCVMat:copyData:compression:]
 +[SBSDKImageConverter UIImageFromCVMat:compression:]
@@ -2658,6 +2718,7 @@ l_OBJC_LABEL_PROTOCOL_$_AVCapturePhotoCaptureDelegate
 -[SBSDKCropViewController viewDidLayoutSubviews]
 -[SBSDKCropViewController applyButtonTapped:]
 -[SBSDKCropViewController cancelButtonTapped:]
+-[SBSDKCropViewController contentRectangle]
 -[SBSDKCropViewController createImageView]
 -[SBSDKCropViewController createCropView]
 -[SBSDKCropViewController createMagnifierView]
@@ -2673,6 +2734,8 @@ l_OBJC_LABEL_PROTOCOL_$_AVCapturePhotoCaptureDelegate
 -[SBSDKCropViewController image]
 -[SBSDKCropViewController edgeColor]
 -[SBSDKCropViewController magneticEdgeColor]
+-[SBSDKCropViewController contentInsets]
+-[SBSDKCropViewController setContentInsets:]
 -[SBSDKCropViewController delegate]
 -[SBSDKCropViewController setDelegate:]
 -[SBSDKCropViewController imageView]
@@ -2690,6 +2753,7 @@ _OBJC_IVAR_$_SBSDKCropViewController._edgeColor
 _OBJC_IVAR_$_SBSDKCropViewController._magneticEdgeColor
 _OBJC_IVAR_$_SBSDKCropViewController._polygon
 _OBJC_IVAR_$_SBSDKCropViewController._image
+_OBJC_IVAR_$_SBSDKCropViewController._contentInsets
 _OBJC_IVAR_$_SBSDKCropViewController._delegate
 _OBJC_IVAR_$_SBSDKCropViewController._imageView
 _OBJC_IVAR_$_SBSDKCropViewController._cropView
@@ -2700,6 +2764,8 @@ l_OBJC_PROTOCOL_$_SBSDKCropViewDelegate
 l_OBJC_LABEL_PROTOCOL_$_SBSDKCropViewDelegate
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Public/Cropping/SBSDKCropViewController.mm
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Public/Cropping/SBSDKCropViewController.h
+UIEdgeInsetsInsetRect
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIGeometry.h
 +[SBSDKOpticalTextRecognizer initialize]
 +[SBSDKOpticalTextRecognizer availableLanguages]
 +[SBSDKOpticalTextRecognizer userPreferredLanguages]
@@ -2716,13 +2782,19 @@ ___80+[SBSDKOpticalTextRecognizer recognizeText:rectangle:languageString:complet
 ___80+[SBSDKOpticalTextRecognizer recognizeText:rectangle:languageString:completion:]_block_invoke_2
 ___copy_helper_block_.126
 ___destroy_helper_block_.127
+___copy_helper_block_.131
+___destroy_helper_block_.132
 +[SBSDKOpticalTextRecognizer analyseImagePageLayout:completion:]
 ___64+[SBSDKOpticalTextRecognizer analyseImagePageLayout:completion:]_block_invoke
 ___64+[SBSDKOpticalTextRecognizer analyseImagePageLayout:completion:]_block_invoke_2
 ___copy_helper_block_.140
 ___destroy_helper_block_.141
+___copy_helper_block_.143
+___destroy_helper_block_.144
 ___block_descriptor_tmp.128
+___block_descriptor_tmp.133
 ___block_descriptor_tmp.142
+___block_descriptor_tmp.145
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Public/OCR/SBSDKOpticalTextRecognizer.mm
 __64+[SBSDKOpticalTextRecognizer analyseImagePageLayout:completion:]_block_invoke_2
 __64+[SBSDKOpticalTextRecognizer analyseImagePageLayout:completion:]_block_invoke
@@ -2741,7 +2813,7 @@ saveStatModel
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/OpenCV/opencv2.framework/Headers/core/persistence.hpp
 filePathFromFilename
 find_last_of
-__str_find_last_of<char, unsigned long, std::__1::char_traits<char>, 18446744073709551615>
+__str_find_last_of<char, unsigned long, std::__1::char_traits<char>, 4294967295>
 loadStatModel
 getFirstTopLevelNode
 FileNode
@@ -2795,21 +2867,19 @@ _OBJC_IVAR_$_SBSDKOCRResult._wordsM
 _OBJC_IVAR_$_SBSDKOCRResult._pageAnalyzerResult
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Public/OCR/SBSDKOCRResult.mm
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Public/OCR/SBSDKOCRResult.h
-__ZTSN3doo2CC6LoggerE
-__ZTIN3doo2CC6LoggerE
 ../Common/CreditCardRecognizer/src/main/log/OpenCvLogger.cpp
-_ZTv0_n48_N3doo2CC12OpenCvLogger10logSymbolsERKNSt3__16vectorIN2cv5Rect_IiEENS2_9allocatorIS6_EEEERKNS4_3MatE
+_ZTv0_n24_N3doo2CC12OpenCvLogger10logSymbolsERKNSt3__16vectorIN2cv5Rect_IiEENS2_9allocatorIS6_EEEERKNS4_3MatE
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/CreditCardRecognizer/src/main/log/OpenCvLogger.cpp
 logSymbols
-_ZTv0_n64_N3doo2CC12OpenCvLogger12logCardFrontERKNS0_9CardFrontE
+_ZTv0_n32_N3doo2CC12OpenCvLogger12logCardFrontERKNS0_9CardFrontE
 logCardFront
-_ZTv0_n56_N3doo2CC12OpenCvLogger19logRecognizedFieldsERKNSt3__16vectorINS0_15RecognizedFieldENS2_9allocatorIS4_EEEERKN2cv3MatE
+_ZTv0_n28_N3doo2CC12OpenCvLogger19logRecognizedFieldsERKNSt3__16vectorINS0_15RecognizedFieldENS2_9allocatorIS4_EEEERKN2cv3MatE
 logRecognizedFields
-_ZTv0_n40_N3doo2CC12OpenCvLogger17logDetectedFieldsERKNSt3__16vectorINS0_13DetectedFieldENS2_9allocatorIS4_EEEERKN2cv3MatE
+_ZTv0_n20_N3doo2CC12OpenCvLogger17logDetectedFieldsERKNSt3__16vectorINS0_13DetectedFieldENS2_9allocatorIS4_EEEERKN2cv3MatE
 logDetectedFields
-_ZTv0_n32_N3doo2CC12OpenCvLogger6logRoiERKN2cv3MatE
+_ZTv0_n16_N3doo2CC12OpenCvLogger6logRoiERKN2cv3MatE
 logRoi
-_ZTv0_n24_N3doo2CC12OpenCvLogger8logImageENSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKN2cv3MatE
+_ZTv0_n12_N3doo2CC12OpenCvLogger8logImageENSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKN2cv3MatE
 -[SBSDKPageAnalyzerResult initWithOrientation:writingDirection:textlineOrder:deskewAngle:]
 -[SBSDKPageAnalyzerResult initFromTesseractEngine:]
 -[SBSDKPageAnalyzerResult copyWithZone:]
@@ -2890,8 +2960,8 @@ __ZN3doo23SVMBinaryImplementation14writeMatToFileERKN2cv3MatERKNS1_6StringE
 __ZNK3doo23SVMBinaryImplementation10getSVCountEi
 __ZNSt3__114basic_ofstreamIcNS_11char_traitsIcEEED1Ev
 __ZNSt3__114basic_ofstreamIcNS_11char_traitsIcEEED0Ev
-__ZTv0_n24_NSt3__114basic_ofstreamIcNS_11char_traitsIcEEED1Ev
-__ZTv0_n24_NSt3__114basic_ofstreamIcNS_11char_traitsIcEEED0Ev
+__ZTv0_n12_NSt3__114basic_ofstreamIcNS_11char_traitsIcEEED1Ev
+__ZTv0_n12_NSt3__114basic_ofstreamIcNS_11char_traitsIcEEED0Ev
 __ZN3doo23SVMBinaryImplementation11read_paramsERKN2cv8FileNodeE
 __ZN3doo23SVMBinaryImplementation15readMatFromFileERN2cv3MatERKNS1_6StringEi
 __ZN3doo23SVMBinaryImplementation19optimize_linear_svmEv
@@ -2931,28 +3001,6 @@ __ZN2cv6detail12PtrOwnerImplIN3doo23SVMBinaryImplementationENS_14DefaultDeleterI
 __ZN2cv6detail12PtrOwnerImplIN3doo23SVMBinaryImplementationENS_14DefaultDeleterIS3_EEE10deleteSelfEv
 __ZNSt3__120__shared_ptr_emplaceIN3doo6search25StatModelBinaryClassifierENS_9allocatorIS3_EEED1Ev
 __ZNSt3__120__shared_ptr_emplaceIN3doo6search25StatModelBinaryClassifierENS_9allocatorIS3_EEED0Ev
-__ZTSN3doo6search28ClassifiersDictionaryFactory17ClassifierFactoryE
-__ZTIN3doo6search28ClassifiersDictionaryFactory17ClassifierFactoryE
-__ZTSN3doo23SVMBinaryImplementationE
-__ZTSN2cv2ml3SVME
-__ZTIN2cv2ml3SVME
-__ZTIN3doo23SVMBinaryImplementationE
-__ZTSN3doo17SVMKernelImpl_binE
-__ZTSN2cv2ml3SVM6KernelE
-__ZTIN2cv2ml3SVM6KernelE
-__ZTIN3doo17SVMKernelImpl_binE
-__ZTSN2cv6detail12PtrOwnerImplIN3doo17SVMKernelImpl_binENS_14DefaultDeleterIS3_EEEE
-__ZTSN2cv6detail8PtrOwnerE
-__ZTIN2cv6detail8PtrOwnerE
-__ZTIN2cv6detail12PtrOwnerImplIN3doo17SVMKernelImpl_binENS_14DefaultDeleterIS3_EEEE
-__ZTSNSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE
-__ZTINSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE
-__ZTSN3doo23SVMBinaryImplementation11PredictBodyE
-__ZTIN3doo23SVMBinaryImplementation11PredictBodyE
-__ZTSN2cv6detail12PtrOwnerImplIN3doo23SVMBinaryImplementationENS_14DefaultDeleterIS3_EEEE
-__ZTIN2cv6detail12PtrOwnerImplIN3doo23SVMBinaryImplementationENS_14DefaultDeleterIS3_EEEE
-__ZTSNSt3__120__shared_ptr_emplaceIN3doo6search25StatModelBinaryClassifierENS_9allocatorIS3_EEEE
-__ZTINSt3__120__shared_ptr_emplaceIN3doo6search25StatModelBinaryClassifierENS_9allocatorIS3_EEEE
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Invoice/src/cpp/modules/MachineLearningTools/TextSearcher/src/cpp/searcher/util/SvmClassifierFactory.cpp
 ~Ptr
 decRef
@@ -3034,7 +3082,6 @@ min<long long, std::__1::__less<long long, long long> >
 max<long long>
 max<long long, std::__1::__less<long long, long long> >
 SvmParams
-TermCriteria
 construct<signed char, const signed char &>
 __construct<signed char, const signed char &>
 solve_generic
@@ -3054,6 +3101,7 @@ elemSize
 sortSamplesByClasses
 sort<int, doo::cmp_lt_idx_bin<int> >
 sort<int *, doo::cmp_lt_idx_bin<int> &>
+cmp_lt_idx_bin
 ptr<int>
 setRangeVector_bin
 construct<doo::SVMBinaryImplementation::DecisionFunc, doo::SVMBinaryImplementation::DecisionFunc>
@@ -3063,10 +3111,10 @@ Range
 _OutputArray<float>
 SolutionInfo
 __push_back_slow_path<doo::SVMBinaryImplementation::DecisionFunc>
-fill_n<double *, unsigned long, double>
-__fill_n<double *, unsigned long, double>
 swap<doo::SVMBinaryImplementation::DecisionFunc *>
 __construct_backward<doo::SVMBinaryImplementation::DecisionFunc>
+fill_n<double *, unsigned long, double>
+__fill_n<double *, unsigned long, double>
 __push_back_slow_path<const doo::SVMBinaryImplementation::DecisionFunc &>
 swap<double *>
 __construct_backward<double>
@@ -3082,9 +3130,9 @@ read_params
 setParams
 operator int
 operator double
-_ZTv0_n24_NSt3__114basic_ofstreamIcNS_11char_traitsIcEEED0Ev
+_ZTv0_n12_NSt3__114basic_ofstreamIcNS_11char_traitsIcEEED0Ev
 ~basic_ofstream
-_ZTv0_n24_NSt3__114basic_ofstreamIcNS_11char_traitsIcEEED1Ev
+_ZTv0_n12_NSt3__114basic_ofstreamIcNS_11char_traitsIcEEED1Ev
 getSVCount
 writeMatToFile
 basic_ofstream
@@ -3196,7 +3244,6 @@ __ZN3doo32RectangularFeatureDetectorResultaSEOS0_
 -[SBSDKDocumentDetector detectDocumentPolygonOnMat:visibleImageRect:smoothingEnabled:useLiveDetectionParameters:]
 -[SBSDKDocumentDetector detectDocumentPolygonOnSampleBuffer:visibleImageRect:smoothingEnabled:useLiveDetectionParameters:]
 -[SBSDKDocumentDetector detectDocumentPolygonOnImage:visibleImageRect:smoothingEnabled:useLiveDetectionParameters:]
--[SBSDKDocumentDetector applyMetadata:image:]
 -[SBSDKDocumentDetector applyPolygon:onImageData:imageScale:imageMode:orientation:originalImage:]
 -[SBSDKDocumentDetector acceptedSizeScore]
 -[SBSDKDocumentDetector setAcceptedSizeScore:]
@@ -3228,7 +3275,6 @@ __ZN3doo32RectangularFeatureDetectorResultaSEOS0_
 -[SBSDKDocumentDetector setAutoDetectionParameters:]
 -[SBSDKDocumentDetector .cxx_destruct]
 -[SBSDKDocumentDetector .cxx_construct]
-__ZN2cv3MataSEOS0_
 __ZNSt3__16vectorIfNS_9allocatorIfEEE6assignIPfEENS_9enable_ifIXaasr21__is_forward_iteratorIT_EE5valuesr16is_constructibleIfNS_15iterator_traitsIS7_E9referenceEEE5valueEvE4typeES7_S7_
 _OBJC_IVAR_$_SBSDKDocumentDetectorResult._status
 _OBJC_IVAR_$_SBSDKDocumentDetectorResult._polygon
@@ -3347,9 +3393,6 @@ scaledDilate
 scaledMorphology
 rotateMatrixCCW
 __ZNSt3__113unordered_mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES6_NS_4hashIS6_EENS_8equal_toIS6_EENS4_INS_4pairIKS6_S6_EEEEED1Ev
-__ZNSt3__121__murmur2_or_cityhashImLm64EE18__hash_len_0_to_16EPKcm
-__ZNSt3__121__murmur2_or_cityhashImLm64EE19__hash_len_17_to_32EPKcm
-__ZNSt3__121__murmur2_or_cityhashImLm64EE19__hash_len_33_to_64EPKcm
 __GLOBAL__sub_I_BicExtractor.cpp
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/PayFormDetection/BicExtractor.cpp
 _GLOBAL__sub_I_BicExtractor.cpp
@@ -3357,22 +3400,13 @@ unordered_map
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/unordered_map
 __hash_table
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__hash_table
-__hash_node_base
+__bucket_list_deallocator
 __rehash
 reset<std::__1::__hash_node_base<std::__1::__hash_node<std::__1::__hash_value_type<std::__1::basic_string<char>, std::__1::basic_string<char> >, void *> *> **>
 __constrain_hash
 __hash
 get_deleter
-__hash_len_33_to_64
-__shift_mix
-__rotate
 __loadword<unsigned long>
-__hash_len_17_to_32
-__hash_len_16
-__hash_len_0_to_16
-__loadword<unsigned int>
-__rotate_by_at_least_1
-__weak_hash_len_32_with_seeds
 rehash
 __next_hash_pow2
 __clz
@@ -3398,8 +3432,6 @@ _gzopen
 _gzread
 _gzclose
 _gzwrite
-__ZTS10Compressor
-__ZTI10Compressor
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Invoice/src/cpp/modules/MachineLearningTools/SVMModel/src/cpp/main/GZCompressor.cpp
 compressFile
 decompressFile
@@ -3437,6 +3469,7 @@ __ZNSt3__120__shared_ptr_emplaceIN3doo2CC20OpenCvTextRecognizerENS_9allocatorIS3
 __ZN3doo2CC20OpenCvTextRecognizerC1ERKNSt3__110shared_ptrINS0_14SymbolSplitterEEES7_RKNS3_INS0_16SymbolClassifierEEESB_SB_
 __ZNSt3__120__shared_ptr_emplaceIN3doo2CC20OpenCvSymbolSplitterENS_9allocatorIS3_EEED1Ev
 __ZNSt3__120__shared_ptr_emplaceIN3doo2CC20OpenCvSymbolSplitterENS_9allocatorIS3_EEED0Ev
+__ZN3doo2CC20OpenCvSymbolSplitterC1ERKNSt3__110shared_ptrINS0_6LoggerEEENS1_23ParametersForXSplittingENS1_22ParametersForYCroppingE
 __ZNSt3__120__shared_ptr_emplaceIN3doo2CC22OpenCvSymbolClassifierENS_9allocatorIS3_EEED1Ev
 __ZNSt3__120__shared_ptr_emplaceIN3doo2CC22OpenCvSymbolClassifierENS_9allocatorIS3_EEED0Ev
 __ZN2cv9Algorithm4loadINS_2ml3SVMEEENS_3PtrIT_EERKNS_6StringES9_
@@ -3462,31 +3495,6 @@ __ZN3doo2CCL24trainedDataPathValidDateE
 __ZN3doo2CCL21trainedDataPathHolderE
 __ZN3doo2CCL14loggerInstanceE
 _OBJC_IVAR_$_SBSDKCreditCardRecognizer._recognizer
-__ZTSNSt3__120__shared_ptr_emplaceIN3doo2CC12EdgeDetectorENS_9allocatorIS3_EEEE
-__ZTINSt3__120__shared_ptr_emplaceIN3doo2CC12EdgeDetectorENS_9allocatorIS3_EEEE
-__ZTSNSt3__120__shared_ptr_emplaceIN3doo2CC10StubLoggerENS_9allocatorIS3_EEEE
-__ZTINSt3__120__shared_ptr_emplaceIN3doo2CC10StubLoggerENS_9allocatorIS3_EEEE
-__ZTSNSt3__120__shared_ptr_emplaceIN3doo2CC19OpenCvFieldDetectorENS_9allocatorIS3_EEEE
-__ZTINSt3__120__shared_ptr_emplaceIN3doo2CC19OpenCvFieldDetectorENS_9allocatorIS3_EEEE
-__ZTSNSt3__120__shared_ptr_emplaceIN3doo2CC21OpenCvFieldRecognizerENS_9allocatorIS3_EEEE
-__ZTINSt3__120__shared_ptr_emplaceIN3doo2CC21OpenCvFieldRecognizerENS_9allocatorIS3_EEEE
-__ZTSNSt3__120__shared_ptr_emplaceIN3doo2CC20OpenCvTextRecognizerENS_9allocatorIS3_EEEE
-__ZTINSt3__120__shared_ptr_emplaceIN3doo2CC20OpenCvTextRecognizerENS_9allocatorIS3_EEEE
-__ZTSNSt3__120__shared_ptr_emplaceIN3doo2CC20OpenCvSymbolSplitterENS_9allocatorIS3_EEEE
-__ZTINSt3__120__shared_ptr_emplaceIN3doo2CC20OpenCvSymbolSplitterENS_9allocatorIS3_EEEE
-__ZTSNSt3__120__shared_ptr_emplaceIN3doo2CC22OpenCvSymbolClassifierENS_9allocatorIS3_EEEE
-__ZTINSt3__120__shared_ptr_emplaceIN3doo2CC22OpenCvSymbolClassifierENS_9allocatorIS3_EEEE
-__ZTSNSt3__120__shared_ptr_emplaceIN3doo2CC19HOGFeatureExtractorENS_9allocatorIS3_EEEE
-__ZTINSt3__120__shared_ptr_emplaceIN3doo2CC19HOGFeatureExtractorENS_9allocatorIS3_EEEE
-__ZTSNSt3__120__shared_ptr_emplaceIN3doo2CC18ValidDateValidatorENS_9allocatorIS3_EEEE
-__ZTINSt3__120__shared_ptr_emplaceIN3doo2CC18ValidDateValidatorENS_9allocatorIS3_EEEE
-__ZTSNSt3__120__shared_ptr_emplaceIN3doo2CC15NumberValidatorENS_9allocatorIS3_EEEE
-__ZTINSt3__120__shared_ptr_emplaceIN3doo2CC15NumberValidatorENS_9allocatorIS3_EEEE
-__ZTSNSt3__120__shared_ptr_emplaceIN3doo2CC15HolderValidatorENS_9allocatorIS3_EEEE
-__ZTINSt3__120__shared_ptr_emplaceIN3doo2CC15HolderValidatorENS_9allocatorIS3_EEEE
-__ZTSNSt3__120__shared_ptr_pointerIPN3doo2CC20CreditCardRecognizerENS_14default_deleteIS3_EENS_9allocatorIS3_EEEE
-__ZTINSt3__120__shared_ptr_pointerIPN3doo2CC20CreditCardRecognizerENS_14default_deleteIS3_EENS_9allocatorIS3_EEEE
-__ZTSNSt3__114default_deleteIN3doo2CC20CreditCardRecognizerEEE
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Public/CreditCardRecognizer/SBSDKCreditCardRecognizer.mm
 _GLOBAL__sub_I_SBSDKCreditCardRecognizer.mm
 __cxx_global_var_init.10
@@ -3505,8 +3513,13 @@ CreditCardRecognizer
 load<cv::ml::SVM>
 ~OpenCvSymbolClassifier
 ../Common/CreditCardRecognizer/src/main/recognition/OpenCvSymbolClassifier.h
-~OpenCvSymbolSplitter
+OpenCvSymbolSplitter
 ../Common/CreditCardRecognizer/src/main/recognition/OpenCvSymbolSplitter.h
+~OpenCvSymbolSplitter
+make_shared<std::__1::shared_ptr<doo::CC::Logger>, doo::CC::OpenCvSymbolSplitter::ParametersForXSplitting &, doo::CC::OpenCvSymbolSplitter::ParametersForYCropping &>
+__shared_ptr_emplace<std::__1::shared_ptr<doo::CC::Logger>, doo::CC::OpenCvSymbolSplitter::ParametersForXSplitting &, doo::CC::OpenCvSymbolSplitter::ParametersForYCropping &>
+__compressed_pair<std::__1::allocator<doo::CC::OpenCvSymbolSplitter> &, std::__1::shared_ptr<doo::CC::Logger> &&, doo::CC::OpenCvSymbolSplitter::ParametersForXSplitting &, doo::CC::OpenCvSymbolSplitter::ParametersForYCropping &>
+__libcpp_compressed_pair_imp<std::__1::allocator<doo::CC::OpenCvSymbolSplitter> &, std::__1::shared_ptr<doo::CC::Logger> &&, doo::CC::OpenCvSymbolSplitter::ParametersForXSplitting &, doo::CC::OpenCvSymbolSplitter::ParametersForYCropping &, 0, 0, 1, 2>
 OpenCvTextRecognizer
 ../Common/CreditCardRecognizer/src/main/recognition/OpenCvTextRecognizer.h
 ~OpenCvTextRecognizer
@@ -3588,12 +3601,9 @@ statModelNumber
 symbolSplitterValidDate
 shared_ptr<doo::CC::OpenCvSymbolSplitter>
 make_shared<doo::CC::OpenCvSymbolSplitter, std::__1::shared_ptr<doo::CC::Logger>, doo::CC::OpenCvSymbolSplitter::ParametersForXSplitting &, doo::CC::OpenCvSymbolSplitter::ParametersForYCropping &>
-make_shared<std::__1::shared_ptr<doo::CC::Logger>, doo::CC::OpenCvSymbolSplitter::ParametersForXSplitting &, doo::CC::OpenCvSymbolSplitter::ParametersForYCropping &>
-__shared_ptr_emplace<std::__1::shared_ptr<doo::CC::Logger>, doo::CC::OpenCvSymbolSplitter::ParametersForXSplitting &, doo::CC::OpenCvSymbolSplitter::ParametersForYCropping &>
-__compressed_pair<std::__1::allocator<doo::CC::OpenCvSymbolSplitter> &, std::__1::shared_ptr<doo::CC::Logger> &&, doo::CC::OpenCvSymbolSplitter::ParametersForXSplitting &, doo::CC::OpenCvSymbolSplitter::ParametersForYCropping &>
-__libcpp_compressed_pair_imp<std::__1::allocator<doo::CC::OpenCvSymbolSplitter> &, std::__1::shared_ptr<doo::CC::Logger> &&, doo::CC::OpenCvSymbolSplitter::ParametersForXSplitting &, doo::CC::OpenCvSymbolSplitter::ParametersForYCropping &, 0, 0, 1, 2>
-OpenCvSymbolSplitter
+ParametersForXSplitting
 symbolSplitterCardNumber
+ParametersForYCropping
 fieldDetector
 shared_ptr<doo::CC::OpenCvFieldDetector>
 make_shared<doo::CC::OpenCvFieldDetector, std::__1::shared_ptr<doo::CC::Logger> >
@@ -3604,12 +3614,10 @@ setTrainedDataPathHolder
 setTrainedDataPathValidDate
 setTrainedDataPathNumber
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Public/SBSDKScanbotSDKConstants.mm
-__ZTSN3doo2CC14TextRecognizerE
-__ZTIN3doo2CC14TextRecognizerE
 ../Common/CreditCardRecognizer/src/main/recognition/OpenCvTextRecognizer.cpp
 isWhitespace
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/CreditCardRecognizer/src/main/recognition/OpenCvTextRecognizer.cpp
-_ZTv0_n24_N3doo2CC20OpenCvTextRecognizer13recognizeTextERKN2cv3MatENS0_13DetectedFieldE
+_ZTv0_n12_N3doo2CC20OpenCvTextRecognizer13recognizeTextERKN2cv3MatENS0_13DetectedFieldE
 getClassifier
 getText
 getSplitter
@@ -3687,9 +3695,6 @@ createRSA
 __ZNSt3__120__shared_ptr_pointerIPN3doo16ChequeRecognizerENS_14default_deleteIS2_EENS_9allocatorIS2_EEED1Ev
 __ZNSt3__120__shared_ptr_pointerIPN3doo16ChequeRecognizerENS_14default_deleteIS2_EENS_9allocatorIS2_EEED0Ev
 _OBJC_IVAR_$_SBSDKChequeRecognizer._recognizer
-__ZTSNSt3__120__shared_ptr_pointerIPN3doo16ChequeRecognizerENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE
-__ZTINSt3__120__shared_ptr_pointerIPN3doo16ChequeRecognizerENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE
-__ZTSNSt3__114default_deleteIN3doo16ChequeRecognizerEEE
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Public/Cheque/SBSDKChequeRecognizer.mm
 ~ChequeRecognizer
 shared_ptr<doo::ChequeRecognizer>
@@ -3760,8 +3765,6 @@ RectWithSizeAndCenter
 __ZN34ConnectedComponentsBoundsExtractor12detectBoundsERKN2cv3MatE
 __ZL11resizeImageRKN2cv3MatEi
 __ZN34ConnectedComponentsBoundsExtractor23findConnectedComponentsERN2cv3MatE
-__ZTSN3doo2CC12RoiExtractorE
-__ZTIN3doo2CC12RoiExtractorE
 ../Common/CreditCardRecognizer/src/main/roi/EdgeDetector.cpp
 __insertion_sort_incomplete<PointsClockwiseComparator &, cv::Point_<int> *>
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/CreditCardRecognizer/src/main/roi/EdgeDetector.cpp
@@ -3777,7 +3780,7 @@ __sort4<AreaComparator &, cv::Rect_<int> *>
 __sort3<AreaComparator &, cv::Rect_<int> *>
 __sort<AreaComparator &, cv::Rect_<int> *>
 findConnectedComponents
-_ZTv0_n24_N3doo2CC12EdgeDetector7extractERKN2cv3MatE
+_ZTv0_n12_N3doo2CC12EdgeDetector7extractERKN2cv3MatE
 ../Common/CreditCardRecognizer/src/main/util/utils.h
 detectBounds
 scaleRectangle
@@ -3790,10 +3793,8 @@ PointsClockwiseComparator
 extract
 rectangleToPolygon
 ConnectedComponentsBoundsExtractor
-__ZTSN3doo2CC13CardValidatorE
-__ZTIN3doo2CC13CardValidatorE
 ../Common/CreditCardRecognizer/src/main/validation/StubCardValidator.cpp
-_ZTv0_n24_N3doo2CC17StubCardValidator8validateENSt3__16vectorINS0_15RecognizedFieldENS2_9allocatorIS4_EEEE
+_ZTv0_n12_N3doo2CC17StubCardValidator8validateENSt3__16vectorINS0_15RecognizedFieldENS2_9allocatorIS4_EEEE
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/CreditCardRecognizer/src/main/validation/StubCardValidator.cpp
 -[SBSDKImageProcessingBlockOperation processImage:error:]
 -[SBSDKImageProcessingBlockOperation processingBlock]
@@ -3838,13 +3839,13 @@ __24+[SBSDKBundle sdkBundle]_block_invoke
 -[UIImage(G8FixOrientation) fixOrientation]
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/G8Tesseract/TesseractOCR/UIImage+G8FixOrientation.m
 ../Common/CreditCardRecognizer/src/main/log/StubLogger.cpp
-_ZTv0_n48_N3doo2CC10StubLogger10logSymbolsERKNSt3__16vectorIN2cv5Rect_IiEENS2_9allocatorIS6_EEEERKNS4_3MatE
+_ZTv0_n24_N3doo2CC10StubLogger10logSymbolsERKNSt3__16vectorIN2cv5Rect_IiEENS2_9allocatorIS6_EEEERKNS4_3MatE
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/CreditCardRecognizer/src/main/log/StubLogger.cpp
-_ZTv0_n64_N3doo2CC10StubLogger12logCardFrontERKNS0_9CardFrontE
-_ZTv0_n56_N3doo2CC10StubLogger19logRecognizedFieldsERKNSt3__16vectorINS0_15RecognizedFieldENS2_9allocatorIS4_EEEERKN2cv3MatE
-_ZTv0_n40_N3doo2CC10StubLogger17logDetectedFieldsERKNSt3__16vectorINS0_13DetectedFieldENS2_9allocatorIS4_EEEERKN2cv3MatE
-_ZTv0_n32_N3doo2CC10StubLogger6logRoiERKN2cv3MatE
-_ZTv0_n24_N3doo2CC10StubLogger8logImageENSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKN2cv3MatE
+_ZTv0_n32_N3doo2CC10StubLogger12logCardFrontERKNS0_9CardFrontE
+_ZTv0_n28_N3doo2CC10StubLogger19logRecognizedFieldsERKNSt3__16vectorINS0_15RecognizedFieldENS2_9allocatorIS4_EEEERKN2cv3MatE
+_ZTv0_n20_N3doo2CC10StubLogger17logDetectedFieldsERKNSt3__16vectorINS0_13DetectedFieldENS2_9allocatorIS4_EEEERKN2cv3MatE
+_ZTv0_n16_N3doo2CC10StubLogger6logRoiERKN2cv3MatE
+_ZTv0_n12_N3doo2CC10StubLogger8logImageENSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERKN2cv3MatE
 -[SBSDKChequeRecognizerResult initWithResult:imageSize:imageRotations:]
 -[SBSDKChequeRecognizerResult routingNumber]
 -[SBSDKChequeRecognizerResult setRoutingNumber:]
@@ -3889,6 +3890,7 @@ setStart
 -[SBSDKPolygon initWithAbsolutePointA:pointB:pointC:pointD:forSize:]
 -[SBSDKPolygon initWithNormalizedRect:]
 -[SBSDKPolygon initWithNormalizedDoubleValues:]
+-[SBSDKPolygon initWithMetadataObject:]
 -[SBSDKPolygon copyWithZone:]
 -[SBSDKPolygon initWithPoints:forSize:]
 -[SBSDKPolygon pointsForSize:]
@@ -3959,11 +3961,11 @@ _scanbotSDKImageStorageFolderURL.onceToken
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/Private/Helpers/SBSDKStorageManager.m
 __54+[SBSDKStorageManager scanbotSDKImageStorageFolderURL]_block_invoke
 __ZNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED1Ev
-__ZThn16_NSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED1Ev
-__ZTv0_n24_NSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED1Ev
+__ZThn8_NSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED1Ev
+__ZTv0_n12_NSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED1Ev
 __ZNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED0Ev
-__ZThn16_NSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED0Ev
-__ZTv0_n24_NSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED0Ev
+__ZThn8_NSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED0Ev
+__ZTv0_n12_NSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED0Ev
 __ZNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEED1Ev
 __ZNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEED0Ev
 __ZNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEE7seekoffExNS_8ios_base7seekdirEj
@@ -3973,10 +3975,6 @@ __ZNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEE9pbackfailEi
 __ZNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEE8overflowEi
 __ZNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEE3strERKNS_12basic_stringIcS2_S4_EE
 __ZNKSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEE3strEv
-__ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE
-__ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE
-__ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE
-__ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/Common/Licensing/License.cpp
 operator>><char, std::__1::char_traits<char> >
 __init<char *>
@@ -3993,11 +3991,11 @@ sputc
 max<char *>
 max<char *, std::__1::__less<char *, char *> >
 ~basic_stringbuf
-_ZTv0_n24_NSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED0Ev
+_ZTv0_n12_NSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED0Ev
 ~basic_stringstream
-_ZThn16_NSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED0Ev
-_ZTv0_n24_NSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED1Ev
-_ZThn16_NSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED1Ev
+_ZThn8_NSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED0Ev
+_ZTv0_n12_NSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED1Ev
+_ZThn8_NSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED1Ev
 featureEnabled
 licenseValid
 matchesOperatingSystem
@@ -4022,6 +4020,8 @@ __ZN3dooL6penpenE
 getPublicKey
 fnb
 fna
+safeAdd
+safeMultiply
 getPrivateKey
 /Users/sebastianhusche/Development/ScanbotSDK-Internal/iOS/build/ScanbotSDK.build/Release-iphoneos/ScanbotSDK.build/DerivedSources/ScanbotSDK_vers.c
 _app_locks
@@ -4154,6 +4154,9 @@ _Td1
 _Td2
 _Td3
 _Td4
+_ctr128_inc
+_gcm_gmult_4bit
+_gcm_ghash_4bit
 _rem_4bit
 _default_iv
 _MOD_EXP_CTIME_COPY_FROM_PREBUF
@@ -5693,9 +5696,14 @@ _TIFFFillTile.module
 _TIFFStartTile.module
 _TIFFComputeStrip.module
 _TIFFVStripSize64.module
+_TIFFVStripSize.module
 _TIFFRawStripSize64.module
+_TIFFRawStripSize.module
+_TIFFStripSize.module
 _TIFFScanlineSize64.module
+_TIFFScanlineSize.module
 _TIFFRasterScanlineSize64.module
+_TIFFRasterScanlineSize.module
 _TIFFBitRevTable
 _TIFFNoBitRevTable
 _ThunderSetupDecode
@@ -5707,6 +5715,8 @@ _twobitdeltas
 _threebitdeltas
 _TIFFTileRowSize64.module
 _TIFFVTileSize64.module
+_TIFFVTileSize.module
+_TIFFTileSize.module
 _TIFFGrowStrips
 _TIFFAppendToStrip
 _TIFFWriteScanline.module
@@ -5750,23 +5760,7 @@ __ZL16ILLEGAL_GRADIENT
 __ZL10WRONG_WORD
 __ZL18kTrainedDataSuffix
 __ZN9tesseractL9kLatinChsE
-__ZTSNSt3__113basic_istreamIcNS_11char_traitsIcEEEE
-__ZTSNSt3__19basic_iosIcNS_11char_traitsIcEEEE
-__ZTINSt3__19basic_iosIcNS_11char_traitsIcEEEE
-__ZTSNSt3__115basic_streambufIcNS_11char_traitsIcEEEE
-__ZTSN9tesseract15MutableIteratorE
-__ZTIN9tesseract15MutableIteratorE
-__ZTS34_ConstTessMemberResultCallback_6_0ILb0EbN9tesseract12PageIteratorENS0_17PageIteratorLevelEiPiS3_S3_S3_E
-__ZTS18TessResultCallbackIbE
-__ZTI18TessResultCallbackIbE
-__ZTI34_ConstTessMemberResultCallback_6_0ILb0EbN9tesseract12PageIteratorENS0_17PageIteratorLevelEiPiS3_S3_S3_E
-__ZTS34_ConstTessMemberResultCallback_5_0ILb0EbN9tesseract12PageIteratorENS0_17PageIteratorLevelEPiS3_S3_S3_E
-__ZTI34_ConstTessMemberResultCallback_5_0ILb0EbN9tesseract12PageIteratorENS0_17PageIteratorLevelEPiS3_S3_S3_E
 __ZN9tesseractL13BoxMissMetricERK4TBOXS2_
-__ZTS29_TessMemberResultCallback_0_1ILb0EvN9tesseract16DocQualCallbacksEiE
-__ZTS13TessCallback1IiE
-__ZTI13TessCallback1IiE
-__ZTI29_TessMemberResultCallback_0_1ILb0EvN9tesseract16DocQualCallbacksEiE
 ___cxx_global_array_dtor
 __ZN9tesseractL18SortCPByTopReverseEPKvS1_
 __ZN9tesseractL14SortCPByBottomEPKvS1_
@@ -5780,54 +5774,18 @@ __ZZNK9tesseract14EquationDetect22EstimateTypeForUnicharERK10UNICHARSETiE12kDigi
 __ZGVZNK9tesseract14EquationDetect22EstimateTypeForUnicharERK10UNICHARSETiE12kDigitsChars
 ____ZN9tesseract9Tesseract21RecogAllWordsPassNParEiP10ETEXT_DESCP11PAGE_RES_ITP13GenericVectorINS_8WordDataEE_block_invoke
 __ZN9tesseractL9DebugDumpEbRK6STRINGRKNS_15ParagraphTheoryERK13GenericVectorINS_19RowScratchRegistersEE
-__ZTS31_TessFunctionResultCallback_0_2ILb0EbRKiS1_E
-__ZTS19TessResultCallback2IbRKiS1_E
-__ZTI19TessResultCallback2IbRKiS1_E
-__ZTI31_TessFunctionResultCallback_0_2ILb0EbRKiS1_E
-__ZTS31_TessFunctionResultCallback_0_2ILb0EbRKP14ParagraphModelS3_E
-__ZTS19TessResultCallback2IbRKP14ParagraphModelS3_E
-__ZTI19TessResultCallback2IbRKP14ParagraphModelS3_E
-__ZTI31_TessFunctionResultCallback_0_2ILb0EbRKP14ParagraphModelS3_E
-__ZTS31_TessFunctionResultCallback_0_2ILb0EbRKN9tesseract14LineHypothesisES3_E
-__ZTS19TessResultCallback2IbRKN9tesseract14LineHypothesisES3_E
-__ZTI19TessResultCallback2IbRKN9tesseract14LineHypothesisES3_E
-__ZTI31_TessFunctionResultCallback_0_2ILb0EbRKN9tesseract14LineHypothesisES3_E
-__ZTS31_TessFunctionResultCallback_0_2ILb0EbRKPK14ParagraphModelS4_E
-__ZTS19TessResultCallback2IbRKPK14ParagraphModelS4_E
-__ZTI19TessResultCallback2IbRKPK14ParagraphModelS4_E
-__ZTI31_TessFunctionResultCallback_0_2ILb0EbRKPK14ParagraphModelS4_E
 __ZN9tesseractL16PrintMatrixPathsEiiRK6MATRIXiPPK11BLOB_CHOICERK10UNICHARSETPKcP7__sFILE
 __ZL21kLangConfigFileSuffix
 __ZL21kUnicharsetFileSuffix
 __ZL17kAmbigsFileSuffix
 __ZL25kCubeUnicharsetFileSuffix
 __ZL22kParamsModelFileSuffix
-__ZTS31_TessFunctionResultCallback_0_2ILb0EbRKN9tesseract8FontInfoES3_E
-__ZTS19TessResultCallback2IbRKN9tesseract8FontInfoES3_E
-__ZTI19TessResultCallback2IbRKN9tesseract8FontInfoES3_E
-__ZTI31_TessFunctionResultCallback_0_2ILb0EbRKN9tesseract8FontInfoES3_E
 __GLOBAL__sub_I_tessvars.cpp
-__ZTSN9tesseract14CharClassifierE
-__ZTIN9tesseract14CharClassifierE
-__ZTSN9tesseract12SearchObjectE
-__ZTIN9tesseract12SearchObjectE
-__ZTSN9tesseract12TuningParamsE
-__ZTIN9tesseract12TuningParamsE
-__ZTSN9tesseract11FeatureBaseE
-__ZTIN9tesseract11FeatureBaseE
-__ZTSN9tesseract11LangModEdgeE
-__ZTIN9tesseract11LangModEdgeE
 __GLOBAL__sub_I_tess_lang_model.cpp
-__ZTSN9tesseract9LangModelE
-__ZTIN9tesseract9LangModelE
 __ZL25kCubeSystemDawgFileSuffix
-__ZTSN9tesseract4DawgE
-__ZTIN9tesseract4DawgE
 __GLOBAL__sub_I_alignedblob.cpp
 __ZL30horizontal_coutline_projectionP9C_OUTLINEP5STATS
 __GLOBAL__sub_I_blkocc.cpp
-__ZTSN9tesseract6BBGridI8BLOBNBOX14BLOBNBOX_CLIST13BLOBNBOX_C_ITEE
-__ZTIN9tesseract6BBGridI8BLOBNBOX14BLOBNBOX_CLIST13BLOBNBOX_C_ITEE
 __ZN12_GLOBAL__N_110FPAnalyzer12Pass1AnalyzeEv
 __ZN12_GLOBAL__N_110FPAnalyzer13EstimatePitchEb
 __ZN12_GLOBAL__N_110FPAnalyzerD1Ev
@@ -5838,7 +5796,6 @@ __ZN13GenericVectorIN12_GLOBAL__N_16FPCharEE7reserveEi
 __ZN13GenericVectorIN12_GLOBAL__N_16FPCharEEpLERKS2_
 __ZN12_GLOBAL__N_15FPRowC1ERKS0_
 __ZN12_GLOBAL__N_15FPRow19significant_overlapERK4TBOXS3_
-__ZN12_GLOBAL__N_111SimpleStats3ileEd
 __ZN12_GLOBAL__N_15FPRow18x_overlap_fractionERK4TBOXS3_
 __ZN12_GLOBAL__N_111SimpleStats13float_compareEPKvS2_
 __ZN12_GLOBAL__N_15FPRow13is_good_pitchEfRK4TBOXS3_
@@ -5855,8 +5812,6 @@ __ZN9tesseractL10kBlobTypesE
 __ZN9tesseractL17IncreaseInOverlapEPKNS_12ColPartitionES2_iPNS_18ColPartition_CLISTE
 __ZN9tesseractL16OKMergeCandidateEPKNS_12ColPartitionES2_b
 __GLOBAL__sub_I_colpartitiongrid.cpp
-__ZTSN9tesseract6BBGridINS_12ColPartitionENS_18ColPartition_CLISTENS_17ColPartition_C_ITEEE
-__ZTIN9tesseract6BBGridINS_12ColPartitionENS_18ColPartition_CLISTENS_17ColPartition_C_ITEEE
 __GLOBAL__sub_I_devanagari_processing.cpp
 __GLOBAL__sub_I_edgblob.cpp
 __GLOBAL__sub_I_fpchop.cpp
@@ -5879,47 +5834,21 @@ __ZN9tesseractL18AcceptableCJKMergeERK4TBOXS2_biiPiS3_
 __ZN9tesseractL17List2ndNeighboursEPK8BLOBNBOXP14BLOBNBOX_CLIST
 __ZN9tesseractL14ListNeighboursEPK8BLOBNBOXP14BLOBNBOX_CLIST
 __GLOBAL__sub_I_strokewidth.cpp
-__ZTS29_TessMemberResultCallback_0_2ILb0EbN9tesseract11StrokeWidthEPNS0_12ColPartitionEP4TBOXE
-__ZTS19TessResultCallback2IbPN9tesseract12ColPartitionEP4TBOXE
-__ZTI19TessResultCallback2IbPN9tesseract12ColPartitionEP4TBOXE
-__ZTI29_TessMemberResultCallback_0_2ILb0EbN9tesseract11StrokeWidthEPNS0_12ColPartitionEP4TBOXE
-__ZTS29_TessMemberResultCallback_0_2ILb0EbN9tesseract11StrokeWidthEPKNS0_12ColPartitionES4_E
-__ZTS19TessResultCallback2IbPKN9tesseract12ColPartitionES3_E
-__ZTI19TessResultCallback2IbPKN9tesseract12ColPartitionES3_E
-__ZTI29_TessMemberResultCallback_0_2ILb0EbN9tesseract11StrokeWidthEPKNS0_12ColPartitionES4_E
 __GLOBAL__sub_I_tabfind.cpp
-__ZTS29_TessMemberResultCallback_0_1ILb0EbN9tesseract7TabFindEiE
-__ZTS19TessResultCallback1IbiE
-__ZTI19TessResultCallback1IbiE
-__ZTI29_TessMemberResultCallback_0_1ILb0EbN9tesseract7TabFindEiE
 __GLOBAL__sub_I_tablefind.cpp
 __ZZNK9tesseract10ColSegment8BoxColorEvE10kBoxColors
-__ZTSN9tesseract6BBGridINS_10ColSegmentENS_16ColSegment_CLISTENS_15ColSegment_C_ITEEE
-__ZTIN9tesseract6BBGridINS_10ColSegmentENS_16ColSegment_CLISTENS_15ColSegment_C_ITEEE
 __ZN9tesseractL28kGoodRowNumberOfColumnsSmallE
 __GLOBAL__sub_I_tabvector.cpp
 __ZN9tesseractL15BoundsWithinBoxEP3PixRK4TBOX
 __GLOBAL__sub_I_topitch.cpp
-__ZTSN9tesseract6BBGridINS_11WordWithBoxENS_17WordWithBox_CLISTENS_16WordWithBox_C_ITEEE
-__ZTIN9tesseract6BBGridINS_11WordWithBoxENS_17WordWithBox_CLISTENS_16WordWithBox_C_ITEEE
 __GLOBAL__sub_I_tovars.cpp
 __GLOBAL__sub_I_underlin.cpp
 __GLOBAL__sub_I_wordseg.cpp
 __ZL9CheckSeamiiP5TWERDP5TBLOBS2_RK13GenericVectorIP4SEAMES5_
-__ZTS6MATRIX
-__ZTS13BandTriMatrixIP16BLOB_CHOICE_LISTE
-__ZTS16GENERIC_2D_ARRAYIP16BLOB_CHOICE_LISTE
-__ZTI16GENERIC_2D_ARRAYIP16BLOB_CHOICE_LISTE
-__ZTI13BandTriMatrixIP16BLOB_CHOICE_LISTE
-__ZTI6MATRIX
 __ZN9tesseractL20HasBetterCaseVariantERK10UNICHARSETPK11BLOB_CHOICEP16BLOB_CHOICE_LIST
 __ZN9tesseractL30kParamsTrainingFeatureTypeNameE
 __ZN9tesseractL20LMPainPointsTypeNameE
 __ZN9tesseractL26XHeightConsistencyEnumNameE
-__ZTS29_TessMemberResultCallback_2_2ILb0EbN9tesseract12LMPainPointsEdP8WERD_RESiiE
-__ZTS19TessResultCallback2IbiiE
-__ZTI19TessResultCallback2IbiiE
-__ZTI29_TessMemberResultCallback_2_2ILb0EbN9tesseract12LMPainPointsEdP8WERD_RESiiE
 __ZZN9tesseract8Classify16RemoveExtraPuncsEP13ADAPT_RESULTSE10punc_chars
 __ZZN9tesseract8Classify16RemoveExtraPuncsEP13ADAPT_RESULTSE11digit_chars
 __ZL27kBuiltInTemplatesFileSuffix
@@ -5928,18 +5857,6 @@ __ZL20kNormProtoFileSuffix
 __ZL21kShapeTableFileSuffix
 __GLOBAL__sub_I_blobclass.cpp
 __ZL16kUnknownFontName
-__ZTS31_TessFunctionResultCallback_0_1ILb0EvN9tesseract8FontInfoEE
-__ZTS13TessCallback1IN9tesseract8FontInfoEE
-__ZTI13TessCallback1IN9tesseract8FontInfoEE
-__ZTI31_TessFunctionResultCallback_0_1ILb0EvN9tesseract8FontInfoEE
-__ZTS31_TessFunctionResultCallback_0_2ILb0EbRKN9tesseract7FontSetES3_E
-__ZTS19TessResultCallback2IbRKN9tesseract7FontSetES3_E
-__ZTI19TessResultCallback2IbRKN9tesseract7FontSetES3_E
-__ZTI31_TessFunctionResultCallback_0_2ILb0EbRKN9tesseract7FontSetES3_E
-__ZTS31_TessFunctionResultCallback_0_1ILb0EvN9tesseract7FontSetEE
-__ZTS13TessCallback1IN9tesseract7FontSetEE
-__ZTI13TessCallback1IN9tesseract7FontSetEE
-__ZTI31_TessFunctionResultCallback_0_1ILb0EvN9tesseract7FontSetEE
 __ZL6FTable
 __ZZ11MakeBuckets12DISTRIBUTIONjdE15DensityFunction
 __ZL11kCountTable
@@ -5948,8 +5865,6 @@ __ZZ17ComputeChiSquaredtdE7ChiWith
 __ZZ16DegreesOfFreedom12DISTRIBUTIONtE13DegreeOffsets
 __ZZ19MultipleCharSamplesP9CLUSTERERP6samplefE9CharFlags
 __ZZ19MultipleCharSamplesP9CLUSTERERP6samplefE8NumFlags
-__ZTS16GENERIC_2D_ARRAYIdE
-__ZTI16GENERIC_2D_ARRAYIdE
 __ZL18MicroFeatureParams
 __ZL14CharNormParams
 __ZL13IntFeatParams
@@ -5966,32 +5881,12 @@ __ZL9cos_table
 __ZL9sin_table
 __ZL10data_table
 __GLOBAL__sub_I_intproto.cpp
-__ZTS31_TessFunctionResultCallback_0_3ILb0EbP7__sFILEPN9tesseract8FontInfoEbE
-__ZTS19TessResultCallback3IbP7__sFILEPN9tesseract8FontInfoEbE
-__ZTI19TessResultCallback3IbP7__sFILEPN9tesseract8FontInfoEbE
-__ZTI31_TessFunctionResultCallback_0_3ILb0EbP7__sFILEPN9tesseract8FontInfoEbE
-__ZTS31_TessFunctionResultCallback_0_3ILb0EbP7__sFILEPN9tesseract7FontSetEbE
-__ZTS19TessResultCallback3IbP7__sFILEPN9tesseract7FontSetEbE
-__ZTI19TessResultCallback3IbP7__sFILEPN9tesseract7FontSetEbE
-__ZTI31_TessFunctionResultCallback_0_3ILb0EbP7__sFILEPN9tesseract7FontSetEbE
-__ZTS31_TessFunctionResultCallback_0_2ILb0EbP7__sFILERKN9tesseract8FontInfoEE
-__ZTS19TessResultCallback2IbP7__sFILERKN9tesseract8FontInfoEE
-__ZTI19TessResultCallback2IbP7__sFILERKN9tesseract8FontInfoEE
-__ZTI31_TessFunctionResultCallback_0_2ILb0EbP7__sFILERKN9tesseract8FontInfoEE
-__ZTS31_TessFunctionResultCallback_0_2ILb0EbP7__sFILERKN9tesseract7FontSetEE
-__ZTS19TessResultCallback2IbP7__sFILERKN9tesseract7FontSetEE
-__ZTI19TessResultCallback2IbP7__sFILERKN9tesseract7FontSetEE
-__ZTI31_TessFunctionResultCallback_0_2ILb0EbP7__sFILERKN9tesseract7FontSetEE
 __GLOBAL__sub_I_mfx.cpp
 __GLOBAL__sub_I_normmatch.cpp
 __GLOBAL__sub_I_picofeat.cpp
 __GLOBAL__sub_I_protos.cpp
 __ZN9tesseractL16case_state_tableE
 __ZN9tesseractL9kWildcardE
-__ZTS31_TessFunctionResultCallback_1_1ILb0EvP13TessCallback1IPKcEPK11WERD_CHOICEE
-__ZTS13TessCallback1IPK11WERD_CHOICEE
-__ZTI13TessCallback1IPK11WERD_CHOICEE
-__ZTI31_TessFunctionResultCallback_1_1ILb0EvP13TessCallback1IPKcEPK11WERD_CHOICEE
 __ZN9tesseractL21kTessdataFileSuffixesE
 __ZL19kPuncDawgFileSuffix
 __ZL21kSystemDawgFileSuffix
@@ -6000,10 +5895,6 @@ __ZL19kFreqDawgFileSuffix
 __ZL27kFixedLengthDawgsFileSuffix
 __ZL21kBigramDawgFileSuffix
 __ZL22kUnambigDawgFileSuffix
-__ZTS29_TessMemberResultCallback_0_0ILb1EPN9tesseract4DawgENS0_10DawgLoaderEE
-__ZTS18TessResultCallbackIPN9tesseract4DawgEE
-__ZTI18TessResultCallbackIPN9tesseract4DawgEE
-__ZTI29_TessMemberResultCallback_0_0ILb1EPN9tesseract4DawgENS0_10DawgLoaderEE
 __ZZN9tesseract4Dict15GlobalDawgCacheEvE5cache
 __ZGVZN9tesseract4Dict15GlobalDawgCacheEvE5cache
 __ZN9tesseractL17kApostropheSymbolE
@@ -6041,16 +5932,6 @@ __ZL12CANTOPENFILE
 __GLOBAL__sub_I_coutln.cpp
 __ZL10EMPTY_LLSQ
 __ZL7idirtab
-__ZTS16GENERIC_2D_ARRAYIiE
-__ZTI16GENERIC_2D_ARRAYIiE
-__ZTS29_TessMemberResultCallback_0_2ILb0Ei8WERD_RESiiE
-__ZTS19TessResultCallback2IiiiE
-__ZTI19TessResultCallback2IiiiE
-__ZTI29_TessMemberResultCallback_0_2ILb0Ei8WERD_RESiiE
-__ZTS29_TessMemberResultCallback_0_2ILb0Eb8WERD_RESRK4TBOXS3_E
-__ZTS19TessResultCallback2IbRK4TBOXS2_E
-__ZTI19TessResultCallback2IbRK4TBOXS2_E
-__ZTI29_TessMemberResultCallback_0_2ILb0Eb8WERD_RESRK4TBOXS3_E
 __GLOBAL__sub_I_polyaprx.cpp
 __ZL18kPermuterTypeNames
 __ZL19kPermuterTypeNoPerm
@@ -6083,14 +5964,6 @@ __ZZ16tprintf_internalPKczE3msg
 __ZZNK7UNICHAR9first_uniEvE12utf8_offsets
 __ZZN7UNICHAR9utf8_stepEPKcE10utf8_bytes
 __ZL15INVALID_UNICHAR
-__ZTS29_TessMemberResultCallback_0_2ILb0EPc19InMemoryFilePointerS0_iE
-__ZTS19TessResultCallback2IPcS0_iE
-__ZTI19TessResultCallback2IPcS0_iE
-__ZTI29_TessMemberResultCallback_0_2ILb0EPc19InMemoryFilePointerS0_iE
-__ZTS29_TessMemberResultCallback_0_2ILb0EPc16LocalFilePointerS0_iE
-__ZTI29_TessMemberResultCallback_0_2ILb0EPc16LocalFilePointerS0_iE
-__ZTS29_TessMemberResultCallback_0_2ILb0EPcN9tesseract5TFileES0_iE
-__ZTI29_TessMemberResultCallback_0_2ILb0EPcN9tesseract5TFileES0_iE
 __ZN2cv22convertAndUnrollScalarERKNS_3MatEiPhm
 __ZN2cv14getConvertFuncEii
 __ZN2cvL9binary_opERKNS_11_InputArrayES2_RKNS_12_OutputArrayES2_PKPFvPKhmS7_mPhmiiPvEbi
@@ -6101,14 +5974,12 @@ __ZN2cv6vBinOpItNS_5OpAddItttEENS_4VAddItEEEEvPKT_mS7_mPS5_mii
 __ZN2cv6vBinOpIsNS_5OpAddIsssEENS_4VAddIsEEEEvPKT_mS7_mPS5_mii
 __ZN2cv8vBinOp32IiNS_5OpAddIiiiEENS_4VAddIiEEEEvPKT_mS7_mPS5_mii
 __ZN2cv8vBinOp32IfNS_5OpAddIfffEENS_4VAddIfEEEEvPKT_mS7_mPS5_mii
-__ZN2cv8vBinOp64IdNS_5OpAddIdddEENS_4VAddIdEEEEvPKT_mS7_mPS5_mii
 __ZN2cv6vBinOpIhNS_5OpSubIhhhEENS_4VSubIhEEEEvPKT_mS7_mPS5_mii
 __ZN2cv6vBinOpIaNS_5OpSubIaaaEENS_4VSubIaEEEEvPKT_mS7_mPS5_mii
 __ZN2cv6vBinOpItNS_5OpSubItttEENS_4VSubItEEEEvPKT_mS7_mPS5_mii
 __ZN2cv6vBinOpIsNS_5OpSubIsssEENS_4VSubIsEEEEvPKT_mS7_mPS5_mii
 __ZN2cv8vBinOp32IiNS_5OpSubIiiiEENS_4VSubIiEEEEvPKT_mS7_mPS5_mii
 __ZN2cv8vBinOp32IfNS_5OpSubIfffEENS_4VSubIfEEEEvPKT_mS7_mPS5_mii
-__ZN2cv8vBinOp64IdNS_5OpSubIdddEENS_4VSubIdEEEEvPKT_mS7_mPS5_mii
 __ZN2cv6vBinOpIhNS_5OpMaxIhEENS_4VMaxIhEEEEvPKT_mS7_mPS5_mii
 __ZN2cv6vBinOpIaNS_5OpMaxIaEENS_4VMaxIaEEEEvPKT_mS7_mPS5_mii
 __ZN2cv6vBinOpItNS_5OpMaxItEENS_4VMaxItEEEEvPKT_mS7_mPS5_mii
@@ -6134,7 +6005,6 @@ __ZN2cv6vBinOpIhNS_5OpAndIhEENS_4VAndIhEEEEvPKT_mS7_mPS5_mii
 __ZN2cv6vBinOpIhNS_4OpOrIhEENS_3VOrIhEEEEvPKT_mS7_mPS5_mii
 __ZN2cv6vBinOpIhNS_5OpXorIhEENS_4VXorIhEEEEvPKT_mS7_mPS5_mii
 __ZN2cv6vBinOpIhNS_5OpNotIhEENS_4VNotIhEEEEvPKT_mS7_mPS5_mii
-__ZN2cvL7recip_iIhEEvPKT_mS3_mPS1_miid
 __ZN2cv15getCopyMaskFuncEm
 __ZN2cvL9inRange8uEPKhmS1_mS1_mPhmNS_5Size_IiEE
 __ZN2cvL9inRange8sEPKamS1_mS1_mPhmNS_5Size_IiEE
@@ -6310,9 +6180,9 @@ __ZN2cvL9LUT8u_16sEPKhPKsPsiii
 __ZN2cvL9LUT8u_32sEPKhPKiPiiii
 __ZN2cvL9LUT8u_32fEPKhPKfPfiii
 __ZN2cvL9LUT8u_64fEPKhPKdPdiii
-__ZN2cv10AutoBufferINS_3MatELm18EEC2Em
-__ZN2cv10AutoBufferINS_3MatELm18EE10deallocateEv
-__ZN2cv10AutoBufferINS_3MatELm18EED2Ev
+__ZN2cv10AutoBufferINS_3MatELm26EEC2Em
+__ZN2cv10AutoBufferINS_3MatELm26EE10deallocateEv
+__ZN2cv10AutoBufferINS_3MatELm26EED2Ev
 __ZNSt3__16vectorIN2cv4UMatENS_9allocatorIS2_EEEC2EmRKS2_
 __ZN2cv6detail12PtrOwnerImplINS_16ParallelLoopBodyENS_14DefaultDeleterIS2_EEED1Ev
 __ZN2cv6detail12PtrOwnerImplINS_16ParallelLoopBodyENS_14DefaultDeleterIS2_EEED0Ev
@@ -6358,7 +6228,6 @@ __ZN2cvL11CCSIDFT_32fEPKfPfiiPiPKiPKNS_7ComplexIfEEiPKvPS7_id
 __ZN2cvL7DFT_64fEPKNS_7ComplexIdEEPS1_iiPKiS6_S3_iPKvS4_id
 __ZN2cvL11RealDFT_64fEPKdPdiiPiPKiPKNS_7ComplexIdEEiPKvPS7_id
 __ZN2cvL11CCSIDFT_64fEPKdPdiiPiPKiPKNS_7ComplexIdEEiPKvPS7_id
-__ZN2cvL12DFTFactorizeEiPi
 __ZN2cvL7DFTInitEiiPiS0_iPvi
 __ZN2cvL23complementComplexOutputERNS_3MatEii
 __ZN2cvL9ExpandCCSEPhii
@@ -6415,6 +6284,7 @@ __ZN2cvL7iPow16sEPKsPsii
 __ZN2cvL7iPow32sEPKiPiii
 __ZN2cvL7iPow32fEPKfPfii
 __ZN2cvL7iPow64fEPKdPdii
+__ZN2cv10AutoBufferINS_7ComplexIdEELm72EEC2Em
 __ZN2cvL7ipowTabE
 __ZN2cv21check_range_functionsE
 __ZZN2cvL10SinCos_32fEPKfPfS2_iiE9sin_table
@@ -6803,34 +6673,24 @@ __ZNSt3__16vectorIN2cv3VecIiLi64EEENS_9allocatorIS3_EEE8__appendEm
 __ZNSt3__16vectorIN2cv3VecIiLi128EEENS_9allocatorIS3_EEE8__appendEm
 __ZNSt3__16__sortIRN2cv11LessThanIdxIhEEPiEEvT0_S6_T_
 __ZNSt3__17__sort4IRN2cv11LessThanIdxIhEEPiEEjT0_S6_S6_S6_T_
-__ZNSt3__17__sort5IRN2cv11LessThanIdxIhEEPiEEjT0_S6_S6_S6_S6_T_
-__ZNSt3__118__insertion_sort_3IRN2cv11LessThanIdxIhEEPiEEvT0_S6_T_
 __ZNSt3__127__insertion_sort_incompleteIRN2cv11LessThanIdxIhEEPiEEbT0_S6_T_
 __ZNSt3__16__sortIRN2cv11LessThanIdxIaEEPiEEvT0_S6_T_
 __ZNSt3__17__sort4IRN2cv11LessThanIdxIaEEPiEEjT0_S6_S6_S6_T_
-__ZNSt3__17__sort5IRN2cv11LessThanIdxIaEEPiEEjT0_S6_S6_S6_S6_T_
-__ZNSt3__118__insertion_sort_3IRN2cv11LessThanIdxIaEEPiEEvT0_S6_T_
 __ZNSt3__127__insertion_sort_incompleteIRN2cv11LessThanIdxIaEEPiEEbT0_S6_T_
 __ZNSt3__16__sortIRN2cv11LessThanIdxItEEPiEEvT0_S6_T_
 __ZNSt3__17__sort4IRN2cv11LessThanIdxItEEPiEEjT0_S6_S6_S6_T_
-__ZNSt3__17__sort5IRN2cv11LessThanIdxItEEPiEEjT0_S6_S6_S6_S6_T_
 __ZNSt3__127__insertion_sort_incompleteIRN2cv11LessThanIdxItEEPiEEbT0_S6_T_
 __ZNSt3__16__sortIRN2cv11LessThanIdxIsEEPiEEvT0_S6_T_
 __ZNSt3__17__sort4IRN2cv11LessThanIdxIsEEPiEEjT0_S6_S6_S6_T_
-__ZNSt3__17__sort5IRN2cv11LessThanIdxIsEEPiEEjT0_S6_S6_S6_S6_T_
 __ZNSt3__127__insertion_sort_incompleteIRN2cv11LessThanIdxIsEEPiEEbT0_S6_T_
 __ZNSt3__16__sortIRN2cv11LessThanIdxIiEEPiEEvT0_S6_T_
 __ZNSt3__17__sort4IRN2cv11LessThanIdxIiEEPiEEjT0_S6_S6_S6_T_
-__ZNSt3__17__sort5IRN2cv11LessThanIdxIiEEPiEEjT0_S6_S6_S6_S6_T_
-__ZNSt3__118__insertion_sort_3IRN2cv11LessThanIdxIiEEPiEEvT0_S6_T_
 __ZNSt3__127__insertion_sort_incompleteIRN2cv11LessThanIdxIiEEPiEEbT0_S6_T_
 __ZNSt3__16__sortIRN2cv11LessThanIdxIfEEPiEEvT0_S6_T_
 __ZNSt3__17__sort4IRN2cv11LessThanIdxIfEEPiEEjT0_S6_S6_S6_T_
-__ZNSt3__17__sort5IRN2cv11LessThanIdxIfEEPiEEjT0_S6_S6_S6_S6_T_
 __ZNSt3__127__insertion_sort_incompleteIRN2cv11LessThanIdxIfEEPiEEbT0_S6_T_
 __ZNSt3__16__sortIRN2cv11LessThanIdxIdEEPiEEvT0_S6_T_
 __ZNSt3__17__sort4IRN2cv11LessThanIdxIdEEPiEEjT0_S6_S6_S6_T_
-__ZNSt3__17__sort5IRN2cv11LessThanIdxIdEEPiEEjT0_S6_S6_S6_S6_T_
 __ZNSt3__127__insertion_sort_incompleteIRN2cv11LessThanIdxIdEEPiEEbT0_S6_T_
 __ZNSt3__16vectorImNS_9allocatorImEEE8__appendEm
 __ZNSt3__16vectorImNS_9allocatorImEEE6assignIPmEENS_9enable_ifIXaasr21__is_forward_iteratorIT_EE5valuesr16is_constructibleImNS_15iterator_traitsIS7_E9referenceEEE5valueEvE4typeES7_S7_
@@ -6918,8 +6778,8 @@ __ZN2cv3ocl24OpenCLBufferPoolBaseImplINS0_20OpenCLBufferPoolImplENS0_13CLBufferE
 __ZN2cv3ocl20OpenCLBufferPoolImplD0Ev
 __ZN2cv3ocl24OpenCLBufferPoolBaseImplINS0_20OpenCLBufferPoolImplENS0_13CLBufferEntryEP7_cl_memE8allocateEm
 __ZN2cv3ocl24OpenCLBufferPoolBaseImplINS0_20OpenCLBufferPoolImplENS0_13CLBufferEntryEP7_cl_memE7releaseES5_
-__ZThn8_N2cv3ocl24OpenCLBufferPoolBaseImplINS0_20OpenCLBufferPoolImplENS0_13CLBufferEntryEP7_cl_memE8allocateEm
-__ZThn8_N2cv3ocl24OpenCLBufferPoolBaseImplINS0_20OpenCLBufferPoolImplENS0_13CLBufferEntryEP7_cl_memE7releaseES5_
+__ZThn4_N2cv3ocl24OpenCLBufferPoolBaseImplINS0_20OpenCLBufferPoolImplENS0_13CLBufferEntryEP7_cl_memE8allocateEm
+__ZThn4_N2cv3ocl24OpenCLBufferPoolBaseImplINS0_20OpenCLBufferPoolImplENS0_13CLBufferEntryEP7_cl_memE7releaseES5_
 __ZN2cv3ocl24OpenCLBufferPoolBaseImplINS0_20OpenCLBufferPoolImplENS0_13CLBufferEntryEP7_cl_memED1Ev
 __ZN2cv3ocl24OpenCLBufferPoolBaseImplINS0_20OpenCLBufferPoolImplENS0_13CLBufferEntryEP7_cl_memED0Ev
 __ZN2cv3ocl24OpenCLBufferPoolBaseImplINS0_20OpenCLBufferPoolImplENS0_13CLBufferEntryEP7_cl_memED2Ev
@@ -6933,8 +6793,8 @@ __ZNSt3__16vectorIN2cv3ocl6DeviceENS_9allocatorIS3_EEE8__appendEm
 __ZNSt3__16vectorIN2cv3ocl12PlatformInfoENS_9allocatorIS3_EEE21__push_back_slow_pathIKS3_EEvRT_
 __ZNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED1Ev
 __ZNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED0Ev
-__ZTv0_n24_NSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED1Ev
-__ZTv0_n24_NSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED0Ev
+__ZTv0_n12_NSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED1Ev
+__ZTv0_n12_NSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEED0Ev
 __ZNSt3__16vectorImNS_9allocatorImEEE21__push_back_slow_pathIKmEEvRT_
 __ZNSt3__16vectorIiNS_9allocatorIiEEE21__push_back_slow_pathIKiEEvRT_
 __ZZN2cv3ocl8Platform10getDefaultEvE1p
@@ -7018,8 +6878,6 @@ __ZZN2cv3ocl7Image2D4Impl14getImageFormatEiibE12channelTypes
 __ZZN2cv3ocl7Image2D4Impl14getImageFormatEiibE16channelTypesNorm
 __ZZN2cv3ocl7Image2D4Impl14getImageFormatEiibE13channelOrders
 __ZZ26clGetSupportedImageFormatsP11_cl_contextmjjP16_cl_image_formatPjE28clGetSupportedImageFormats_p
-__ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE
-__ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE
 __ZN2cv16DefaultFormatterD1Ev
 __ZN2cv16DefaultFormatterD0Ev
 __ZNK2cv16DefaultFormatter6formatERKNS_3MatE
@@ -7146,7 +7004,6 @@ __ZL17icvYMLWriteStringP13CvFileStoragePKcS2_i
 __ZL18icvYMLWriteCommentP13CvFileStoragePKci
 __ZL21icvYMLStartNextStreamP13CvFileStorage
 __ZL15icvDecodeFormatPKcPii
-__ZL17icvDoubleToStringPcd
 __ZL17icvXMLWriteScalarP13CvFileStoragePKcS2_i
 __ZL11icvYMLWriteP13CvFileStoragePKcS2_
 __ZL16icvWriteFileNodeP13CvFileStoragePKcPK10CvFileNode
@@ -7346,7 +7203,6 @@ __ZN2cvL14normDiffL2_16uEPKtS1_PKhPdii
 __ZN2cvL14normDiffL2_16sEPKsS1_PKhPdii
 __ZN2cvL14normDiffL2_32sEPKiS1_PKhPdii
 __ZN2cvL14normDiffL2_64fEPKdS1_PKhPdii
-__ZN2cv12normDiffInf_IddEEiPKT_S3_PKhPT0_ii
 __ZN2cv11normDiffL1_IaiEEiPKT_S3_PKhPT0_ii
 __ZN2cv11normDiffL1_ItiEEiPKT_S3_PKhPT0_ii
 __ZN2cv11normDiffL1_IsiEEiPKT_S3_PKhPT0_ii
@@ -7392,6 +7248,7 @@ __ZN2cv7TLSDataINS_11CoreTLSDataEED1Ev
 __ZN2cv7TLSDataINS_11CoreTLSDataEED0Ev
 __ZNK2cv7TLSDataINS_11CoreTLSDataEE18createDataInstanceEv
 __ZNK2cv7TLSDataINS_11CoreTLSDataEE18deleteDataInstanceEPv
+__ZN2cv7TLSDataINS_11CoreTLSDataEED2Ev
 __GLOBAL__sub_I_system.cpp
 __ZN2cvL22__initialization_mutexE
 __ZN2cv34__initialization_mutex_initializerE
@@ -7864,10 +7721,10 @@ __ZNK2cv10ExifReader11getYCbCrPosEm
 __ZNK2cv10ExifReader8getRefBWEm
 __ZNK2cv10ExifReader12getURationalEm
 __ZNSt3__16__treeINS_12__value_typeIiN2cv11ExifEntry_tEEENS_19__map_value_compareIiS4_NS_4lessIiEELb1EEENS_9allocatorIS4_EEE7destroyEPNS_11__tree_nodeIS4_PvEE
-__ZNSt3__16__treeINS_12__value_typeIiN2cv11ExifEntry_tEEENS_19__map_value_compareIiS4_NS_4lessIiEELb1EEENS_9allocatorIS4_EEE12__find_equalIS4_EERPNS_16__tree_node_baseIPvEENS_21__tree_const_iteratorIS4_PNS_11__tree_nodeIS4_SE_EElEESH_RKT_
+__ZNSt3__16__treeINS_12__value_typeIiN2cv11ExifEntry_tEEENS_19__map_value_compareIiS4_NS_4lessIiEELb1EEENS_9allocatorIS4_EEE12__find_equalIS4_EERPNS_16__tree_node_baseIPvEENS_21__tree_const_iteratorIS4_PNS_11__tree_nodeIS4_SE_EEiEESH_RKT_
 __ZNSt3__16__treeINS_12__value_typeIiN2cv11ExifEntry_tEEENS_19__map_value_compareIiS4_NS_4lessIiEELb1EEENS_9allocatorIS4_EEE16__construct_nodeERKS4_
 __ZNSt3__16vectorINS_4pairIjjEENS_9allocatorIS2_EEE6assignIPS2_EENS_9enable_ifIXaasr21__is_forward_iteratorIT_EE5valuesr16is_constructibleIS2_NS_15iterator_traitsIS9_E9referenceEEE5valueEvE4typeES9_S9_
-__ZNSt3__16__treeINS_12__value_typeIiN2cv11ExifEntry_tEEENS_19__map_value_compareIiS4_NS_4lessIiEELb1EEENS_9allocatorIS4_EEE5eraseENS_21__tree_const_iteratorIS4_PNS_11__tree_nodeIS4_PvEElEE
+__ZNSt3__16__treeINS_12__value_typeIiN2cv11ExifEntry_tEEENS_19__map_value_compareIiS4_NS_4lessIiEELb1EEENS_9allocatorIS4_EEE5eraseENS_21__tree_const_iteratorIS4_PNS_11__tree_nodeIS4_PvEEiEE
 __ZNSt3__113__tree_removeIPNS_16__tree_node_baseIPvEEEEvT_S5_
 __ZNSt3__16__treeINS_12__value_typeIiN2cv11ExifEntry_tEEENS_19__map_value_compareIiS4_NS_4lessIiEELb1EEENS_9allocatorIS4_EEE15__insert_uniqueERKS4_
 __ZNSt3__16vectorINS_4pairIjjEENS_9allocatorIS2_EEE21__push_back_slow_pathIKS2_EEvRT_
@@ -7883,6 +7740,7 @@ __ZN2cv21ImageCodecInitializerC2Ev
 __ZNSt3__16vectorIN2cv3PtrINS1_16BaseImageDecoderEEENS_9allocatorIS4_EEE21__push_back_slow_pathIKS4_EEvRT_
 __ZNSt3__16vectorIN2cv3PtrINS1_16BaseImageEncoderEEENS_9allocatorIS4_EEE21__push_back_slow_pathIKS4_EEvRT_
 __ZNSt3__16vectorIN2cv3MatENS_9allocatorIS2_EEE21__push_back_slow_pathIKS2_EEvRT_
+__ZNSt3__16vectorIiNS_9allocatorIiEEEC2IPKiEET_NS_9enable_ifIXaasr21__is_forward_iteratorIS7_EE5valuesr16is_constructibleIiNS_15iterator_traitsIS7_E9referenceEEE5valueES7_E4typeE
 __GLOBAL__sub_I_loadsave.cpp
 __ZN2cvL6codecsE
 __ZL10rgbe_erroriPKc
@@ -7894,7 +7752,7 @@ __ZZ14cvConvertImageE10cvFuncName
 __Z23icvApproximateChainTC89P7CvChainiP12CvMemStoragei
 __ZN2cvL13approxPolyDP_IiEEiPKNS_6Point_IT_EEiPS3_bdPNS_10AutoBufferINS_5RangeELm136EEE
 __ZN2cvL13approxPolyDP_IfEEiPKNS_6Point_IT_EEiPS3_bdPNS_10AutoBufferINS_5RangeELm136EEE
-__ZN2cv10AutoBufferI9_CvPtInfoLm50EEC2Em
+__ZN2cv10AutoBufferI9_CvPtInfoLm59EEC2Em
 __ZN2cv10AutoBufferINS_5RangeELm136EE6resizeEm
 __ZZ23icvApproximateChainTC89P7CvChainiP12CvMemStorageiE8abs_diff
 __ZNSt3__16vectorIPhNS_9allocatorIS1_EEE8__appendEm
@@ -8005,7 +7863,6 @@ __ZNK2cv9RGB2HSV_bclEPKhPhi
 __ZN2cv20CvtColorLoop_InvokerINS_9RGB2HSV_fEED1Ev
 __ZN2cv20CvtColorLoop_InvokerINS_9RGB2HSV_fEED0Ev
 __ZNK2cv20CvtColorLoop_InvokerINS_9RGB2HSV_fEEclERKNS_5RangeE
-__ZNK2cv9RGB2HSV_fclEPKfPfi
 __ZN2cv20CvtColorLoop_InvokerINS_9RGB2HLS_bEED1Ev
 __ZN2cv20CvtColorLoop_InvokerINS_9RGB2HLS_bEED0Ev
 __ZNK2cv20CvtColorLoop_InvokerINS_9RGB2HLS_bEEclERKNS_5RangeE
@@ -9391,7 +9248,6 @@ __ZN2cv21resizeGeneric_InvokerINS_13HResizeLinearIfffLi1ENS_12HResizeNoVecEEENS_
 __ZN2cv21resizeGeneric_InvokerINS_13HResizeLinearIfffLi1ENS_12HResizeNoVecEEENS_13VResizeLinearIfffNS_4CastIffEENS_20VResizeLinearVec_32fEEEED0Ev
 __ZNK2cv21resizeGeneric_InvokerINS_13HResizeLinearIfffLi1ENS_12HResizeNoVecEEENS_13VResizeLinearIfffNS_4CastIffEENS_20VResizeLinearVec_32fEEEEclERKNS_5RangeE
 __ZNK2cv13HResizeLinearIfffLi1ENS_12HResizeNoVecEEclEPPKfPPfiPKiS4_iiiii
-__ZNK2cv13VResizeLinearIfffNS_4CastIffEENS_20VResizeLinearVec_32fEEclEPPKfPfS6_i
 __ZN2cv21resizeGeneric_InvokerINS_13HResizeLinearIfffLi1ENS_12HResizeNoVecEEENS_13VResizeLinearIfffNS_4CastIffEENS_20VResizeLinearVec_32fEEEED2Ev
 __ZN2cv21resizeGeneric_InvokerINS_13HResizeLinearIddfLi1ENS_12HResizeNoVecEEENS_13VResizeLinearIddfNS_4CastIddEENS_12VResizeNoVecEEEED1Ev
 __ZN2cv21resizeGeneric_InvokerINS_13HResizeLinearIddfLi1ENS_12HResizeNoVecEEENS_13VResizeLinearIddfNS_4CastIddEENS_12VResizeNoVecEEEEC2ERKNS_3MatERSA_PKiSF_PKfSH_RKNS_5Size_IiEESL_iii
@@ -10396,7 +10252,7 @@ __ZN2cv2ml13TrainDataImpl5clearEv
 __ZNK2cv2ml13TrainDataImpl10decodeElemEPKcRfRicRNSt3__13mapINS_6StringEiNS6_4lessIS8_EENS6_9allocatorINS6_4pairIKS8_iEEEEEES5_
 __ZNK2cv2ml13TrainDataImpl11setVarTypesERKNS_6StringEiRNSt3__16vectorIhNS5_9allocatorIhEEEE
 __ZNSt3__16__treeINS_12__value_typeIN2cv6StringEiEENS_19__map_value_compareIS3_S4_NS_4lessIS3_EELb1EEENS_9allocatorIS4_EEE7destroyEPNS_11__tree_nodeIS4_PvEE
-__ZNSt3__16__treeINS_12__value_typeIN2cv6StringEiEENS_19__map_value_compareIS3_S4_NS_4lessIS3_EELb1EEENS_9allocatorIS4_EEE12__find_equalIS4_EERPNS_16__tree_node_baseIPvEENS_21__tree_const_iteratorIS4_PNS_11__tree_nodeIS4_SE_EElEESH_RKT_
+__ZNSt3__16__treeINS_12__value_typeIN2cv6StringEiEENS_19__map_value_compareIS3_S4_NS_4lessIS3_EELb1EEENS_9allocatorIS4_EEE12__find_equalIS4_EERPNS_16__tree_node_baseIPvEENS_21__tree_const_iteratorIS4_PNS_11__tree_nodeIS4_SE_EEiEESH_RKT_
 __ZNSt3__13mapIN2cv6StringEiNS_4lessIS2_EENS_9allocatorINS_4pairIKS2_iEEEEEixERS7_
 __ZNSt3__16vectorIfNS_9allocatorIfEEE21__push_back_slow_pathIKfEEvRT_
 __ZNSt3__16vectorIhNS_9allocatorIhEEE6assignIPhEENS_9enable_ifIXaasr21__is_forward_iteratorIT_EE5valuesr16is_constructibleIhNS_15iterator_traitsIS7_E9referenceEEE5valueEvE4typeES7_S7_
@@ -10533,8 +10389,6 @@ __ZN2cv2ml7SVMImpl6Solver25select_working_set_nu_svmERiS3_
 __ZN2cv2ml7SVMImpl6Solver15calc_rho_nu_svmERdS3_
 __ZNSt3__16__sortIRN2cv2ml10cmp_lt_idxIiEEPiEEvT0_S7_T_
 __ZNSt3__17__sort4IRN2cv2ml10cmp_lt_idxIiEEPiEEjT0_S7_S7_S7_T_
-__ZNSt3__17__sort5IRN2cv2ml10cmp_lt_idxIiEEPiEEjT0_S7_S7_S7_S7_T_
-__ZNSt3__118__insertion_sort_3IRN2cv2ml10cmp_lt_idxIiEEPiEEvT0_S7_T_
 __ZNSt3__127__insertion_sort_incompleteIRN2cv2ml10cmp_lt_idxIiEEPiEEbT0_S7_T_
 __ZN2cv2ml7SVMImpl6Solver11get_row_svcEiPfS3_b
 __ZNSt3__16vectorIdNS_9allocatorIdEEE21__push_back_slow_pathIKdEEvRT_
@@ -11085,7 +10939,7 @@ __ZN2cv14AviMjpegStream8parseAviERNS_16MjpegInputStreamERNSt3__15dequeINS3_4pair
 __ZN2cv14AviMjpegStream8parseAviERNS_16MjpegInputStreamE
 __ZN2cv17MotionJpegCapture11setPropertyEid
 __ZNK2cv17MotionJpegCapture11getPropertyEi
-__ZN2cv17MotionJpegCapture9readFrameENSt3__116__deque_iteratorINS1_4pairIyjEEPS4_RS4_PS5_lLl256EEE
+__ZN2cv17MotionJpegCapture9readFrameENSt3__116__deque_iteratorINS1_4pairIyjEEPS4_RS4_PS5_iLi341EEE
 __ZN2cv17MotionJpegCapture9grabFrameEv
 __ZN2cv17MotionJpegCapture13retrieveFrameEiRKNS_12_OutputArrayE
 __ZN2cv17MotionJpegCaptureD2Ev
@@ -11503,6 +11357,14 @@ _pass2_no_dither
 _finish_pass2
 _update_box
 _fill_inverse_cmap
+_png_init_filter_functions_neon
+_png_read_filter_row_up_neon
+_png_read_filter_row_sub3_neon
+_png_read_filter_row_avg3_neon
+_png_read_filter_row_paeth3_neon
+_png_read_filter_row_sub4_neon
+_png_read_filter_row_avg4_neon
+_png_read_filter_row_paeth4_neon
 _png_set_sig_bytes
 _png_sig_cmp
 _png_zalloc
@@ -11996,7 +11858,6 @@ _init_block
 _build_tree
 _compress_block
 __tr_tally
-_pqdownheap
 _send_tree
 _static_l_desc
 _static_d_desc
@@ -14127,7 +13988,29 @@ _pixSaveTiledWithText.procName
 _zlibCompress.procName
 _zlibUncompress.procName
 __ZL15__ARCLite__loadv
+__ZL30add_image_hook_autoreleasepoolPK11mach_headerl
+__ZL34__arclite_objc_autoreleasePoolPushv
+__ZL33__arclite_objc_autoreleasePoolPopPv
+__ZL19patch_lazy_pointersPK11mach_headerP7patch_tm
+__ZL42__arclite_NSArray_objectAtIndexedSubscriptP7NSArrayP13objc_selectorj
+__ZL53__arclite_NSMutableArray_setObject_atIndexedSubscriptP14NSMutableArrayP13objc_selectorP11objc_objectj
+__ZL46__arclite_NSDictionary_objectForKeyedSubscriptP12NSDictionaryP13objc_selectorP11objc_object
+__ZL47__arclite_NSOrderedSet_objectAtIndexedSubscriptP12NSOrderedSetP13objc_selectorj
+__ZL58__arclite_NSMutableOrderedSet_setObject_atIndexedSubscriptP19NSMutableOrderedSetP13objc_selectorP11objc_objectj
 __ZL58__arclite_NSMutableDictionary__setObject_forKeyedSubscriptP19NSMutableDictionaryP13objc_selectorP11objc_objectS4_
+__ZL18add_image_hook_ARCPK11mach_headerl
+__ZL36__arclite_object_setInstanceVariableP11objc_objectPKcPv
+__ZL24__arclite_object_setIvarP11objc_objectP9objc_ivarS0_
+__ZL21__arclite_object_copyP11objc_objectm
+__ZL21__arclite_objc_retainP11objc_object
+__ZL26__arclite_objc_retainBlockP11objc_object
+__ZL22__arclite_objc_releaseP11objc_object
+__ZL26__arclite_objc_autoreleaseP11objc_object
+__ZL32__arclite_objc_retainAutoreleaseP11objc_object
+__ZL37__arclite_objc_autoreleaseReturnValueP11objc_object
+__ZL43__arclite_objc_retainAutoreleaseReturnValueP11objc_object
+__ZL44__arclite_objc_retainAutoreleasedReturnValueP11objc_object
+__ZL26__arclite_objc_storeStrongPP11objc_objectS0_
 __ZL22add_image_hook_swiftV1PK11mach_headerl
 __ZL42__arclite_NSUndoManagerProxy_isKindOfClassP11objc_objectP13objc_selectorP10objc_class
 __ZL13replaceMethodP10objc_classP13objc_selectorPFP11objc_objectS4_S2_zEPS6_
@@ -14171,9 +14054,17 @@ __ZL11_class_name
 __ZL32OBJC_$_CLASS_METHODS___ARCLite__
 __ZL17_load_method_name
 __ZL17_load_method_type
+__ZL23NSAutoreleasePool_class
+__ZZL30add_image_hook_autoreleasepoolPK11mach_headerlE7patches
+__ZGVZL30add_image_hook_autoreleasepoolPK11mach_headerlE7patches
+l_OBJC_PROTOCOL_$___ARCLiteIndexedSubscripting__
+l_OBJC_LABEL_PROTOCOL_$___ARCLiteIndexedSubscripting__
+l_OBJC_PROTOCOL_REFERENCE_$___ARCLiteIndexedSubscripting__
 l_OBJC_PROTOCOL_$___ARCLiteKeyedSubscripting__
 l_OBJC_LABEL_PROTOCOL_$___ARCLiteKeyedSubscripting__
 l_OBJC_PROTOCOL_REFERENCE_$___ARCLiteKeyedSubscripting__
+__ZZL18add_image_hook_ARCPK11mach_headerlE7patches
+__ZGVZL18add_image_hook_ARCPK11mach_headerlE7patches
 __ZL30NSUndoManagerProxy_targetClass
 __ZL29original_NSManagedObject_init
 __ZL40original_NSManagedObject_allocWithEntity
@@ -14201,7 +14092,7 @@ __ZL25original_protocol_getName
 __ZL36original_objc_copyClassNamesForImage
 __ZL12demangleLock
 __ZL9Demangled
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c++ -arch arm64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=c++11 -Wno-trigraphs -fno-exceptions -fno-rtti -mpascal-strings -Os -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties -Wno-arc-repeated-use-of-weak -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -Wno-c++11-extensions -D NDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.Internal.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -Winvalid-offsetof -miphoneos-version-min=4.3 -g -fno-threadsafe-statics -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -fembed-bitcode=all -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-generated-files.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-own-target-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-all-target-headers.hmap -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-project-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/Symbols/BuiltProducts/include -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources/arm64 -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources -F/Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/Symbols/BuiltProducts -F/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.Internal.sdk/System/Library/PrivateFrameworks -Wall -Wextra -Wno-gcc-compat -Wno-error=incomplete-umbrella -Wno-error=incomplete-umbrella -MMD -MT dependencies -MF /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.d --serialize-diagnostics /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.dia -c /Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-66/source/arclite.mm -o /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.o -mlinker-version=278.4
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c++ -arch armv7 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=c++11 -Wno-trigraphs -fno-exceptions -fno-rtti -mpascal-strings -Os -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties -Wno-arc-repeated-use-of-weak -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -Wno-c++11-extensions -D NDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.Internal.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -Winvalid-offsetof -miphoneos-version-min=4.3 -g -fno-threadsafe-statics -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -fembed-bitcode=all -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-generated-files.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-own-target-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-all-target-headers.hmap -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-project-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/Symbols/BuiltProducts/include -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources/armv7 -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources -F/Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/Symbols/BuiltProducts -F/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.Internal.sdk/System/Library/PrivateFrameworks -Wall -Wextra -Wno-gcc-compat -Wno-error=incomplete-umbrella -Wno-error=incomplete-umbrella -MMD -MT dependencies -MF /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/armv7/arclite.d --serialize-diagnostics /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/armv7/arclite.dia -c /Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-66/source/arclite.mm -o /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-66~534/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/armv7/arclite.o -mlinker-version=278.4 -march=armv7a
 /Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-66/source/arclite.mm
 /Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-66
 fixStringForCoreData
@@ -14251,7 +14142,6 @@ __arclite_NSManagedObject_init
 replaceMethod
 __arclite_NSUndoManagerProxy_isKindOfClass
 add_image_hook_swiftV1
-patch_lazy_pointers
 patch_t<const char **(const char *, unsigned int *)>
 patch_t<const char *(Protocol *)>
 patch_t<const char *(Class)>
@@ -14260,9 +14150,51 @@ patch_t<Class (const char *)>
 patch_t<void *(id)>
 patch_t<Class (Class, const char *, unsigned long)>
 patch_t<Class (Class, const objc_image_info *)>
+__arclite_objc_storeStrong
+__arclite_objc_release
+__arclite_objc_retain
+__arclite_objc_retainAutoreleasedReturnValue
+__arclite_objc_retainAutoreleaseReturnValue
+__arclite_objc_autoreleaseReturnValue
+__arclite_objc_retainAutorelease
+__arclite_objc_autorelease
+__arclite_objc_retainBlock
+__arclite_object_copy
+fixupCopiedReferences
+_class_getInstanceStart
+alignedInstanceStart
+__arclite_class_usesAutomaticRetainRelease
+classOrSuperClassesUseARR
+__arclite_object_setIvar
+isScannedOffset
+_ivar_getClass
+__arclite_object_setInstanceVariable
+add_image_hook_ARC
+patch_t<void (id *, id)>
+patch_t<id (id)>
+patch_t<void (id)>
+patch_t<id (id, unsigned long)>
+patch_t<void (id, objc_ivar *, id)>
+patch_t<objc_ivar *(id, const char *, void *)>
 __arclite_NSMutableDictionary__setObject_forKeyedSubscript
+__arclite_NSMutableOrderedSet_setObject_atIndexedSubscript
+__arclite_NSOrderedSet_objectAtIndexedSubscript
+__arclite_NSDictionary_objectForKeyedSubscript
+__arclite_NSMutableArray_setObject_atIndexedSubscript
+__arclite_NSArray_objectAtIndexedSubscript
+patch_lazy_pointers
+__arclite_objc_autoreleasePoolPop
+__arclite_objc_autoreleasePoolPush
+add_image_hook_autoreleasepool
+patch_t<void (void *)>
+patch_t<void *()>
 __ARCLite__load
 install_swiftV1
+install_ARC
 install_dict_nil_value
 addOrReplaceMethod
 keyedGetter
+install_subscripting
+addMethod
+indexedGetter
+install_autoreleasepool

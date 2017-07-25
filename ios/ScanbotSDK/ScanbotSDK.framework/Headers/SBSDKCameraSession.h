@@ -62,7 +62,7 @@ AVCaptureMetadataOutputObjectsDelegate>
 /**
  * A block being executed when the torch light status changes (mode or availability).
  **/
-@property (nonatomic, copy, nullable) void (^updateTorchlightBlock)();
+@property (nonatomic, copy, nullable) void (^updateTorchlightBlock)(void);
 
 @property (nonatomic, readonly, nullable) AVCaptureSession* captureSession;
 
@@ -88,6 +88,21 @@ AVCaptureMetadataOutputObjectsDelegate>
  * Returns YES if the camera session has already been started, NO otherwise.
  */
 - (BOOL)isSessionRunning;
+
+/** 
+ * Pauses the detection of documents and QR codes.
+ */
+- (void)pauseDetection;
+
+/**
+ * Resumes the detection of documents and QR codes.
+ */
+- (void)resumeDetection;
+
+/**
+ * Returns YES, if detection is paused, NO otherwise.
+ */
+- (BOOL)isDetectionPaused;
 
 /**
  * Captures a still image asynchronously and passes the CMSampleBufferRef and if needed an error to the

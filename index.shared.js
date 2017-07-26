@@ -40,14 +40,14 @@ const AppWithNavigationState = connect(mapStateToProps)(App);
 
 class Root extends Component {
   state = {
-    rehydrated: true,
+    rehydrated: false,
     store: configureStore(AppNavigator)
   };
 
   componentDidMount() {
-    // persistStore(this.state.store, { storage: AsyncStorage }, () => {
-    //   this.setState({ rehydrated: true })
-    // });
+    persistStore(this.state.store, { storage: AsyncStorage }, () => {
+      this.setState({ rehydrated: true })
+    });
   }
 
   render() {

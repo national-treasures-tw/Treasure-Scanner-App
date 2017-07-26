@@ -12,6 +12,8 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
+// #import "PAirSandbox.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -31,6 +33,13 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+
+	#ifdef DEBUG
+		// Handy while developing, see https://github.com/music4kid/AirSandbox
+		// Swipe from the right edge of the screen, a simple file browser shall pop up.
+		// [[PAirSandbox sharedInstance] enableSwipe];
+	#endif
+
   return YES;
 }
 

@@ -1,5 +1,5 @@
 import STATUS from '../utils/consts';
-const getStatusLabelForStatus = (status) => ({
+const getStatusLabelForStatus = status => ({
   [STATUS.UNDEFINED]: 'Not uploaded yet',
   [STATUS.LOADING]: 'Busy uploading...',
   [STATUS.LOADED]: 'Uploaded',

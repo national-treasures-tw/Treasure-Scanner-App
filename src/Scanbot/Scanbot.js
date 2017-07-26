@@ -111,6 +111,18 @@ const Scanbot = {
     PropTypes.checkPropTypes(documentPropTypes, document, 'prop', 'scan');
     return SBScanbot.crop(document);
   },
+
+  /**
+   * SBScanbot.rotate(image);
+   *
+   * - image:
+   *    string to file on disk
+   *
+   * Rotates image and returns new filepath
+   */
+  rotate: (image) => {
+    return SBScanbot.rotate(image);
+  },
 };
 
 const rangeProptype = (min, max) => (props, propName, componentName) => {

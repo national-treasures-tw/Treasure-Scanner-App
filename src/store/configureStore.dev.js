@@ -7,6 +7,8 @@ import { composeWithDevTools } from 'remote-redux-devtools';
 
 import getRootReducer from '../reducers/getRootReducer';
 import deleteImageMiddleware from './deleteImageMiddleware';
+import uploadMiddleware from './uploadMiddleware';
+
 const configureStore = (AppNavigator) => {
 
   // inject AppNavigator so we can create navigation reducer dynamically
@@ -17,7 +19,7 @@ const configureStore = (AppNavigator) => {
     rootReducer,
     composeWithDevTools(
       applyMiddleware(
-        deleteImageMiddleware,
+        deleteImageMiddleware, uploadMiddleware,
         thunk.withExtraArgument({ }),
         createLogger({ collapsed: true, duration: true }),
       ),

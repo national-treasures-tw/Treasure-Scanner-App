@@ -27,23 +27,42 @@ export const winSize = Dimensions.get('window');
 
 class DocumentReviewList extends Component {
   static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
+    const { params: { scan, startSessionUpload, sessionId } = {} } = navigation.state;
 
-    const headerRight = params.scan ? (
-      <Button
+    let headerRight;
+    if(scan) {
+      headerRight = <Button
         title="Next Scan"
         onPress={() => {
+          startSessionUpload(sessionId);
           navigation.goBack();
           setTimeout(() => {
-            params.scan();
+            scan();
           }, 400);
         }}
-      />
-    ) : undefined;
+      />;
+    }
+
+    // headerRight = <Button
+    //   title="Upload"
+    //   onPress={() => {
+    //     startSessionUpload();
+    //     navigation.goBack();
+    //   }}
+    // />;
 
     return {
       title: `Documents`,
-      headerRight
+      headerRight,
+      headerLeft: (
+        <Button
+          title="Done"
+          onPress={() => {
+            navigation.goBack();
+            startSessionUpload(sessionId)
+          }}
+        />
+      )
     };
   };
 
@@ -78,10 +97,13 @@ class DocumentReviewList extends Component {
   }
 
   componentDidMount = () => {
-    const { documents } = this.props;
+    const { documents, startSessionUpload } = this.props;
     if(documents.length === 0) {
       this.scan();
     }
+
+    // set params so we can use them in `navigationOptions`
+    this.props.navigation.setParams({ startSessionUpload })
   };
 
   onCrop = async () => {
@@ -110,10 +132,21 @@ class DocumentReviewList extends Component {
     }
   };
 
-  onRotate = () => {
+  onRotate = async () => {
+
     const { scrollIndex } = this.state;
     const { documents, rotateDocument } = this.props;
-    rotateDocument(documents[scrollIndex].id);
+
+    try {
+      // See 'Scanbot/Scanbot.js' for all options and documentation
+      const rotatedImage = await Scanbot.rotate(documents[scrollIndex].image);
+      rotateDocument(
+        documents[scrollIndex].id,
+        rotatedImage,
+      );
+    } catch (ex) {
+      this.setState({ error: `Rotating Failed ${ex}` });
+    }
   };
 
   onDelete = () => {
@@ -137,6 +170,7 @@ class DocumentReviewList extends Component {
   render() {
     const { error, scrollIndex, documents } = this.state;
     const document = documents[scrollIndex];
+
     return (
       <View style={styles.viewport}>
         {error && (
@@ -162,11 +196,7 @@ class DocumentReviewList extends Component {
                 key={index}
               >
                 <Image
-                  style={[
-                    styles.image,
-                    document.rotation ? { transform: [{ rotate: `${document.rotation}deg`}] } : {},
-                    (document.rotation % 90 === 0) ? styles.rotatedImage : {}
-                  ]}
+                  style={styles.image}
                   source={{ uri: `file://${document.image}`, scale: 1 }}
                 />
               </View>
@@ -180,7 +210,7 @@ class DocumentReviewList extends Component {
           </View>
         )}
 
-        {documents.length > 0 && document && (
+        {document && !document.uploaded && (
           <View style={styles.bottomTabBar}>
             <Button
               disabled={!document.originalImage || document.isNotDocument}
@@ -190,7 +220,7 @@ class DocumentReviewList extends Component {
             />
             <Button
               style={styles.button}
-              onPress={this.onRotate}
+              onPress={() => this.onRotate()}
               title="Rotate"
             />
             <Button
@@ -198,6 +228,14 @@ class DocumentReviewList extends Component {
               onPress={this.onDelete}
               title="Delete"
             />
+          </View>
+        )}
+
+        {document && document.uploaded && (
+          <View style={styles.bottomTabBar}>
+            <Text>
+              Document already uploaded
+            </Text>
           </View>
         )}
       </View>
@@ -226,10 +264,6 @@ const styles = StyleSheet.create({
     width: winSize.width - 40,
     height: winSize.height - 50,
     resizeMode: Image.resizeMode.contain,
-  },
-  rotatedImage: {
-    width: winSize.height - 50,
-    height: winSize.width - 40,
   },
   errorContainer: {
     flex: 1,

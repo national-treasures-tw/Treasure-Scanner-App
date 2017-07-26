@@ -1,16 +1,18 @@
 import { SESSION, DOCUMENT } from '../actions/ActionTypes';
 
+// Scanning
+
 export function addScanSession(documents) {
   return {
     type: SESSION.ADD_SESSION,
-    documents
+    documents,
   }
 }
 
 export function deleteDocument(id) {
   return {
     type: DOCUMENT.DELETE,
-    id
+    id,
   }
 }
 
@@ -19,13 +21,30 @@ export function cropDocument(id, image, polygon) {
     type: DOCUMENT.CROP,
     id,
     image,
-    polygon
+    polygon,
   }
 }
 
-export function rotateDocument(id) {
+export function rotateDocument(id, image) {
   return {
     type: DOCUMENT.ROTATE,
-    id
+    id,
+    image,
+  }
+}
+
+// Uploading
+
+export function startSessionUpload(sessionId) {
+  return {
+    type: SESSION.UPLOAD.START,
+    sessionId,
+  }
+}
+
+export function documentUploadStart(sessionId) {
+  return {
+    type: SESSION.UPLOAD.START,
+    sessionId,
   }
 }

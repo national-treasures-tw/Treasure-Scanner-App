@@ -55,7 +55,7 @@ class SessionList extends Component {
 
   componentWillReceiveProps(newProps) {
     const { dataSource } = this.state;
-    const { sessions, navigation } = newProps;
+    const { sessions, navigation, startSessionUpload } = newProps;
 
     // if a new session is added, navigate to DocumentReviewList
     if(sessions.length > this.props.sessions.length) {
@@ -74,6 +74,10 @@ class SessionList extends Component {
           });
         }, 200);
       }, 200);
+    } else if(sessions.length !== this.props.sessions){
+      this.setState({
+        dataSource: dataSource.cloneWithRows(sessions),
+      });
     }
   }
 
@@ -117,7 +121,6 @@ class SessionList extends Component {
 
   renderRow = (session, index) => {
     const { navigation: { navigate } } = this.props;
-
     const date = new Date(session.timestamp * 1000);
     return (
       <View style={styles.listItem} key={index}>
@@ -126,7 +129,7 @@ class SessionList extends Component {
             {date.getFullYear()}-{date.getMonth()}-{date.getDate()}
           </Text>
           <Text>
-            {getStatusLabelForStatus(session.documents.status)}
+            {getStatusLabelForStatus(session.status)}
           </Text>
         </View>
 

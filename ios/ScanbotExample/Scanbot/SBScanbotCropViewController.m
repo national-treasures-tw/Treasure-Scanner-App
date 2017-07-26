@@ -6,8 +6,9 @@
 #import <React/RCTConvert.h>
 
 #import "SBConsts.h"
-#import "UIColor+Hex.h"
 
+#import "UIColor+Hex.h"
+#import "UIImage+Rotate.h"
 
 @interface SBScanbotCropViewController ()
 
@@ -61,7 +62,12 @@
 }
 
 - (IBAction)onDone:(id)sender {
-	NSData *data = UIImageJPEGRepresentation(self.cropController.croppedImage, 0.9);
+	// apply rotation
+	NSNumber *rotation = self.document[@"rotation"];
+
+	UIImage *newImage = [self.cropController.croppedImage imageRotatedByDegrees:rotation.floatValue];
+
+	NSData *data = UIImageJPEGRepresentation(newImage, 0.9);
 
 	NSURL *path = [NSURL fileURLWithPath:self.document[@"image"]];
 	path = [path URLByDeletingLastPathComponent];

@@ -11,9 +11,7 @@ export const DOC_PREFIX = 'doc-';
 
 const scansReducer = (state = initialState, action) => {
   switch (action.type) {
-
     case ActionTypes.SESSION.ADD_SESSION:
-
       const docCount = Object.keys(state.documents).length;
       let documents = action.documents
         // add some props to each document
@@ -47,40 +45,26 @@ const scansReducer = (state = initialState, action) => {
         }
       };
 
+    case ActionTypes.SESSION.UPLOAD.LOADING:
+    case ActionTypes.SESSION.UPLOAD.LOADED:
+    case ActionTypes.SESSION.UPLOAD.ERROR:
+      return {
+        ...state,
+        sessions: {
+          ...state.sessions,
+          [action.sessionId]: sessionReducer(state.sessions[action.sessionId], action)
+        }
+      };
+
+    case ActionTypes.DOCUMENT.UPLOADED:
     case ActionTypes.DOCUMENT.DELETE:
-      return {
-        ...state,
-        documents: {
-          ...state.documents,
-          [action.id] : {
-            ...state.documents[action.id],
-            deleted: true,
-          }
-        }
-      };
-
     case ActionTypes.DOCUMENT.CROP:
-      return {
-        ...state,
-        documents: {
-          ...state.documents,
-          [action.id] : {
-            ...state.documents[action.id],
-            polygon: action.polygon,
-            image: action.image,
-          }
-        }
-      };
-
     case ActionTypes.DOCUMENT.ROTATE:
       return {
         ...state,
         documents: {
           ...state.documents,
-          [action.id] : {
-            ...state.documents[action.id],
-            rotation: state.documents[action.id].rotation + 90,
-          }
+          [action.id]: documentReducer(state.documents[action.id], action)
         }
       };
 
@@ -88,6 +72,58 @@ const scansReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+const sessionReducer = (session = {}, action) => {
+  switch (action.type) {
+    case ActionTypes.SESSION.UPLOAD.LOADING:
+      return {
+        ...session,
+        status: STATUS.LOADING
+      };
+    case ActionTypes.SESSION.UPLOAD.LOADED:
+      return {
+        ...session,
+        status: STATUS.LOADED
+      };
+    case ActionTypes.SESSION.UPLOAD.ERROR:
+      return {
+        ...session,
+        status: STATUS.ERROR
+      };
+    default:
+      return session;
+  }
+};
+
+const documentReducer = (document = {}, action) => {
+  switch (action.type) {
+    case ActionTypes.DOCUMENT.UPLOADED:
+      return {
+        ...document,
+        uploaded: true
+      };
+    case ActionTypes.DOCUMENT.DELETE:
+      return {
+        ...document,
+        deleted: true,
+      };
+    case ActionTypes.DOCUMENT.CROP:
+      return {
+        ...document,
+        polygon: action.polygon,
+        image: action.image,
+      };
+    case ActionTypes.DOCUMENT.ROTATE:
+      return {
+        ...document,
+        image: action.image,
+        rotation: document.rotation + 90,
+      };
+    default:
+      return document;
+  }
+};
+
 
 export default scansReducer;
 

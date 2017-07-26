@@ -45,6 +45,8 @@
 		443238C01F17B06600B0FFD8 /* ScanbotSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4432386E1F17AE0300B0FFD8 /* ScanbotSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		444ED8A81F1D009400F9C9FA /* SBScanbotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444ED8A71F1D009400F9C9FA /* SBScanbotViewController.xib */; };
 		444ED8AC1F1D0B2C00F9C9FA /* SBHud.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444ED8AB1F1D0B2C00F9C9FA /* SBHud.xib */; };
+		448917DB1F27756600F956D4 /* PAirSandbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 448917DA1F27756600F956D4 /* PAirSandbox.m */; };
+		448918441F28FA7500F956D4 /* UIImage+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 448918431F28FA7500F956D4 /* UIImage+Rotate.m */; };
 		4D0FAF4DE7FD42B7EED74A4C /* RCTConvert+Enums.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0FA7ADFFCB556E3E3F5498 /* RCTConvert+Enums.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -308,6 +310,8 @@
 		444ED8AB1F1D0B2C00F9C9FA /* SBHud.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SBHud.xib; path = ScanbotExample/Scanbot/SBHud.xib; sourceTree = "<group>"; };
 		448917D91F27756600F956D4 /* PAirSandbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAirSandbox.h; sourceTree = "<group>"; };
 		448917DA1F27756600F956D4 /* PAirSandbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAirSandbox.m; sourceTree = "<group>"; };
+		448918421F28FA7500F956D4 /* UIImage+Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Rotate.h"; path = "ScanbotExample/UIImage+Rotate.h"; sourceTree = "<group>"; };
+		448918431F28FA7500F956D4 /* UIImage+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Rotate.m"; path = "ScanbotExample/UIImage+Rotate.m"; sourceTree = "<group>"; };
 		4D0FA7ADFFCB556E3E3F5498 /* RCTConvert+Enums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RCTConvert+Enums.m"; path = "ScanbotExample/Scanbot/RCTConvert+Enums.m"; sourceTree = "<group>"; };
 		4D0FAD2E3795E6751352AB80 /* RCTConvert+Enums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RCTConvert+Enums.h"; path = "ScanbotExample/Scanbot/RCTConvert+Enums.h"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -434,8 +438,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				442DF85D1F1E613800A26150 /* UIColor+Hex.h */,
-				442DF85E1F1E613800A26150 /* UIColor+Hex.m */,
+				448918601F290EB800F956D4 /* Utils */,
 				443238951F17AE3B00B0FFD8 /* Scanbot */,
 				443238941F17AE3500B0FFD8 /* Supporting Files */,
 			);
@@ -507,6 +510,19 @@
 				448917D71F276B8A00F956D4 /* libRNFS.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		448918601F290EB800F956D4 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				442DF85D1F1E613800A26150 /* UIColor+Hex.h */,
+				442DF85E1F1E613800A26150 /* UIColor+Hex.m */,
+				448918421F28FA7500F956D4 /* UIImage+Rotate.h */,
+				448918431F28FA7500F956D4 /* UIImage+Rotate.m */,
+				448917D91F27756600F956D4 /* PAirSandbox.h */,
+				448917DA1F27756600F956D4 /* PAirSandbox.m */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
@@ -624,7 +640,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 610;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -974,6 +990,8 @@
 				443238BD1F17AF1700B0FFD8 /* ScanbotSDKCreditCardData.bundle in Sources */,
 				443238B71F17AF1400B0FFD8 /* deu-frak.traineddata in Sources */,
 				443238B81F17AF1400B0FFD8 /* deu.traineddata in Sources */,
+				448917DB1F27756600F956D4 /* PAirSandbox.m in Sources */,
+				448918441F28FA7500F956D4 /* UIImage+Rotate.m in Sources */,
 				443238B91F17AF1400B0FFD8 /* eng.traineddata in Sources */,
 				443238BA1F17AF1400B0FFD8 /* osd.traineddata in Sources */,
 				443238BB1F17AF1400B0FFD8 /* pdf.ttf in Sources */,
@@ -1028,10 +1046,7 @@
 				INFOPLIST_FILE = ScanbotExampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1054,10 +1069,7 @@
 				INFOPLIST_FILE = ScanbotExampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",

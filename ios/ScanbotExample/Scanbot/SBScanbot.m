@@ -4,6 +4,8 @@
 #import "SBScanbotCropViewController.h"
 #import "SBConsts.h"
 
+#import "UIImage+Rotate.h"
+
 @implementation SBScanbot
 
 - (dispatch_queue_t)methodQueue {
@@ -71,6 +73,66 @@ RCT_EXPORT_METHOD(crop:(NSDictionary *)document
 		[rootViewController presentViewController:cropController animated:YES completion:NULL];
 	});
 }
+
+
+RCT_EXPORT_METHOD(rotate:(NSString *)imgStr
+									resolver:(RCTPromiseResolveBlock)resolve
+									rejecter:(RCTPromiseRejectBlock)reject) {
+
+	dispatch_async(dispatch_get_main_queue(), ^{
+		NSError *error;
+		NSString *newPath = [self rotateImageAtFilePath:imgStr error:&error];
+		if(error) {
+			reject(@"Could not rotate image", [error localizedDescription], nil);
+			return;
+		}
+
+		resolve(newPath);
+	});
+}
+
+# pragma Helper functions
+
+- (NSString *) rotateImageAtFilePath:(NSString *)path error:(NSError **)rotateError {
+
+	// Read image in form filesystem
+	if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+		*rotateError = [NSError errorWithDomain:[NSString stringWithFormat:@"File does not exist at location %@", path] code:0 userInfo:nil];
+		return nil;
+	}
+
+	NSError *error;
+	NSData *imageData = [NSData dataWithContentsOfFile:path options:0 error:&error];
+	if(error) {
+		*rotateError = error;
+		return nil;
+	}
+
+	UIImage *newImage = [[UIImage imageWithData:imageData] imageRotatedByDegrees:90];
+
+	// Write back to disk
+	imageData = UIImageJPEGRepresentation(newImage, 0.9);
+
+	NSURL *newPath = [NSURL fileURLWithPath:path];
+	newPath = [newPath URLByDeletingLastPathComponent];
+	newPath = [newPath URLByAppendingPathComponent:[[NSUUID UUID] UUIDString]];
+	newPath = [newPath URLByAppendingPathExtension:@"jpg"];
+
+	[imageData writeToFile:[newPath relativePath] options:NSDataWritingAtomic error:&error];
+	if (error) {
+		*rotateError = error;
+	}
+
+	// Delete old file
+	[[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+	if (error) {
+		*rotateError = error;
+	}
+
+	return newPath.relativePath;
+}
+
+
 
 
 @end

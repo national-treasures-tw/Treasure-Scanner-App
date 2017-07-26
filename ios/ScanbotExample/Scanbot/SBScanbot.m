@@ -6,6 +6,12 @@
 
 #import "UIImage+Rotate.h"
 
+@interface SBScanbot ()
+
+@property (strong, nonatomic) NSDictionary *translations;
+
+@end
+
 @implementation SBScanbot
 
 - (dispatch_queue_t)methodQueue {
@@ -48,12 +54,16 @@ RCT_EXPORT_METHOD(setLicense:(NSString *)license) {
 	[ScanbotSDK setLicense: license];
 }
 
+RCT_EXPORT_METHOD(setTranslations:(NSDictionary *)labels) {
+	_translations = labels;
+}
+
 RCT_EXPORT_METHOD(scan:(NSDictionary *)options
 									resolver:(RCTPromiseResolveBlock)resolve
 									rejecter:(RCTPromiseRejectBlock)reject) {
 
 	SBScanbotViewController* scanController = [[[NSBundle mainBundle] loadNibNamed:@"SBScanbotViewController" owner:self options:nil] firstObject];
-	[scanController scan:options resolve:resolve reject:reject];
+	[scanController scan:options translations:[self translations] resolve:resolve reject:reject];
 
 	dispatch_async(dispatch_get_main_queue(), ^{
 		UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
@@ -66,7 +76,7 @@ RCT_EXPORT_METHOD(crop:(NSDictionary *)document
 									rejecter:(RCTPromiseRejectBlock)reject) {
 
 	SBScanbotCropViewController* cropController = [[[NSBundle mainBundle] loadNibNamed:@"SBScanbotCropViewController" owner:self options:nil] firstObject];
-	[cropController crop:document resolve:resolve reject:reject];
+	[cropController crop:document translations:[self translations] resolve:resolve reject:reject];
 
 	dispatch_async(dispatch_get_main_queue(), ^{
 		UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;

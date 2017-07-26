@@ -13,6 +13,7 @@
 @interface SBScanbotCropViewController ()
 
 @property (strong, nonatomic) NSDictionary *document;
+@property (strong, nonatomic) NSDictionary *translations;
 @property (strong, nonatomic) RCTPromiseResolveBlock resolve;
 @property (strong, nonatomic) RCTPromiseRejectBlock reject;
 
@@ -32,12 +33,23 @@
 	self.cropController = [[SBSDKCropViewController alloc] initWithParentViewController:self containerView:self.view];
 }
 
+- (NSString *) translationLabelForKey:(NSString *)key {
+	@try {
+		return [self.translations valueForKeyPath:key];
+	}
+	@catch (NSException * e) {
+		return key;
+	}
+}
+
 #pragma mark - User actions
 
 - (void) crop:(NSDictionary *)document
+ translations:(NSDictionary *)translations
 			resolve:(RCTPromiseResolveBlock)resolver
 			 reject:(RCTPromiseRejectBlock)rejecter {
 
+	self.translations = translations;
 	self.document = document;
 	self.resolve = resolver;
 	self.reject = rejecter;
@@ -59,6 +71,11 @@
 	if([self.document[@"polygon"] isKindOfClass:[NSArray class]]) {
 		self.cropController.polygon = [[SBSDKPolygon alloc] initWithNormalizedDoubleValues:self.document[@"polygon"]];
 	}
+
+	[self.cancelButton setTitle: [self translationLabelForKey:@"cancel"]
+									 forState:UIControlStateNormal];
+	[self.doneButton setTitle: [self translationLabelForKey:@"done"]
+									 forState:UIControlStateNormal];
 }
 
 - (IBAction)onDone:(id)sender {

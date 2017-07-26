@@ -42,6 +42,16 @@ const Scanbot = {
   setLicense: SBScanbot.setLicense,
 
   /**
+   * SBScanbot.setTranslations(string);
+   *
+   * Sets all copy on labels and buttons in the Scanbot UI
+   **/
+  setTranslations: (translations) => {
+    PropTypes.checkPropTypes(translationPropTypes, translations, 'prop', 'scan');
+    SBScanbot.setTranslations(translations);
+  },
+
+  /**
    * SBScanbot.scan(options);
    *
    * Options:
@@ -141,6 +151,7 @@ const documentPropTypes = {
   rotation: PropTypes.number,
 };
 
+
 const scanPropTypes = {
   imageScale: rangeProptype(0, 1),
   autoCaptureSensitivity: rangeProptype(0, 1),
@@ -148,29 +159,32 @@ const scanPropTypes = {
   acceptedAngleScore: rangeProptype(0, 100),
   initialImageMode: PropTypes.oneOf([SBSDKImageModeColor, SBSDKImageModeGrayscale]).isRequired,
   initialShutterMode: PropTypes.oneOf([SBSDKShutterModeSmart, SBSDKShutterModeAlwaysAuto, SBSDKShutterModeAlwaysManual]).isRequired,
-  labelTranslations: PropTypes.shape({
-    cancelButton: PropTypes.string.isRequired,
-    singularDocument: PropTypes.string.isRequired,
-    pluralDocuments: PropTypes.string.isRequired,
-    imageMode: PropTypes.shape({
-      [SBSDKImageModeColor]: PropTypes.string.isRequired,
-      [SBSDKImageModeGrayscale]: PropTypes.string.isRequired,
-    }).isRequired,
-    shutterMode: PropTypes.shape({
-      [SBSDKShutterModeSmart]: PropTypes.string.isRequired,
-      [SBSDKShutterModeAlwaysAuto]: PropTypes.string.isRequired,
-      [SBSDKShutterModeAlwaysManual]: PropTypes.string.isRequired,
-    }).isRequired,
-    detectionStatus: PropTypes.shape({
-      [SBSDKDocumentDetectionStatusOK]: PropTypes.string.isRequired,
-      [SBSDKDocumentDetectionStatusOK_SmallSize]: PropTypes.string.isRequired,
-      [SBSDKDocumentDetectionStatusOK_BadAngles]: PropTypes.string.isRequired,
-      [SBSDKDocumentDetectionStatusOK_BadAspectRatio]: PropTypes.string.isRequired,
-      [SBSDKDocumentDetectionStatusError_NothingDetected]: PropTypes.string.isRequired,
-      [SBSDKDocumentDetectionStatusError_Brightness]: PropTypes.string.isRequired,
-      [SBSDKDocumentDetectionStatusError_Noise]:PropTypes.string.isRequired,
-    }).isRequired,
+};
+
+const translationPropTypes = {
+  cancel: PropTypes.string.isRequired,
+  done: PropTypes.string.isRequired,
+  singularDocument: PropTypes.string.isRequired,
+  pluralDocuments: PropTypes.string.isRequired,
+  imageMode: PropTypes.shape({
+    [SBSDKImageModeColor]: PropTypes.string.isRequired,
+    [SBSDKImageModeGrayscale]: PropTypes.string.isRequired,
+  }).isRequired,
+  shutterMode: PropTypes.shape({
+    [SBSDKShutterModeSmart]: PropTypes.string.isRequired,
+    [SBSDKShutterModeAlwaysAuto]: PropTypes.string.isRequired,
+    [SBSDKShutterModeAlwaysManual]: PropTypes.string.isRequired,
+  }).isRequired,
+  detectionStatus: PropTypes.shape({
+    [SBSDKDocumentDetectionStatusOK]: PropTypes.string.isRequired,
+    [SBSDKDocumentDetectionStatusOK_SmallSize]: PropTypes.string.isRequired,
+    [SBSDKDocumentDetectionStatusOK_BadAngles]: PropTypes.string.isRequired,
+    [SBSDKDocumentDetectionStatusOK_BadAspectRatio]: PropTypes.string.isRequired,
+    [SBSDKDocumentDetectionStatusError_NothingDetected]: PropTypes.string.isRequired,
+    [SBSDKDocumentDetectionStatusError_Brightness]: PropTypes.string.isRequired,
+    [SBSDKDocumentDetectionStatusError_Noise]:PropTypes.string.isRequired,
   }).isRequired,
 };
+
 
 export default Scanbot;

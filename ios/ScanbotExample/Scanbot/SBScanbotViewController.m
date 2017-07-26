@@ -11,6 +11,7 @@
 @interface SBScanbotViewController () <SBSDKScannerViewControllerDelegate>
 
 @property (strong, nonatomic) NSDictionary *options;
+@property (strong, nonatomic) NSDictionary *translations;
 @property (strong, nonatomic) RCTPromiseResolveBlock resolve;
 @property (strong, nonatomic) RCTPromiseRejectBlock reject;
 
@@ -61,7 +62,6 @@
 	// Embed in this viewcontroller. No automatic image storage.
 	self.scannerViewController = [[SBSDKScannerViewController alloc] initWithParentViewController:self
 																																									 imageStorage:nil];
-
 	self.scannerViewController.delegate = self;
 
 	// Set initial UI elements
@@ -98,9 +98,7 @@
 		self.scannerViewController.shutterMode = (SBSDKShutterMode)[self.options[@"initialShutterMode"] integerValue];
 	}
 
-	if (self.options[@"labelTranslations"]) {
-		[self.cancelButton setTitle:[self translationLabelForKey:@"cancelButton"] forState:UIControlStateNormal];
-	}
+	[self.cancelButton setTitle:[self translationLabelForKey:@"cancel"] forState:UIControlStateNormal];
 }
 
 - (void) setHud {
@@ -179,9 +177,11 @@
 #pragma mark - User actions
 
 - (void) scan:(NSDictionary *)options
+ translations:(NSDictionary *)translations
 			resolve:(RCTPromiseResolveBlock)resolver
 			 reject:(RCTPromiseRejectBlock)rejecter {
 
+	self.translations = translations;
 	self.options = options;
 	self.resolve = resolver;
 	self.reject = rejecter;
@@ -331,7 +331,7 @@
 
 - (NSString *) translationLabelForKey:(NSString *)key {
 	@try {
-		return [self.options[@"labelTranslations"] valueForKeyPath:key];
+		return [self.translations valueForKeyPath:key];
 	}
 	@catch (NSException * e) {
 		return key;
@@ -341,7 +341,7 @@
 - (NSString *) translationLabelForKey:(NSString *)key enumValue:(int) enumValue {
 	NSString* keyPath = [NSString stringWithFormat:@"%@.%d", key, enumValue];
 	@try {
-		return [self.options[@"labelTranslations"] valueForKeyPath:keyPath];
+		return [self.translations valueForKeyPath:keyPath];
 	}
 	@catch (NSException * e) {
 		return keyPath;

@@ -8,6 +8,7 @@
 @interface SBScanbotCropViewController : UIViewController
 
 - (void) crop:(NSDictionary *)document
+ translations:(NSDictionary *)translations
 			resolve:(RCTPromiseResolveBlock)resolver
 			 reject:(RCTPromiseRejectBlock)rejecter;
 

@@ -8,6 +8,7 @@
 @interface SBScanbotViewController : UIViewController<SBSDKScannerViewControllerDelegate>
 
 - (void) scan:(NSDictionary *)options
+ translations:(NSDictionary *)translations
 			resolve:(RCTPromiseResolveBlock)resolver
 			 reject:(RCTPromiseRejectBlock)rejecter;
 

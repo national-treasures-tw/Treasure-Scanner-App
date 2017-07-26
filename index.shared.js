@@ -8,17 +8,18 @@ import { connect, Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { AsyncStorage, View } from 'react-native'
 import { StackNavigator } from 'react-navigation';
+import { addNavigationHelpers } from 'react-navigation';
 
 import Scanbot from './src/Scanbot/Scanbot';
-
 import DocumentReviewList from './src/components/DocumentReviewList';
 import SessionList from './src/components/SessionList';
 import configureStore from './src/store/configureStore';
 
-// Set valid license here
-Scanbot.setLicense('Px/ikVYDSTzigYnpa+pwcXluzh/sk6B+16D2zqRf2fK2HgvBDRI6ofHV+DmVSLJMgcXprW7h4bEMKkczYth3SsPeV7B0CLQJdnblxXTnC/DAAFmJxQMK+0Icl9deZWuzeZW/YDT4fCvQRLAFgaFLQKWzYzBmoZj+Sanl0R5OOdG+/thIvTQMXJF+vSvW3NGQzr1ADUKsZ8ye3O5ERLKsMtQo+kAMA/krKVPpMStHN+8lP+CU1Qb4Z7cWjSjCcqIBT3HS5e3oPDqDrp9Spy81XXYfr/KTlRIT9G7ZZIsi3650tpB1KE3zJvUzolBlKMuUVNpGHC4NjFyBUbPU6mS9Ow==\nU2NhbmJvdFNESwpUTlQuVGFpd2FuLVRyZWF1c3JlCjE1MDE4OTExOTkKNzgKMQ==\n');
+import config from './src/config';
 
-import { addNavigationHelpers } from 'react-navigation';
+// Set valid license and translations here
+Scanbot.setLicense(config.scanbotLicense);
+Scanbot.setTranslations(config.labelTranslations);
 
 const AppNavigator = StackNavigator({
   SessionList: { screen: SessionList },

@@ -1,7 +1,6 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import { autoRehydrate } from 'redux-persist';
 
-import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'remote-redux-devtools';
 
@@ -20,7 +19,6 @@ const configureStore = (AppNavigator) => {
     composeWithDevTools(
       applyMiddleware(
         deleteImageMiddleware, uploadMiddleware,
-        thunk.withExtraArgument({ }),
         createLogger({ collapsed: true, duration: true }),
       ),
       autoRehydrate()

@@ -9,8 +9,8 @@
 
 - (void) scan:(NSDictionary *)options
  translations:(NSDictionary *)translations
-			resolve:(RCTPromiseResolveBlock)resolver
-			 reject:(RCTPromiseRejectBlock)rejecter;
+			resolve:(RCTPromiseResolveBlock)resolve
+	 dispatcher:(RCTEventDispatcher *)dispatcher;
 
 @end
 

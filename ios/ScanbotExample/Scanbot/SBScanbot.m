@@ -4,6 +4,9 @@
 #import "SBScanbotCropViewController.h"
 #import "SBConsts.h"
 
+#import <React/RCTBridge.h>
+#import <React/RCTEventDispatcher.h>
+
 #import "UIImage+Rotate.h"
 
 @interface SBScanbot ()
@@ -13,6 +16,8 @@
 @end
 
 @implementation SBScanbot
+
+@synthesize bridge = _bridge;
 
 - (dispatch_queue_t)methodQueue {
 	return dispatch_get_main_queue();
@@ -63,7 +68,11 @@ RCT_EXPORT_METHOD(scan:(NSDictionary *)options
 									rejecter:(RCTPromiseRejectBlock)reject) {
 
 	SBScanbotViewController* scanController = [[[NSBundle mainBundle] loadNibNamed:@"SBScanbotViewController" owner:self options:nil] firstObject];
-	[scanController scan:options translations:[self translations] resolve:resolve reject:reject];
+
+	[scanController scan:options
+					translations:self.translations
+							 resolve:resolve
+						dispatcher:self.bridge.eventDispatcher];
 
 	dispatch_async(dispatch_get_main_queue(), ^{
 		UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;

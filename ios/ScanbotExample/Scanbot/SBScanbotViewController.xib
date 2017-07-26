@@ -31,11 +31,11 @@
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <inset key="contentEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <state key="normal" title="## Cancel">
+                        <state key="normal" title="## Done">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
-                            <action selector="onCancel:" destination="paA-s9-LJ8" eventType="touchUpInside" id="O5Z-8i-dNo"/>
+                            <action selector="onDone:" destination="paA-s9-LJ8" eventType="touchUpInside" id="V1O-x1-Tg9"/>
                         </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rfK-E2-Qse">
@@ -94,39 +94,34 @@
                             <constraint firstItem="VGp-Vq-ENq" firstAttribute="top" secondItem="rfK-E2-Qse" secondAttribute="top" id="xPA-kR-vQH"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDh-pr-pPW">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="## Pages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRD-5F-dYs">
                         <rect key="frame" x="255" y="567" width="120" height="100"/>
-                        <color key="backgroundColor" red="0.96862745100000003" green="0.25490196079999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.90980392160000001" green="0.25882352939999997" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="100" id="BHx-8w-Tgp"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="u6U-lV-hZV"/>
+                            <constraint firstAttribute="width" constant="120" id="8HM-8p-Azg"/>
+                            <constraint firstAttribute="height" constant="100" id="yCA-qt-gbk"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="30" maxY="0.0"/>
-                        <state key="normal" title="## Pages &gt;">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="onDone:" destination="paA-s9-LJ8" eventType="touchUpInside" id="g4N-PL-gyT"/>
-                        </connections>
-                    </button>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="lDh-pr-pPW" secondAttribute="trailing" constant="-16" id="9ab-F5-Ocl"/>
                     <constraint firstAttribute="trailingMargin" secondItem="rfK-E2-Qse" secondAttribute="trailing" constant="-16" id="Me4-zW-ZZP"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="SRD-5F-dYs" secondAttribute="trailing" constant="-16" id="cWA-wP-0bP"/>
                     <constraint firstItem="6SZ-8g-utU" firstAttribute="top" secondItem="PWj-8p-kEd" secondAttribute="bottom" constant="-1" id="ee2-Z5-sZ4"/>
                     <constraint firstItem="rfK-E2-Qse" firstAttribute="leading" secondItem="siS-hS-d7S" secondAttribute="leadingMargin" constant="-16" id="kMZ-2Q-i0i"/>
                     <constraint firstItem="rfK-E2-Qse" firstAttribute="top" secondItem="ojI-Ej-Oqf" secondAttribute="bottom" id="m3E-o7-w9s"/>
+                    <constraint firstItem="6SZ-8g-utU" firstAttribute="top" secondItem="SRD-5F-dYs" secondAttribute="bottom" id="mnq-UI-DwF"/>
                     <constraint firstItem="PWj-8p-kEd" firstAttribute="leading" secondItem="siS-hS-d7S" secondAttribute="leadingMargin" constant="-16" id="rvd-eD-UOf"/>
-                    <constraint firstItem="6SZ-8g-utU" firstAttribute="top" secondItem="lDh-pr-pPW" secondAttribute="bottom" id="wSI-16-81x"/>
                 </constraints>
             </view>
             <nil key="simulatedStatusBarMetrics"/>
             <connections>
-                <outlet property="cancelButton" destination="PWj-8p-kEd" id="dy6-YA-L9y"/>
-                <outlet property="doneButton" destination="lDh-pr-pPW" id="TSp-Ir-Kns"/>
+                <outlet property="doneButton" destination="PWj-8p-kEd" id="BVV-Q4-fVy"/>
                 <outlet property="imageModeButton" destination="VGp-Vq-ENq" id="PjH-18-YA6"/>
+                <outlet property="pageCounter" destination="SRD-5F-dYs" id="Ken-l0-6Jv"/>
                 <outlet property="shutterModeButton" destination="Gke-xx-RFV" id="IR8-V6-IFs"/>
                 <outlet property="typeButton" destination="1Za-VO-V9f" id="9mu-ja-Qwh"/>
             </connections>

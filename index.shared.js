@@ -12,7 +12,6 @@ import { addNavigationHelpers } from 'react-navigation';
 
 import Scanbot from './src/Scanbot/Scanbot';
 import DocumentReviewList from './src/components/DocumentReviewList';
-import SessionList from './src/components/SessionList';
 import configureStore from './src/store/configureStore';
 
 import config from './src/config';
@@ -22,7 +21,7 @@ Scanbot.setLicense(config.scanbotLicense);
 Scanbot.setTranslations(config.labelTranslations);
 
 const AppNavigator = StackNavigator({
-  SessionList: { screen: SessionList },
+  // @Hsin you can add more app screens here if you need
   DocumentReviewList: { screen: DocumentReviewList },
 });
 

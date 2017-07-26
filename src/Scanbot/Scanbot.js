@@ -45,6 +45,8 @@ const Scanbot = {
    * SBScanbot.setTranslations(string);
    *
    * Sets all copy on labels and buttons in the Scanbot UI
+   *
+   * See translationPropTypes for list of properties
    **/
   setTranslations: (translations) => {
     PropTypes.checkPropTypes(translationPropTypes, translations, 'prop', 'scan');
@@ -91,8 +93,10 @@ const Scanbot = {
    *    - SBSDKShutterModeAlwaysManual:
    *        The camera will only take a photo when the user presses the shutter button
    *
-   * - labelTranslations:
-   *    Object with translations keys, see scanPropTypes function below for required translations
+   * Use DeviceEventEmitter and listen to ImageScanned to get the scanned images:
+   *
+   *    DeviceEventEmitter.addListener('ImageScanned', doc => console.log(doc));
+   *
    */
   scan: (options) => {
     PropTypes.checkPropTypes(scanPropTypes, options, 'prop', 'scan');

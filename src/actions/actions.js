@@ -2,10 +2,10 @@ import { SESSION, DOCUMENT } from '../actions/ActionTypes';
 
 // Scanning
 
-export function addScanSession(documents) {
+export function addDocument(document) {
   return {
-    type: SESSION.ADD_SESSION,
-    documents,
+    type: DOCUMENT.ADD,
+    document,
   }
 }
 
@@ -33,18 +33,13 @@ export function rotateDocument(id, image) {
   }
 }
 
-// Uploading
-
-export function startSessionUpload(sessionId) {
+export function uploadDocument(id) {
   return {
-    type: SESSION.UPLOAD.START,
-    sessionId,
+    type: DOCUMENT.UPLOAD.UPLOAD,
+    id,
   }
 }
 
-export function documentUploadStart(sessionId) {
-  return {
-    type: SESSION.UPLOAD.START,
-    sessionId,
-  }
+export function uploadPendingDocuments() {
+  return { type: DOCUMENT.UPLOAD.UPLOAD_PENDING }
 }

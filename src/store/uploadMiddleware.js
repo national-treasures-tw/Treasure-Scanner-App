@@ -1,34 +1,50 @@
 import * as ActionTypes from '../actions/ActionTypes';
 import RNFS from 'react-native-fs';
 import config from '../config';
-import getScanSession from '../selectors/getScanSession';
+import getScannedDocuments from '../selectors/getScannedDocuments';
 import { groupCollapsed, groupEnd } from '../utils/logging';
+import Status from '../utils/consts';
 
 export default store => next => async action => {
   next(action);
 
-  if (action.type === ActionTypes.SESSION.UPLOAD.START) {
-    const session = getScanSession(store.getState(), { sessionId: action.sessionId });
+  switch (action.type) {
+    case ActionTypes.DOCUMENT.ADD:
+      // al but first 3
+      uploadingPendingDocuments(store, 3);
+      break;
 
-    store.dispatch({
-      type: ActionTypes.SESSION.UPLOAD.LOADING,
-      sessionId: action.sessionId
-    });
+    case ActionTypes.DOCUMENT.UPLOAD.UPLOAD_PENDING:
+      // all
+      uploadingPendingDocuments(store, 0);
+      break;
 
-    const results = await Promise.all(
-      session.documents
-        .filter(doc => doc.uploaded !== true)
-        .map(doc => uploadFile(store.dispatch, doc))
-    );
-
-    store.dispatch({
-      type: results.includes(false) ? ActionTypes.SESSION.UPLOAD.ERROR : ActionTypes.SESSION.UPLOAD.LOADED,
-      sessionId: action.sessionId
-    });
+    case ActionTypes.DOCUMENT.UPLOAD.UPLOAD:
+      const state = store.getState();
+      await uploadFile(store.dispatch, state.documents[action.id]);
+      break;
+    default:
   }
 };
 
+const uploadingPendingDocuments = (store, excludeLastN) => {
+  const documents = getScannedDocuments(store.getState());
+  documents
+    // skip first N
+    .slice(excludeLastN)
+    // Don't re-upload Loaded or Loading ones
+    .filter(doc => doc.status === Status.UNDEFINED || doc.status === Status.ERROR)
+    // Upload!
+    .forEach(doc => uploadFile(store.dispatch, doc));
+};
+
 const uploadFile = async (dispatch, document) => {
+
+  dispatch({
+    type: ActionTypes.DOCUMENT.UPLOAD.LOADING,
+    id: document.id,
+  });
+
   try {
     const base64Image = await RNFS.readFile(document.image, 'base64');
     const response = await fetch(config.bucket, {
@@ -58,19 +74,17 @@ const uploadFile = async (dispatch, document) => {
     });
 
     await checkStatus(response);
-
     dispatch({
-      type: ActionTypes.DOCUMENT.UPLOADED,
+      type: ActionTypes.DOCUMENT.UPLOAD.LOADED,
       id: document.id
     });
 
-    return true;
-
   } catch (ex) {
-
-    console.warn(`Failed to upload ${ex.description}`);
-
-    return false;
+    console.log('Upload failed', ex);
+    dispatch({
+      type: ActionTypes.DOCUMENT.UPLOAD.ERROR,
+      id: document.id
+    });
   }
 };
 

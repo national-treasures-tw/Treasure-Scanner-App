@@ -1,6 +1,5 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import { autoRehydrate } from 'redux-persist'
-import thunk from 'redux-thunk';
 
 import getRootReducer from '../reducers/getRootReducer';
 import deleteImageMiddleware from './deleteImageMiddleware';
@@ -13,7 +12,6 @@ const configureStore = (AppNavigator) => {
     compose(
       applyMiddleware(
         deleteImageMiddleware, uploadMiddleware,
-        thunk.withExtraArgument({ }),
       ),
       autoRehydrate()
     )

@@ -3,29 +3,32 @@
 #import <React/RCTUtils.h>
 #import <React/RCTLog.h>
 #import <React/RCTConvert.h>
+#import <React/RCTBridge.h>
+#import <React/RCTEventDispatcher.h>
 
 #import "SBConsts.h"
 #import "UIColor+Hex.h"
-
 
 @interface SBScanbotViewController () <SBSDKScannerViewControllerDelegate>
 
 @property (strong, nonatomic) NSDictionary *options;
 @property (strong, nonatomic) NSDictionary *translations;
 @property (strong, nonatomic) RCTPromiseResolveBlock resolve;
-@property (strong, nonatomic) RCTPromiseRejectBlock reject;
+@property (strong, nonatomic) RCTEventDispatcher *dispatcher;
 
 @property (strong, nonatomic) SBSDKScannerViewController *scannerViewController;
-@property (strong, nonatomic) SBSDKImageStorage *imageStorage;
-@property (strong, nonatomic) SBSDKImageStorage *originalImageStorage;
-@property (strong, nonatomic) NSMutableArray <NSDictionary *> *metaDataStorage;
 
+@property (strong, nonatomic) UIImage *capturedImage;
+@property (strong, nonatomic) UIImage *capturedDocumentImage;
+@property (strong, nonatomic) NSDictionary *metaData;
+
+@property (assign, nonatomic) int imageCount;
 @property (assign, nonatomic) BOOL viewAppeared;
 @property (assign, nonatomic) BOOL isCapturing;
 @property (assign, nonatomic) BOOL nextIsNonDocument;
 @property (assign, nonatomic) SBSDKShutterMode previousShutterMode;
 
-@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (weak, nonatomic) IBOutlet UILabel *pageCounter;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (weak, nonatomic) IBOutlet UIButton *shutterModeButton;
 @property (weak, nonatomic) IBOutlet UIButton *imageModeButton;
@@ -50,14 +53,7 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
-	// Image storage to save the cropped and captured document images to
-	self.imageStorage = [[SBSDKImageStorage alloc] init];
-
-	// Image storage to save originals to
-	self.originalImageStorage = [[SBSDKImageStorage alloc] init];
-
-	// Storage for polygons meta data
-	self.metaDataStorage = [NSMutableArray new];
+	self.imageCount = 0;
 
 	// Embed in this viewcontroller. No automatic image storage.
 	self.scannerViewController = [[SBSDKScannerViewController alloc] initWithParentViewController:self
@@ -98,13 +94,13 @@
 		self.scannerViewController.shutterMode = (SBSDKShutterMode)[self.options[@"initialShutterMode"] integerValue];
 	}
 
-	[self.cancelButton setTitle:[self translationLabelForKey:@"cancel"] forState:UIControlStateNormal];
+	[self.doneButton setTitle:[self translationLabelForKey:@"done"] forState:UIControlStateNormal];
 }
 
 - (void) setHud {
 	// Remove color from interface builder (easier building)
-	self.cancelButton.backgroundColor = [UIColor clearColor];
 	self.doneButton.backgroundColor = [UIColor clearColor];
+	self.pageCounter.backgroundColor = [UIColor clearColor];
 
 	// Customize this xib file to add some UI between the scanner preview and the shutter button
 	UIView *grayBG = [[[NSBundle mainBundle] loadNibNamed:@"SBHud" owner:self options:nil] firstObject];
@@ -112,21 +108,15 @@
 }
 
 - (void) updateDoneButton {
-	NSUInteger imageCount = [self.originalImageStorage imageCount];
-	if(imageCount == 0) {
-		self.doneButton.hidden = true;
-	} else if(imageCount == 1) {
-		[self.doneButton setTitle: [self translationLabelForKey:@"singularDocument"]
-										 forState:UIControlStateNormal];
-		self.doneButton.hidden = false;
+	if([self imageCount] == 0) {
+		self.pageCounter.hidden = false;
+	} else if([self imageCount] == 1) {
+		self.pageCounter.text = [self translationLabelForKey:@"singularDocument"];
+		self.pageCounter.hidden = false;
 	} else {
-		[self.doneButton setTitle: [NSString stringWithFormat:[self translationLabelForKey:@"pluralDocuments"], (int)imageCount]
-										 forState:UIControlStateNormal];
-		self.doneButton.hidden = false;
+		self.pageCounter.text = [NSString stringWithFormat:[self translationLabelForKey:@"pluralDocuments"], [self imageCount]];
+		self.pageCounter.hidden = false;
 	}
-
-	self.doneButton.enabled = !self.isCapturing;
-	self.doneButton.alpha = self.isCapturing ? 0.5 : 1;
 }
 
 - (void) updateImageModeButton {
@@ -178,13 +168,13 @@
 
 - (void) scan:(NSDictionary *)options
  translations:(NSDictionary *)translations
-			resolve:(RCTPromiseResolveBlock)resolver
-			 reject:(RCTPromiseRejectBlock)rejecter {
+			resolve:(RCTPromiseResolveBlock)resolve
+	 dispatcher:(RCTEventDispatcher *)dispatcher {
 
+	self.dispatcher = dispatcher;
 	self.translations = translations;
 	self.options = options;
-	self.resolve = resolver;
-	self.reject = rejecter;
+	self.resolve = resolve;
 
 	[self setScannerOptions];
 	[self updateDoneButton];
@@ -227,32 +217,22 @@
 #pragma mark - Done / Cancel
 
 - (IBAction)onDone:(id)sender {
+	self.resolve(@{});
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) saveLastImage  {
 	NSError *error;
-	NSMutableArray *images = [self saveImages:&error];
-	if(images.count == 0 && error) {
-		NSLog(@"Scanning images failed %@", error);
-		[self onError:@"Scanning images failed" message:[error localizedDescription]];
+	NSDictionary *document = [self getScannedDocument:&error];
+	if(error) {
+		[self.dispatcher sendDeviceEventWithName:@"ScanError" body:@{@"error": error}];
 		return;
 	}
 
-	[self close:images];
+	[self.dispatcher sendDeviceEventWithName:@"ImageScanned" body:document];
 }
 
-- (IBAction)onCancel:(UIButton *)sender {
-	[self close:[NSMutableArray arrayWithCapacity:0]];
-}
-
-- (NSMutableArray *) saveImages:(NSError **)saveError {
-
-	NSUInteger imageCount = [self.imageStorage imageCount];
-	NSUInteger originalCount = [self.originalImageStorage imageCount];
-
-	if(imageCount != originalCount) {
-		NSLog(@"Image counts do not match: %d %d", (int)self.imageStorage.imageCount, (int)self.originalImageStorage.imageCount);
-		#ifdef DEBUG
-			@throw [NSError new];
-		#endif
-	}
+- (NSDictionary *) getScannedDocument:(NSError **)saveError {
 
 	NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
 	NSString *scansPath = [documentsDirectory stringByAppendingPathComponent:@"/Scans"];
@@ -264,68 +244,47 @@
 		if(error) {
 			NSLog(@"Creating folder failed %@", error);
 			*saveError = error;
-			return [NSMutableArray arrayWithCapacity:0];
+			return @{};
 		}
 	}
 
-	NSMutableArray *images = [NSMutableArray arrayWithCapacity:imageCount];
+	NSMutableDictionary *document = [self.metaData mutableCopy];
 
-	for (int i = 0; i < MIN(imageCount, originalCount); i++) {
+	// create random filepath
+	NSURL *url = [NSURL URLWithString:scansPath];
+	url = [url URLByAppendingPathComponent:[[NSUUID UUID] UUIDString]];
+	url = [url URLByAppendingPathExtension:@"jpg"];
 
-		NSError *imgErr;
-		NSString *imgSource = [[[[self imageStorage] imageURLs] objectAtIndex:i] relativePath];
-		NSString *imgDest = [scansPath stringByAppendingPathComponent:[imgSource lastPathComponent]];
-		[[NSFileManager defaultManager] copyItemAtPath:imgSource toPath:imgDest error:&imgErr];
+	document[@"image"] = [url relativePath];
 
-		NSError *origErr;
-		NSString *origSource = [[[[self originalImageStorage] imageURLs] objectAtIndex:i] relativePath];
-		NSString *origDest = [scansPath stringByAppendingPathComponent:[origSource lastPathComponent]];
-		[[NSFileManager defaultManager] copyItemAtPath:origSource toPath:origDest error:&origErr];
-
-		if (imgErr || origErr) {
-			if(imgErr) {
-				*saveError = imgErr;
-			} else {
-				*saveError = origErr;
-			}
-			continue;
-		}
-
-		NSDictionary *metaData = [self.metaDataStorage objectAtIndex:i];
-
-		[images addObject:@{
-												@"image": imgDest,
-												@"originalImage": origDest,
-												@"polygon": metaData[@"polygon"],
-												@"isNotDocument": metaData[@"isNotDocument"]
-												}];
+	NSData *data = UIImageJPEGRepresentation(self.capturedImage, 0.9);
+	[data writeToFile:[url relativePath] options:NSDataWritingAtomic error:&error];
+	if (error) {
+		*saveError = error;
+		return @{};
 	}
 
-	return images;
-}
+	url = [NSURL URLWithString:scansPath];
+	url = [url URLByAppendingPathComponent: [NSString stringWithFormat:@"%@-original", [[NSUUID UUID] UUIDString]]];
+	url = [url URLByAppendingPathExtension:@"jpg"];
 
-- (void) close:(NSMutableArray*) images {
-	if(self.resolve) {
-		self.resolve(images);
+	document[@"originalImage"] = [url relativePath];
+
+	data = UIImageJPEGRepresentation(self.capturedDocumentImage, 0.9);
+	[data writeToFile:[url relativePath] options:NSDataWritingAtomic error:&error];
+	if (error) {
+		*saveError = error;
+		return @{};
 	}
 
-	self.resolve = nil;
-	self.reject = nil;
-
-	[self dismissViewControllerAnimated:YES completion:nil];
+	return document;
 }
 
-- (void) onError:(NSString *)code message:(NSString *)message {
-	if(self.reject) {
-		self.reject(code, message, nil);
-	}
-
-	self.resolve = nil;
-	self.reject = nil;
-
-	[self dismissViewControllerAnimated:YES completion:nil];
+- (void) resetState {
+	self.capturedImage = nil;
+	self.capturedDocumentImage = nil;
+	self.metaData = nil;
 }
-
 
 #pragma mark - Translation / Label helper functions
 
@@ -385,8 +344,8 @@ shouldRotateInterfaceForDeviceOrientation:(UIDeviceOrientation)orientation
  * @param controller The calling SBSDKScannerViewController.
  */
 - (void)scannerControllerWillCaptureStillImage:(SBSDKScannerViewController *)controller {
+	//NSLog(@"willCapture");
 
-	// NSLog(@"willCapture");
 	self.isCapturing = true;
 	[self updateDoneButton];
 	[self updateImageModeButton];
@@ -415,13 +374,13 @@ shouldRotateInterfaceForDeviceOrientation:(UIDeviceOrientation)orientation
 		 lensCameraProperties:(nullable SBSDKLensCameraProperties *)properties {
 	//NSLog(@"didCapture");
 	
-	[self.metaDataStorage addObject:@{
-																		@"isNotDocument": @(self.nextIsNonDocument),
-																		@"polygon": polygon ? [polygon normalizedDoubleValues] : [NSNull null],
-																	 }];
+	self.metaData = @{
+										@"isNotDocument": @(self.nextIsNonDocument),
+										@"polygon": polygon ? [polygon normalizedDoubleValues] : [NSNull null],
+										};
 
 	// Save non cropped image
-	[self.originalImageStorage addImage:image];
+	self.capturedImage = image;
 
 	// Change UI back to normal if this was a Non-Document
 	if(self.nextIsNonDocument) {
@@ -437,13 +396,17 @@ shouldRotateInterfaceForDeviceOrientation:(UIDeviceOrientation)orientation
  */
 - (void)scannerController:(SBSDKScannerViewController *)controller didCaptureDocumentImage:(UIImage *)documentImage {
 	//NSLog(@"didCaptureDocumentImage");
+
 	// Save cropped image
-	[self.imageStorage addImage:documentImage];
+	self.capturedDocumentImage = documentImage;
+	self.imageCount++;
+
 	self.isCapturing = false;
 	[self updateDoneButton];
 	[self updateImageModeButton];
 	[self updateShutterModeButton];
 	[self updateTypeButton];
+	[self saveLastImage];
 }
 
 /**
@@ -459,6 +422,7 @@ shouldRotateInterfaceForDeviceOrientation:(UIDeviceOrientation)orientation
 	[self updateImageModeButton];
 	[self updateShutterModeButton];
 	[self updateTypeButton];
+	[self resetState];
 }
 
 /**

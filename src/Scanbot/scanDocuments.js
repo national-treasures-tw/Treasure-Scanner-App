@@ -57,7 +57,7 @@ const scanDocuments = async () => {
 
   // See 'Scanbot/Scanbot.js' for all options and documentation
   let documents = await Scanbot.scan({
-    imageScale: 1,
+    imageScale: 0.5,
     autoCaptureSensitivity: 0.83, // delay of 0.5s
     acceptedSizeScore: 50,
     acceptedAngleScore: 70,

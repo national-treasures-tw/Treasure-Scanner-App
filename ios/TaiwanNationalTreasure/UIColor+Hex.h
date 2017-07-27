@@ -1,6 +1,6 @@
 //
 //  UIColor+Hex.h
-//  ScanbotExample
+//  TaiwanNationalTreasure
 //
 //  Created by Tieme van Veen on 18/07/2017.
 //  Copyright © 2017 Facebook. All rights reserved.

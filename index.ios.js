@@ -5,4 +5,4 @@ import SharedIndex from './index.shared';
 
 const App = () => <SharedIndex/>;
 
-AppRegistry.registerComponent('ScanbotExample', () => App);
+AppRegistry.registerComponent('TaiwanNationalTreasure', () => App);

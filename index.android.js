@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-export default class ScanbotExample extends Component {
+export default class TaiwanNationalTreasure extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('ScanbotExample', () => ScanbotExample);
+AppRegistry.registerComponent('TaiwanNationalTreasure', () => TaiwanNationalTreasure);

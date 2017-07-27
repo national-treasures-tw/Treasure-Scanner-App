@@ -1,4 +1,4 @@
-package com.scanbotexample;
+package com.TaiwanNationalTreasure;
 
 import android.app.Application;
 

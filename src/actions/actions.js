@@ -1,4 +1,4 @@
-import { SESSION, DOCUMENT } from '../actions/ActionTypes';
+import { DOCUMENT } from '../actions/ActionTypes';
 
 // Scanning
 

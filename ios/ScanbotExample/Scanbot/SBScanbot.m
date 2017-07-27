@@ -32,10 +32,17 @@
 	return root;
 }
 
+- (NSArray<NSString *> *)supportedEvents
+{
+	return @[SBSDKImageScannedEvent];
+}
+
 RCT_EXPORT_MODULE()
 
 - (NSDictionary *)constantsToExport {
 	return @{
+		@"SBSDKImageScannedEvent" : SBSDKImageScannedEvent,
+
 		@"SBSDKImageModeColor" : @(SBSDKImageModeColor),
 		@"SBSDKImageModeGrayscale" : @(SBSDKImageModeGrayscale),
 
@@ -70,9 +77,11 @@ RCT_EXPORT_METHOD(scan:(NSDictionary *)options
 	SBScanbotViewController* scanController = [[[NSBundle mainBundle] loadNibNamed:@"SBScanbotViewController" owner:self options:nil] firstObject];
 
 	[scanController scan:options
-					translations:self.translations
+					translations:_translations
 							 resolve:resolve
-						dispatcher:self.bridge.eventDispatcher];
+					imageScanned:^(NSDictionary *scan) {
+						[self sendEventWithName:SBSDKImageScannedEvent body:scan];
+					}];
 
 	dispatch_async(dispatch_get_main_queue(), ^{
 		UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;

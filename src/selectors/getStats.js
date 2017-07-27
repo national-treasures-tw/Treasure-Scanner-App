@@ -10,7 +10,7 @@ const getStats = createSelector(
     return {
       Archived: list.filter(doc => doc.archived).length,
       Deleted: list.filter(doc => doc.deleted).length,
-      Pending: list.filter(doc => doc.status === Status.UNDEFINED).length,
+      Pending: list.filter(doc => !doc.deleted && doc.status === Status.UNDEFINED).length,
       Uploading: list.filter(doc => doc.status === Status.LOADING).length,
       Uploaded: list.filter(doc => doc.status === Status.LOADED).length,
       Failed: list.filter(doc => doc.status === Status.ERROR).length,

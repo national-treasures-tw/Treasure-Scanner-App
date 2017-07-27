@@ -14,7 +14,7 @@
 @property (strong, nonatomic) NSDictionary *options;
 @property (strong, nonatomic) NSDictionary *translations;
 @property (strong, nonatomic) RCTPromiseResolveBlock resolve;
-@property (strong, nonatomic) RCTEventDispatcher *dispatcher;
+@property (strong, nonatomic) void (^callback)(NSDictionary *scan);
 
 @property (strong, nonatomic) SBSDKScannerViewController *scannerViewController;
 
@@ -166,12 +166,13 @@
 
 #pragma mark - User actions
 
+
 - (void) scan:(NSDictionary *)options
  translations:(NSDictionary *)translations
 			resolve:(RCTPromiseResolveBlock)resolve
-	 dispatcher:(RCTEventDispatcher *)dispatcher {
+ imageScanned:(void (^)(NSDictionary *scan))callback {
 
-	self.dispatcher = dispatcher;
+	self.callback = callback;
 	self.translations = translations;
 	self.options = options;
 	self.resolve = resolve;
@@ -225,11 +226,11 @@
 	NSError *error;
 	NSDictionary *document = [self getScannedDocument:&error];
 	if(error) {
-		[self.dispatcher sendDeviceEventWithName:@"ScanError" body:@{@"error": error}];
+		self.callback(@{@"error": [error localizedDescription]});
 		return;
 	}
 
-	[self.dispatcher sendDeviceEventWithName:@"ImageScanned" body:document];
+	self.callback(@{@"document": document});
 }
 
 - (NSDictionary *) getScannedDocument:(NSError **)saveError {

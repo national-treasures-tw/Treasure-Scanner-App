@@ -1,8 +1,8 @@
-import { NativeModules, Alert } from 'react-native';
+import { NativeModules, NativeEventEmitter } from 'react-native';
 import PropTypes from 'prop-types';
 
 const SBScanbot = NativeModules.SBScanbot;
-
+const SBScanbotEmitter = new NativeEventEmitter(SBScanbot);
 /*
  * This file is not strictly necessary, this would also work:
  *
@@ -12,6 +12,8 @@ const SBScanbot = NativeModules.SBScanbot;
  */
 
 // Consts
+
+export const SBSDKImageScannedEvent = SBScanbot.SBSDKImageScannedEvent;
 
 export const SBSDKImageModeColor = SBScanbot.SBSDKImageModeColor;
 export const SBSDKImageModeGrayscale = SBScanbot.SBSDKImageModeGrayscale;
@@ -93,14 +95,26 @@ const Scanbot = {
    *    - SBSDKShutterModeAlwaysManual:
    *        The camera will only take a photo when the user presses the shutter button
    *
-   * Use DeviceEventEmitter and listen to ImageScanned to get the scanned images:
-   *
-   *    DeviceEventEmitter.addListener('ImageScanned', doc => console.log(doc));
+   * onScan:
+   *  - callback fired when user made a scan
    *
    */
-  scan: (options) => {
+  scan: async (options, onScan) => {
     PropTypes.checkPropTypes(scanPropTypes, options, 'prop', 'scan');
-    return SBScanbot.scan(options);
+
+    const subscription = SBScanbotEmitter.addListener(SBSDKImageScannedEvent, onScan);
+    return SBScanbot.scan(options).then(result => {
+
+      // Wait a little bit for incoming scans that still need processing
+      setTimeout(() => {
+        subscription.remove();
+      }, 1000);
+
+      return result;
+    }).catch(ex => {
+      subscription.remove();
+      throw ex;
+    });
   },
 
   /**
@@ -121,7 +135,7 @@ const Scanbot = {
    * - rotation:
    *    rotation of image in degrees
    */
-  crop: (document) => {
+  crop: document => {
     PropTypes.checkPropTypes(documentPropTypes, document, 'prop', 'scan');
     return SBScanbot.crop(document);
   },

@@ -10,7 +10,8 @@
 - (void) scan:(NSDictionary *)options
  translations:(NSDictionary *)translations
 			resolve:(RCTPromiseResolveBlock)resolve
-	 dispatcher:(RCTEventDispatcher *)dispatcher;
+ imageScanned:(void (^)(NSDictionary *scan))callback;
+
 
 @end
 

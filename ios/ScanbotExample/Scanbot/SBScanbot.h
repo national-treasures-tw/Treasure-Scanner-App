@@ -1,7 +1,8 @@
 #import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
 #import <ScanbotSDK/ScanbotSDK.h>
 
-@interface SBScanbot : NSObject <RCTBridgeModule>
+@interface SBScanbot : RCTEventEmitter <RCTBridgeModule>
 
 @end
 

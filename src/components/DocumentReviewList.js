@@ -13,7 +13,6 @@ import {
   ListView,
   Dimensions,
   Button,
-  DeviceEventEmitter,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -36,21 +35,7 @@ class DocumentReviewList extends Component {
 
     return {
       title: `Documents`,
-      headerRight: (
-        <Button
-          title="Scan"
-          onPress={async () => {
-            StatusBar.setHidden(true, true);
-
-            // start uploading all pending documents
-            params.uploadPendingDocuments();
-
-            // See 'Scanbot/Scanbot.js' for all options and documentation
-            await Scanbot.scan(config.scanOptions);
-            StatusBar.setHidden(false, true);
-          }}
-        />
-      ),
+      headerRight: <Button title="Scan" onPress={() => params.onScanButton()} />,
     }
   };
 
@@ -64,32 +49,20 @@ class DocumentReviewList extends Component {
 
     this.state = {
       scrollIndex: 0,
-      documents: documents,
       dataSource: dataSource.cloneWithRows([...documents, stats ]),
     };
   };
 
   componentDidMount = () => {
-    const { addDocument, uploadPendingDocuments } = this.props;
-
     // set params so we can use them in `navigationOptions`
-    this.props.navigation.setParams({ uploadPendingDocuments });
-
-    this.imageListener = DeviceEventEmitter.addListener(
-      'ImageScanned', (document) => addDocument(document)
-    );
+    this.props.navigation.setParams({ onScanButton: this.onScanButton });
   };
-
-  componentWillUnmount() {
-    this.imageListener.remove();
-  }
 
   componentWillReceiveProps(newProps) {
     const { dataSource } = this.state;
     const { documents, stats } = this.props;
 
     this.setState({
-      documents: newProps.documents,
       dataSource: dataSource.cloneWithRows([...newProps.documents, stats ]),
     });
 
@@ -100,23 +73,50 @@ class DocumentReviewList extends Component {
     }
   }
 
-  onCrop = async () => {
-    const { scrollIndex } = this.state;
-    const { documents, cropDocument } = this.props;
+  onScanButton = async () => {
+    const { uploadPendingDocuments } = this.props;
 
+    StatusBar.setHidden(true, true);
+
+    // start uploading all pending documents
+    uploadPendingDocuments();
+
+    // See 'Scanbot/Scanbot.js' for all options and documentation
+    await Scanbot.scan(config.scanOptions, this.onReceiveDocumentScan);
+    StatusBar.setHidden(false, true);
+  };
+
+  onReceiveDocumentScan = ({ document, error }) => {
+    const { addDocument } = this.props;
+
+    if(error) {
+      alert(error);
+      return;
+    }
+
+    if(document) {
+      addDocument(document)
+    }
+  };
+
+  onCropButton = async () => {
+    const { scrollIndex } = this.state;
+    const { cropDocument } = this.props;
+
+    const doc = this.getRow(scrollIndex);
     try {
       StatusBar.setHidden(true, true);
       // See 'Scanbot/Scanbot.js' for all options and documentation
-      const croppedDocument = await Scanbot.crop(documents[scrollIndex]);
+      const croppedDocument = await Scanbot.crop(doc);
       StatusBar.setHidden(false, true);
 
-      if (documents[scrollIndex].image === croppedDocument.image) {
+      if (doc.image === croppedDocument.image) {
         // user canceled the crop
         return;
       }
 
       cropDocument(
-        documents[scrollIndex].id,
+        doc.id,
         croppedDocument.image,
         croppedDocument.polygon
       );
@@ -126,54 +126,60 @@ class DocumentReviewList extends Component {
     }
   };
 
-  onRotate = async () => {
+  onRotateButton = async () => {
     const { scrollIndex } = this.state;
-    const { documents, rotateDocument } = this.props;
+    const { rotateDocument } = this.props;
 
+    const doc = this.getRow(scrollIndex);
     try {
       // See 'Scanbot/Scanbot.js' for all options and documentation
-      const rotatedImage = await Scanbot.rotate(documents[scrollIndex].image);
       rotateDocument(
-        documents[scrollIndex].id,
-        rotatedImage,
+        doc.id,
+        await Scanbot.rotate(doc.image),
       );
     } catch (ex) {
       alert('Rotating failed..', ex);
     }
   };
 
-  onDelete = () => {
+  onDeleteButton = () => {
     const { scrollIndex } = this.state;
-    const { documents, deleteDocument } = this.props;
-    deleteDocument(documents[scrollIndex].id);
+    const { deleteDocument } = this.props;
+    deleteDocument(this.getRow(scrollIndex).id);
   };
 
   onScroll = (event) => {
-    const { documents } = this.props;
+    const { dataSource } = this.state;
 
     this.setState({
       // User might have scrolled or bounced before beginning or end
       scrollIndex: Math.min(
-        Math.max(documents.length, 0),
+        Math.max(dataSource.getRowCount() - 1, 0),
         Math.round(Math.max(0, event.nativeEvent.contentOffset.x) / winSize.width)
       )
     });
   };
 
+  getRow = (index) => {
+    const { dataSource } = this.state;
+    return dataSource.getRowData(0, index);
+  };
+
   render() {
     const { uploadDocument } = this.props;
-    const { scrollIndex, documents } = this.state;
+    const { scrollIndex, dataSource } = this.state;
 
-    const document = scrollIndex >= documents.length ? undefined : documents[scrollIndex];
+    const documentCount = dataSource.getRowCount();
+    const document = dataSource.getRowData(0, scrollIndex);
 
     return (
       <View style={styles.viewport}>
 
-        {documents.length > 0 && (
+        {documentCount > 0 && (
           <ListView
             ref={(c) => (this._listView = c)}
             enableEmptySections={true}
-            dataSource={this.state.dataSource}
+            dataSource={dataSource}
             style={styles.list}
             onScroll={this.onScroll}
             horizontal={true}
@@ -215,13 +221,13 @@ class DocumentReviewList extends Component {
           />
         )}
 
-        {documents.length === 0 && (
+        {documentCount === 0 && (
           <View style={styles.infoContainer}>
             <Text style={styles.info}>Your scanned documents will appear here</Text>
           </View>
         )}
 
-        {documents.length > 0 && scrollIndex === documents.length && (
+        {documentCount > 0 && scrollIndex + 1 === documentCount && (
           <View style={styles.bottomTabBar}>
             <Button
               style={styles.button}
@@ -232,7 +238,7 @@ class DocumentReviewList extends Component {
           </View>
         )}
 
-        {document && (() => {
+        {document && document.id && (() => {
           switch (document.status) {
             case Status.UNDEFINED:
               return (
@@ -240,17 +246,17 @@ class DocumentReviewList extends Component {
                   <Button
                     disabled={!document.originalImage || document.isNotDocument}
                     style={styles.button}
-                    onPress={() => this.onCrop()}
+                    onPress={() => this.onCropButton()}
                     title="Crop"
                   />
                   <Button
                     style={styles.button}
-                    onPress={() => this.onRotate()}
+                    onPress={() => this.onRotateButton()}
                     title="Rotate"
                   />
                   <Button
                     style={styles.button}
-                    onPress={this.onDelete}
+                    onPress={this.onDeleteButton}
                     title="Delete"
                   />
                 </View>

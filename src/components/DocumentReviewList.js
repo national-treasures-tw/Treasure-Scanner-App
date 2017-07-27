@@ -1,8 +1,3 @@
-/**
- * Scanbot Example
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -11,7 +6,8 @@ import {
   Image,
   StatusBar,
   ListView,
-  Dimensions, Button,
+  Dimensions,
+  Button,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
@@ -19,136 +15,166 @@ import { connect } from 'react-redux';
 
 import Scanbot from '../Scanbot/Scanbot';
 
-import getScanSession from '../selectors/getScanSession';
-
 import * as actions from '../actions/actions';
+import config from '../config';
+import Status from '../utils/consts';
+import getStats from '../selectors/getStats';
+import getScannedDocuments from '../selectors/getScannedDocuments';
 
 export const winSize = Dimensions.get('window');
 
 class DocumentReviewList extends Component {
+
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
 
-    const headerRight = params.scan ? (
-      <Button
-        title="Next Scan"
-        onPress={() => {
-          navigation.goBack();
-          setTimeout(() => {
-            params.scan();
-          }, 400);
-        }}
-      />
-    ) : undefined;
-
     return {
       title: `Documents`,
-      headerRight
-    };
+      headerRight: <Button title="Scan" onPress={() => params.onScanButton()} />,
+    }
   };
 
   constructor(props, context) {
     super(props, context);
-    const { documents } = this.props;
+    const { documents, stats } = this.props;
 
     const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => (r1 !== r2)
     });
 
     this.state = {
-      error: false,
       scrollIndex: 0,
-      documents: documents,
-      dataSource: dataSource.cloneWithRows(documents),
+      dataSource: dataSource.cloneWithRows([...documents, stats ]),
     };
   };
 
-  componentWillReceiveProps(newProps) {
-    const { params, documents } = this.props;
+  componentDidMount = () => {
+    // set params so we can use them in `navigationOptions`
+    this.props.navigation.setParams({ onScanButton: this.onScanButton });
+  };
 
-    if(!params.sessionId) {
+  componentWillReceiveProps(newProps) {
+    const { dataSource } = this.state;
+    const { documents, stats } = this.props;
+
+    this.setState({
+      dataSource: dataSource.cloneWithRows([...newProps.documents, stats ]),
+    });
+
+    if(newProps.documents.length > documents.length) {
+      if(this._listView) {
+        this._listView.scrollTo({ x: 0, y: 0 });
+      }
+    }
+  }
+
+  onScanButton = async () => {
+    const { uploadPendingDocuments } = this.props;
+
+    StatusBar.setHidden(true, true);
+
+    // start uploading all pending documents
+    uploadPendingDocuments();
+
+    // See 'Scanbot/Scanbot.js' for all options and documentation
+    await Scanbot.scan(config.scanOptions, this.onReceiveDocumentScan);
+    StatusBar.setHidden(false, true);
+  };
+
+  onReceiveDocumentScan = ({ document, error }) => {
+    const { addDocument } = this.props;
+
+    if(error) {
+      alert(error);
       return;
     }
 
-    const { dataSource } = this.state;
-    this.setState({
-      documents: documents,
-      dataSource: dataSource.cloneWithRows(newProps.documents),
-    });
-  }
-
-  componentDidMount = () => {
-    const { documents } = this.props;
-    if(documents.length === 0) {
-      this.scan();
+    if(document) {
+      addDocument(document)
     }
   };
 
-  onCrop = async () => {
+  onCropButton = async () => {
     const { scrollIndex } = this.state;
-    const { documents, cropDocument } = this.props;
+    const { cropDocument } = this.props;
 
+    const doc = this.getRow(scrollIndex);
     try {
       StatusBar.setHidden(true, true);
       // See 'Scanbot/Scanbot.js' for all options and documentation
-      const croppedDocument = await Scanbot.crop(documents[scrollIndex]);
+      const croppedDocument = await Scanbot.crop(doc);
       StatusBar.setHidden(false, true);
 
-      if (documents[scrollIndex].image === croppedDocument.image) {
+      if (doc.image === croppedDocument.image) {
         // user canceled the crop
         return;
       }
 
       cropDocument(
-        documents[scrollIndex].id,
+        doc.id,
         croppedDocument.image,
         croppedDocument.polygon
       );
 
     } catch (ex) {
-      this.setState({ error: `Scanning Failed ${ex}` });
+      alert('Crop failed..', ex);
     }
   };
 
-  onRotate = () => {
+  onRotateButton = async () => {
     const { scrollIndex } = this.state;
-    const { documents, rotateDocument } = this.props;
-    rotateDocument(documents[scrollIndex].id);
+    const { rotateDocument } = this.props;
+
+    const doc = this.getRow(scrollIndex);
+    try {
+      // See 'Scanbot/Scanbot.js' for all options and documentation
+      rotateDocument(
+        doc.id,
+        await Scanbot.rotate(doc.image),
+      );
+    } catch (ex) {
+      alert('Rotating failed..', ex);
+    }
   };
 
-  onDelete = () => {
+  onDeleteButton = () => {
     const { scrollIndex } = this.state;
-    const { documents, deleteDocument } = this.props;
-    deleteDocument(documents[scrollIndex].id);
+    const { deleteDocument } = this.props;
+    deleteDocument(this.getRow(scrollIndex).id);
   };
 
   onScroll = (event) => {
-    const { documents } = this.props;
+    const { dataSource } = this.state;
 
     this.setState({
       // User might have scrolled or bounced before beginning or end
       scrollIndex: Math.min(
-        Math.max(documents.length - 1, 0),
+        Math.max(dataSource.getRowCount() - 1, 0),
         Math.round(Math.max(0, event.nativeEvent.contentOffset.x) / winSize.width)
       )
     });
   };
 
+  getRow = (index) => {
+    const { dataSource } = this.state;
+    return dataSource.getRowData(0, index);
+  };
+
   render() {
-    const { error, scrollIndex, documents } = this.state;
-    const document = documents[scrollIndex];
+    const { uploadDocument } = this.props;
+    const { scrollIndex, dataSource } = this.state;
+
+    const documentCount = dataSource.getRowCount();
+    const document = dataSource.getRowData(0, scrollIndex);
+
     return (
       <View style={styles.viewport}>
-        {error && (
-          <View style={styles.errorContainer}>
-            <Text style={styles.error}>Error</Text>
-          </View>
-        )}
 
-        {!error && documents.length > 0 && (
+        {documentCount > 0 && (
           <ListView
+            ref={(c) => (this._listView = c)}
             enableEmptySections={true}
-            dataSource={this.state.dataSource}
+            dataSource={dataSource}
             style={styles.list}
             onScroll={this.onScroll}
             horizontal={true}
@@ -156,17 +182,33 @@ class DocumentReviewList extends Component {
             directionalLockEnabled={true}
             automaticallyAdjustContentInsets={false}
             showsVerticalScrollIndicator={false}
-            renderRow={(document, index) => (
+            renderRow={(document, index) => !document.id ? (
+              <View
+                style={styles.stats}
+                key={index}
+              >
+                {Object.keys(document).map(key => (
+                  <View
+                    style={styles.infoContainer}
+                    key={key}
+                  >
+                    <Text style={styles.info}>
+                      {key}
+                    </Text>
+                    <Text style={styles.info}>
+                      {document[key]}
+                    </Text>
+                  </View>
+                ))}
+
+              </View>
+            ) : (
               <View
                 style={styles.listItem}
                 key={index}
               >
                 <Image
-                  style={[
-                    styles.image,
-                    document.rotation ? { transform: [{ rotate: `${document.rotation}deg`}] } : {},
-                    (document.rotation % 90 === 0) ? styles.rotatedImage : {}
-                  ]}
+                  style={styles.image}
                   source={{ uri: `file://${document.image}`, scale: 1 }}
                 />
               </View>
@@ -174,32 +216,82 @@ class DocumentReviewList extends Component {
           />
         )}
 
-        {!error && documents.length === 0 && (
-          <View style={styles.errorContainer}>
+        {documentCount === 0 && (
+          <View style={styles.infoContainer}>
             <Text style={styles.info}>Your scanned documents will appear here</Text>
           </View>
         )}
 
-        {documents.length > 0 && document && (
+        {documentCount > 0 && scrollIndex + 1 === documentCount && (
           <View style={styles.bottomTabBar}>
             <Button
-              disabled={!document.originalImage}
               style={styles.button}
-              onPress={() => this.onCrop()}
-              title="Crop"
-            />
-            <Button
-              style={styles.button}
-              onPress={this.onRotate}
-              title="Rotate"
-            />
-            <Button
-              style={styles.button}
-              onPress={this.onDelete}
-              title="Delete"
+              onPress={() => {}}
+              title="Stats"
+              disabled
             />
           </View>
         )}
+
+        {document && document.id && (() => {
+          switch (document.status) {
+            case Status.UNDEFINED:
+              return (
+                <View style={styles.bottomTabBar}>
+                  <Button
+                    disabled={!document.originalImage || document.isNotDocument}
+                    style={styles.button}
+                    onPress={() => this.onCropButton()}
+                    title="Crop"
+                  />
+                  <Button
+                    style={styles.button}
+                    onPress={() => this.onRotateButton()}
+                    title="Rotate"
+                  />
+                  <Button
+                    style={styles.button}
+                    onPress={this.onDeleteButton}
+                    title="Delete"
+                  />
+                </View>
+              );
+            case Status.LOADING:
+              return (
+                <View style={styles.bottomTabBar}>
+                  <Button
+                    style={styles.button}
+                    onPress={() => {}}
+                    title="Uploading..."
+                    disabled
+                  />
+                </View>
+              );
+            case Status.LOADED:
+              return (
+                <View style={styles.bottomTabBar}>
+                  <Button
+                    style={styles.button}
+                    onPress={() => {}}
+                    title="Document uploaded"
+                    disabled
+                  />
+                </View>
+              );
+            case Status.ERROR:
+              return (
+                <View style={styles.bottomTabBar}>
+                  <Button
+                    style={styles.button}
+                    onPress={() => uploadDocument(document.id)}
+                    title="Upload failed.. Try again?"
+                  />
+                </View>
+              );
+            default:
+          }
+        })()}
+
       </View>
     );
   }
@@ -207,35 +299,36 @@ class DocumentReviewList extends Component {
 
 const styles = StyleSheet.create({
   viewport: {
-    paddingTop: 20,
+    paddingTop: 10,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#f5fcff',
   },
   list: {
     flex: 1,
   },
   listItem: {
-    flex: 1,
     width: winSize.width,
-    height: winSize.height - 50,
+    flex: 1,
     alignItems: 'center',
   },
   image: {
-    width: winSize.width - 40,
-    height: winSize.height - 50,
+    width: winSize.width - 20,
+    height: winSize.height - 136,
     resizeMode: Image.resizeMode.contain,
   },
-  rotatedImage: {
-    width: winSize.height - 50,
-    height: winSize.width - 40,
+  stats: {
+    width: winSize.width,
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
-  errorContainer: {
+  infoContainer: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 40,
   },
   info: {
     flex: 1,
@@ -260,10 +353,9 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  const params = state.nav.routes[state.nav.index].params || {};
   return {
-    params,
-    documents: getScanSession(state, params).documents,
+    documents: getScannedDocuments(state),
+    stats: getStats(state)
   };
 }
 

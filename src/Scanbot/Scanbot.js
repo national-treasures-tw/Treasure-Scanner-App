@@ -1,8 +1,8 @@
-import { NativeModules, Alert } from 'react-native';
+import { NativeModules, NativeEventEmitter } from 'react-native';
 import PropTypes from 'prop-types';
 
 const SBScanbot = NativeModules.SBScanbot;
-
+const SBScanbotEmitter = new NativeEventEmitter(SBScanbot);
 /*
  * This file is not strictly necessary, this would also work:
  *
@@ -12,6 +12,8 @@ const SBScanbot = NativeModules.SBScanbot;
  */
 
 // Consts
+
+export const SBSDKImageScannedEvent = SBScanbot.SBSDKImageScannedEvent;
 
 export const SBSDKImageModeColor = SBScanbot.SBSDKImageModeColor;
 export const SBSDKImageModeGrayscale = SBScanbot.SBSDKImageModeGrayscale;
@@ -40,6 +42,18 @@ const Scanbot = {
    * Will terminate the app if license is invalid
    **/
   setLicense: SBScanbot.setLicense,
+
+  /**
+   * SBScanbot.setTranslations(string);
+   *
+   * Sets all copy on labels and buttons in the Scanbot UI
+   *
+   * See translationPropTypes for list of properties
+   **/
+  setTranslations: (translations) => {
+    PropTypes.checkPropTypes(translationPropTypes, translations, 'prop', 'scan');
+    SBScanbot.setTranslations(translations);
+  },
 
   /**
    * SBScanbot.scan(options);
@@ -81,12 +95,26 @@ const Scanbot = {
    *    - SBSDKShutterModeAlwaysManual:
    *        The camera will only take a photo when the user presses the shutter button
    *
-   * - labelTranslations:
-   *    Object with translations keys, see scanPropTypes function below for required translations
+   * onScan:
+   *  - callback fired when user made a scan
+   *
    */
-  scan: (options) => {
+  scan: async (options, onScan) => {
     PropTypes.checkPropTypes(scanPropTypes, options, 'prop', 'scan');
-    return SBScanbot.scan(options);
+
+    const subscription = SBScanbotEmitter.addListener(SBSDKImageScannedEvent, onScan);
+    return SBScanbot.scan(options).then(result => {
+
+      // Wait a little bit for incoming scans that still need processing
+      setTimeout(() => {
+        subscription.remove();
+      }, 1000);
+
+      return result;
+    }).catch(ex => {
+      subscription.remove();
+      throw ex;
+    });
   },
 
   /**
@@ -107,9 +135,21 @@ const Scanbot = {
    * - rotation:
    *    rotation of image in degrees
    */
-  crop: (document) => {
+  crop: document => {
     PropTypes.checkPropTypes(documentPropTypes, document, 'prop', 'scan');
     return SBScanbot.crop(document);
+  },
+
+  /**
+   * SBScanbot.rotate(image);
+   *
+   * - image:
+   *    string to file on disk
+   *
+   * Rotates image and returns new filepath
+   */
+  rotate: (image) => {
+    return SBScanbot.rotate(image);
   },
 };
 
@@ -129,6 +169,7 @@ const documentPropTypes = {
   rotation: PropTypes.number,
 };
 
+
 const scanPropTypes = {
   imageScale: rangeProptype(0, 1),
   autoCaptureSensitivity: rangeProptype(0, 1),
@@ -136,29 +177,32 @@ const scanPropTypes = {
   acceptedAngleScore: rangeProptype(0, 100),
   initialImageMode: PropTypes.oneOf([SBSDKImageModeColor, SBSDKImageModeGrayscale]).isRequired,
   initialShutterMode: PropTypes.oneOf([SBSDKShutterModeSmart, SBSDKShutterModeAlwaysAuto, SBSDKShutterModeAlwaysManual]).isRequired,
-  labelTranslations: PropTypes.shape({
-    cancelButton: PropTypes.string.isRequired,
-    singularDocument: PropTypes.string.isRequired,
-    pluralDocuments: PropTypes.string.isRequired,
-    imageMode: PropTypes.shape({
-      [SBSDKImageModeColor]: PropTypes.string.isRequired,
-      [SBSDKImageModeGrayscale]: PropTypes.string.isRequired,
-    }).isRequired,
-    shutterMode: PropTypes.shape({
-      [SBSDKShutterModeSmart]: PropTypes.string.isRequired,
-      [SBSDKShutterModeAlwaysAuto]: PropTypes.string.isRequired,
-      [SBSDKShutterModeAlwaysManual]: PropTypes.string.isRequired,
-    }).isRequired,
-    detectionStatus: PropTypes.shape({
-      [SBSDKDocumentDetectionStatusOK]: PropTypes.string.isRequired,
-      [SBSDKDocumentDetectionStatusOK_SmallSize]: PropTypes.string.isRequired,
-      [SBSDKDocumentDetectionStatusOK_BadAngles]: PropTypes.string.isRequired,
-      [SBSDKDocumentDetectionStatusOK_BadAspectRatio]: PropTypes.string.isRequired,
-      [SBSDKDocumentDetectionStatusError_NothingDetected]: PropTypes.string.isRequired,
-      [SBSDKDocumentDetectionStatusError_Brightness]: PropTypes.string.isRequired,
-      [SBSDKDocumentDetectionStatusError_Noise]:PropTypes.string.isRequired,
-    }).isRequired,
+};
+
+const translationPropTypes = {
+  cancel: PropTypes.string.isRequired,
+  done: PropTypes.string.isRequired,
+  singularDocument: PropTypes.string.isRequired,
+  pluralDocuments: PropTypes.string.isRequired,
+  imageMode: PropTypes.shape({
+    [SBSDKImageModeColor]: PropTypes.string.isRequired,
+    [SBSDKImageModeGrayscale]: PropTypes.string.isRequired,
+  }).isRequired,
+  shutterMode: PropTypes.shape({
+    [SBSDKShutterModeSmart]: PropTypes.string.isRequired,
+    [SBSDKShutterModeAlwaysAuto]: PropTypes.string.isRequired,
+    [SBSDKShutterModeAlwaysManual]: PropTypes.string.isRequired,
+  }).isRequired,
+  detectionStatus: PropTypes.shape({
+    [SBSDKDocumentDetectionStatusOK]: PropTypes.string.isRequired,
+    [SBSDKDocumentDetectionStatusOK_SmallSize]: PropTypes.string.isRequired,
+    [SBSDKDocumentDetectionStatusOK_BadAngles]: PropTypes.string.isRequired,
+    [SBSDKDocumentDetectionStatusOK_BadAspectRatio]: PropTypes.string.isRequired,
+    [SBSDKDocumentDetectionStatusError_NothingDetected]: PropTypes.string.isRequired,
+    [SBSDKDocumentDetectionStatusError_Brightness]: PropTypes.string.isRequired,
+    [SBSDKDocumentDetectionStatusError_Noise]:PropTypes.string.isRequired,
   }).isRequired,
 };
+
 
 export default Scanbot;

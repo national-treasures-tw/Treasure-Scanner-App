@@ -1,5 +1,5 @@
 {
-	"name": "ScanbotExample",
+	"name": "TaiwanNationalTreasure",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -19,7 +19,6 @@
 		"redux-devtools": "^3.4.0",
 		"redux-logger": "^3.0.6",
 		"redux-persist": "^4.8.2",
-		"redux-thunk": "^2.2.0",
 		"remote-redux-devtools": "^0.5.12",
 		"reselect": "^3.0.1"
 	},

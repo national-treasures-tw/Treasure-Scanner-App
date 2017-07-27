@@ -1,7 +1,7 @@
 const getNavReducer = (AppNavigator) => {
   // see react-navigation docs
   const initialState = AppNavigator.router.getStateForAction(
-    AppNavigator.router.getActionForPathAndParams('SessionList')
+    AppNavigator.router.getActionForPathAndParams('DocumentReviewList')
   );
 
   // see react-navigation docs

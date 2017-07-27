@@ -12,6 +12,7 @@
 #import "SBSDKDocumentDetectionStatus.h"
 #import "SBSDKImageStorage.h"
 #import "SBSDKScanbotSDKConstants.h"
+#import "SBSDKLensCameraProperties.h"
 
 /**
  * @enum SBSDKShutterMode
@@ -70,7 +71,8 @@ typedef NS_ENUM(NSInteger, SBSDKShutterMode) {
 /**
  * Tells the delegate that a document image has been cropped out of an orientation corrected still image.
  * @param controller The calling SBSDKScannerViewController.
- * @param documentImage The cropped and perspective corrected documents image, rotated depending on the device orientation.
+ * @param documentImage The cropped and perspective corrected documents image, 
+ * rotated depending on the device orientation.
  */
 - (void)scannerController:(nonnull SBSDKScannerViewController *)controller
   didCaptureDocumentImage:(nonnull UIImage *)documentImage;
@@ -83,11 +85,23 @@ typedef NS_ENUM(NSInteger, SBSDKShutterMode) {
 - (void)scannerController:(nonnull SBSDKScannerViewController *)controller didCaptureImage:(nonnull UIImage *)image;
 
 /**
+ * Tells the delegate that a still image has been captured and its orientation has been corrected. Optional.
+ * @param controller The calling SBSDKScannerViewController.
+ * @param image The captured original image, rotated depending on the device orientation.
+ * @param polygon The polygon that was detected on the image.
+ * @param properties The properties of the camera and lens. Useful to calculate the aspect ratio of the cropped image.
+ */
+- (void)scannerController:(nonnull SBSDKScannerViewController *)controller didCaptureImage:(nullable UIImage *)image
+      withDetectedPolygon:(nullable SBSDKPolygon *)polygon
+     lensCameraProperties:(nullable SBSDKLensCameraProperties *)properties;
+
+/**
  * Tells the delegate that capturing a still image has been failed The underlying error is provided. Optional.
  * @param controller The calling SBSDKScannerViewController.
  * @param error The reason for the failure.
  */
-- (void)scannerController:(nonnull SBSDKScannerViewController *)controller didFailCapturingImage:(nonnull NSError *)error;
+- (void)scannerController:(nonnull SBSDKScannerViewController *)controller
+    didFailCapturingImage:(nonnull NSError *)error;
 
 /**
  * Tells the delegate that a document detection has been occured on the current video frame. Optional.
@@ -116,7 +130,8 @@ shouldAutoCaptureWithPolygon:(nullable SBSDKPolygon *)polygon
  * @param controller The calling SBSDKScannerViewController.
  * @return Your custom view to visualize the detection status, e.g. a label with localized text or
  * an image view with an icon.
- * If you return nil the standard label is displayed. If you want to show nothing just return an empty view ([UIView new]).
+ * If you return nil the standard label is displayed. If you want to show nothing just return 
+ * an empty view ([UIView new]).
  * If possible reuse the views per status or just use one single configurable view.
  * The scanner view controller takes care of adding and removing your view from/to the view hierarchy.
  */
@@ -160,6 +175,12 @@ shouldAutoCaptureWithPolygon:(nullable SBSDKPolygon *)polygon
 - (CGPoint)scannerControllerCenterForShutterButton:(nonnull SBSDKScannerViewController *)controller;
 
 /**
+ * Asks the delegate on which view to place the shutter button.
+ * @return A view in the current view hierarchy.
+ */
+- (nonnull UIView *)scannerControllerSuperViewForShutterButton:(nonnull SBSDKScannerViewController *)controller;
+
+/**
  * Implement this method to customize the detected documents polygon drawing. If you implement this method you are
  * responsible for correct configuration of the shape layer and setting the shape layers path property.
  * Implementing this method also disables calling of the delegate
@@ -187,15 +208,18 @@ shouldAutoCaptureWithPolygon:(nullable SBSDKPolygon *)polygon
  * @return An UIColor representing the state of detections.
  * You could for example return green for DetectionStateOK and red otherwise.
  */
-- (nonnull UIColor *)scannerController:(nonnull SBSDKScannerViewController *)controller polygonColorForDetectionStatus:(SBSDKDocumentDetectionStatus)status;
+- (nonnull UIColor *)scannerController:(nonnull SBSDKScannerViewController *)controller
+        polygonColorForDetectionStatus:(SBSDKDocumentDetectionStatus)status;
 
 
 /**
- * Informs the delegate that the device orientation has changed. The SBSDKScannerController will use this orientation to rotate captured images.
+ * Informs the delegate that the device orientation has changed. 
+ * The SBSDKScannerController will use this orientation to rotate captured images.
  * Optional.
  * @param controller The calling SBSDKScannerViewController.
  * @param orientation The new device orientation used to rotate captured images automatically.
- * @param transform The CGAffineTransform that can be used to rotate UI elements to reflect the current capture orientation.
+ * @param transform The CGAffineTransform that can be used to rotate UI elements to reflect the current 
+ * capture orientation.
  */
 - (void)scannerControllerDidChangeDeviceOrientation:(nonnull SBSDKScannerViewController *)controller
                                                  to:(UIDeviceOrientation)orientation
@@ -214,6 +238,22 @@ shouldAutoCaptureWithPolygon:(nullable SBSDKPolygon *)polygon
 - (BOOL)scannerController:(nonnull SBSDKScannerViewController *)controller
 shouldRotateInterfaceForDeviceOrientation:(UIDeviceOrientation)orientation
                 transform:(CGAffineTransform)transform;
+
+/**
+ * Asks the delegate if the receiver should detect QR codes.
+ * Optional.
+ * @param controller The calling SBSDKScannerViewController.
+ */
+- (BOOL)scannerControllerShouldDetectQRCode:(nonnull SBSDKScannerViewController *)controller;
+
+/**
+ * Informs the delegate that the receiver has detected a QR code.
+ * Optional.
+ * @param controller The calling SBSDKScannerViewController.
+ * @param qrCodes Array of AVMetadataMachineReadableCodeObjects containing the detected QR codes.
+ */
+- (void)scannerController:(nonnull SBSDKScannerViewController *)controller
+         didDetectQRCodes:(nonnull NSArray<AVMetadataMachineReadableCodeObject *> *)qrCodes;
 
 @end
 
@@ -236,6 +276,17 @@ shouldRotateInterfaceForDeviceOrientation:(UIDeviceOrientation)orientation
  * The controllers camera session.
  */
 @property (nonatomic, strong, readonly, nonnull) SBSDKCameraSession *cameraSession;
+
+/** 
+ * If set to YES (default), the camera session will be stopped entirely, 
+ * when the receiver disappears and restarts when the receiver reappears.
+ * There is no CPU usage while the receiver is not on screen.
+ *
+ * NO will NOT stop the camera session, but pause the delivery of video frames and QR codes.
+ * There is some very low CPU activity while the receiver is not on screen, but there is also no
+ * lag when the receiver returns to the screen.
+ */
+@property (nonatomic, assign) BOOL stopsCameraSessionWhenDisappeared;
 
 /**
  * The image storage. If not nil, cropped document images will be saved there,
@@ -323,9 +374,25 @@ shouldRotateInterfaceForDeviceOrientation:(UIDeviceOrientation)orientation
                                         imageStorage:(nullable SBSDKImageStorage *)storage;
 
 /**
+ * Desginated initializer. Installs the receiver as child view controller onto the parent view controllers
+ * view using its entire bounds area.
+ * @param parentViewController The view controller the newly created instance is embedded into.
+ * If parentViewController conforms to SBSDKScannerViewControllerDelegate, it is automatically set as delegate.
+ * @param containerView The view the newly created instance is embedded into.
+ * If nil the parentViewControllers view is used.
+ * @param storage The image storage to persist the shot document images. Can be nil.
+ * @param qrCodeEnabled Whether you are interested in QR code detection or not.
+ */
+- (nullable instancetype)initWithParentViewController:(nonnull UIViewController *)parentViewController
+                                           parentView:(nullable UIView *)containerView
+                                         imageStorage:(nullable SBSDKImageStorage *)storage
+                                enableQRCodeDetection:(BOOL)qrCodeEnabled;
+
+/**
  * Captures a still image manually and calls the delegate methods.
  * @return YES, if the capture process has been initiated successfully. NO otherwise.
- * Note: NO is returned if the device is currently capturing another image or if the camera session is not yet setup or broken.
+ * Note: NO is returned if the device is currently capturing another image or 
+ * if the camera session is not yet setup or broken.
  **/
 - (BOOL)captureStillImage;
 

@@ -72,6 +72,13 @@
 - (BOOL)addImage:(nullable UIImage *)image;
 
 /**
+ * Appends a single image from the URL to the receiver.
+ * @param url The URL to the image to be added.
+ * @return YES if the operation was successful, NO otherwise.
+ **/
+- (BOOL)addImageFromURL:(nullable NSURL *)url;
+
+/**
  * Removes the image at the given index from the receiver and deletes the image file.
  * @param index The index of the image to be deleted from the receiver. Does nothing if the index is not valid.
  **/
@@ -103,6 +110,53 @@
  * @return An UIImage object representing the thumbnail.
  **/
 - (nullable UIImage *)thumbnailForImageAtIndex:(NSUInteger)index ofSize:(CGSize)size;
+
+/**
+ * Loads the UIImage at the given key from the receiver and returns it.
+ * @param key The dictionary key of the image to be loaded from the receiver.
+ * @return The loaded image or nil if for the key no image is available.
+ **/
+- (nullable UIImage *)imageForKey:(nonnull NSString *)key;
+
+/**
+ * Adds an UIImage to the receiver.
+ * @param image The UIImage object to be added. Passing nil removes the existing image for the given key.
+ * @param key The dictionary key of the image to be added to the receiver.
+ **/
+- (void)setImage:(nullable UIImage *)image forKey:(nonnull NSString *)key;
+
+/**
+ * Sets a single image from the URL to the receiver.
+ * @param url The URL to the image to be added.
+ * @param key The dictionary key of the image to be added to the receiver.
+ * @param move If YES, the file is moved from the source location, otherwise copied.
+ **/
+- (void)setImageFromURL:(nullable NSURL *)url forKey:(nonnull NSString *)key moveFile:(BOOL)move;
+
+/**
+ * Returns the images file URL at the given key.
+ * Use with caution: if the receiver is deallocated the URL will be invalid.
+ * @param key The key of the image in the receivers image dictionary.
+ * @return The file URL the image is physically located at. Or nil if index is invalid.
+ **/
+- (nullable NSURL *)imageURLForKey:(nonnull NSString *)key;
+
+/**
+ * Generates a thumbnail of the image at the specified key with given size. The thumbnail is cached.
+ * @param key The key of the image in the receivers image dictionary.
+ * @param size The size of the thumbnail. If size has a different aspect ratio than the image the thumbnail is fitted-in
+ * the requested size.
+ * @return An UIImage object representing the thumbnail or nil if no image is present for the given key.
+ **/
+- (nullable UIImage *)thumbnailOfImageForKey:(nonnull NSString *)key ofSize:(CGSize)size;
+
+/**
+ * Removes the image at the given key from the receiver and deletes the image file.
+ * @param key The key of the image in the receivers image dictionary.
+ **/
+- (void)removeImageForKey:(nonnull NSString *)key;
+
+- (void)waitUntilWritingCompleted;
 
 /**
  * Takes an NSIndexSet of indices into the receiver and returns a validated NSIndexSet by removing all invalid indices.

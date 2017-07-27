@@ -1,12 +1,13 @@
-import { createStore, compose, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { autoRehydrate } from 'redux-persist';
 
-import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'remote-redux-devtools';
 
 import getRootReducer from '../reducers/getRootReducer';
 import deleteImageMiddleware from './deleteImageMiddleware';
+import uploadMiddleware from './uploadMiddleware';
+
 const configureStore = (AppNavigator) => {
 
   // inject AppNavigator so we can create navigation reducer dynamically
@@ -17,8 +18,7 @@ const configureStore = (AppNavigator) => {
     rootReducer,
     composeWithDevTools(
       applyMiddleware(
-        deleteImageMiddleware,
-        thunk.withExtraArgument({ }),
+        deleteImageMiddleware, uploadMiddleware,
         createLogger({ collapsed: true, duration: true }),
       ),
       autoRehydrate()

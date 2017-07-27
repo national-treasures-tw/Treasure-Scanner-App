@@ -61,6 +61,12 @@
 - (instancetype)initWithNormalizedDoubleValues:(NSArray<NSNumber *>*)values;
 
 /**
+ * One of the desinated initializer methods.
+ * @param codeObject An AVMetadataMachineReadableCodeObject as returned from QR code detection.
+ **/
+- (instancetype)initWithMetadataObject:(AVMetadataMachineReadableCodeObject *)codeObject;
+
+/**
  * Compares the receiver to another instance of SBSDKPolygon.
  * @param polygon The polygon instance the receiver is compared to.
  * @return YES, if the points of polygon are equal to the points of the receiver, NO otherwise.

@@ -258,7 +258,7 @@
 
 	document[@"image"] = [url relativePath];
 
-	NSData *data = UIImageJPEGRepresentation(self.capturedImage, 0.9);
+	NSData *data = UIImageJPEGRepresentation(self.capturedDocumentImage, 0.9);
 	[data writeToFile:[url relativePath] options:NSDataWritingAtomic error:&error];
 	if (error) {
 		*saveError = error;
@@ -271,7 +271,7 @@
 
 	document[@"originalImage"] = [url relativePath];
 
-	data = UIImageJPEGRepresentation(self.capturedDocumentImage, 0.9);
+	data = UIImageJPEGRepresentation(self.capturedImage, 0.9);
 	[data writeToFile:[url relativePath] options:NSDataWritingAtomic error:&error];
 	if (error) {
 		*saveError = error;

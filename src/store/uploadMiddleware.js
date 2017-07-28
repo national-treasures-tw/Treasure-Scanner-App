@@ -45,6 +45,12 @@ const uploadFile = async (dispatch, document) => {
     id: document.id,
   });
 
+  // fix for https://github.com/facebook/react-native/issues/9599
+  if(typeof global.self === "undefined") {
+    console.log('[patch] global.self = global;');
+    global.self = global;
+  }
+
   try {
     const base64Image = await RNFS.readFile(document.image, 'base64');
     const response = await fetch(config.bucket, {

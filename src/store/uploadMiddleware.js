@@ -10,8 +10,8 @@ export default store => next => async action => {
 
   switch (action.type) {
     case ActionTypes.DOCUMENT.ADD:
-      // al but first 3
-      uploadingPendingDocuments(store, 3);
+      // al but first N
+      uploadingPendingDocuments(store, config.autoUploadAllButLastN);
       break;
 
     case ActionTypes.DOCUMENT.UPLOAD.UPLOAD_PENDING:
@@ -44,6 +44,12 @@ const uploadFile = async (dispatch, document) => {
     type: ActionTypes.DOCUMENT.UPLOAD.LOADING,
     id: document.id,
   });
+
+  // fix for https://github.com/facebook/react-native/issues/9599
+  if(typeof global.self === "undefined") {
+    console.log('[patch] global.self = global;');
+    global.self = global;
+  }
 
   try {
     const base64Image = await RNFS.readFile(document.image, 'base64');

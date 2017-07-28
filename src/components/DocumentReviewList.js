@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import {
   StyleSheet,
-  Text,
   View,
   StatusBar,
   ListView,

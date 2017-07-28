@@ -101,10 +101,12 @@
 	// Remove color from interface builder (easier building)
 	self.doneButton.backgroundColor = [UIColor clearColor];
 	self.pageCounter.backgroundColor = [UIColor clearColor];
-	self.pageCounter.hidden = true;
+	self.pageCounter.hidden = true; // hide until first scan is made
 
 	// Customize this xib file to add some UI between the scanner preview and the shutter button
 	UIView *grayBG = [[[NSBundle mainBundle] loadNibNamed:@"SBHud" owner:self options:nil] firstObject];
+	// fix grayBG position
+	grayBG.frame = self.scannerViewController.view.frame;
 	[self.scannerViewController.HUDView addSubview:grayBG];
 }
 

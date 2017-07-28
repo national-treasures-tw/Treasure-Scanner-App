@@ -30,9 +30,6 @@
 	},
 	"jest": {
 		"preset": "react-native",
-		"verbose": true,
-		"testPathIgnorePatterns": [
-			"assets/*"
-		]
+		"verbose": true
 	}
 }

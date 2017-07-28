@@ -10,8 +10,8 @@ export default store => next => async action => {
 
   switch (action.type) {
     case ActionTypes.DOCUMENT.ADD:
-      // al but first 3
-      uploadingPendingDocuments(store, 3);
+      // al but first N
+      uploadingPendingDocuments(store, config.autoUploadAllButLastN);
       break;
 
     case ActionTypes.DOCUMENT.UPLOAD.UPLOAD_PENDING:

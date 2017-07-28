@@ -6,8 +6,11 @@ const getAllDocuments = state => state.documents;
 const getStats = createSelector(
   [getAllDocuments],
   documents => {
-    const list = Object.keys(documents).map(id => documents[id]);
+    const list = Object.keys(documents)
+      .map(id => documents[id])
+      .filter(doc => doc !== undefined);
     return {
+      image: 'stat',
       Archived: list.filter(doc => doc.archived).length,
       Deleted: list.filter(doc => doc.deleted).length,
       Pending: list.filter(doc => !doc.deleted && doc.status === Status.UNDEFINED).length,

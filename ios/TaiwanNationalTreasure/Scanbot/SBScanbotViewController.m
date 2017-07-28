@@ -101,6 +101,7 @@
 	// Remove color from interface builder (easier building)
 	self.doneButton.backgroundColor = [UIColor clearColor];
 	self.pageCounter.backgroundColor = [UIColor clearColor];
+	self.pageCounter.hidden = true;
 
 	// Customize this xib file to add some UI between the scanner preview and the shutter button
 	UIView *grayBG = [[[NSBundle mainBundle] loadNibNamed:@"SBHud" owner:self options:nil] firstObject];
@@ -109,7 +110,7 @@
 
 - (void) updateDoneButton {
 	if([self imageCount] == 0) {
-		self.pageCounter.hidden = false;
+		self.pageCounter.hidden = true;
 	} else if([self imageCount] == 1) {
 		self.pageCounter.text = [self translationLabelForKey:@"singularDocument"];
 		self.pageCounter.hidden = false;

@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types'
+
 import {
   StyleSheet,
   Text,
   View,
-  Image,
   StatusBar,
   ListView,
   Dimensions,
@@ -12,18 +13,19 @@ import {
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import * as actions from '../actions/actions';
 
 import Scanbot from '../Scanbot/Scanbot';
-
-import * as actions from '../actions/actions';
 import config from '../config';
-import Status from '../utils/consts';
 import getStats from '../selectors/getStats';
 import getScannedDocuments from '../selectors/getScannedDocuments';
+import ReviewBottomTapbar from './ReviewBottomTapbar';
+import ReviewStats from './ReviewStats';
+import ReviewDocument from './ReviewDocument';
 
 export const winSize = Dimensions.get('window');
 
-class DocumentReviewList extends Component {
+class DocumentReviewList extends PureComponent {
 
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
@@ -39,11 +41,12 @@ class DocumentReviewList extends Component {
     const { documents, stats } = this.props;
 
     const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => (r1 !== r2)
+      rowHasChanged: (r1, r2) => r1 !== r2
     });
 
     this.state = {
       scrollIndex: 0,
+      documentCount: documents.length,
       dataSource: dataSource.cloneWithRows([...documents, stats ]),
     };
   };
@@ -58,6 +61,7 @@ class DocumentReviewList extends Component {
     const { documents, stats } = this.props;
 
     this.setState({
+      documentCount: documents.length,
       dataSource: dataSource.cloneWithRows([...newProps.documents, stats ]),
     });
 
@@ -71,12 +75,10 @@ class DocumentReviewList extends Component {
   onScanButton = async () => {
     const { uploadPendingDocuments } = this.props;
 
-    StatusBar.setHidden(true, true);
-
     // start uploading all pending documents
     uploadPendingDocuments();
 
-    // See 'Scanbot/Scanbot.js' for all options and documentation
+    StatusBar.setHidden(true, true);
     await Scanbot.scan(config.scanOptions, this.onReceiveDocumentScan);
     StatusBar.setHidden(false, true);
   };
@@ -94,208 +96,68 @@ class DocumentReviewList extends Component {
     }
   };
 
-  onCropButton = async () => {
-    const { scrollIndex } = this.state;
-    const { cropDocument } = this.props;
-
-    const doc = this.getRow(scrollIndex);
-    try {
-      StatusBar.setHidden(true, true);
-      // See 'Scanbot/Scanbot.js' for all options and documentation
-      const croppedDocument = await Scanbot.crop(doc);
-      StatusBar.setHidden(false, true);
-
-      if (doc.image === croppedDocument.image) {
-        // user canceled the crop
-        return;
-      }
-
-      cropDocument(
-        doc.id,
-        croppedDocument.image,
-        croppedDocument.polygon
-      );
-
-    } catch (ex) {
-      alert('Crop failed..', ex);
-    }
-  };
-
-  onRotateButton = async () => {
-    const { scrollIndex } = this.state;
-    const { rotateDocument } = this.props;
-
-    const doc = this.getRow(scrollIndex);
-    try {
-      // See 'Scanbot/Scanbot.js' for all options and documentation
-      rotateDocument(
-        doc.id,
-        await Scanbot.rotate(doc.image),
-      );
-    } catch (ex) {
-      alert('Rotating failed..', ex);
-    }
-  };
-
-  onDeleteButton = () => {
-    const { scrollIndex } = this.state;
-    const { deleteDocument } = this.props;
-    deleteDocument(this.getRow(scrollIndex).id);
-  };
-
   onScroll = (event) => {
-    const { dataSource } = this.state;
+    const { documentCount } = this.state;
 
     this.setState({
       // User might have scrolled or bounced before beginning or end
       scrollIndex: Math.min(
-        Math.max(dataSource.getRowCount() - 1, 0),
+        Math.max(documentCount, 0),
         Math.round(Math.max(0, event.nativeEvent.contentOffset.x) / winSize.width)
       )
     });
   };
 
-  getRow = (index) => {
-    const { dataSource } = this.state;
-    return dataSource.getRowData(0, index);
-  };
-
   render() {
-    const { uploadDocument } = this.props;
-    const { scrollIndex, dataSource } = this.state;
-
-    const documentCount = dataSource.getRowCount();
-    const document = dataSource.getRowData(0, scrollIndex);
+    const { stats } = this.props;
+    const { scrollIndex, dataSource, documentCount } = this.state;
 
     return (
       <View style={styles.viewport}>
+        <ListView
+          ref={(c) => (this._listView = c)}
+          enableEmptySections={false}
+          dataSource={dataSource}
+          style={styles.list}
+          onScroll={this.onScroll}
+          horizontal={true}
+          pagingEnabled={true}
+          directionalLockEnabled={true}
+          automaticallyAdjustContentInsets={false}
+          showsVerticalScrollIndicator={false}
+          renderRow={(rowData, _, rowId) => {
+            return rowData.id ?
+              <ReviewDocument key={rowId} image={rowData.image} /> :
+              <ReviewStats key={rowId} documentCount={documentCount} stats={stats} />
+          }}
+        />
 
-        {documentCount > 0 && (
-          <ListView
-            ref={(c) => (this._listView = c)}
-            enableEmptySections={true}
-            dataSource={dataSource}
-            style={styles.list}
-            onScroll={this.onScroll}
-            horizontal={true}
-            pagingEnabled={true}
-            directionalLockEnabled={true}
-            automaticallyAdjustContentInsets={false}
-            showsVerticalScrollIndicator={false}
-            renderRow={(document, index) => !document.id ? (
-              <View
-                style={styles.stats}
-                key={index}
-              >
-                {Object.keys(document).map(key => (
-                  <View
-                    style={styles.infoContainer}
-                    key={key}
-                  >
-                    <Text style={styles.info}>
-                      {key}
-                    </Text>
-                    <Text style={styles.info}>
-                      {document[key]}
-                    </Text>
-                  </View>
-                ))}
-
-              </View>
-            ) : (
-              <View
-                style={styles.listItem}
-                key={index}
-              >
-                <Image
-                  style={styles.image}
-                  source={{ uri: `file://${document.image}`, scale: 1 }}
-                />
-              </View>
-            )}
+        {(documentCount > 0 && scrollIndex < documentCount) ? (
+          <ReviewBottomTapbar
+            document={dataSource.getRowData(0, scrollIndex)}
           />
+        ) : (
+          <View style={{ height: 60 }}/>
         )}
-
-        {documentCount === 0 && (
-          <View style={styles.infoContainer}>
-            <Text style={styles.info}>Your scanned documents will appear here</Text>
-          </View>
-        )}
-
-        {documentCount > 0 && scrollIndex + 1 === documentCount && (
-          <View style={styles.bottomTabBar}>
-            <Button
-              style={styles.button}
-              onPress={() => {}}
-              title="Stats"
-              disabled
-            />
-          </View>
-        )}
-
-        {document && document.id && (() => {
-          switch (document.status) {
-            case Status.UNDEFINED:
-              return (
-                <View style={styles.bottomTabBar}>
-                  <Button
-                    disabled={!document.originalImage || document.isNotDocument}
-                    style={styles.button}
-                    onPress={() => this.onCropButton()}
-                    title="Crop"
-                  />
-                  <Button
-                    style={styles.button}
-                    onPress={() => this.onRotateButton()}
-                    title="Rotate"
-                  />
-                  <Button
-                    style={styles.button}
-                    onPress={this.onDeleteButton}
-                    title="Delete"
-                  />
-                </View>
-              );
-            case Status.LOADING:
-              return (
-                <View style={styles.bottomTabBar}>
-                  <Button
-                    style={styles.button}
-                    onPress={() => {}}
-                    title="Uploading..."
-                    disabled
-                  />
-                </View>
-              );
-            case Status.LOADED:
-              return (
-                <View style={styles.bottomTabBar}>
-                  <Button
-                    style={styles.button}
-                    onPress={() => {}}
-                    title="Document uploaded"
-                    disabled
-                  />
-                </View>
-              );
-            case Status.ERROR:
-              return (
-                <View style={styles.bottomTabBar}>
-                  <Button
-                    style={styles.button}
-                    onPress={() => uploadDocument(document.id)}
-                    title="Upload failed.. Try again?"
-                  />
-                </View>
-              );
-            default:
-          }
-        })()}
-
       </View>
     );
   }
 }
+
+DocumentReviewList.propTypes = {
+  documents: PropTypes.arrayOf(
+    React.PropTypes.shape({
+      image: PropTypes.string.isRequired,
+      originalImage: PropTypes.string.isRequired,
+      status: PropTypes.string,
+      timestamp: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
+      rotation: PropTypes.number.isRequired,
+      deleted: PropTypes.bool.isRequired,
+    })
+  ).isRequired,
+  stats: PropTypes.object.isRequired,
+};
 
 const styles = StyleSheet.create({
   viewport: {
@@ -308,47 +170,8 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
   },
-  listItem: {
-    width: winSize.width,
-    flex: 1,
-    alignItems: 'center',
-  },
-  image: {
-    width: winSize.width - 20,
-    height: winSize.height - 136,
-    resizeMode: Image.resizeMode.contain,
-  },
-  stats: {
-    width: winSize.width,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-  },
-  infoContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 40,
-  },
-  info: {
-    flex: 1,
-    textAlign: 'center',
-    color: 'gray'
-  },
   error: {
     color: 'red',
-  },
-  bottomTabBar: {
-    flexDirection: 'row',
-    width: winSize.width,
-    backgroundColor: '#f1f1f1',
-    justifyContent: 'space-around',
-    padding: 8,
-  },
-  button: {
-    flex: 1,
-    textAlign: 'center',
-    borderWidth: 1
   },
 });
 

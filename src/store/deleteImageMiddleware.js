@@ -2,6 +2,7 @@ import * as ActionTypes from '../actions/ActionTypes';
 import RNFS from 'react-native-fs';
 import getScannedDocuments from '../selectors/getScannedDocuments';
 import Status from '../utils/consts';
+import config from '../config';
 
 const deleteImageMiddleware = store => next => action => {
   next(action);
@@ -19,8 +20,8 @@ const deleteImageMiddleware = store => next => action => {
     // Archive everything ...
     const documents = getScannedDocuments(store.getState());
     documents
-      // ... except last 20 documents
-      .slice(20)
+      // ... except last N documents
+      .slice(config.autoArchiveAllButLastN)
       // ... and only those which are loaded
       .filter(doc => doc.status === Status.LOADED)
       .forEach(doc => {

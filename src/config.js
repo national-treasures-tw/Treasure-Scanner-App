@@ -39,8 +39,8 @@ const config = {
     "cancel": "Cancel",
     "done": "Done",
 
-    "singularDocument": "1", // or "1 page" if you like
-    "pluralDocuments": "%d", // or "%d pages" if you like
+    "singularDocument": "1 page",
+    "pluralDocuments": "%d pages",
 
     "imageMode": {
       [SBSDKImageModeColor]: "Color",

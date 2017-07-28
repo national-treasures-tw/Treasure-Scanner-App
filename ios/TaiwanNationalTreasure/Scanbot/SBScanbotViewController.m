@@ -28,7 +28,6 @@
 @property (assign, nonatomic) BOOL nextIsNonDocument;
 @property (assign, nonatomic) SBSDKShutterMode previousShutterMode;
 
-@property (weak, nonatomic) IBOutlet UILabel *pageCounter;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (weak, nonatomic) IBOutlet UIButton *shutterModeButton;
 @property (weak, nonatomic) IBOutlet UIButton *imageModeButton;
@@ -100,8 +99,6 @@
 - (void) setHud {
 	// Remove color from interface builder (easier building)
 	self.doneButton.backgroundColor = [UIColor clearColor];
-	self.pageCounter.backgroundColor = [UIColor clearColor];
-	self.pageCounter.hidden = true; // hide until first scan is made
 
 	// Customize this xib file to add some UI between the scanner preview and the shutter button
 	UIView *grayBG = [[[NSBundle mainBundle] loadNibNamed:@"SBHud" owner:self options:nil] firstObject];
@@ -112,13 +109,11 @@
 
 - (void) updateDoneButton {
 	if([self imageCount] == 0) {
-		self.pageCounter.hidden = true;
+		[self.doneButton setTitle:[self translationLabelForKey:@"cancel"] forState:UIControlStateNormal];
 	} else if([self imageCount] == 1) {
-		self.pageCounter.text = [self translationLabelForKey:@"singularDocument"];
-		self.pageCounter.hidden = false;
+		[self.doneButton setTitle:[self translationLabelForKey:@"singularDocument"] forState:UIControlStateNormal];
 	} else {
-		self.pageCounter.text = [NSString stringWithFormat:[self translationLabelForKey:@"pluralDocuments"], [self imageCount]];
-		self.pageCounter.hidden = false;
+		[self.doneButton setTitle:[NSString stringWithFormat:[self translationLabelForKey:@"pluralDocuments"], [self imageCount]] forState:UIControlStateNormal];
 	}
 }
 

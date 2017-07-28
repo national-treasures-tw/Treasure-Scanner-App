@@ -21,22 +21,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PWj-8p-kEd">
-                        <rect key="frame" x="0.0" y="637" width="120" height="100"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.24646832190000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="120" id="Nsd-jd-Oe1"/>
-                            <constraint firstAttribute="height" constant="100" id="uWc-9N-9Bf"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <inset key="contentEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <state key="normal" title="## Done">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="onDone:" destination="paA-s9-LJ8" eventType="touchUpInside" id="V1O-x1-Tg9"/>
-                        </connections>
-                    </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rfK-E2-Qse" userLabel="Topbar">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
                         <subviews>
@@ -93,34 +77,36 @@
                             <constraint firstItem="VGp-Vq-ENq" firstAttribute="top" secondItem="rfK-E2-Qse" secondAttribute="top" id="xPA-kR-vQH" userLabel="ImageMode top"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRD-5F-dYs">
-                        <rect key="frame" x="294" y="636" width="90" height="100"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PWj-8p-kEd">
+                        <rect key="frame" x="294" y="636" width="120" height="100"/>
                         <color key="backgroundColor" white="0.0" alpha="0.24646832190000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="90" id="8HM-8p-Azg"/>
-                            <constraint firstAttribute="height" constant="100" id="yCA-qt-gbk"/>
+                            <constraint firstAttribute="width" constant="120" id="Nsd-jd-Oe1"/>
+                            <constraint firstAttribute="height" constant="100" id="uWc-9N-9Bf"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="30" maxY="0.0"/>
+                        <state key="normal" title="Cancel">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="onDone:" destination="paA-s9-LJ8" eventType="touchUpInside" id="V1O-x1-Tg9"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="rfK-E2-Qse" secondAttribute="trailing" id="Me4-zW-ZZP" userLabel="Topbar right"/>
-                    <constraint firstAttribute="trailing" secondItem="SRD-5F-dYs" secondAttribute="trailing" constant="30" id="cWA-wP-0bP" userLabel="Page Counter right"/>
-                    <constraint firstItem="6SZ-8g-utU" firstAttribute="top" secondItem="PWj-8p-kEd" secondAttribute="bottom" constant="-1" id="ee2-Z5-sZ4" userLabel="Done Button bottom"/>
+                    <constraint firstItem="6SZ-8g-utU" firstAttribute="top" secondItem="PWj-8p-kEd" secondAttribute="bottom" id="ee2-Z5-sZ4" userLabel="Done Button bottom"/>
                     <constraint firstItem="rfK-E2-Qse" firstAttribute="leading" secondItem="siS-hS-d7S" secondAttribute="leading" id="kMZ-2Q-i0i" userLabel="Topbar left"/>
                     <constraint firstItem="rfK-E2-Qse" firstAttribute="top" secondItem="ojI-Ej-Oqf" secondAttribute="bottom" id="m3E-o7-w9s" userLabel="Topbar top"/>
-                    <constraint firstItem="6SZ-8g-utU" firstAttribute="top" secondItem="SRD-5F-dYs" secondAttribute="bottom" id="mnq-UI-DwF" userLabel="Page Counter bottom"/>
-                    <constraint firstItem="PWj-8p-kEd" firstAttribute="leading" secondItem="siS-hS-d7S" secondAttribute="leading" id="rvd-eD-UOf" userLabel="Done Button left"/>
+                    <constraint firstItem="PWj-8p-kEd" firstAttribute="trailing" secondItem="siS-hS-d7S" secondAttribute="trailing" id="rvd-eD-UOf" userLabel="Done Button left"/>
                 </constraints>
             </view>
             <nil key="simulatedStatusBarMetrics"/>
             <connections>
                 <outlet property="doneButton" destination="PWj-8p-kEd" id="BVV-Q4-fVy"/>
                 <outlet property="imageModeButton" destination="VGp-Vq-ENq" id="PjH-18-YA6"/>
-                <outlet property="pageCounter" destination="SRD-5F-dYs" id="Ken-l0-6Jv"/>
                 <outlet property="shutterModeButton" destination="Gke-xx-RFV" id="IR8-V6-IFs"/>
                 <outlet property="typeButton" destination="1Za-VO-V9f" id="9mu-ja-Qwh"/>
             </connections>

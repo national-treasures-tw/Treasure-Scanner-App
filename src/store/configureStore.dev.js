@@ -21,7 +21,7 @@ const configureStore = (AppNavigator) => {
         deleteImageMiddleware, uploadMiddleware,
         createLogger({ collapsed: true, duration: true }),
       ),
-      autoRehydrate()
+      // autoRehydrate()
     )
   );
 

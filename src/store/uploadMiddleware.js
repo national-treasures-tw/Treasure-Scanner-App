@@ -45,12 +45,6 @@ const uploadFile = async (dispatch, document) => {
     id: document.id,
   });
 
-  // fix for https://github.com/facebook/react-native/issues/9599
-  if(typeof global.self === "undefined") {
-    console.log('[patch] global.self = global;');
-    global.self = global;
-  }
-
   try {
     const base64Image = await RNFS.readFile(document.image, 'base64');
     const response = await fetch(config.bucket, {
@@ -66,7 +60,8 @@ const uploadFile = async (dispatch, document) => {
 
         // @Hsin please add the right meta data here
         email: 'test@examoke.com',
-        naId: '1742009',
+        docId: '1742008',
+        location: 'nara',
         recordGroup: '469',
         entry: 'UD409',
         stack: '250',

@@ -35,6 +35,7 @@
 		448917DB1F27756600F956D4 /* PAirSandbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 448917DA1F27756600F956D4 /* PAirSandbox.m */; };
 		448918441F28FA7500F956D4 /* UIImage+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 448918431F28FA7500F956D4 /* UIImage+Rotate.m */; };
 		4D0FAF4DE7FD42B7EED74A4C /* RCTConvert+Enums.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0FA7ADFFCB556E3E3F5498 /* RCTConvert+Enums.m */; };
+		54EC6BCF1F32545000E3F460 /* libRNAWSCognito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54EC6BCC1F3253E200E3F460 /* libRNAWSCognito.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		B990D5C7489143EE8C98695D /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F63823A125294E60AC681D5D /* libRNFS.a */; };
@@ -202,6 +203,13 @@
 			remoteGlobalIDString = 6456441F1EB8DA9100672408;
 			remoteInfo = "RNFS-tvOS";
 		};
+		54EC6BCB1F3253E200E3F460 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 54EC6BAE1F3253E200E3F460 /* RNAWSCognito.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNAWSCognito;
+		};
 		5E9157321DD0AC6500FF2AA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
@@ -288,6 +296,7 @@
 		448918431F28FA7500F956D4 /* UIImage+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Rotate.m"; path = "TaiwanNationalTreasure/UIImage+Rotate.m"; sourceTree = "<group>"; };
 		4D0FA7ADFFCB556E3E3F5498 /* RCTConvert+Enums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RCTConvert+Enums.m"; path = "TaiwanNationalTreasure/Scanbot/RCTConvert+Enums.m"; sourceTree = "<group>"; };
 		4D0FAD2E3795E6751352AB80 /* RCTConvert+Enums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RCTConvert+Enums.h"; path = "TaiwanNationalTreasure/Scanbot/RCTConvert+Enums.h"; sourceTree = "<group>"; };
+		54EC6BAE1F3253E200E3F460 /* RNAWSCognito.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNAWSCognito.xcodeproj; path = "/Users/Shin/Desktop/Coding/TNT/react-native-scanbot/node_modules/react-native/Libraries/LinkingIOS/../../../react-native-aws-cognito-js/ios/RNAWSCognito.xcodeproj"; sourceTree = "<absolute>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -299,6 +308,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54EC6BCF1F32545000E3F460 /* libRNAWSCognito.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -478,6 +488,14 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
+		54EC6BAF1F3253E200E3F460 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				54EC6BCC1F3253E200E3F460 /* libRNAWSCognito.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,6 +517,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				54EC6BAE1F3253E200E3F460 /* RNAWSCognito.xcodeproj */,
 				44167F861F2A6FE000B21C56 /* ScanbotSDK.framework */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -638,6 +657,10 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = 54EC6BAF1F3253E200E3F460 /* Products */;
+					ProjectRef = 54EC6BAE1F3253E200E3F460 /* RNAWSCognito.xcodeproj */;
 				},
 				{
 					ProductGroup = 448917B71F276B8A00F956D4 /* Products */;
@@ -811,6 +834,13 @@
 			fileType = archive.ar;
 			path = libRNFS.a;
 			remoteRef = 448917D61F276B8A00F956D4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		54EC6BCC1F3253E200E3F460 /* libRNAWSCognito.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNAWSCognito.a;
+			remoteRef = 54EC6BCB1F3253E200E3F460 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */ = {

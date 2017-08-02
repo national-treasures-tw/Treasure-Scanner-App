@@ -64,4 +64,3 @@ const styles = StyleSheet.create({
 });
 
 export default ReviewStats;
-

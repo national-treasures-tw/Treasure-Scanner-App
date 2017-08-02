@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`dummy component exists 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hasTVPreferredFocus={undefined}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "transparent",
+      },
+      undefined,
+    ]
+  }
+  testID={undefined}
+  tvParallaxProperties={undefined}
+>
+  <Image
+    resizeMode="cover"
+    source={1}
+    style={
+      Object {
+        "backgroundColor": "#292929",
+        "height": 1334,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 750,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+          "marginTop": 64,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignSelf": "center",
+              "backgroundColor": "rgba(0,0,0,0)",
+              "flex": 0.18,
+              "justifyContent": "center",
+              "padding": 20,
+            },
+            Object {
+              "width": 750,
+            },
+          ]
+        }
+      >
+        <Image
+          source={1}
+          style={
+            Object {
+              "alignSelf": "center",
+              "height": 54,
+              "justifyContent": "center",
+              "width": 75,
+            }
+          }
+        />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "alignItems": "center",
+              "color": "#e78720",
+              "fontFamily": "Futura",
+              "fontSize": 28,
+              "justifyContent": "center",
+              "textAlign": "center",
+            }
+          }
+        >
+          Lifestyle App
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "alignSelf": "center",
+            "flex": 0.82,
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginTop": 20,
+            "paddingTop": 20,
+          }
+        }
+      >
+        <View
+          behavior="height"
+        />
+      </View>
+    </View>
+  </Image>
+</View>
+`;

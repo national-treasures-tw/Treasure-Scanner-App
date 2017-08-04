@@ -13,6 +13,7 @@ import { addNavigationHelpers } from 'react-navigation';
 import Scanbot from './src/Scanbot/Scanbot';
 import DocumentReviewList from './src/components/DocumentReviewList';
 import LoginScreen from './src/components/login/LoginScreen';
+import Home from './src/components//Home/Home';
 import configureStore from './src/store/configureStore';
 
 import config from './src/config';
@@ -23,7 +24,8 @@ Scanbot.setTranslations(config.labelTranslations);
 
 const AppNavigator = StackNavigator({
   // @Hsin you can add more app screens here if you need
-  LoginScreen: { screen: LoginScreen },
+  LoginScreen: { screen: Home },
+  Home: { screen: LoginScreen },
   DocumentReviewList: { screen: DocumentReviewList },
 });
 

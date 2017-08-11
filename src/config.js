@@ -16,7 +16,7 @@ import {
 } from './Scanbot/Scanbot';
 
 const config = {
-  scanbotLicense: 'Px/ikVYDSTzigYnpa+pwcXluzh/sk6B+16D2zqRf2fK2HgvBDRI6ofHV+DmVSLJMgcXprW7h4bEMKkczYth3SsPeV7B0CLQJdnblxXTnC/DAAFmJxQMK+0Icl9deZWuzeZW/YDT4fCvQRLAFgaFLQKWzYzBmoZj+Sanl0R5OOdG+/thIvTQMXJF+vSvW3NGQzr1ADUKsZ8ye3O5ERLKsMtQo+kAMA/krKVPpMStHN+8lP+CU1Qb4Z7cWjSjCcqIBT3HS5e3oPDqDrp9Spy81XXYfr/KTlRIT9G7ZZIsi3650tpB1KE3zJvUzolBlKMuUVNpGHC4NjFyBUbPU6mS9Ow==\nU2NhbmJvdFNESwpUTlQuVGFpd2FuLVRyZWF1c3JlCjE1MDE4OTExOTkKNzgKMQ==\n',
+  scanbotLicense: 'VXMvtFUgalNpBeyjO8F2kwC+KEvoooRTxemKTvEZrdTf6EmiJ+zx4I/8Fb7FTxyZoU3Vh4Z7/mYp8Yw8OEnvGCnfLc6P0Lfb8RwSopcL2SxFGou6TH3sH3nEw8giXiMTzkhdMBA0xvaGuagPA/Sk2/l3t/PRD65Q0mdEmql37nXs1i53QkMTY5Q5x4bDkDlvytopayVU8BLZhKIWcDbGdzWQWhsqPX4FodsEAGrSWdzdfdz/uiLFaQKzhb0BtzOfWoyWWTvhDokxGD2HXSjCvGRPHKGopJBIndhEG2uG7FmSLKEFWXXobQ3lzo4pG83SjuC1LWuEXrbdkpUm9Lvs7w==\nU2NhbmJvdFNESwpUTlQuVGFpd2FuLVRyZWF1c3JlCjE1MDU0MzM1OTkKNzgKMQ==\n',
 
   // bucket: 'https://requestb.in/11d6jet1',
   bucket: 'https://76k76zdzzl.execute-api.us-east-1.amazonaws.com/stage/upload',

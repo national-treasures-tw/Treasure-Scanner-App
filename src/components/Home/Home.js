@@ -3,20 +3,21 @@
  */
 
 import React from 'react';
-import { Button, Text, Platform, ScrollView, StyleSheet, View, Image } from 'react-native';
+import { Button, Text, Platform, ScrollView, StyleSheet, View, Image, NetInfo, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { TabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import homeStyles from './styles/HomeStyle'
 import { Images, Metrics } from '../Themes';
+import { onSignOut } from "../auth";
 const width = Metrics.screenWidth;
 
 const MyNavScreen = ({ navigation, banner }) => (
   <ScrollView style={styles.container}>
     <Text>{banner}</Text>
     <Button
-      onPress={() => navigation.navigate('Home')}
-      title="Go to home tab"
+      onPress={() => onSignOut().then(() => navigation.navigate("SignedOut"))}
+      title="Log out"
     />
     <Button
       onPress={() => navigation.navigate('Settings')}
@@ -165,6 +166,31 @@ class MyScanScreen extends React.Component {
       (error) => this.setState({ error: error.message }),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
     );
+
+  }
+
+  onReadyForTask = () => {
+    const { latitude, longitude } = this.state;
+    NetInfo.fetch().then((reach) => {
+      console.log('inside net info');
+      console.log('Initial: ' + reach);
+      if (reach !== 'wifi') {
+        // alert('Please make sure you connect to a Wifi network before continuing');
+      }
+    });
+    const siteCoordinates = { NARA: { latitude: 39.0006809, longitude: -76.9605249 } };
+    // proximity of 0.1 in latitude is about 7 miles in distance
+    const proximity = 0.1;
+    const isCloseBy = latitude < siteCoordinates.NARA.latitude + proximity
+      && latitude > siteCoordinates.NARA.latitude - proximity
+      && longitude > siteCoordinates.NARA.longitude - proximity
+      && longitude < siteCoordinates.NARA.longitude + proximity
+    if (isCloseBy) {
+      alert('Your location is not within the National Archive, please use tutorial mode instead.')
+    } else {
+      this.props.navigation.navigate("Task");
+    }
+
   }
 
   render() {
@@ -187,9 +213,12 @@ class MyScanScreen extends React.Component {
             <Image resizeMode='stretch' style={homeStyles.locationImage} source={Images.unImg} />
           </View>
         </Swiper>
-        <Text>Latitude: {this.state.latitude}</Text>
-        <Text>Longitude: {this.state.longitude}</Text>
         {this.state.error ? <Text>Error: {this.state.error}</Text> : null}
+        <View style={styles.row}>
+          <TouchableOpacity style={homeStyles.readyForTaskButton} onPress={this.onReadyForTask}>
+            <Text style={homeStyles.readyForTaskButtonText}>開始任務</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -206,33 +235,18 @@ MyScanScreen.navigationOptions = {
   ),
 };
 
-const MyProfileScreen = ({ navigation }) => (
-  <Image
-    resizeMode='cover'
-    source={Images.requestFormImg}
-    style={homeStyles.backgroundImage} >
-    <View style={homeStyles.container}>
-      <Text style={homeStyles.requestorText}>YuCheng Lin</Text>
-      <Text style={homeStyles.naIdText}>021755</Text>
-      <Text style={homeStyles.RGNumberText}>59</Text>
-      <Text style={homeStyles.stackAreaText}>250</Text>
-      <Text style={homeStyles.rowNumberText}>062</Text>
-      <Text style={homeStyles.compartmentText}>007</Text>
-      <Text style={homeStyles.shelfNumberText}>01 -></Text>
-      <Text style={homeStyles.recordIdText}>{`
-        Entry A1-1263-B
-        International Cooperation Admin Deputy Directors
-        Box 1-20
-      `}</Text>
-    </View>
-  </Image>
-);
+class MyProfileScreen extends React.Component {
+  render() {
+    return (
+      <MyNavScreen banner="Settings Tab" navigation={this.props.navigation} />
+    )}
+}
 
 MyProfileScreen.navigationOptions = {
-  tabBarLabel: 'Profile',
+  tabBarLabel: 'Tutorial',
   tabBarIcon: ({ tintColor, focused }) => (
     <Ionicons
-      name={focused ? 'ios-person' : 'ios-person-outline'}
+      name={focused ? 'ios-book' : 'ios-book-outline'}
       size={26}
       style={{ color: tintColor }}
     />
@@ -260,17 +274,17 @@ const SimpleTabs = TabNavigator(
       screen: MyHomeScreen,
       path: '',
     },
-    Profile: {
-      screen: MyProfileScreen,
-      path: 'profile',
+    Archivement: {
+      screen: MyAchivementScreen,
+      path: 'achivement',
     },
     Scan: {
       screen: MyScanScreen,
       path: 'scan',
     },
-    Archivement: {
-      screen: MyAchivementScreen,
-      path: 'achivement',
+    Tutorial: {
+      screen: MyProfileScreen,
+      path: 'tutorial',
     },
     Settings: {
       screen: MySettingsScreen,

@@ -9,7 +9,7 @@ import {
   TouchableHighlight,
   Keyboard
 } from 'react-native'
-import LoginForm from './LoginForm';
+import SignupForm from './SignupForm';
 // import LoginButtons from './LoginButtons'
 import { connect } from 'react-redux'
 import styles from './styles/LoginScreenStyle'
@@ -122,25 +122,26 @@ export class LoginScreen extends React.Component {
 
   renderLoginContainer = () => {
     const { name, email, password, passwordConfirmation, passwordError, emailError } = this.state
-    const { fetching, showingForm, dispatch, loginError, onForgotPassword, navigation } = this.props
+    const { fetching, showingForm, dispatch, loginError, onForgotPassword } = this.props
 
     return (
       <View behavior='height'>
-          <LoginForm
-            navigation={navigation}
+          <SignupForm
+            values={this.state.values}
+            onChange={values => this.setState({...this.state, values})}
             fetching={fetching}
             email={email}
-            emailError={emailError}
-            passwordError={passwordError}
-            submitError={loginError}
+            name={name}
             password={password}
-            disabled={this.disableSigninButton()}
+            passwordConfirmation={passwordConfirmation}
+            onNameChange={this.onNameChange}
             handleChangeEmail={this.handleChangeEmail}
             handleChangePassword={this.handleChangePassword}
-            onLoginButtonPressed={this.onLoginButtonPressed}
-            onForgotPassword={this.onForgotPassword}
+            handleChangePasswordConfirmation={this.handleChangePasswordConfirmation}
+            onForgotPassword={onForgotPassword}
+            onSignupButtonPressed={this.onSignupButtonPressed}
             onCancelButtonPressed={() => dispatch(LoginActions.showButtonsForm())}
-            onSignupButtonPressed={() => this.props.navigation.navigate("SignUp")} />
+            onLoginButtonPressed={() => this.props.navigation.navigate("SignIn")} />
       </View>
     )
   }
@@ -175,7 +176,6 @@ export class LoginScreen extends React.Component {
 
 export const mapStateToProps = (state) => ({
   fetching: false,
-  showingForm: 'LOGIN',
   loginError: false,
   isLoggedIn: false,
 })

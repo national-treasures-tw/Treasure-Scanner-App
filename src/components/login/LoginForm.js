@@ -16,6 +16,7 @@ import {
 } from 'react-native-aws-cognito-js';
 import { Images } from '../Themes'
 import styles from './styles/LoginFormStyle';
+import { onSignIn } from "../auth";
 
 const userPool = new CognitoUserPool({
   UserPoolId: 'us-east-1_tQots06gp',
@@ -40,6 +41,8 @@ class LoginForm extends React.Component {
   }
 
   onLogin = () => {
+    onSignIn().then(() => this.props.navigation.navigate("SignedIn"));
+    /*
     const { email, password } = this.state;
     console.log('hello I am logging in as ${email}');
     const authenticationData = {
@@ -69,6 +72,7 @@ class LoginForm extends React.Component {
         alert(err);
       },
     });
+    */
   }
   render () {
     const {
@@ -142,7 +146,7 @@ class LoginForm extends React.Component {
         </View>
 
         <View style={styles.signupPrompt}>
-          <TouchableOpacity style={styles.signupButton} onPress={this.onLogin}>
+          <TouchableOpacity style={styles.signupButton} onPress={this.props.onSignupButtonPressed}>
             <Text style={styles.loginTextSocial}>{'註冊'}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.forgotButton} onPress={(fetching || disabled) ? () => {} : onLoginButtonPressed}>

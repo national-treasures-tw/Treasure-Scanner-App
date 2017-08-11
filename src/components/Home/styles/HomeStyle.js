@@ -133,7 +133,7 @@ export default StyleSheet.create({
   },
   recordIdText: {
     transform: [{ rotate: '90deg'}],
-    fontSize: 20,
+    fontSize: 16,
     top: -220,
     left: -70,
     backgroundColor: 'transparent',
@@ -142,21 +142,21 @@ export default StyleSheet.create({
   RGNumberText: {
     transform: [{ rotate: '90deg'}],
     fontSize: 20,
-    top: -220,
+    top: -245,
     left: 10,
     backgroundColor: 'transparent'
   },
   stackAreaText: {
     transform: [{ rotate: '90deg'}],
     fontSize: 20,
-    top: -140,
+    top: -150,
     left: 12,
     backgroundColor: 'transparent'
   },
   rowNumberText: {
     transform: [{ rotate: '90deg'}],
     fontSize: 20,
-    top: -78,
+    top: -90,
     left: 14,
     backgroundColor: 'transparent'
   },
@@ -173,5 +173,18 @@ export default StyleSheet.create({
     top: 145,
     left: 22,
     backgroundColor: 'transparent'
+  },
+  readyForTaskButton: {
+    top: 150,
+    width: 141,
+    height: 40,
+    backgroundColor: 'rgb(54, 54, 54)',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    padding: 18,
+  },
+  readyForTaskButtonText: {
+    fontSize: 24,
+    color: '#FFF'
   }
 })

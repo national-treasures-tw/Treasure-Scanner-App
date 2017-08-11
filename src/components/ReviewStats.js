@@ -4,18 +4,22 @@ import {
   StyleSheet,
   View,
   Dimensions,
-  Text
+  Text,
+  TouchableOpacity
 } from 'react-native';
 
 export const winSize = Dimensions.get('window');
 
-const ReviewStats = ({ documentCount, stats }) => {
+const ReviewStats = ({ documentCount, stats, onScan }) => {
 
   if(documentCount === 0) {
     return  (
       <View style={styles.stats}>
         <View style={styles.infoContainer}>
           <Text style={styles.info}>Your scanned documents will appear here</Text>
+          <TouchableOpacity style={styles.scanButton} onPress={onScan}>
+            <Text style={styles.scanButtonText}>Scan Now</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -52,7 +56,7 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },

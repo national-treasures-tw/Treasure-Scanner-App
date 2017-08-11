@@ -127,7 +127,7 @@ class DocumentReviewList extends PureComponent {
           renderRow={(rowData, _, rowId) => {
             return rowData.id ?
               <ReviewDocument key={rowId} image={rowData.image} /> :
-              <ReviewStats key={rowId} documentCount={documentCount} stats={stats} />
+              <ReviewStats key={rowId} documentCount={documentCount} stats={stats} onScan={this.onScanButton} />
           }}
         />
 
@@ -184,4 +184,3 @@ function mapStateToProps(state) {
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DocumentReviewList);
-

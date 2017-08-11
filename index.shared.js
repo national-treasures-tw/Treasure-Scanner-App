@@ -16,28 +16,59 @@ import LoginScreen from './src/components/login/LoginScreen';
 import Home from './src/components//Home/Home';
 import configureStore from './src/store/configureStore';
 
+import { createRootNavigator } from "./src/components/router";
+import { isSignedIn } from "./src/components/auth";
+
 import config from './src/config';
 
 // Set valid license and translations here
 Scanbot.setLicense(config.scanbotLicense);
 Scanbot.setTranslations(config.labelTranslations);
 
-const AppNavigator = StackNavigator({
-  // @Hsin you can add more app screens here if you need
-  LoginScreen: { screen: Home },
-  Home: { screen: LoginScreen },
-  DocumentReviewList: { screen: DocumentReviewList },
-});
+class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-const App = ({ nav, dispatch }) =>
-  <AppNavigator
-    navigation={addNavigationHelpers({
-      dispatch: dispatch,
-      state: nav
-    })}
-  />;
+    this.state = {
+      signedIn: false,
+      checkedSignIn: false
+    };
+  }
 
-const mapStateToProps = (state, props) => ({ nav: state.nav });
+  componentWillMount() {
+    isSignedIn()
+      .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
+      .catch(err => alert(err.message));
+  }
+
+  render() {
+    const { checkedSignIn, signedIn } = this.state;
+
+    // If we haven't checked AsyncStorage yet, don't render anything (better ways to do this)
+    if (!checkedSignIn) {
+      return null;
+    }
+
+    const Layout = createRootNavigator(signedIn);
+    return <Layout />;
+  }
+}
+// const AppNavigator = StackNavigator({
+//   // @Hsin you can add more app screens here if you need
+//   LoginScreen: { screen: Home },
+//   Home: { screen: LoginScreen },
+//   DocumentReviewList: { screen: DocumentReviewList },
+// });
+//
+// const App = ({ nav, dispatch }) =>
+//   <AppNavigator
+//     navigation={addNavigationHelpers({
+//       dispatch: dispatch,
+//       state: nav
+//     })}
+//   />;
+
+const mapStateToProps = (state, props) => ({ });
 // const mapDispatchToProps = dispatch => ({ dispatch: dispatch });
 
 const AppWithNavigationState = connect(mapStateToProps)(App);
@@ -45,7 +76,7 @@ const AppWithNavigationState = connect(mapStateToProps)(App);
 class Root extends Component {
   state = {
     rehydrated: false,
-    store: configureStore(AppNavigator)
+    store: configureStore(App)
   };
 
   componentDidMount() {
@@ -56,10 +87,10 @@ class Root extends Component {
 
   render() {
     // Show the logo while we wait to get the saved state from disk
-    if(!this.state.rehydrated){
-      // TODO show logo here
-      return <View />;
-    }
+    // if(!this.state.rehydrated){
+    //   // TODO show logo here
+    //   return <View />;
+    // }
 
     return (
       <Provider store={this.state.store}>

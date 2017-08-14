@@ -122,11 +122,12 @@ export class LoginScreen extends React.Component {
 
   renderLoginContainer = () => {
     const { name, email, password, passwordConfirmation, passwordError, emailError } = this.state
-    const { fetching, showingForm, dispatch, loginError, onForgotPassword } = this.props
+    const { fetching, showingForm, dispatch, loginError, onForgotPassword, navigation } = this.props
 
     return (
       <View behavior='height'>
           <SignupForm
+            navigation={navigation}
             values={this.state.values}
             onChange={values => this.setState({...this.state, values})}
             fetching={fetching}

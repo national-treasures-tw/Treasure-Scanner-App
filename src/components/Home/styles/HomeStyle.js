@@ -54,6 +54,42 @@ export default StyleSheet.create({
   scrollableContent: {
     width: Metrics.screenWidth
   },
+  nameBox: {
+    marginLeft: 31,
+    marginTop: 15,
+    marginBottom: 10
+  },
+  nameBoxText: {
+    fontSize: 36
+  },
+  levelBoxText: {
+    fontSize: 14
+  },
+  levelBar: {
+    flexDirection: 'row'
+  },
+  levelBar1: {
+    height: 8,
+    width: 95,
+    backgroundColor: 'rgb(245, 166, 35)',
+    borderWidth: 1,
+    borderColor: 'rgb(69, 64, 62)',
+    borderRightWidth: 0
+  },
+  levelBar2: {
+    height: 8,
+    width: 54,
+    backgroundColor: 'rgb(136, 118, 102)',
+    borderWidth: 1,
+    borderColor: 'rgb(69, 64, 62)',
+    borderLeftWidth: 0
+  },
+  headingSub: {
+    marginLeft: 31
+  },
+  headingSubText: {
+    fontSize: 16
+  },
   newsBox: {
     width: '98%',
     margin: 3,
@@ -96,7 +132,8 @@ export default StyleSheet.create({
   rankItems: {
     alignSelf: 'center',
     justifyContent: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginBottom: 8
   },
   rankItemName: {
     color: '#FFF',

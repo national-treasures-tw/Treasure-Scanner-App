@@ -22,8 +22,8 @@ export default class ReceiveTask extends React.Component {
 
     return {
       title: `Request Form`,
-      headerRight: <Button title="Next" onPress={() => navigation.navigate("Scan")} />,
-      headerLeft: <Button title="Back" onPress={() => navigation.navigate("SignedIn")} />
+      headerRight: <Button title="Permission" onPress={() => navigation.navigate("CopyCenter")} />,
+      headerLeft: <Button title="Back" onPress={() => navigation.navigate("LocationPicker")} />
     }
   };
 
@@ -58,21 +58,22 @@ export default class ReceiveTask extends React.Component {
 
   render() {
     const { RGNumber, stackArea, rowNumber, compartment, shelfNumber, recordIdText } = this.state;
-  return (
-    <Image
-      resizeMode='cover'
-      source={Images.requestFormImg}
-      style={homeStyles.backgroundImage} >
-      <View style={homeStyles.container}>
-        <Text style={homeStyles.requestorText}>YuCheng Lin</Text>
-        <Text style={homeStyles.naIdText}>021755</Text>
-        <Text style={homeStyles.RGNumberText}>{RGNumber}</Text>
-        <Text style={homeStyles.stackAreaText}>{stackArea}</Text>
-        <Text style={homeStyles.rowNumberText}>{rowNumber}</Text>
-        <Text style={homeStyles.compartmentText}>{compartment}</Text>
-        <Text style={homeStyles.shelfNumberText}>{shelfNumber}</Text>
-        <Text style={homeStyles.recordIdText}>{recordIdText}</Text>
-      </View>
-    </Image>
-  )}
+    return (
+      <Image
+        resizeMode='cover'
+        source={Images.requestFormImg}
+        style={homeStyles.backgroundImage} >
+        <View style={homeStyles.container}>
+          <Text style={homeStyles.requestorText}>YuCheng Lin</Text>
+          <Text style={homeStyles.naIdText}>021755</Text>
+          <Text style={homeStyles.RGNumberText}>{RGNumber}</Text>
+          <Text style={homeStyles.stackAreaText}>{stackArea}</Text>
+          <Text style={homeStyles.rowNumberText}>{rowNumber}</Text>
+          <Text style={homeStyles.compartmentText}>{compartment}</Text>
+          <Text style={homeStyles.shelfNumberText}>{shelfNumber}</Text>
+          <Text style={homeStyles.recordIdText}>{recordIdText}</Text>
+        </View>
+      </Image>
+    );
+  }
 }

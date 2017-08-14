@@ -14,17 +14,18 @@ import {
 // } from 'aws-sdk/dist/aws-sdk-react-native';
 
 import {
-  // AuthenticationDetails,
-  // CognitoUser,
+  AuthenticationDetails,
+  CognitoUser,
   CognitoUserPool,
   CognitoUserAttribute
 } from 'react-native-aws-cognito-js';
 import { Images } from '../Themes';
 import styles from './styles/LoginFormStyle';
+import { onSignIn } from "../auth";
 
 const userPool = new CognitoUserPool({
-  UserPoolId: 'us-east-1_tQots06gp',
-  ClientId: '7fqqnkp63viris6jhenqft6vjv',
+  UserPoolId: 'us-east-1_8JaJl8ZVD',
+  ClientId: '428sfq1asso7a3pam8ugmmssdh',
 });
 
 // Config.region = appConfig.region;
@@ -53,6 +54,7 @@ class SignupForm extends React.Component {
 
   onSignUp = () => {
     const { email, nickname, password } = this.state;
+    const { navigation } = this.props;
     console.log(`${email} with nickname ${nickname}`)
     let attributeList = [];
 
@@ -73,7 +75,28 @@ class SignupForm extends React.Component {
         alert(err.message);
         return;
       }
-      alert('sign up is a success!')
+
+      const authenticationData = {
+        Username: email,
+        Password: password,
+      };
+      const authenticationDetails = new AuthenticationDetails(authenticationData);
+
+      const userData = {
+        Username: email,
+        Pool: userPool
+      };
+      const cognitoUser = new CognitoUser(userData);
+      cognitoUser.authenticateUser(authenticationDetails, {
+        onSuccess: (result) => {
+          const token = result.getAccessToken().getJwtToken();
+          console.log('access token + ' + token);
+          onSignIn(token).then(() => navigation.navigate("SignedIn"));
+        },
+        onFailure: (err) => {
+          alert(err);
+        },
+      });
     });
   }
 

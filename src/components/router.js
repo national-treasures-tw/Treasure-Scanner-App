@@ -6,6 +6,7 @@ import SignIn from "./login/LoginScreen";
 import SignUp from "./login/SignupScreen";
 import Home from './Home/Home';
 import ReceiveTask from './Task/ReceiveTask';
+import CopyCenter from './Task/CopyCenter';
 import DocumentReviewList from './DocumentReviewList';
 
 const headerStyle = {
@@ -32,6 +33,9 @@ export const SignedOut = StackNavigator({
 export const startTask = StackNavigator({
   ReceiveTask: {
     screen: ReceiveTask
+  },
+  CopyCenter: {
+    screen: CopyCenter
   },
   Scan: {
     screen: DocumentReviewList

@@ -9,6 +9,7 @@ const images = {
   unImg: require('../Images/un.jpg'),
   scanImg: require('../Images/scanbot.jpg'),
   requestFormImg: require('../Images/request_form.jpg'),
+  copyCenter: require('../Images/copy_center.jpg'),
   loginBackground: require('../Images/background.jpg'),
 }
 

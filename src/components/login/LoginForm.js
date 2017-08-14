@@ -19,8 +19,8 @@ import styles from './styles/LoginFormStyle';
 import { onSignIn } from "../auth";
 
 const userPool = new CognitoUserPool({
-  UserPoolId: 'us-east-1_tQots06gp',
-  ClientId: '7fqqnkp63viris6jhenqft6vjv',
+  UserPoolId: 'us-east-1_8JaJl8ZVD',
+  ClientId: '428sfq1asso7a3pam8ugmmssdh',
 });
 
 class LoginForm extends React.Component {
@@ -41,10 +41,7 @@ class LoginForm extends React.Component {
   }
 
   onLogin = () => {
-    onSignIn().then(() => this.props.navigation.navigate("SignedIn"));
-    /*
     const { email, password } = this.state;
-    console.log('hello I am logging in as ${email}');
     const authenticationData = {
       Username: email,
       Password: password,
@@ -58,21 +55,15 @@ class LoginForm extends React.Component {
     const cognitoUser = new CognitoUser(userData);
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: (result) => {
-        console.log('access token + ' + result.getAccessToken().getJwtToken());
-        // Config.credentials = new CognitoIdentityCredentials({
-        //   IdentityPoolId: appConfig.IdentityPoolId,
-        //   Logins: {
-        //     [`cognito-idp.${appConfig.region}.amazonaws.com/${appConfig.UserPoolId}`]: result.getIdToken().getJwtToken()
-        //   }
-        // });
-        alert('Success');
-        //console.log(Config.credentials);
+        console.log(result);
+        const token = result.getAccessToken().getJwtToken();
+        console.log('access token + ' + token);
+        onSignIn(token).then(() => this.props.navigation.navigate("SignedIn"));
       },
       onFailure: (err) => {
         alert(err);
       },
     });
-    */
   }
   render () {
     const {

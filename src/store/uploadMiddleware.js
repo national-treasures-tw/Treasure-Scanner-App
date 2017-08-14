@@ -59,18 +59,21 @@ const uploadFile = async (dispatch, document) => {
         timestamp: document.timestamp,
 
         // @Hsin please add the right meta data here
-        email: 'test@examoke.com',
+        dispatchId: '123123-112',
+        userId: 'my-user-id',
         docId: '1742008',
         location: 'nara',
-        recordGroup: '469',
-        entry: 'UD409',
-        stack: '250',
-        row: '075',
-        compartment: '035',
-        shelf: '02-07',
-        box: '1-127',
-        containerId: '14',
-        title: '...',
+        metadata: {
+          recordGroup: '469',
+          entry: 'UD409',
+          stack: '250',
+          row: '075',
+          compartment: '035',
+          shelf: '02-07',
+          box: '1-127',
+          containerId: '14',
+          title: '...'
+        }
       })
     });
 

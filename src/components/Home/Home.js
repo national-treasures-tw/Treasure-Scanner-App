@@ -36,6 +36,26 @@ const MyHomeScreen = ({ navigation }) => (
       <View style={[homeStyles.topSection, { width }]}>
         <Image source={Images.badge1} style={homeStyles.badge1} />
         <View style={homeStyles.topBox}>
+          <View style={homeStyles.nameBox}>
+            <Text style={homeStyles.nameBoxText}>蕭A</Text>
+          </View>
+          {/* Levels: 1 (< 500), 2 (500 - 5000), 3 (> 5000) */}
+          <View style={homeStyles.nameBox}>
+            <Text style={homeStyles.levelBoxText}>Level. 1</Text>
+            <View style={homeStyles.levelBar}>
+              <View style={homeStyles.levelBar1}></View>
+              <View style={homeStyles.levelBar2}></View>
+            </View>
+          </View>
+          <View style={homeStyles.headingSub}>
+            <Text style={homeStyles.headingSubText}>本季排名：121</Text>
+          </View>
+          <View style={homeStyles.headingSub}>
+            <Text style={homeStyles.headingSubText}>貢獻寶藏總數：54</Text>
+          </View>
+          <View style={homeStyles.headingSub}>
+            <Text style={homeStyles.headingSubText}>國家寶藏總數：121972</Text>
+          </View>
         </View>
       </View>
       <ScrollView style={homeStyles.scrollableContent}>
@@ -278,7 +298,7 @@ const SimpleTabs = TabNavigator(
       screen: MyAchivementScreen,
       path: 'achivement',
     },
-    Scan: {
+    LocationPicker: {
       screen: MyScanScreen,
       path: 'scan',
     },

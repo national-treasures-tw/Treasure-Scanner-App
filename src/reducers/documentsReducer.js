@@ -18,6 +18,9 @@ const documentsReducer = (state = {}, action) => {
           deleted: false,
         }
       };
+    case ActionTypes.DOCUMENT.LOCATION:
+      return { ...state, location: action.location };
+
     case ActionTypes.DOCUMENT.UPLOAD.LOADING:
     case ActionTypes.DOCUMENT.UPLOAD.LOADED:
     case ActionTypes.DOCUMENT.UPLOAD.ERROR:
@@ -82,4 +85,3 @@ const documentReducer = (document = {}, action) => {
 };
 
 export default documentsReducer;
-

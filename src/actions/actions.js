@@ -1,5 +1,13 @@
 import { DOCUMENT } from '../actions/ActionTypes';
 
+// Selecting location
+export function selectLocation(location) {
+  return {
+    type: DOCUMENT.LOCATION,
+    location,
+  }
+}
+
 // Scanning
 
 export function addDocument(document) {

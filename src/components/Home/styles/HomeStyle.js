@@ -94,7 +94,8 @@ export default StyleSheet.create({
     width: '98%',
     margin: 3,
     backgroundColor: 'rgb(90, 84, 82)',
-    borderRadius: 3
+    borderRadius: 3,
+    marginBottom: 50
   },
   newsBoxTitle: {
     alignSelf: 'center',
@@ -150,9 +151,95 @@ export default StyleSheet.create({
     flex: 1
   },
   slide: {
-    flex: 1,
+    backgroundColor: 'rgb(59, 58, 56)',
+    borderColor: 'rgb(243, 180, 70)',
+    borderWidth: 2,
+    width: 266,
+    height: 425,
+    left: 80,
+    marginRight: 24
+  },
+  slide3: {
+    backgroundColor: 'rgb(59, 58, 56)',
+    borderColor: 'rgb(243, 180, 70)',
+    borderWidth: 2,
+    width: 266,
+    height: 425,
+    left: 80,
+    marginRight: 115
+  },
+  slideTitle: {
+    alignSelf: 'center',
+    marginTop: 0,
+    width: '100%',
+    height: 105,
+    padding: 12,
+    borderBottomColor: 'rgb(243, 180, 70)',
+    borderBottomWidth: 1
+  },
+  slideTitleText: {
+    color: '#FFF',
+    fontSize: 18,
+    textAlign: 'center',
+    marginBottom: 14
+  },
+  slideTitleSubText: {
+    color: '#FFF',
+    fontSize: 18,
+    opacity: 0.8,
+    textAlign: 'center'
+  },
+  slideLogoPlaceholder: {
+    alignSelf: 'center',
+    width: 155,
+    height: 155,
+    marginTop: 24,
+    marginBottom: 24,
+    backgroundColor: 'black'
+  },
+  slideBodyText: {
+    fontSize: 14,
+    textAlign: 'center',
+    lineHeight: 19,
+    color: '#FFF',
+    opacity: 0.8
+  },
+  slideBodyButton: {
+    alignSelf: 'center',
+    width: 242,
+    height: 52,
+    backgroundColor: 'rgb(160, 30, 64)',
+    marginTop: 24,
     justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'rgb(243, 180, 70)'
+  },
+  slideBodyButton1: {
+    alignSelf: 'center',
+    width: 242,
+    height: 52,
+    backgroundColor: 'rgb(160, 30, 64)',
+    marginTop: 44,
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'rgb(243, 180, 70)'
+  },
+  slideBodyButtonText: {
+    fontSize: 16,
+    color: '#FFF',
+    textAlign: 'center',
+    letterSpacing: 0.3
+  },
+  slideFootnote: {
+    alignSelf: 'center',
+    top: -120,
+    width: 235,
     backgroundColor: 'transparent'
+  },
+  slideFootnoteText: {
+    fontSize: 16,
+    color: 'rgb(69, 64, 62)',
+    textAlign: 'center'
   },
   requestorText: {
     transform: [{ rotate: '90deg'}],

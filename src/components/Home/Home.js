@@ -4,12 +4,12 @@
 
 import React from 'react';
 import { Button, Text, Platform, ScrollView, StyleSheet, View, Image, NetInfo, TouchableOpacity } from 'react-native';
-import Swiper from 'react-native-swiper';
 import { TabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import homeStyles from './styles/HomeStyle'
 import { Images, Metrics } from '../Themes';
 import { onSignOut } from "../auth";
+import MyScanScreen from './SelectLocation';
 const width = Metrics.screenWidth;
 
 const MyNavScreen = ({ navigation, banner }) => (
@@ -58,7 +58,7 @@ const MyHomeScreen = ({ navigation }) => (
           </View>
         </View>
       </View>
-      <ScrollView style={homeStyles.scrollableContent}>
+      <ScrollView style={homeStyles.scrollableContent} bounces>
         <View style={homeStyles.rankBox}>
           <View style={homeStyles.newsBoxTitle}>
             <Text style={homeStyles.newsBoxTitleText}>本季排名</Text>
@@ -115,7 +115,7 @@ const MyHomeScreen = ({ navigation }) => (
 );
 
 MyHomeScreen.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: '首頁',
   tabBarIcon: ({ tintColor, focused }) => (
     <Ionicons
       name={focused ? 'ios-home' : 'ios-home-outline'}
@@ -153,102 +153,10 @@ const MyAchivementScreen = ({ navigation }) => (
 );
 
 MyAchivementScreen.navigationOptions = {
-  tabBarLabel: 'Achivements',
+  tabBarLabel: '成就',
   tabBarIcon: ({ tintColor, focused }) => (
     <Ionicons
       name={focused ? 'ios-ribbon' : 'ios-ribbon-outline'}
-      size={26}
-      style={{ color: tintColor }}
-    />
-  ),
-};
-
-class MyScanScreen extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      latitude: null,
-      longitude: null,
-      error: null,
-    };
-  }
-
-  componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.setState({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          error: null,
-        });
-      },
-      (error) => this.setState({ error: error.message }),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-    );
-
-  }
-
-  onReadyForTask = () => {
-    const { latitude, longitude } = this.state;
-    NetInfo.fetch().then((reach) => {
-      console.log('inside net info');
-      console.log('Initial: ' + reach);
-      if (reach !== 'wifi') {
-        // alert('Please make sure you connect to a Wifi network before continuing');
-      }
-    });
-    const siteCoordinates = { NARA: { latitude: 39.0006809, longitude: -76.9605249 } };
-    // proximity of 0.1 in latitude is about 7 miles in distance
-    const proximity = 0.1;
-    const isCloseBy = latitude < siteCoordinates.NARA.latitude + proximity
-      && latitude > siteCoordinates.NARA.latitude - proximity
-      && longitude > siteCoordinates.NARA.longitude - proximity
-      && longitude < siteCoordinates.NARA.longitude + proximity
-    if (isCloseBy) {
-      alert('Your location is not within the National Archive, please use tutorial mode instead.')
-    } else {
-      this.props.navigation.navigate("Task");
-    }
-
-  }
-
-  render() {
-    return (
-      <View style={{ flexGrow: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Swiper showsButtons style={homeStyles.wrapper} height={240}
-          onMomentumScrollEnd={(e, state, context) => console.log('index:', state.index)}
-          dot={<View style={{backgroundColor: 'rgba(0,0,0,.2)', width: 5, height: 5, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3}} />}
-          activeDot={<View style={{backgroundColor: '#000', width: 8, height: 8, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3}} />}
-          paginationStyle={{
-            bottom: -23, left: null, right: 10
-          }} loop>
-          <View style={homeStyles.slide} title={<Text numberOfLines={1}>翻拍練習</Text>}>
-            <Image resizeMode='stretch' style={homeStyles.locationImage} source={Images.scanImg} />
-          </View>
-          <View style={homeStyles.slide} title={<Text numberOfLines={1}>National Archives and Records Administration</Text>}>
-            <Image resizeMode='stretch' style={homeStyles.locationImage} source={Images.naraImg} />
-          </View>
-          <View style={homeStyles.slide} title={<Text numberOfLines={1}>United Nations Records Management</Text>}>
-            <Image resizeMode='stretch' style={homeStyles.locationImage} source={Images.unImg} />
-          </View>
-        </Swiper>
-        {this.state.error ? <Text>Error: {this.state.error}</Text> : null}
-        <View style={styles.row}>
-          <TouchableOpacity style={homeStyles.readyForTaskButton} onPress={this.onReadyForTask}>
-            <Text style={homeStyles.readyForTaskButtonText}>開始任務</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
-}
-
-MyScanScreen.navigationOptions = {
-  tabBarLabel: 'Start Task',
-  tabBarIcon: ({ tintColor, focused }) => (
-    <Ionicons
-      name={focused ? 'ios-camera' : 'ios-camera-outline'}
       size={26}
       style={{ color: tintColor }}
     />
@@ -263,7 +171,7 @@ class MyProfileScreen extends React.Component {
 }
 
 MyProfileScreen.navigationOptions = {
-  tabBarLabel: 'Tutorial',
+  tabBarLabel: '指南',
   tabBarIcon: ({ tintColor, focused }) => (
     <Ionicons
       name={focused ? 'ios-book' : 'ios-book-outline'}
@@ -278,7 +186,7 @@ const MySettingsScreen = ({ navigation }) => (
 );
 
 MySettingsScreen.navigationOptions = {
-  tabBarLabel: 'Settings',
+  tabBarLabel: '設定',
   tabBarIcon: ({ tintColor, focused }) => (
     <Ionicons
       name={focused ? 'ios-settings' : 'ios-settings-outline'}

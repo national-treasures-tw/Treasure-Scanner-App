@@ -1,10 +1,35 @@
-import { DOCUMENT, SELECT_LOCATION } from '../actions/ActionTypes';
+import { DOCUMENT, SELECT_LOCATION, RECEIVE_RECORD, USER_SIGNIN, RECEIVE_USER_DETAILS } from '../actions/ActionTypes';
+
+
+// receiveUserDetails
+export function receiveUserDetails(details) {
+  return {
+    type: RECEIVE_USER_DETAILS,
+    details
+  }
+}
+
+// Signin in
+export function signIn(token) {
+  return {
+    type: USER_SIGNIN,
+    token,
+  }
+}
 
 // Selecting location
 export function selectLocation(location) {
   return {
     type: SELECT_LOCATION,
     location,
+  }
+}
+
+// receiving a record dispatch
+export function receiveRecord(record) {
+  return {
+    type: RECEIVE_RECORD,
+    record,
   }
 }
 

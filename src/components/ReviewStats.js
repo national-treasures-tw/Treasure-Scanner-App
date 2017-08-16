@@ -10,13 +10,13 @@ import {
 
 export const winSize = Dimensions.get('window');
 
-const ReviewStats = ({ documentCount, stats, onScan }) => {
+const ReviewStats = ({ documentCount, stats, onScan, practiceMode }) => {
 
   if(documentCount === 0) {
     return  (
       <View style={styles.stats}>
         <View style={styles.infoContainer}>
-          <Text style={styles.info}>Your scanned documents will appear here</Text>
+          <Text style={styles.info}>{ practiceMode ? 'Click Scan to to begin practicing' : 'Your scanned documents will appear here' }</Text>
           <TouchableOpacity style={styles.scanButton} onPress={onScan}>
             <Text style={styles.scanButtonText}>Scan Now</Text>
           </TouchableOpacity>

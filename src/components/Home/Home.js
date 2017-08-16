@@ -10,6 +10,7 @@ import homeStyles from './styles/HomeStyle'
 import { Images, Metrics } from '../Themes';
 import { onSignOut } from "../auth";
 import MyScanScreen from './SelectLocation';
+import MyHomeScreen from './Profile';
 const width = Metrics.screenWidth;
 
 const MyNavScreen = ({ navigation, banner }) => (
@@ -26,104 +27,6 @@ const MyNavScreen = ({ navigation, banner }) => (
     <Button onPress={() => navigation.goBack(null)} title="Go back" />
   </ScrollView>
 );
-
-const MyHomeScreen = ({ navigation }) => (
-  <Image
-    resizeMode='cover'
-    source={Images.loginBackground}
-    style={homeStyles.backgroundImage} >
-    <View style={homeStyles.container}>
-      <View style={[homeStyles.topSection, { width }]}>
-        <Image source={Images.badge1} style={homeStyles.badge1} />
-        <View style={homeStyles.topBox}>
-          <View style={homeStyles.nameBox}>
-            <Text style={homeStyles.nameBoxText}>蕭A</Text>
-          </View>
-          {/* Levels: 1 (< 500), 2 (500 - 5000), 3 (> 5000) */}
-          <View style={homeStyles.nameBox}>
-            <Text style={homeStyles.levelBoxText}>Level. 1</Text>
-            <View style={homeStyles.levelBar}>
-              <View style={homeStyles.levelBar1}></View>
-              <View style={homeStyles.levelBar2}></View>
-            </View>
-          </View>
-          <View style={homeStyles.headingSub}>
-            <Text style={homeStyles.headingSubText}>本季排名：121</Text>
-          </View>
-          <View style={homeStyles.headingSub}>
-            <Text style={homeStyles.headingSubText}>貢獻寶藏總數：54</Text>
-          </View>
-          <View style={homeStyles.headingSub}>
-            <Text style={homeStyles.headingSubText}>國家寶藏總數：121972</Text>
-          </View>
-        </View>
-      </View>
-      <ScrollView style={homeStyles.scrollableContent} bounces>
-        <View style={homeStyles.rankBox}>
-          <View style={homeStyles.newsBoxTitle}>
-            <Text style={homeStyles.newsBoxTitleText}>本季排名</Text>
-          </View>
-          <View style={homeStyles.rankBoxContent}>
-            <View style={homeStyles.rankItems}>
-              <Text style={homeStyles.rankItemName}>小風</Text>
-              <Text style={homeStyles.rankItemScore}>3523</Text>
-            </View>
-            <View style={homeStyles.rankItems}>
-              <Text style={homeStyles.rankItemName}>美東金平</Text>
-              <Text style={homeStyles.rankItemScore}>2123</Text>
-            </View>
-            <View style={homeStyles.rankItems}>
-              <Text style={homeStyles.rankItemName}>憨哥</Text>
-              <Text style={homeStyles.rankItemScore}>1023</Text>
-            </View>
-            <View style={homeStyles.rankItems}>
-              <Text style={homeStyles.rankItemName}>Robin</Text>
-              <Text style={homeStyles.rankItemScore}>523</Text>
-            </View>
-            <View style={homeStyles.rankItems}>
-              <Text style={homeStyles.rankItemName}>蕭Ａ</Text>
-              <Text style={homeStyles.rankItemScore}>323</Text>
-            </View>
-          </View>
-        </View>
-        <View style={homeStyles.newsBox}>
-          <View style={homeStyles.newsBoxTitle}>
-            <Text style={homeStyles.newsBoxTitleText}>寶藏速報</Text>
-          </View>
-          <View style={homeStyles.newsBoxItems}>
-            <Text style={homeStyles.newsBoxTitleItemText}>第一小隊 7/10 8am 在 NARA 正門集合</Text>
-          </View>
-          <View style={homeStyles.newsBoxItems}>
-            <Text style={homeStyles.newsBoxTitleItemText}>g0v 獎助金專案「遺落在世界的國家寶藏」接連上自由時報頭版和 …</Text>
-          </View>
-          <View style={homeStyles.newsBoxItems}>
-            <Text style={homeStyles.newsBoxTitleItemText}>國家寶藏在開放文化基金會舉辦的Civic Tech Fest進行結案報告</Text>
-          </View>
-          <View style={homeStyles.newsBoxItems}>
-            <Text style={homeStyles.newsBoxTitleItemText}>第一小隊 7/10 8am 在 NARA 正門集合</Text>
-          </View>
-          <View style={homeStyles.newsBoxItems}>
-            <Text style={homeStyles.newsBoxTitleItemText}>g0v 獎助金專案「遺落在世界的國家寶藏」接連上自由時報頭版和 …</Text>
-          </View>
-          <View style={homeStyles.newsBoxItems}>
-            <Text style={homeStyles.newsBoxTitleItemText}>國家寶藏在開放文化基金會舉辦的Civic Tech Fest進行結案報告</Text>
-          </View>
-        </View>
-      </ScrollView>
-    </View>
-  </Image>
-);
-
-MyHomeScreen.navigationOptions = {
-  tabBarLabel: '首頁',
-  tabBarIcon: ({ tintColor, focused }) => (
-    <Ionicons
-      name={focused ? 'ios-home' : 'ios-home-outline'}
-      size={26}
-      style={{ color: tintColor }}
-    />
-  ),
-};
 
 const MyAchivementScreen = ({ navigation }) => (
   <Image

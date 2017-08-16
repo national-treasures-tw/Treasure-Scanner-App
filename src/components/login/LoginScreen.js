@@ -13,7 +13,9 @@ import LoginForm from './LoginForm';
 // import LoginButtons from './LoginButtons'
 import { connect } from 'react-redux'
 import styles from './styles/LoginScreenStyle'
-import { Images, Metrics } from '../Themes'
+import { Images, Metrics } from '../Themes';
+import * as actions from '../../actions/actions';
+import { bindActionCreators } from 'redux';
 
 export class LoginScreen extends React.Component {
   constructor (props) {
@@ -122,11 +124,12 @@ export class LoginScreen extends React.Component {
 
   renderLoginContainer = () => {
     const { name, email, password, passwordConfirmation, passwordError, emailError } = this.state
-    const { fetching, showingForm, dispatch, loginError, onForgotPassword, navigation } = this.props
+    const { fetching, showingForm, dispatch, loginError, onForgotPassword, navigation, signIn } = this.props
 
     return (
       <View behavior='height'>
           <LoginForm
+            signIn={signIn}
             navigation={navigation}
             fetching={fetching}
             email={email}
@@ -180,26 +183,6 @@ export const mapStateToProps = (state) => ({
   isLoggedIn: false,
 })
 
-export const mapDispatchToProps = (dispatch: () => void) => ({
-  dispatch,
-  attemptLogin: (email: string, password: string) => {
-    // dispatch(loginAsync(email, password))
-  },
-
-  attemptSignup: (fields: {
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    buildingId: string,
-    apartmentId: string
-  }) => {
-    dispatch(attemptSignup(fields))
-  },
-  onFbLoginPressed: () => dispatch(attemptFacebookLogin()),
-  // FIXME: will be implemented whene the email feature is created
-  onForgotPassword: (email) => {},
-  getBuildings: () => dispatch()
-})
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)

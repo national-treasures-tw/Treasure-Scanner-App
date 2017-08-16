@@ -140,7 +140,13 @@ export default StyleSheet.create({
     color: '#FFF',
     fontSize: 15,
     marginRight: 80,
-    width: 100
+    width: 120
+  },
+  rankItemNameNumberOne: {
+    color: '#FFF',
+    fontSize: 15,
+    marginRight: 80,
+    width: 230
   },
   rankItemScore: {
     color: '#FFF',
@@ -189,13 +195,19 @@ export default StyleSheet.create({
     opacity: 0.8,
     textAlign: 'center'
   },
-  slideLogoPlaceholder: {
+  slideLogo: {
     alignSelf: 'center',
-    width: 155,
-    height: 155,
+    width: 165,
+    height: 165,
     marginTop: 24,
-    marginBottom: 24,
-    backgroundColor: 'black'
+    marginBottom: 24
+  },
+  slideLogoUN: {
+    alignSelf: 'center',
+    width: 165,
+    height: 140,
+    marginTop: 24,
+    marginBottom: 24
   },
   slideBodyText: {
     fontSize: 14,
@@ -220,6 +232,16 @@ export default StyleSheet.create({
     height: 52,
     backgroundColor: 'rgb(160, 30, 64)',
     marginTop: 44,
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'rgb(243, 180, 70)'
+  },
+  slideBodyButtonUN: {
+    alignSelf: 'center',
+    width: 242,
+    height: 52,
+    backgroundColor: 'rgb(160, 30, 64)',
+    marginTop: 49,
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: 'rgb(243, 180, 70)'

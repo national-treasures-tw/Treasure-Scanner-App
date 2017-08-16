@@ -2,8 +2,11 @@ import React from 'react';
 import { Text, View, Image, Button } from 'react-native';
 import homeStyles from '../Home/styles/HomeStyle'
 import { Images } from '../Themes';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/actions';
+import { bindActionCreators } from 'redux';
 
-export default class ReceiveTask extends React.Component {
+class ReceiveTask extends React.Component {
   constructor(props) {
     super(props);
 
@@ -28,36 +31,41 @@ export default class ReceiveTask extends React.Component {
   };
 
   componentDidMount() {
+    const { user } = this.props;
     const initTime = new Date().getTime();
-    fetch('https://76k76zdzzl.execute-api.us-east-1.amazonaws.com/stage/dispatch', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        userId: 'oh-my-user-id',
-        isTest: true
+    if (!user.record) {
+      fetch('https://76k76zdzzl.execute-api.us-east-1.amazonaws.com/stage/dispatch', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: 'oh-my-user-id',
+          isTest: true
+        })
       })
-    })
-    .then(fetchRes => fetchRes.json())
-    .then((res) => {
-      // console.log(res);
-      console.log(`Wait time: ${new Date().getTime() - initTime} ms`)
-      const { StackArea, RGN, Row, Compartment, Shelf, Title, boxRangeString } = res.record;
-      this.setState({
-        RGNumber: RGN,
-        stackArea: StackArea,
-        rowNumber: Row,
-        compartment: Compartment,
-        shelfNumber: Shelf,
-        recordIdText: `Box #${boxRangeString.split('-').join(', ')} \n ${Title}`,
+      .then(fetchRes => fetchRes.json())
+      .then((res) => {
+        // console.log(res);
+        console.log(`Wait time: ${new Date().getTime() - initTime} ms`);
+        const { StackArea, RGN, Row, Compartment, Shelf, Title, boxRangeString } = res.record;
+        const normalizedRecord = {
+          RGNumber: RGN,
+          stackArea: StackArea,
+          rowNumber: Row,
+          compartment: Compartment,
+          shelfNumber: Shelf,
+          recordIdText: `Box #${boxRangeString.split('-').join(', ')} \n ${Title}`,
+        };
+        this.props.receiveRecord(normalizedRecord);
       })
-    })
+    }
   }
 
   render() {
-    const { RGNumber, stackArea, rowNumber, compartment, shelfNumber, recordIdText } = this.state;
+    const { record } = this.props.user || {};
+    const {  RGNumber, stackArea, rowNumber, compartment, shelfNumber, recordIdText } = record || {};
     return (
       <Image
         resizeMode='cover'
@@ -77,3 +85,13 @@ export default class ReceiveTask extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  };
+}
+
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReceiveTask);

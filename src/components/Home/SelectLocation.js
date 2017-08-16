@@ -50,13 +50,14 @@ class MyScanScreen extends React.Component {
     };
     // proximity of 0.1 in latitude is about 7 miles in distance
     // so here we are checking if the user is within 7 miles of the selected location
-    const proximity = 0.1;
+    const proximity = 0.05;
     const isCloseBy = latitude < siteCoordinates[location].latitude + proximity
       && latitude > siteCoordinates[location].latitude - proximity
       && longitude > siteCoordinates[location].longitude - proximity
-      && longitude < siteCoordinates[location].longitude + proximity
+      && longitude < siteCoordinates[location].longitude + proximity;
+    const locationString = location === 'NARA' ? 'National Archive' : 'United Nations';
     if (isCloseBy) {
-      alert('Your location is not within the National Archive, please use tutorial mode instead.')
+      alert(`Your location is not within the ${locationString}, please use Practice Mode instead.`);
     } else {
       selectLocation(location);
       if (location === 'NARA') {
@@ -87,7 +88,7 @@ class MyScanScreen extends React.Component {
                 <Text style={homeStyles.slideTitleSubText}>(隨時隨地)  </Text>
               </View>
               <View style={homeStyles.slideBody}>
-                <View style={homeStyles.slideLogoPlaceholder}></View>
+                <Image source={Images.badge1} style={homeStyles.slideLogo} />
                 <TouchableOpacity style={homeStyles.slideBodyButton1} onPress={this.onReadyForPractice}>
                   <Text style={homeStyles.slideBodyButtonText}>開始練習</Text>
                 </TouchableOpacity>
@@ -99,7 +100,7 @@ class MyScanScreen extends React.Component {
                 <Text style={homeStyles.slideTitleSubText}>(Washington D.C.) </Text>
               </View>
               <View style={homeStyles.slideBody}>
-                <View style={homeStyles.slideLogoPlaceholder}></View>
+                <Image source={Images.naraImg} style={homeStyles.slideLogo} />
                 <Text style={homeStyles.slideBodyText}>已尋獲寶藏：2397</Text>
                 <TouchableOpacity style={homeStyles.slideBodyButton} onPress={() => this.onReadyForTask('NARA')}>
                   <Text style={homeStyles.slideBodyButtonText}>取得任務內容</Text>
@@ -112,9 +113,9 @@ class MyScanScreen extends React.Component {
                 <Text style={homeStyles.slideTitleSubText}>(New York City) </Text>
               </View>
               <View style={homeStyles.slideBody}>
-                <View style={homeStyles.slideLogoPlaceholder}></View>
+                <Image source={Images.unImg} style={homeStyles.slideLogoUN} />
                 <Text style={homeStyles.slideBodyText}>已尋獲寶藏：1397</Text>
-                <TouchableOpacity style={homeStyles.slideBodyButton} onPress={() => this.onReadyForTask('UN')}>
+                <TouchableOpacity style={homeStyles.slideBodyButtonUN} onPress={() => this.onReadyForTask('UN')}>
                   <Text style={homeStyles.slideBodyButtonText}>取得任務內容</Text>
                 </TouchableOpacity>
               </View>

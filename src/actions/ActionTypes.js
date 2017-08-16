@@ -17,3 +17,9 @@ export const DOCUMENT = {
 };
 
 export const SELECT_LOCATION = 'SELECT_LOCATION';
+
+export const RECEIVE_RECORD = 'RECEIVE_RECORD';
+
+export const USER_SIGNIN = 'USER_SIGNIN';
+
+export const RECEIVE_USER_DETAILS = 'RECEIVE_USER_DETAILS';

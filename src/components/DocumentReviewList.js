@@ -32,7 +32,8 @@ class DocumentReviewList extends PureComponent {
     return {
       title: `Documents`,
       headerRight: <Button title="Scan" onPress={() => params.onScanButton()} />,
-    }
+    headerLeft: <Button title="Back" onPress={() => { params.user.location === 'NARA' ? navigation.goBack() : navigation.navigate("LocationPicker")}} />
+    };
   };
 
   constructor(props, context) {
@@ -52,7 +53,7 @@ class DocumentReviewList extends PureComponent {
 
   componentDidMount = () => {
     // set params so we can use them in `navigationOptions`
-    this.props.navigation.setParams({ onScanButton: this.onScanButton });
+    this.props.navigation.setParams({ onScanButton: this.onScanButton, user: this.props.user });
   };
 
   componentWillReceiveProps(newProps) {
@@ -110,7 +111,7 @@ class DocumentReviewList extends PureComponent {
   };
 
   render() {
-    const { stats } = this.props;
+    const { stats, user } = this.props;
     const { scrollIndex, dataSource, documentCount } = this.state;
 
     return (
@@ -129,7 +130,13 @@ class DocumentReviewList extends PureComponent {
           renderRow={(rowData, _, rowId) => {
             return rowData.id ?
               <ReviewDocument key={rowId} image={rowData.image} /> :
-              <ReviewStats key={rowId} documentCount={documentCount} stats={stats} onScan={this.onScanButton} />
+              <ReviewStats
+                key={rowId}
+                documentCount={documentCount}
+                stats={stats} 
+                onScan={this.onScanButton}
+                practiceMode={user.location === 'practice'}
+              />
           }}
         />
 

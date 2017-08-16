@@ -13,9 +13,11 @@ import SignupForm from './SignupForm';
 // import LoginButtons from './LoginButtons'
 import { connect } from 'react-redux'
 import styles from './styles/LoginScreenStyle'
-import { Images, Metrics } from '../Themes'
+import { Images, Metrics } from '../Themes';
+import * as actions from '../../actions/actions';
+import { bindActionCreators } from 'redux';
 
-export class LoginScreen extends React.Component {
+export class SignupScreen extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -122,11 +124,12 @@ export class LoginScreen extends React.Component {
 
   renderLoginContainer = () => {
     const { name, email, password, passwordConfirmation, passwordError, emailError } = this.state
-    const { fetching, showingForm, dispatch, loginError, onForgotPassword, navigation } = this.props
+    const { fetching, showingForm, dispatch, loginError, onForgotPassword, navigation, signIn } = this.props
 
     return (
       <View behavior='height'>
           <SignupForm
+            signIn={signIn}
             navigation={navigation}
             values={this.state.values}
             onChange={values => this.setState({...this.state, values})}
@@ -181,26 +184,6 @@ export const mapStateToProps = (state) => ({
   isLoggedIn: false,
 })
 
-export const mapDispatchToProps = (dispatch: () => void) => ({
-  dispatch,
-  attemptLogin: (email: string, password: string) => {
-    // dispatch(loginAsync(email, password))
-  },
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
-  attemptSignup: (fields: {
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    buildingId: string,
-    apartmentId: string
-  }) => {
-    dispatch(attemptSignup(fields))
-  },
-  onFbLoginPressed: () => dispatch(attemptFacebookLogin()),
-  // FIXME: will be implemented whene the email feature is created
-  onForgotPassword: (email) => {},
-  getBuildings: () => dispatch()
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(SignupScreen)

@@ -56,8 +56,9 @@ class LoginForm extends React.Component {
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: (result) => {
         console.log(result);
-        const token = result.getAccessToken().getJwtToken();
-        console.log('access token + ' + token);
+        const token = result.getIdToken().getJwtToken();
+        console.log('ID token + ' + token);
+        this.props.signIn(token);
         onSignIn(token).then(() => this.props.navigation.navigate("SignedIn"));
       },
       onFailure: (err) => {

@@ -89,9 +89,11 @@ class SignupForm extends React.Component {
       const cognitoUser = new CognitoUser(userData);
       cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: (result) => {
-          const token = result.getAccessToken().getJwtToken();
-          console.log('access token + ' + token);
-          onSignIn(token).then(() => navigation.navigate("SignedIn"));
+          console.log(result);
+          const token = result.getIdToken().getJwtToken();
+          console.log('ID token + ' + token);
+          this.props.signIn(token);
+          onSignIn(token).then(() => this.props.navigation.navigate("SignedIn"));
         },
         onFailure: (err) => {
           alert(err);

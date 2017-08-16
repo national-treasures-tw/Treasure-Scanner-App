@@ -1,12 +1,11 @@
 import { combineReducers } from 'redux';
 
 import documentsReducer from './documentsReducer';
-import getNavReducer from './getNavReducer';
+import getUserReducer from './getUserReducer';
 
 const getRootReducer = AppNavigator => {
   return combineReducers({
-    // create navigation reducer dynamically based on AppNavigator
-    // nav: getNavReducer(AppNavigator),
+    user: getUserReducer,
     documents: documentsReducer,
   })
 };

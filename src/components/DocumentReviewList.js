@@ -83,14 +83,16 @@ class DocumentReviewList extends PureComponent {
   };
 
   onReceiveDocumentScan = ({ document, error }) => {
-    const { addDocument } = this.props;
+    const { addDocument, user } = this.props;
 
     if(error) {
       alert(error);
       return;
     }
 
-    if(document) {
+    const isUserAtLocation = user.location === 'NARA' || user.location === 'UN';
+
+    if(document && isUserAtLocation ) {
       addDocument(document)
     }
   };
@@ -177,7 +179,8 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     documents: getScannedDocuments(state),
-    stats: getStats(state)
+    stats: getStats(state),
+    user: state.user
   };
 }
 

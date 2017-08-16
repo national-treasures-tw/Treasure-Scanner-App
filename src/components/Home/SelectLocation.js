@@ -33,9 +33,10 @@ class MyScanScreen extends React.Component {
     );
 
   }
-
-  onReadyForTask = () => {
+  // location: 'NARA' or 'UN'
+  onReadyForTask = (location) => {
     const { latitude, longitude } = this.state;
+    const { selectLocation, navigation } = this.props;
     NetInfo.fetch().then((reach) => {
       console.log('inside net info');
       console.log('Initial: ' + reach);
@@ -43,19 +44,34 @@ class MyScanScreen extends React.Component {
         // alert('Please make sure you connect to a Wifi network before continuing');
       }
     });
-    const siteCoordinates = { NARA: { latitude: 39.0006809, longitude: -76.9605249 } };
+    const siteCoordinates = {
+      NARA: { latitude: 39.0006809, longitude: -76.9605249 },
+      UN: { latitude: 40.7517766, longitude: -73.9702365 }
+    };
     // proximity of 0.1 in latitude is about 7 miles in distance
+    // so here we are checking if the user is within 7 miles of the selected location
     const proximity = 0.1;
-    const isCloseBy = latitude < siteCoordinates.NARA.latitude + proximity
-      && latitude > siteCoordinates.NARA.latitude - proximity
-      && longitude > siteCoordinates.NARA.longitude - proximity
-      && longitude < siteCoordinates.NARA.longitude + proximity
+    const isCloseBy = latitude < siteCoordinates[location].latitude + proximity
+      && latitude > siteCoordinates[location].latitude - proximity
+      && longitude > siteCoordinates[location].longitude - proximity
+      && longitude < siteCoordinates[location].longitude + proximity
     if (isCloseBy) {
       alert('Your location is not within the National Archive, please use tutorial mode instead.')
     } else {
-      this.props.navigation.navigate("Task");
+      selectLocation(location);
+      if (location === 'NARA') {
+        navigation.navigate("Task");
+      } else if (location === 'UN') {
+        // 8/2017 for UN go directly to scan view because dispatcher for UN is not ready
+        navigation.navigate("Scan");
+      }
     }
+  }
 
+  onReadyForPractice = () => {
+    const { selectLocation, navigation } = this.props;
+    selectLocation('practice');
+    navigation.navigate('Scan');
   }
 
   render() {
@@ -72,8 +88,8 @@ class MyScanScreen extends React.Component {
               </View>
               <View style={homeStyles.slideBody}>
                 <View style={homeStyles.slideLogoPlaceholder}></View>
-                <TouchableOpacity style={homeStyles.slideBodyButton1} onPress={this.onReadyForTask}>
-                  <Text style={homeStyles.slideBodyButtonText}>取得練習內容</Text>
+                <TouchableOpacity style={homeStyles.slideBodyButton1} onPress={this.onReadyForPractice}>
+                  <Text style={homeStyles.slideBodyButtonText}>開始練習</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -85,7 +101,7 @@ class MyScanScreen extends React.Component {
               <View style={homeStyles.slideBody}>
                 <View style={homeStyles.slideLogoPlaceholder}></View>
                 <Text style={homeStyles.slideBodyText}>已尋獲寶藏：2397</Text>
-                <TouchableOpacity style={homeStyles.slideBodyButton} onPress={this.onReadyForTask}>
+                <TouchableOpacity style={homeStyles.slideBodyButton} onPress={() => this.onReadyForTask('NARA')}>
                   <Text style={homeStyles.slideBodyButtonText}>取得任務內容</Text>
                 </TouchableOpacity>
               </View>
@@ -98,7 +114,7 @@ class MyScanScreen extends React.Component {
               <View style={homeStyles.slideBody}>
                 <View style={homeStyles.slideLogoPlaceholder}></View>
                 <Text style={homeStyles.slideBodyText}>已尋獲寶藏：1397</Text>
-                <TouchableOpacity style={homeStyles.slideBodyButton} onPress={this.onReadyForTask}>
+                <TouchableOpacity style={homeStyles.slideBodyButton} onPress={() => this.onReadyForTask('UN')}>
                   <Text style={homeStyles.slideBodyButtonText}>取得任務內容</Text>
                 </TouchableOpacity>
               </View>

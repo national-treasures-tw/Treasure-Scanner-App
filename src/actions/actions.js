@@ -1,9 +1,9 @@
-import { DOCUMENT } from '../actions/ActionTypes';
+import { DOCUMENT, SELECT_LOCATION } from '../actions/ActionTypes';
 
 // Selecting location
 export function selectLocation(location) {
   return {
-    type: DOCUMENT.LOCATION,
+    type: SELECT_LOCATION,
     location,
   }
 }

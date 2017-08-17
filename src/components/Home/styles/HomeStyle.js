@@ -68,22 +68,6 @@ export default StyleSheet.create({
   levelBar: {
     flexDirection: 'row'
   },
-  levelBar1: {
-    height: 8,
-    width: 95,
-    backgroundColor: 'rgb(245, 166, 35)',
-    borderWidth: 1,
-    borderColor: 'rgb(69, 64, 62)',
-    borderRightWidth: 0
-  },
-  levelBar2: {
-    height: 8,
-    width: 54,
-    backgroundColor: 'rgb(136, 118, 102)',
-    borderWidth: 1,
-    borderColor: 'rgb(69, 64, 62)',
-    borderLeftWidth: 0
-  },
   headingSub: {
     marginLeft: 31
   },

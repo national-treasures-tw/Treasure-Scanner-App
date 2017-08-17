@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { Button, Text, Platform, ScrollView, StyleSheet, View, Image, NetInfo, TouchableOpacity } from 'react-native';
+import { Button, Text, Platform, StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import homeStyles from './styles/HomeStyle'
@@ -11,6 +11,7 @@ import { Images, Metrics } from '../Themes';
 import { onSignOut } from "../auth";
 import MyScanScreen from './SelectLocation';
 import MyHomeScreen from './Profile';
+import MyAchivementScreen from './Achivement';
 const width = Metrics.screenWidth;
 
 const MyNavScreen = ({ navigation, banner }) => (
@@ -28,6 +29,7 @@ const MyNavScreen = ({ navigation, banner }) => (
   </ScrollView>
 );
 
+/*
 const MyAchivementScreen = ({ navigation }) => (
   <Image
     resizeMode='cover'
@@ -65,7 +67,7 @@ MyAchivementScreen.navigationOptions = {
     />
   ),
 };
-
+*/
 class MyProfileScreen extends React.Component {
   render() {
     return (

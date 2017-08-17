@@ -81,7 +81,7 @@ class MyScanScreen extends React.Component {
         resizeMode='cover'
         source={Images.loginBackground}
         style={homeStyles.backgroundImage} >
-        <ScrollView style={{ marginTop: 100 }} horizontal alwaysBounceHorizontal={false} centerContent contentOffset={{ x: 300, y: 0}} >
+        <ScrollView style={homeStyles.selectLocationContainer} horizontal alwaysBounceHorizontal={false} centerContent contentOffset={{ x: width * 0.82, y: 0}} >
             <View style={homeStyles.slide} >
               <View style={homeStyles.slideTitle}>
                 <Text style={homeStyles.slideTitleText}>練習翻拍</Text>

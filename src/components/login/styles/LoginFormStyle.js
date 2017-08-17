@@ -26,7 +26,7 @@ export default StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    height: 52,
+    height: Metrics.screenHeight * 0.08,
     backgroundColor: 'rgba(255, 255, 255, 0.7)',
     borderWidth: 1,
     borderColor: 'black',
@@ -78,7 +78,7 @@ export default StyleSheet.create({
   },
   loginButton: {
     flex: 1,
-    height: 52,
+    height: Metrics.screenHeight * 0.08,
     backgroundColor: 'rgb(69, 64, 62)',
     paddingLeft: Metrics.doubleBaseMargin * 2,
     paddingRight: Metrics.doubleBaseMargin * 2,

@@ -25,8 +25,8 @@ class ReceiveTask extends React.Component {
 
     return {
       title: `Request Form`,
-      headerRight: <Button title="Permission" onPress={() => navigation.navigate("CopyCenter")} />,
-      headerLeft: <Button title="Back" onPress={() => navigation.navigate("LocationPicker")} />
+      headerRight: <Button title="Permission" color="white" onPress={() => navigation.navigate("CopyCenter")} />,
+      headerLeft: <Button title="Back" color="white" onPress={() => navigation.navigate("LocationPicker")} />
     }
   };
 

@@ -11,6 +11,9 @@ const userReducer = (state = {}, action) => {
     case ActionTypes.USER_SIGNIN:
       return { ...state, token: action.token };
 
+    case ActionTypes.USER_SIGNOUT:
+      return { ...state, token: null, details: null, record: null, location: null };
+
     case ActionTypes.RECEIVE_USER_DETAILS:
       return { ...state, details: action.details };
 

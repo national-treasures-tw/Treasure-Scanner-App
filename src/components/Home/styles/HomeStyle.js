@@ -22,7 +22,7 @@ export default StyleSheet.create({
     backgroundColor: Colors.eosBlack,
   },
   container: {
-    marginTop: Metrics.navBarHeight,
+    marginTop: 5,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
@@ -33,8 +33,8 @@ export default StyleSheet.create({
   badge1: {
     alignSelf: 'auto',
     justifyContent: 'flex-start',
-    height: 201,
-    width: 147,
+    height: Metrics.screenHeight * 0.3,
+    width: Metrics.screenWidth * 0.39,
   },
   topSection: {
     flexDirection: 'row',
@@ -46,7 +46,7 @@ export default StyleSheet.create({
     top: 10
   },
   topBox: {
-    width: 236,
+    width: Metrics.screenWidth * 0.60,
     height: 196,
     borderColor: 'rgb(69, 64, 62)',
     borderWidth: 2,
@@ -55,7 +55,7 @@ export default StyleSheet.create({
     width: Metrics.screenWidth
   },
   nameBox: {
-    marginLeft: 31,
+    marginLeft: Metrics.screenWidth * 0.081,
     marginTop: 15,
     marginBottom: 10
   },
@@ -69,7 +69,7 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   headingSub: {
-    marginLeft: 31
+    marginLeft: Metrics.screenWidth * 0.081
   },
   headingSubText: {
     fontSize: 16
@@ -110,10 +110,6 @@ export default StyleSheet.create({
     borderRadius: 3,
     marginBottom: 10
   },
-  rankBoxContent: {
-    backgroundColor: 'rgb(54, 54, 54)',
-    padding: 14,
-  },
   rankItems: {
     alignSelf: 'center',
     justifyContent: 'center',
@@ -125,6 +121,10 @@ export default StyleSheet.create({
     fontSize: 15,
     marginRight: 80,
     width: 120
+  },
+  rankBoxContent: {
+    backgroundColor: 'rgb(54, 54, 54)',
+    padding: 14,
   },
   rankItemNameNumberOne: {
     color: '#FFF',
@@ -140,12 +140,15 @@ export default StyleSheet.create({
     width: Metrics.screenWidth,
     flex: 1
   },
+  selectLocationContainer: {
+    marginTop: Metrics.screenHeight * 0.03
+  },
   slide: {
     backgroundColor: 'rgb(59, 58, 56)',
     borderColor: 'rgb(243, 180, 70)',
     borderWidth: 2,
     width: Metrics.screenWidth * 0.7,
-    height: Metrics.screenHeight * 0.83,
+    height: Metrics.screenHeight * 0.70,
     left: 80,
     marginRight: 24
   },
@@ -154,7 +157,7 @@ export default StyleSheet.create({
     borderColor: 'rgb(243, 180, 70)',
     borderWidth: 2,
     width: Metrics.screenWidth * 0.7,
-    height: Metrics.screenHeight * 0.83,
+    height: Metrics.screenHeight * 0.70,
     left: 80,
     marginRight: 115
   },
@@ -181,17 +184,17 @@ export default StyleSheet.create({
   },
   slideLogo: {
     alignSelf: 'center',
-    width: 165,
-    height: 165,
-    marginTop: 24,
-    marginBottom: 24
+    width: Metrics.screenWidth * 0.52,
+    height: Metrics.screenHeight * 0.3,
+    marginTop: Metrics.screenHeight * 0.04,
+    marginBottom: Metrics.screenHeight * 0.02
   },
   slideLogoUN: {
     alignSelf: 'center',
-    width: 165,
-    height: 140,
-    marginTop: 24,
-    marginBottom: 24
+    width: Metrics.screenWidth * 0.52,
+    height: Metrics.screenHeight * 0.25,
+    marginTop: Metrics.screenHeight * 0.04,
+    marginBottom: Metrics.screenHeight * 0.04
   },
   slideBodyText: {
     fontSize: 14,
@@ -202,30 +205,30 @@ export default StyleSheet.create({
   },
   slideBodyButton: {
     alignSelf: 'center',
-    width: 242,
-    height: 52,
+    width: Metrics.screenWidth * 0.65,
+    height: Metrics.screenHeight * 0.08,
     backgroundColor: 'rgb(160, 30, 64)',
-    marginTop: 24,
+    marginTop: Metrics.screenHeight * 0.02,
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: 'rgb(243, 180, 70)'
   },
   slideBodyButton1: {
     alignSelf: 'center',
-    width: 242,
-    height: 52,
+    width: Metrics.screenWidth * 0.65,
+    height: Metrics.screenHeight * 0.08,
     backgroundColor: 'rgb(160, 30, 64)',
-    marginTop: 44,
+    marginTop: Metrics.screenHeight * 0.045,
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: 'rgb(243, 180, 70)'
   },
   slideBodyButtonUN: {
     alignSelf: 'center',
-    width: 242,
-    height: 52,
+    width: Metrics.screenWidth * 0.65,
+    height: Metrics.screenHeight * 0.08,
     backgroundColor: 'rgb(160, 30, 64)',
-    marginTop: 49,
+    marginTop: Metrics.screenHeight * 0.05,
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: 'rgb(243, 180, 70)'
@@ -238,12 +241,12 @@ export default StyleSheet.create({
   },
   slideFootnote: {
     alignSelf: 'center',
-    top: -120,
-    width: 235,
+    top: -Metrics.screenHeight * 0.19,
+    width: Metrics.screenWidth * 0.63,
     backgroundColor: 'transparent'
   },
   slideFootnoteText: {
-    fontSize: 16,
+    fontSize: 14,
     color: 'rgb(69, 64, 62)',
     textAlign: 'center'
   },
@@ -316,5 +319,38 @@ export default StyleSheet.create({
   readyForTaskButtonText: {
     fontSize: 24,
     color: '#FFF'
+  },
+  // Achivement badge
+  badgeItems: {
+    alignSelf: 'auto',
+    justifyContent: 'center',
+    marginBottom: 8
+  },
+  badgeItemName: {
+    color: '#FFF',
+    fontSize: 15,
+    marginRight: 80,
+    width: 120
+  },
+  badgesDisplay: {
+    flexDirection: 'row',
+    width: '100%',
+    height: 62,
+    marginBottom: 24,
+    marginTop: 15
+  },
+  rankBadge: {
+    height: 62,
+    width: 63,
+    marginRight: 15
+  },
+  badgePlaceholder: {
+    height: 42,
+    width: 42,
+    borderColor: 'rgb(151, 151, 151)',
+    borderWidth: 0.5,
+    marginRight: 25,
+    marginTop: 10,
+    transform: [{ rotate: '45deg'}]
   }
 })

@@ -10,6 +10,7 @@ import {
   Keyboard
 } from 'react-native'
 import LoginForm from './LoginForm';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 // import LoginButtons from './LoginButtons'
 import { connect } from 'react-redux'
 import styles from './styles/LoginScreenStyle'
@@ -159,9 +160,15 @@ export class LoginScreen extends React.Component {
           resizeMode='cover'
           source={Images.loginBackground}
           style={styles.backgroundImage} >
-          <View style={styles.container}>
+          <KeyboardAwareScrollView
+            style={{ backgroundColor: 'transparent' }}
+            resetScrollToCoords={{ x: 0, y: 0 }}
+            contentContainerStyle={styles.container}
+            extraScrollHeight={80}
+            scrollEnabled
+          >
             <View style={[styles.topLogo, this.state.topLogo]}>
-              <Image source={Images.logo} style={styles.eosLogo} />
+              <Image source={Images.logo} style={styles.tntLogo} />
               <Image source={Images.name} style={styles.tntName} />
             </View>
             <View style={styles.content}>
@@ -169,7 +176,7 @@ export class LoginScreen extends React.Component {
                 this.renderLoginContainer()
               }
             </View>
-          </View>
+          </KeyboardAwareScrollView>
         </Image>
       </TouchableHighlight>
     )

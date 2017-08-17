@@ -14,7 +14,7 @@ export default class ReceiveTask extends React.Component {
 
     return {
       title: `Permission`,
-      headerRight: <Button title="Next" onPress={() => navigation.navigate("Scan")} />,
+      headerRight: <Button title="Next" color="white" onPress={() => navigation.navigate("Scan")} />,
     }
   };
 

@@ -8,7 +8,8 @@ import {
   StatusBar,
   TouchableHighlight,
   Keyboard
-} from 'react-native'
+} from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import SignupForm from './SignupForm';
 // import LoginButtons from './LoginButtons'
 import { connect } from 'react-redux'
@@ -127,26 +128,24 @@ export class SignupScreen extends React.Component {
     const { fetching, showingForm, dispatch, loginError, onForgotPassword, navigation, signIn } = this.props
 
     return (
-      <View behavior='height'>
-          <SignupForm
-            signIn={signIn}
-            navigation={navigation}
-            values={this.state.values}
-            onChange={values => this.setState({...this.state, values})}
-            fetching={fetching}
-            email={email}
-            name={name}
-            password={password}
-            passwordConfirmation={passwordConfirmation}
-            onNameChange={this.onNameChange}
-            handleChangeEmail={this.handleChangeEmail}
-            handleChangePassword={this.handleChangePassword}
-            handleChangePasswordConfirmation={this.handleChangePasswordConfirmation}
-            onForgotPassword={onForgotPassword}
-            onSignupButtonPressed={this.onSignupButtonPressed}
-            onCancelButtonPressed={() => dispatch(LoginActions.showButtonsForm())}
-            onLoginButtonPressed={() => this.props.navigation.navigate("SignIn")} />
-      </View>
+        <SignupForm
+          signIn={signIn}
+          navigation={navigation}
+          values={this.state.values}
+          onChange={values => this.setState({...this.state, values})}
+          fetching={fetching}
+          email={email}
+          name={name}
+          password={password}
+          passwordConfirmation={passwordConfirmation}
+          onNameChange={this.onNameChange}
+          handleChangeEmail={this.handleChangeEmail}
+          handleChangePassword={this.handleChangePassword}
+          handleChangePasswordConfirmation={this.handleChangePasswordConfirmation}
+          onForgotPassword={onForgotPassword}
+          onSignupButtonPressed={this.onSignupButtonPressed}
+          onCancelButtonPressed={() => dispatch(LoginActions.showButtonsForm())}
+          onLoginButtonPressed={() => this.props.navigation.navigate("SignIn")} />
     )
   }
 
@@ -161,9 +160,15 @@ export class SignupScreen extends React.Component {
           resizeMode='cover'
           source={Images.loginBackground}
           style={styles.backgroundImage} >
-          <View style={styles.container}>
+          <KeyboardAwareScrollView
+            style={{ backgroundColor: 'transparent' }}
+            resetScrollToCoords={{ x: 0, y: 0 }}
+            contentContainerStyle={styles.container}
+            extraScrollHeight={70}
+            scrollEnabled
+          >
             <View style={[styles.topLogo, this.state.topLogo]}>
-              <Image source={Images.logo} style={styles.eosLogo} />
+              <Image source={Images.logo} style={styles.tntLogo} />
               <Image source={Images.name} style={styles.tntName} />
             </View>
             <View style={styles.content}>
@@ -171,7 +176,7 @@ export class SignupScreen extends React.Component {
                 this.renderLoginContainer()
               }
             </View>
-          </View>
+        </KeyboardAwareScrollView>
         </Image>
       </TouchableHighlight>
     )

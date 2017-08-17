@@ -10,7 +10,7 @@ const metrics = {
   marginVertical: 10,
   section: 25,
   baseMargin: 10,
-  doubleBaseMargin: 20,
+  doubleBaseMargin: 16,
   smallMargin: 5,
   horizontalLineHeight: 1,
   searchBarHeight: 30,

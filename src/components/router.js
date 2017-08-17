@@ -10,35 +10,47 @@ import CopyCenter from './Task/CopyCenter';
 import DocumentReviewList from './DocumentReviewList';
 
 const headerStyle = {
-  marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
-};
+  headerStyle: { backgroundColor: 'rgb(35, 29, 11)' },
+  headerTitleStyle: { color: '#FFF', fontSize: 14 },
+  headerBackTitleStyle: { color: '#FFF', fontSize: 14 },
+  headerTintColor: 'white'
+}
 
 export const SignedOut = StackNavigator({
   SignIn: {
     screen: SignIn,
     navigationOptions: {
       title: "Sign In",
-      headerStyle
+      ...headerStyle
     }
   },
   SignUp: {
     screen: SignUp,
     navigationOptions: {
       title: "Sign Up",
-      headerStyle
+      ...headerStyle
     }
   },
 });
 
 export const startTask = StackNavigator({
   ReceiveTask: {
-    screen: ReceiveTask
+    screen: ReceiveTask,
+    navigationOptions: {
+      ...headerStyle
+    }
   },
   CopyCenter: {
-    screen: CopyCenter
+    screen: CopyCenter,
+    navigationOptions: {
+      ...headerStyle
+    }
   },
   Scan: {
-    screen: DocumentReviewList
+    screen: DocumentReviewList,
+    navigationOptions: {
+      ...headerStyle
+    }
   },
 });
 

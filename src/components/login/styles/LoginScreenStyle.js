@@ -22,7 +22,7 @@ export default StyleSheet.create({
     backgroundColor: Colors.eosBlack
   },
   container: {
-    marginTop: Metrics.navBarHeight,
+    marginTop: 32,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
@@ -30,14 +30,16 @@ export default StyleSheet.create({
     //     justifyContent: 'center',
     // alignItems: 'center'
   },
-  eosLogo: {
+  tntLogo: {
     alignSelf: 'center',
     justifyContent: 'center',
-    height: 147,
-    width: 147
+    height: Metrics.screenHeight * 0.20,
+    width: Metrics.screenWidth * 0.36
   },
   tntName: {
     alignSelf: 'center',
+    height: Metrics.screenHeight * 0.09,
+    width: Metrics.screenWidth * 0.42
   },
   topLogo: {
     flex: 0.18,

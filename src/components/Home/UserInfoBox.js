@@ -1,16 +1,15 @@
 import React from 'react';
-import { Text, View, Image, StyleSheet } from 'react-native';
+import { Text, View, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import homeStyles from './styles/HomeStyle';
-import { Images } from '../Themes';
+import { Images, Metrics } from '../Themes';
 import { levelWidthCalculator, levelLabelCalculator } from '../../utils/levelHelper';
 const width = Metrics.screenWidth;
 
 export default class UserInfoBox extends React.Component {
   render() {
     const { details } = this.props;
-    const seasonString = `season${new Date().getFullYear()}${Math.floor(new Date().getMonth() / 3) + 1}`;
     const levelTotalWidth = 144;
-    const levelWidth = details && levelWidthCalculator(details.info[seasonString], levelTotalWidth)
+    const levelWidth = details && levelWidthCalculator(details.info.totalScore, levelTotalWidth)
     const barStyle = StyleSheet.create({
       bar1: {
         height: 8,
@@ -35,11 +34,11 @@ export default class UserInfoBox extends React.Component {
         <Image source={Images.badge1} style={homeStyles.badge1} />
         <View style={homeStyles.topBox}>
           <View style={homeStyles.nameBox}>
-            <Text style={homeStyles.nameBoxText}>{details ? details.info.nickname : 'Fetching...'}</Text>
+            { details ? <Text style={homeStyles.nameBoxText}> {details.info.nickname}</Text> : <ActivityIndicator size="large" animating /> }
           </View>
           {/* Levels: 1 (< 500), 2 (500 - 5000), 3 (> 5000) */}
           <View style={homeStyles.nameBox}>
-            <Text style={homeStyles.levelBoxText}>Level. {details && levelLabelCalculator(details.info[seasonString])}</Text>
+            <Text style={homeStyles.levelBoxText}>Level. {details && levelLabelCalculator(details.info.totalScore)}</Text>
             <View style={homeStyles.levelBar}>
               <View style={barStyle.bar1}></View>
               <View style={barStyle.bar2}></View>

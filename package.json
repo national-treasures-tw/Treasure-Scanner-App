@@ -14,6 +14,7 @@
     "react-native": "0.43.4",
     "react-native-aws-cognito-js": "0.0.5",
     "react-native-fs": "^2.3.3",
+    "react-native-keyboard-aware-scroll-view": "^0.3.0",
     "react-native-vector-icons": "^4.3.0",
     "react-navigation": "^1.0.0-beta.11",
     "react-redux": "^5.0.5",

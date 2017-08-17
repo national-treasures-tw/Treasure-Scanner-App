@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import { connect, Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
-import { AsyncStorage, View } from 'react-native'
+import { AsyncStorage, View, StatusBar } from 'react-native'
 import { StackNavigator } from 'react-navigation';
 import { addNavigationHelpers } from 'react-navigation';
 
@@ -36,6 +36,7 @@ class App extends React.Component {
   }
 
   componentWillMount() {
+    StatusBar.setBarStyle('light-content');
     isSignedIn()
       .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
       .catch(err => alert(err.message));

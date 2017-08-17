@@ -1,4 +1,10 @@
-import { DOCUMENT, SELECT_LOCATION, RECEIVE_RECORD, USER_SIGNIN, RECEIVE_USER_DETAILS } from '../actions/ActionTypes';
+import {
+  DOCUMENT,
+  SELECT_LOCATION,
+  RECEIVE_RECORD,
+  USER_SIGNIN,
+  USER_SIGNOUT,
+  RECEIVE_USER_DETAILS } from '../actions/ActionTypes';
 
 
 // receiveUserDetails
@@ -14,6 +20,13 @@ export function signIn(token) {
   return {
     type: USER_SIGNIN,
     token,
+  }
+}
+
+// Signin out
+export function signOut() {
+  return {
+    type: USER_SIGNOUT
   }
 }
 

@@ -59,8 +59,24 @@ class MyAchivementScreen extends React.Component {
                 <Text style={homeStyles.newsBoxTitleText}>我的成就獎章</Text>
               </View>
               <View style={homeStyles.rankBoxContent}>
-                <View style={homeStyles.rankItems}>
-                  <Text style={homeStyles.rankItemName}>等級徽章</Text>
+                <View style={homeStyles.badgeItems}>
+                  <Text style={homeStyles.badgeItemName}>等級徽章</Text>
+                </View>
+                <View style={homeStyles.badgesDisplay}>
+                  <Image source={Images.badge1} style={homeStyles.rankBadge} />
+                  <View style={homeStyles.badgePlaceholder} />
+                  <View style={homeStyles.badgePlaceholder} />
+                  <View style={homeStyles.badgePlaceholder} />
+                  <View style={homeStyles.badgePlaceholder} />
+                </View>
+                <View style={homeStyles.badgeItems}>
+                  <Text style={homeStyles.badgeItemName}>場館徽章</Text>
+                </View>
+                <View style={homeStyles.badgesDisplay}>
+                  <Image source={Images.badge1} style={homeStyles.rankBadge} />
+                  <View style={homeStyles.badgePlaceholder} />
+                  <View style={homeStyles.badgePlaceholder} />
+                  <View style={homeStyles.badgePlaceholder} />
                 </View>
               </View>
             </View>

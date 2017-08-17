@@ -160,8 +160,8 @@ export default StyleSheet.create({
     backgroundColor: 'rgb(59, 58, 56)',
     borderColor: 'rgb(243, 180, 70)',
     borderWidth: 2,
-    width: 266,
-    height: 425,
+    width: Metrics.screenWidth * 0.7,
+    height: Metrics.screenHeight * 0.83,
     left: 80,
     marginRight: 24
   },
@@ -169,8 +169,8 @@ export default StyleSheet.create({
     backgroundColor: 'rgb(59, 58, 56)',
     borderColor: 'rgb(243, 180, 70)',
     borderWidth: 2,
-    width: 266,
-    height: 425,
+    width: Metrics.screenWidth * 0.7,
+    height: Metrics.screenHeight * 0.83,
     left: 80,
     marginRight: 115
   },

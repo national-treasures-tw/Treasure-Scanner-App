@@ -4,6 +4,8 @@
 const images = {
   logo: require('../Images/tnt_logo.png'),
   badge1: require('../Images/badge-1.png'),
+  badge2: require('../Images/badge-2.png'),
+  badge3: require('../Images/badge-3.png'),
   name: require('../Images/name.png'),
   naraImg: require('../Images/naraLogo@2x.png'),
   unImg: require('../Images/unLogo@2x.png'),

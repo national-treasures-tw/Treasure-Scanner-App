@@ -48,13 +48,13 @@ class MyScanScreen extends React.Component {
       NARA: { latitude: 39.0006809, longitude: -76.9605249 },
       UN: { latitude: 40.7517766, longitude: -73.9702365 }
     };
-    // proximity of 0.1 in latitude is about 7 miles in distance
+    // proximity of 0.01 in latitude is about 7 miles in distance
     // so here we are checking if the user is within 7 miles of the selected location
-    const proximity = 0.05;
-    const isCloseBy = latitude < siteCoordinates[location].latitude + proximity
-      && latitude > siteCoordinates[location].latitude - proximity
-      && longitude > siteCoordinates[location].longitude - proximity
-      && longitude < siteCoordinates[location].longitude + proximity;
+    const proximity = { NARA: 0.01, UN: 0.005 } ;
+    const isCloseBy = latitude < siteCoordinates[location].latitude + proximity[location]
+      && latitude > siteCoordinates[location].latitude - proximity[location]
+      && longitude > siteCoordinates[location].longitude - proximity[location]
+      && longitude < siteCoordinates[location].longitude + proximity[location];
     const locationString = location === 'NARA' ? 'National Archive' : 'United Nations';
     if (isCloseBy) {
       alert(`Your location is not within the ${locationString}, please use Practice Mode instead.`);

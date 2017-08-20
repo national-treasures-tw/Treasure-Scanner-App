@@ -339,10 +339,16 @@ export default StyleSheet.create({
     marginBottom: 24,
     marginTop: 15
   },
-  rankBadge: {
+  rankBadgeFirstOne: {
     height: 62,
     width: 63,
     marginRight: 15
+  },
+  rankBadge: {
+    height: 62,
+    width: 63,
+    marginRight: 15,
+    marginLeft: -10
   },
   badgePlaceholder: {
     height: 42,

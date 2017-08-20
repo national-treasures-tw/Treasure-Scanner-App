@@ -30,6 +30,15 @@ export default StyleSheet.create({
     //     justifyContent: 'center',
     // alignItems: 'center'
   },
+  loginContainer: {
+    marginTop: 92,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+    // flexDirection: 'column',
+    //     justifyContent: 'center',
+    // alignItems: 'center'
+  },
   tntLogo: {
     alignSelf: 'center',
     justifyContent: 'center',

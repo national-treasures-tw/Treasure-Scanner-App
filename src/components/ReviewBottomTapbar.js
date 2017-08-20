@@ -62,32 +62,78 @@ class ReviewBottomTapbar extends PureComponent {
     deleteDocument(document.id);
   };
 
+  onStatusChange = (status) => {
+    const { user, uploadPendingDocuments, goHome } = this.props;
+    uploadPendingDocuments();
+
+    fetch('https://76k76zdzzl.execute-api.us-east-1.amazonaws.com/stage/dispatch', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId: user.details.info.userId,
+        dispatchId: user.record ? user.record.dispatchId : 'doc-id-for-UN',
+        status
+      })
+    })
+    .then((res) => {
+      // console.log(res);
+      console.log(`status is ${status}`);
+
+      goHome();
+    })
+  }
+
   render(){
-    const { document, uploadDocument } = this.props;
+    const { document, uploadDocument, documentCount } = this.props;
+
+    if (documentCount === 0) {
+      return <View style={{ height: 60 }}/>;
+    }
 
     switch (document.status) {
       case Status.UNDEFINED:
 
-        return (
-          <View style={styles.bottomTabBar}>
-            <Button
-              disabled={!document.originalImage || document.isNotDocument}
-              style={styles.button}
-              onPress={() => this.onCropButton()}
-              title="Crop"
-            />
-            <Button
-              style={styles.button}
-              onPress={() => this.onRotateButton()}
-              title="Rotate"
-            />
-            <Button
-              style={styles.button}
-              onPress={this.onDeleteButton}
-              title="🗑"
-            />
-          </View>
-        );
+        if (!document.id && document.id !== 0) {
+          // stats page
+          return (
+            <View style={styles.bottomTabBar}>
+              <Button
+                style={styles.button}
+                onPress={() => this.onStatusChange('complete')}
+                title="Complete"
+              />
+              <Button
+                style={styles.button}
+                onPress={() => this.onStatusChange('incomplete')}
+                title="Incomplete"
+              />
+            </View>
+          )
+        } else {
+          return (
+            <View style={styles.bottomTabBar}>
+              <Button
+                disabled={!document.originalImage || document.isNotDocument}
+                style={styles.button}
+                onPress={() => this.onCropButton()}
+                title="Crop"
+              />
+              <Button
+                style={styles.button}
+                onPress={() => this.onRotateButton()}
+                title="Rotate"
+              />
+              <Button
+                style={styles.button}
+                onPress={this.onDeleteButton}
+                title="🗑"
+              />
+            </View>
+          );
+        }
 
       case Status.LOADING:
 

@@ -17,6 +17,9 @@ const userReducer = (state = {}, action) => {
     case ActionTypes.RECEIVE_USER_DETAILS:
       return { ...state, details: action.details };
 
+    case ActionTypes.DOCUMENT.COMPLETE:
+      return { ...state, record: null, location: null };
+
     default:
       return state;
   }

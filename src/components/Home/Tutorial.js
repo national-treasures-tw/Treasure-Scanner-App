@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, View, Image, StyleSheet } from 'react-native';
+import { Text, TouchableOpacity, View, Image, StyleSheet, WebView } from 'react-native';
 import homeStyles from './styles/HomeStyle';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Images, Metrics } from '../Themes';
@@ -10,29 +10,20 @@ import { onSignOut } from '../auth';
 
 
 class MyTutorialScreen extends React.Component {
-  onSignout = () => {
-    const { navigation, signOut } = this.props;
-    onSignOut()
-    .then(() => {
-      signOut();
-      navigation.navigate("SignedOut")
-    })
+  onWebview = () => {
+    const { navigation } = this.props;
+
+    navigation.navigate("Webview");
   }
 
   render() {
     const { details } = this.props.user;
 
     return (
-      <Image
-        resizeMode='cover'
-        source={Images.loginBackground}
-        style={homeStyles.backgroundImage} >
-        <View style={homeStyles.container}>
-          <TouchableOpacity onPress={this.onSignout} style={homeStyles.slideBodyButton}>
-            <Text style={homeStyles.slideBodyButtonText}>登出</Text>
-          </TouchableOpacity>
-        </View>
-      </Image>
+      <WebView
+        source={{uri: 'https://paper.dropbox.com/doc/iNmQvK5cd4ny198x1Kwc8'}}
+        style={{marginTop: 20}}
+      />
     );
   }
 }

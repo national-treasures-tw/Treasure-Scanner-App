@@ -1,6 +1,6 @@
 import React from "react";
-import { Platform, StatusBar } from "react-native";
-import { StackNavigator, TabNavigator, Button } from "react-navigation";
+import { Platform, StatusBar, WebView, Button } from "react-native";
+import { StackNavigator, TabNavigator } from "react-navigation";
 
 import SignIn from "./login/LoginScreen";
 import SignUp from "./login/SignupScreen";
@@ -20,8 +20,7 @@ export const SignedOut = StackNavigator({
   SignIn: {
     screen: SignIn,
     navigationOptions: {
-      title: "Sign In",
-      ...headerStyle
+      headerStyle: { position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0 }
     }
   },
   SignUp: {
@@ -51,7 +50,7 @@ export const startTask = StackNavigator({
     navigationOptions: {
       ...headerStyle
     }
-  },
+  }
 });
 
 export const SignedIn = Home;

@@ -163,7 +163,7 @@ export class LoginScreen extends React.Component {
           <KeyboardAwareScrollView
             style={{ backgroundColor: 'transparent' }}
             resetScrollToCoords={{ x: 0, y: 0 }}
-            contentContainerStyle={styles.container}
+            contentContainerStyle={styles.loginContainer}
             extraScrollHeight={80}
             scrollEnabled
           >

@@ -5,7 +5,7 @@ export const levelWidthCalculator = (score, totalWidth) => {
     return Math.ceil((score / 500) * totalWidth)
   } else if (score > 500 && score < 5000) {
     return Math.ceil((score / 5000) * totalWidth)
-  } else if (score > 5000 && score < 50000) {
+  } else if (score > 5000) {
     return Math.ceil((score / 50000) * totalWidth)
   }
 }
@@ -17,7 +17,7 @@ export const levelLabelCalculator = (score) => {
     return '1'
   } else if (score > 500 && score < 5000) {
     return '2'
-  } else if (score > 5000 && score < 50000) {
+  } else if (score > 5000) {
     return '3'
   }
 }

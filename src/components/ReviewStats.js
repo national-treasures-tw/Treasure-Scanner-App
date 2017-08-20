@@ -11,7 +11,7 @@ import {
 export const winSize = Dimensions.get('window');
 
 const ReviewStats = ({ documentCount, stats, onScan, practiceMode }) => {
-
+  console.log(documentCount)
   if(documentCount === 0) {
     return  (
       <View style={styles.stats}>
@@ -50,6 +50,7 @@ ReviewStats.propTypes = {
 
 const styles = StyleSheet.create({
   stats: {
+    height: 400,
     width: winSize.width,
     alignItems: 'center',
     justifyContent: 'space-around',

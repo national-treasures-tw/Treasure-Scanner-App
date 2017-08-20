@@ -4,8 +4,16 @@ import {
   RECEIVE_RECORD,
   USER_SIGNIN,
   USER_SIGNOUT,
+  COMPLETE_TASK,
   RECEIVE_USER_DETAILS } from '../actions/ActionTypes';
 
+
+// complete task
+export function completeTask() {
+  return {
+    type: DOCUMENT.COMPLETE
+  }
+}
 
 // receiveUserDetails
 export function receiveUserDetails(details) {

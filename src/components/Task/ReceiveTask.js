@@ -33,7 +33,7 @@ class ReceiveTask extends React.Component {
   componentDidMount() {
     const { user } = this.props;
     const initTime = new Date().getTime();
-    if (!user.record) {
+    if (!user.record && user.location === 'NARA') {
       fetch('https://76k76zdzzl.execute-api.us-east-1.amazonaws.com/stage/dispatch', {
         method: 'POST',
         headers: {
@@ -41,7 +41,7 @@ class ReceiveTask extends React.Component {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          userId: 'oh-my-user-id',
+          userId: user.details.info.userId,
           isTest: true
         })
       })
@@ -49,13 +49,19 @@ class ReceiveTask extends React.Component {
       .then((res) => {
         // console.log(res);
         console.log(`Wait time: ${new Date().getTime() - initTime} ms`);
-        const { StackArea, RGN, Row, Compartment, Shelf, Title, boxRangeString } = res.record;
+        const { StackArea, RGN, Row, Compartment, Shelf, Title, boxRangeString, dispatchId, uid, NAID, EN } = res.record;
         const normalizedRecord = {
+          dispatchId,
+          catalogId: uid,
           RGNumber: RGN,
           stackArea: StackArea,
           rowNumber: Row,
           compartment: Compartment,
           shelfNumber: Shelf,
+          NAID,
+          EN,
+          boxRangeString,
+          Title,
           recordIdText: `Box #${boxRangeString.split('-').join(', ')} \n ${Title}`,
         };
         this.props.receiveRecord(normalizedRecord);

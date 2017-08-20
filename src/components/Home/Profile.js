@@ -9,17 +9,26 @@ import { bindActionCreators } from 'redux';
 import { getToken } from '../auth';
 import { levelWidthCalculator, levelLabelCalculator } from '../../utils/levelHelper';
 import UserInfoBox from './UserInfoBox';
+
+import { CognitoUserPool } from 'react-native-aws-cognito-js';
+const userPool = new CognitoUserPool({
+  UserPoolId: 'us-east-1_8JaJl8ZVD',
+  ClientId: '428sfq1asso7a3pam8ugmmssdh',
+});
+
 const width = Metrics.screenWidth;
+
 
 class MyHomeScreen extends React.Component {
   componentDidMount() {
-    const { user } = this.props;
+    const { user, signOut, navigation } = this.props;
     const initTime = new Date().getTime();
     if (!user.details && user.token) {
       this.fetchUserInfo(user.token)
     } else if (!user.details) {
       getToken()
       .then((token) => {
+        console.log(token);
         if (token) {
           this.fetchUserInfo(token);
         }
@@ -28,6 +37,7 @@ class MyHomeScreen extends React.Component {
   }
 
   fetchUserInfo = (token) => {
+    const { signOut, navigation } = this.props;
     fetch(`https://76k76zdzzl.execute-api.us-east-1.amazonaws.com/stage/user?token=${token}`, {
       method: 'GET',
       headers: {
@@ -39,7 +49,12 @@ class MyHomeScreen extends React.Component {
     .then(fetchRes => fetchRes.json())
     .then((res) => {
       console.log(res);
-      this.props.receiveUserDetails(res.user);
+      if (res.success) {
+        this.props.receiveUserDetails(res.user);
+      } else {
+        signOut();
+        navigation.navigate("SignedOut")
+      }
     });
   }
 

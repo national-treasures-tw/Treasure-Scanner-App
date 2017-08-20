@@ -29,16 +29,18 @@ export default class UserInfoBox extends React.Component {
       }
     });
 
+    const levelNumber = details && levelLabelCalculator(details.info.totalScore);
+
     return (
       <View style={[homeStyles.topSection, { width }]}>
-        <Image source={Images.badge1} style={homeStyles.badge1} />
+        <Image source={Images[`badge${levelNumber}`]} style={homeStyles.badge1} />
         <View style={homeStyles.topBox}>
           <View style={homeStyles.nameBox}>
             { details ? <Text style={homeStyles.nameBoxText}> {details.info.nickname}</Text> : <ActivityIndicator size="large" animating /> }
           </View>
           {/* Levels: 1 (< 500), 2 (500 - 5000), 3 (> 5000) */}
           <View style={homeStyles.nameBox}>
-            <Text style={homeStyles.levelBoxText}>Level. {details && levelLabelCalculator(details.info.totalScore)}</Text>
+            <Text style={homeStyles.levelBoxText}>Level. {levelNumber}</Text>
             <View style={homeStyles.levelBar}>
               <View style={barStyle.bar1}></View>
               <View style={barStyle.bar2}></View>

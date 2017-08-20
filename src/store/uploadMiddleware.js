@@ -21,7 +21,7 @@ export default store => next => async action => {
 
     case ActionTypes.DOCUMENT.UPLOAD.UPLOAD:
       const state = store.getState();
-      await uploadFile(store.dispatch, state.documents[action.id]);
+      await uploadFile(store.dispatch, state.documents[action.id], state);
       break;
     default:
   }
@@ -29,21 +29,44 @@ export default store => next => async action => {
 
 const uploadingPendingDocuments = (store, excludeLastN) => {
   const documents = getScannedDocuments(store.getState());
+  const state = store.getState();
   documents
     // skip first N
     .slice(excludeLastN)
     // Don't re-upload Loaded or Loading ones
     .filter(doc => doc.status === Status.UNDEFINED || doc.status === Status.ERROR)
     // Upload!
-    .forEach(doc => uploadFile(store.dispatch, doc));
+    .forEach(doc => uploadFile(store.dispatch, doc, state));
 };
-
-const uploadFile = async (dispatch, document) => {
+/*
+* state = {
+  user: { location }
+  record: { RG... }
+}
+*
+*/
+const uploadFile = async (dispatch, document, state) => {
 
   dispatch({
     type: ActionTypes.DOCUMENT.UPLOAD.LOADING,
     id: document.id,
   });
+
+  const { location, details, record } = state.user;
+  const {
+    dispatchId,
+    catalogId,
+    RGNumber,
+    stackArea,
+    rowNumber,
+    compartment,
+    shelfNumber,
+    NAID,
+    EN,
+    Title,
+    boxRangeString,
+    recordIdText
+  } = record || {};
 
   try {
     const base64Image = await RNFS.readFile(document.image, 'base64');
@@ -59,20 +82,20 @@ const uploadFile = async (dispatch, document) => {
         timestamp: document.timestamp,
 
         // @Hsin please add the right meta data here
-        dispatchId: '123123-112',
-        userId: 'my-user-id',
-        docId: '1742008',
-        location: 'nara',
+        dispatchId,
+        userId: details.info.userId,
+        docId: NAID || 'some-id-from-UN',
+        location: location,
         metadata: {
-          recordGroup: '469',
-          entry: 'UD409',
-          stack: '250',
-          row: '075',
-          compartment: '035',
-          shelf: '02-07',
-          box: '1-127',
-          containerId: '14',
-          title: '...'
+          recordGroup: RGNumber,
+          entry: EN,
+          stack: stackArea,
+          row: rowNumber,
+          compartment: compartment,
+          shelf: shelfNumber,
+          box: boxRangeString,
+          containerId: boxRangeString,
+          title: Title
         }
       })
     });

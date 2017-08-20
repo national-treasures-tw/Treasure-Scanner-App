@@ -31,8 +31,8 @@ class DocumentReviewList extends PureComponent {
 
     return {
       title: `Documents`,
-      headerRight: <Button title="Scan" onPress={() => params.onScanButton()} />,
-    headerLeft: <Button title="Back" onPress={() => { params.user.location === 'NARA' ? navigation.goBack() : navigation.navigate("LocationPicker")}} />
+      headerRight: <Button title="Scan" color="white" onPress={() => params.onScanButton()} />,
+    headerLeft: <Button title="Back" color="white" onPress={() => { params.user.location === 'NARA' ? navigation.goBack() : navigation.navigate("LocationPicker")}} />
     };
   };
 
@@ -110,8 +110,13 @@ class DocumentReviewList extends PureComponent {
     });
   };
 
+  onGoHome = () => {
+    this.props.completeTask();
+    this.props.navigation.navigate('LocationPicker');
+  }
+
   render() {
-    const { stats, user } = this.props;
+    const { stats, user, uploadPendingDocuments } = this.props;
     const { scrollIndex, dataSource, documentCount } = this.state;
 
     return (
@@ -129,24 +134,36 @@ class DocumentReviewList extends PureComponent {
           showsVerticalScrollIndicator={false}
           renderRow={(rowData, _, rowId) => {
             return rowData.id ?
-              <ReviewDocument key={rowId} image={rowData.image} /> :
-              <ReviewStats
-                key={rowId}
-                documentCount={documentCount}
-                stats={stats} 
-                onScan={this.onScanButton}
-                practiceMode={user.location === 'practice'}
-              />
+              (
+                <View>
+                  <ReviewDocument key={rowId} image={rowData.image} />
+                  <ReviewBottomTapbar
+                    goHome={this.onGoHome}
+                    uploadPendingDocuments={uploadPendingDocuments}
+                    document={rowData}
+                  />
+                </View>
+              )
+              :
+              (
+                <View>
+                  <ReviewStats
+                    key={rowId}
+                    documentCount={documentCount}
+                    stats={stats}
+                    onScan={this.onScanButton}
+                    practiceMode={user.location === 'practice'}
+                  />
+                  <ReviewBottomTapbar
+                    documentCount={documentCount}
+                    goHome={this.onGoHome}
+                    uploadPendingDocuments={uploadPendingDocuments}
+                    document={rowData}
+                  />
+                </View>
+              )
           }}
         />
-
-        {(documentCount > 0 && scrollIndex < documentCount) ? (
-          <ReviewBottomTapbar
-            document={dataSource.getRowData(0, scrollIndex)}
-          />
-        ) : (
-          <View style={{ height: 60 }}/>
-        )}
       </View>
     );
   }

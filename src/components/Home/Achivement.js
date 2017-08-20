@@ -6,46 +6,14 @@ import { Images, Metrics } from '../Themes';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/actions';
 import { bindActionCreators } from 'redux';
-import { getToken } from '../auth';
-import { levelWidthCalculator, levelLabelCalculator } from '../../utils/levelHelper';
 import UserInfoBox from './UserInfoBox';
+import { levelLabelCalculator } from '../../utils/levelHelper';
 const width = Metrics.screenWidth;
 
 class MyAchivementScreen extends React.Component {
-  componentDidMount() {
-    const { user } = this.props;
-    const initTime = new Date().getTime();
-    if (!user.details && user.token) {
-      this.fetchUserInfo(user.token)
-    } else if (!user.details) {
-      getToken()
-      .then((token) => {
-        if (token) {
-          this.fetchUserInfo(token);
-        }
-      })
-    }
-  }
-
-  fetchUserInfo = (token) => {
-    fetch(`https://76k76zdzzl.execute-api.us-east-1.amazonaws.com/stage/user?token=${token}`, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': token
-      }
-    })
-    .then(fetchRes => fetchRes.json())
-    .then((res) => {
-      console.log(res);
-      this.props.receiveUserDetails(res.user);
-    });
-  }
-
   render() {
     const { details } = this.props.user;
-
+    const levelNumber = details && parseInt(levelLabelCalculator(details.info.totalScore));
     return (
       <Image
         resizeMode='cover'
@@ -63,9 +31,9 @@ class MyAchivementScreen extends React.Component {
                   <Text style={homeStyles.badgeItemName}>等級徽章</Text>
                 </View>
                 <View style={homeStyles.badgesDisplay}>
-                  <Image source={Images.badge1} style={homeStyles.rankBadge} />
-                  <View style={homeStyles.badgePlaceholder} />
-                  <View style={homeStyles.badgePlaceholder} />
+                  <Image source={Images.badge1} style={homeStyles.rankBadgeFirstOne} />
+                  {levelNumber > 1 ?  <Image source={Images.badge2} style={homeStyles.rankBadge} /> : <View style={homeStyles.badgePlaceholder} />}
+                  {levelNumber > 2 ?  <Image source={Images.badge3} style={homeStyles.rankBadge} /> : <View style={homeStyles.badgePlaceholder} />}
                   <View style={homeStyles.badgePlaceholder} />
                   <View style={homeStyles.badgePlaceholder} />
                 </View>
@@ -73,7 +41,7 @@ class MyAchivementScreen extends React.Component {
                   <Text style={homeStyles.badgeItemName}>場館徽章</Text>
                 </View>
                 <View style={homeStyles.badgesDisplay}>
-                  <Image source={Images.badge1} style={homeStyles.rankBadge} />
+                  <Image source={Images.badge1} style={homeStyles.rankBadgeFirstOne} />
                   <View style={homeStyles.badgePlaceholder} />
                   <View style={homeStyles.badgePlaceholder} />
                   <View style={homeStyles.badgePlaceholder} />

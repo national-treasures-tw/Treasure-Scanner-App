@@ -12,7 +12,7 @@ export const levelWidthCalculator = (score, totalWidth) => {
 
 // calculates label for the level bar in profile view
 export const levelLabelCalculator = (score) => {
-  if (!score) return '';
+  if (!score && score !== 0) return '';
   if (score < 500) {
     return '1'
   } else if (score > 500 && score < 5000) {

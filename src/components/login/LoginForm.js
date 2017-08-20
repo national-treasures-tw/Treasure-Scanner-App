@@ -129,10 +129,10 @@ class LoginForm extends React.Component {
         </View>
 
         <View style={styles.socialLoginColumn}>
-          <TouchableOpacity style={styles.googleButton} onPress={(fetching || disabled) ? () => {} : onLoginButtonPressed}>
+          <TouchableOpacity style={styles.googleButton} onPress={() => alert('抱歉，目前不能使用第三方登入。請按下方註冊')}>
             <Text style={styles.loginTextSocial}>{'GOOGLE'}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.facebookButton} onPress={(fetching || disabled) ? () => {} : onLoginButtonPressed}>
+          <TouchableOpacity style={styles.facebookButton} onPress={() => alert('抱歉，目前不能使用第三方登入。請按下方註冊')}>
             <Text style={styles.loginTextSocial}>{'FACEBOOK'}</Text>
           </TouchableOpacity>
         </View>
@@ -141,7 +141,7 @@ class LoginForm extends React.Component {
           <TouchableOpacity style={styles.signupButton} onPress={this.props.onSignupButtonPressed}>
             <Text style={styles.loginTextSocial}>{'註冊'}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.forgotButton} onPress={(fetching || disabled) ? () => {} : onLoginButtonPressed}>
+          <TouchableOpacity style={styles.forgotButton} onPress={() => alert('抱歉，目前不能重設密碼。請重新註冊')}>
             <Text style={styles.loginTextSocial}>{'忘記密碼'}</Text>
           </TouchableOpacity>
         </View>

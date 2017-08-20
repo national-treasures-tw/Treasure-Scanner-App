@@ -30,13 +30,14 @@ export default class UserInfoBox extends React.Component {
     });
 
     const levelNumber = details && levelLabelCalculator(details.info.totalScore);
-
+    const nickname = details && details.info.nickname;
+    const isLongNickname = nickname && nickname.length > 8;
     return (
       <View style={[homeStyles.topSection, { width }]}>
         <Image source={Images[`badge${levelNumber}`]} style={homeStyles.badge1} />
         <View style={homeStyles.topBox}>
           <View style={homeStyles.nameBox}>
-            { details ? <Text style={homeStyles.nameBoxText}> {details.info.nickname}</Text> : <ActivityIndicator size="large" animating /> }
+            { details ? <Text style={isLongNickname ? homeStyles.nameBoxTextSmall : homeStyles.nameBoxText}>{nickname}</Text> : <ActivityIndicator size="large" animating /> }
           </View>
           {/* Levels: 1 (< 500), 2 (500 - 5000), 3 (> 5000) */}
           <View style={homeStyles.nameBox}>

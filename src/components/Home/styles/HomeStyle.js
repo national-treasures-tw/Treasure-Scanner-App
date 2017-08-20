@@ -62,6 +62,9 @@ export default StyleSheet.create({
   nameBoxText: {
     fontSize: 36
   },
+  nameBoxTextSmall: {
+    fontSize: 25
+  },
   levelBoxText: {
     fontSize: 14
   },
@@ -79,7 +82,7 @@ export default StyleSheet.create({
     margin: 3,
     backgroundColor: 'rgb(90, 84, 82)',
     borderRadius: 3,
-    marginBottom: 50
+    marginBottom: 150
   },
   newsBoxTitle: {
     alignSelf: 'center',
@@ -250,61 +253,89 @@ export default StyleSheet.create({
     color: 'rgb(69, 64, 62)',
     textAlign: 'center'
   },
-  requestorText: {
+  requestorTextLastName: {
     transform: [{ rotate: '90deg'}],
-    fontSize: 20,
-    top: -50,
-    left: 150,
+    fontSize: 18,
+    top: -70,
+    left: 140,
+    backgroundColor: 'transparent'
+  },
+  requestorTextFirstName: {
+    transform: [{ rotate: '90deg'}],
+    fontSize: 18,
+    top: 100,
+    left: 140,
     backgroundColor: 'transparent'
   },
   naIdText: {
     transform: [{ rotate: '90deg'}],
-    fontSize: 20,
-    top: 180,
-    left: 150,
+    fontSize: 18,
+    top: 250,
+    left: 140,
     backgroundColor: 'transparent'
   },
   recordIdText: {
     transform: [{ rotate: '90deg'}],
     fontSize: 16,
-    top: -220,
-    left: -70,
+    top: -65,
+    left: 100,
     backgroundColor: 'transparent',
     width: 400
   },
   RGNumberText: {
     transform: [{ rotate: '90deg'}],
-    fontSize: 20,
-    top: -245,
-    left: 10,
+    fontSize: 18,
+    top: -150,
+    left: 60,
+    backgroundColor: 'transparent'
+  },
+  entryNumberText: {
+    transform: [{ rotate: '90deg'}],
+    fontSize: 18,
+    top: -20,
+    left: 54,
+    backgroundColor: 'transparent'
+  },
+  NAIDText: {
+    transform: [{ rotate: '90deg'}],
+    fontSize: 18,
+    top: 95,
+    left: 58,
+    backgroundColor: 'transparent'
+  },
+  boxNumberText: {
+    transform: [{ rotate: '90deg'}],
+    fontSize: 18,
+    top: 200,
+    left: 58,
     backgroundColor: 'transparent'
   },
   stackAreaText: {
     transform: [{ rotate: '90deg'}],
-    fontSize: 20,
-    top: -150,
-    left: 12,
+    fontSize: 18,
+    top: -255,
+    left: 21,
     backgroundColor: 'transparent'
   },
   rowNumberText: {
     transform: [{ rotate: '90deg'}],
-    fontSize: 20,
-    top: -90,
-    left: 14,
+    fontSize: 18,
+    top: -175,
+    left: 21,
     backgroundColor: 'transparent'
   },
   compartmentText: {
     transform: [{ rotate: '90deg'}],
-    fontSize: 20,
-    top: 30,
-    left: 20,
+    fontSize: 18,
+    top: -90,
+    left: 22,
     backgroundColor: 'transparent'
   },
   shelfNumberText: {
     transform: [{ rotate: '90deg'}],
-    fontSize: 20,
-    top: 145,
-    left: 22,
+    fontSize: 18,
+    top: -10,
+    left: 23,
     backgroundColor: 'transparent'
   },
   readyForTaskButton: {
@@ -354,7 +385,7 @@ export default StyleSheet.create({
     height: 42,
     width: 42,
     borderColor: 'rgb(151, 151, 151)',
-    borderWidth: 0.5,
+    borderWidth: 1,
     marginRight: 25,
     marginTop: 10,
     transform: [{ rotate: '45deg'}]

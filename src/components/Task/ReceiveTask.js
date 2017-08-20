@@ -61,8 +61,7 @@ class ReceiveTask extends React.Component {
           NAID,
           EN,
           boxRangeString,
-          Title,
-          recordIdText: `Box #${boxRangeString.split('-').join(', ')} \n ${Title}`,
+          Title
         };
         this.props.receiveRecord(normalizedRecord);
       })
@@ -71,21 +70,27 @@ class ReceiveTask extends React.Component {
 
   render() {
     const { record } = this.props.user || {};
-    const {  RGNumber, stackArea, rowNumber, compartment, shelfNumber, recordIdText } = record || {};
+    const {  RGNumber, stackArea, rowNumber, compartment, shelfNumber, Title, EN, boxRangeString, NAID } = record || {};
+    const titleArray = Title && Title.split('\n');
+    const seriesName = Title && (titleArray[1].includes('Series') ? titleArray[1] : titleArray[0]);
     return (
       <Image
         resizeMode='cover'
         source={Images.requestFormImg}
         style={homeStyles.backgroundImage} >
         <View style={homeStyles.container}>
-          <Text style={homeStyles.requestorText}>YuCheng Lin</Text>
-          <Text style={homeStyles.naIdText}>021755</Text>
+          <Text style={homeStyles.requestorTextLastName}>Last Name</Text>
+          <Text style={homeStyles.requestorTextFirstName}>First Name</Text>
+          <Text style={homeStyles.naIdText}>ID Number</Text>
           <Text style={homeStyles.RGNumberText}>{RGNumber}</Text>
+          <Text style={homeStyles.entryNumberText}>{EN}</Text>
+          <Text style={homeStyles.NAIDText}>{NAID}</Text>
+          <Text style={homeStyles.boxNumberText}>{boxRangeString}</Text>
           <Text style={homeStyles.stackAreaText}>{stackArea}</Text>
           <Text style={homeStyles.rowNumberText}>{rowNumber}</Text>
           <Text style={homeStyles.compartmentText}>{compartment}</Text>
           <Text style={homeStyles.shelfNumberText}>{shelfNumber}</Text>
-          <Text style={homeStyles.recordIdText}>{recordIdText}</Text>
+          <Text style={homeStyles.recordIdText}>{seriesName}</Text>
         </View>
       </Image>
     );

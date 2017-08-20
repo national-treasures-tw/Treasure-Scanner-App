@@ -30,6 +30,10 @@ const documentsReducer = (state = {}, action) => {
         ...state,
         [action.id]: documentReducer(state[action.id], action)
       };
+
+    case ActionTypes.DOCUMENT.COMPLETE:
+      return {};
+
     default:
       return state;
   }

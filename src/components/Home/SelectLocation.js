@@ -13,60 +13,54 @@ class MyScanScreen extends React.Component {
     super(props);
 
     this.state = {
-      latitude: null,
-      longitude: null,
-      error: null,
+      error: null
     };
   }
 
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.setState({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          error: null,
-        });
-      },
-      (error) => this.setState({ error: error.message }),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-    );
-
-  }
-  // location: 'NARA' or 'UN'
-  onReadyForTask = (location) => {
-    const { latitude, longitude } = this.state;
-    const { selectLocation, navigation } = this.props;
     NetInfo.fetch().then((reach) => {
       console.log('inside net info');
       console.log('Initial: ' + reach);
       if (reach !== 'wifi') {
-        // alert('Please make sure you connect to a Wifi network before continuing');
+        alert('請連上Wifi再繼續進行下一步，因為我們會大量使用網路上傳翻拍');
       }
     });
-    const siteCoordinates = {
-      NARA: { latitude: 39.0006809, longitude: -76.9605249 },
-      UN: { latitude: 40.7517766, longitude: -73.9702365 }
-    };
-    // proximity of 0.01 in latitude is about 7 miles in distance
-    // so here we are checking if the user is within 7 miles of the selected location
-    const proximity = { NARA: 0.01, UN: 0.005 } ;
-    const isCloseBy = latitude < siteCoordinates[location].latitude + proximity[location]
-      && latitude > siteCoordinates[location].latitude - proximity[location]
-      && longitude > siteCoordinates[location].longitude - proximity[location]
-      && longitude < siteCoordinates[location].longitude + proximity[location];
-    const locationString = location === 'NARA' ? 'National Archive' : 'United Nations';
-    if (isCloseBy) {
-      alert(`Your location is not within the ${locationString}, please use Practice Mode instead.`);
-    } else {
-      selectLocation(location);
-      if (location === 'NARA') {
-        navigation.navigate("Task");
-      } else if (location === 'UN') {
-        // 8/2017 for UN go directly to scan view because dispatcher for UN is not ready
-        navigation.navigate("Scan");
-      }
-    }
+  }
+  // location: 'NARA' or 'UN'
+  onReadyForTask = (location) => {
+    const { selectLocation, navigation } = this.props;
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        const siteCoordinates = {
+          NARA: { latitude: 39.0006809, longitude: -76.9605249 },
+          UN: { latitude: 40.7517766, longitude: -73.9702365 }
+        };
+        // proximity of 0.01 in latitude is about 7 miles in distance
+        // so here we are checking if the user is within 7 miles of the selected location
+        const proximity = { NARA: 0.01, UN: 0.01 } ;
+        const isCloseBy = latitude < siteCoordinates[location].latitude + proximity[location]
+          && latitude > siteCoordinates[location].latitude - proximity[location]
+          && longitude > siteCoordinates[location].longitude - proximity[location]
+          && longitude < siteCoordinates[location].longitude + proximity[location];
+        const locationString = location === 'NARA' ? 'National Archive' : 'United Nations';
+        if (isCloseBy) {
+          alert(`您的位置不在 ${locationString} 範圍內，請使用練習模式`);
+        } else {
+          selectLocation(location);
+          if (location === 'NARA') {
+            navigation.navigate("Task");
+          } else if (location === 'UN') {
+            // 8/2017 for UN go directly to scan view because dispatcher for UN is not ready
+            navigation.navigate("Scan");
+          }
+        }
+      },
+      (error) => alert(error.message),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+    );
   }
 
   onReadyForPractice = () => {

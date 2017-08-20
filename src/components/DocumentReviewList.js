@@ -32,7 +32,7 @@ class DocumentReviewList extends PureComponent {
     return {
       title: `Documents`,
       headerRight: <Button title="Scan" color="white" onPress={() => params.onScanButton()} />,
-    headerLeft: <Button title="Back" color="white" onPress={() => { params.user.location === 'NARA' ? navigation.goBack() : navigation.navigate("LocationPicker")}} />
+      headerLeft: <Button title="Back" color="white" onPress={() => navigation.navigate("LocationPicker")} />
     };
   };
 

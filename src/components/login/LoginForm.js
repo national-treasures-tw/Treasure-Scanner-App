@@ -5,7 +5,8 @@ import {
   Text,
   Image,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from 'react-native';
 
 import {
@@ -28,7 +29,8 @@ class LoginForm extends React.Component {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      isLoading: false
     };
   }
 
@@ -53,16 +55,17 @@ class LoginForm extends React.Component {
       Pool: userPool
     };
     const cognitoUser = new CognitoUser(userData);
+    this.setState({ isLoading: true });
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: (result) => {
-        console.log(result);
         const token = result.getIdToken().getJwtToken();
-        console.log('ID token + ' + token);
         this.props.signIn(token);
+        this.setState({ isLoading: false });
         onSignIn(token).then(() => this.props.navigation.navigate("SignedIn"));
       },
       onFailure: (err) => {
         alert(err);
+        this.setState({ isLoading: false });
       },
     });
   }
@@ -81,7 +84,8 @@ class LoginForm extends React.Component {
       onCancelButtonPressed,
       onSignupButtonPressed,
       onForgotPassword
-    } = this.props
+    } = this.props;
+    const { isLoading } = this.state;
     const editable = !fetching
     const textInputStyle = editable ? styles.textInput : styles.textInputReadonly
     const showEmailError = emailError && emailError.message.length > 0
@@ -123,8 +127,8 @@ class LoginForm extends React.Component {
         </View>
 
         <View style={styles.loginColumn}>
-          <TouchableOpacity style={styles.loginButton} onPress={this.onLogin}>
-            <Text style={styles.loginText}>{'登入'}</Text>
+          <TouchableOpacity style={styles.loginButton} onPress={this.onLogin} disabled={isLoading}>
+            { isLoading ? <ActivityIndicator size="small" animating /> : <Text style={styles.loginText}>{'登入'}</Text> }
           </TouchableOpacity>
         </View>
 

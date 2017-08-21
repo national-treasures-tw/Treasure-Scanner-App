@@ -19,9 +19,8 @@ class MyScanScreen extends React.Component {
 
   componentDidMount() {
     NetInfo.fetch().then((reach) => {
-      console.log('inside net info');
-      console.log('Initial: ' + reach);
-      if (reach !== 'wifi') {
+      console.log(' reach is ' + reach)
+      if (reach !== 'wifi' && reach !== 'unknown') {
         alert('請連上Wifi再繼續進行下一步，因為我們會大量使用網路上傳翻拍');
       }
     });
@@ -46,7 +45,7 @@ class MyScanScreen extends React.Component {
           && longitude > siteCoordinates[location].longitude - proximity[location]
           && longitude < siteCoordinates[location].longitude + proximity[location];
         const locationString = location === 'NARA' ? 'National Archive' : 'United Nations';
-        if (isCloseBy) {
+        if (!isCloseBy) {
           alert(`您的位置不在 ${locationString} 範圍內，請使用練習模式`);
         } else {
           selectLocation(location);

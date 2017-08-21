@@ -42,7 +42,8 @@ class ReceiveTask extends React.Component {
         },
         body: JSON.stringify({
           userId: user.details.info.userId,
-          isTest: true
+          // this needs to be set to false for production
+          // isTest: true
         })
       })
       .then(fetchRes => fetchRes.json())

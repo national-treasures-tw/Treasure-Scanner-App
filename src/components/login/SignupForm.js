@@ -5,7 +5,8 @@ import {
   Text,
   Image,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from 'react-native'
 
 // import {
@@ -36,7 +37,9 @@ class SignupForm extends React.Component {
     this.state = {
       email: '',
       nickname: '',
-      password: ''
+      password: '',
+      confirmPassword: '',
+      isLoading: false
     };
   }
 
@@ -52,10 +55,14 @@ class SignupForm extends React.Component {
     this.setState({ password });
   }
 
+  onConfirmPasswordChange = (confirmPassword) => {
+    this.setState({ confirmPassword });
+  }
+
   onSignUp = () => {
     const { email, nickname, password } = this.state;
     const { navigation } = this.props;
-    console.log(`${email} with nickname ${nickname}`)
+    this.setState({ isLoading: true });
     let attributeList = [];
 
     const attributeEmail = new CognitoUserAttribute({
@@ -89,14 +96,14 @@ class SignupForm extends React.Component {
       const cognitoUser = new CognitoUser(userData);
       cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: (result) => {
-          console.log(result);
           const token = result.getIdToken().getJwtToken();
-          console.log('ID token + ' + token);
           this.props.signIn(token);
+          this.setState({ isLoading: false });
           onSignIn(token).then(() => this.props.navigation.navigate("SignedIn"));
         },
         onFailure: (err) => {
           alert(err);
+          this.setState({ isLoading: false });
         },
       });
     });
@@ -170,13 +177,12 @@ class SignupForm extends React.Component {
             secureTextEntry
             onChangeText={this.onPasswordChange}
             underlineColorAndroid='transparent'
-            onSubmitEditing={onLoginButtonPressed}
             placeholder={'密碼'} />
         </View>
 
         <View style={[styles.row, showPasswordError ? styles.redline : styles.greyline]}>
           <TextInput
-            ref='password'
+            ref='confirmPassword'
             style={textInputStyle}
             value={password}
             editable={editable}
@@ -185,15 +191,15 @@ class SignupForm extends React.Component {
             autoCapitalize='none'
             autoCorrect={false}
             secureTextEntry
-            onChangeText={handleChangePassword}
+            onChangeText={this.onConfirmPasswordChange}
             underlineColorAndroid='transparent'
-            onSubmitEditing={onLoginButtonPressed}
+            onSubmitEditing={this.onSignUp}
             placeholder={'確認密碼'} />
         </View>
 
         <View style={styles.loginColumn}>
           <TouchableOpacity style={styles.loginButton} onPress={this.onSignUp}>
-            <Text style={styles.loginText}>{'註冊'}</Text>
+            { this.state.isLoading ? <ActivityIndicator size="small" animating /> : <Text style={styles.loginText}>{'註冊'}</Text> }
           </TouchableOpacity>
         </View>
 

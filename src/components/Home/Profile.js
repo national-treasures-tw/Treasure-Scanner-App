@@ -23,7 +23,7 @@ class MyHomeScreen extends React.Component {
   componentDidMount() {
     const { user, signOut, navigation } = this.props;
     const initTime = new Date().getTime();
-    if (!user.details && user.token) {
+    if (user.token) {
       this.fetchUserInfo(user.token)
     } else if (!user.details) {
       getToken()
@@ -61,10 +61,13 @@ class MyHomeScreen extends React.Component {
   render() {
     const { details } = this.props.user;
     const seasonString = `season${new Date().getFullYear()}${Math.floor(new Date().getMonth() / 3) + 1}`;
-    const ranking = details && details.ranking.sort((a, b) => a[seasonString] < b[seasonString]).map(member => (
+    const ranking = details && details.ranking
+      .sort((a, b) => a[seasonString] < b[seasonString] ? 1 : -1)
+      .filter((usr, i) => !!usr[seasonString] && i < 10)
+      .map((member, index) => (
       <View style={homeStyles.rankItems} key={member.nickname + member[seasonString]}>
-        <Text style={homeStyles.rankItemName}>{member.nickname}</Text>
-        <Text style={homeStyles.rankItemScore}>{member[seasonString]}</Text>
+        <Text style={member.nickname === details.info.nickname ? homeStyles.rankItemMyName : homeStyles.rankItemName}>{`${index + 1}.  ${member.nickname}`}</Text>
+        <Text style={member.nickname === details.info.nickname ? homeStyles.rankItemMyScore : homeStyles.rankItemScore}>{member[seasonString]}</Text>
       </View>
     ));
 

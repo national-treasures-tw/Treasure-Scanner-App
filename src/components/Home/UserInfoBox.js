@@ -32,6 +32,8 @@ export default class UserInfoBox extends React.Component {
     const levelNumber = details && levelLabelCalculator(details.info.totalScore);
     const nickname = details && details.info.nickname;
     const isLongNickname = nickname && nickname.length > 8;
+    const seasonString = `season${new Date().getFullYear()}${Math.floor(new Date().getMonth() / 3) + 1}`;
+    const myRanking = details && details.ranking.filter(usr => usr[seasonString] > details.info[seasonString]).length;
     return (
       <View style={[homeStyles.topSection, { width }]}>
         <Image source={Images[`badge${levelNumber}`]} style={homeStyles.badge1} />
@@ -48,7 +50,7 @@ export default class UserInfoBox extends React.Component {
             </View>
           </View>
           <View style={homeStyles.headingSub}>
-            <Text style={homeStyles.headingSubText}>本季排名：{details && details.ranking.length + 1}</Text>
+            <Text style={homeStyles.headingSubText}>本季排名：{myRanking + 1}</Text>
           </View>
           <View style={homeStyles.headingSub}>
             <Text style={homeStyles.headingSubText}>貢獻寶藏總數：{details && details.info.totalScore}</Text>

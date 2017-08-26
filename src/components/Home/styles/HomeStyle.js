@@ -60,10 +60,10 @@ export default StyleSheet.create({
     marginBottom: 10
   },
   nameBoxText: {
-    fontSize: 36
+    fontSize: 32
   },
   nameBoxTextSmall: {
-    fontSize: 25
+    fontSize: 23
   },
   levelBoxText: {
     fontSize: 14
@@ -125,6 +125,12 @@ export default StyleSheet.create({
     marginRight: 80,
     width: 120
   },
+  rankItemMyName: {
+    color: 'rgb(245, 166, 35)',
+    fontSize: 15,
+    marginRight: 80,
+    width: 120
+  },
   rankBoxContent: {
     backgroundColor: 'rgb(54, 54, 54)',
     padding: 14,
@@ -137,7 +143,13 @@ export default StyleSheet.create({
   },
   rankItemScore: {
     color: '#FFF',
-    fontSize: 15
+    fontSize: 15,
+    width: 60
+  },
+  rankItemMyScore: {
+    color: 'rgb(245, 166, 35)',
+    fontSize: 15,
+    width: 60
   },
   locationImage: {
     width: Metrics.screenWidth,

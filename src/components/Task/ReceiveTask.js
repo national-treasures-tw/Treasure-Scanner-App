@@ -5,6 +5,7 @@ import { Images } from '../Themes';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/actions';
 import { bindActionCreators } from 'redux';
+import { dispatchUrl } from '../../env';
 
 class ReceiveTask extends React.Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class ReceiveTask extends React.Component {
     const { user } = this.props;
     const initTime = new Date().getTime();
     if (!user.record && user.location === 'NARA') {
-      fetch('https://76k76zdzzl.execute-api.us-east-1.amazonaws.com/stage/dispatch', {
+      fetch(dispatchUrl, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

@@ -18,10 +18,11 @@ import {
 import { Images } from '../Themes'
 import styles from './styles/LoginFormStyle';
 import { onSignIn } from "../auth";
+import { UserPoolId, ClientId } from '../../env';
 
 const userPool = new CognitoUserPool({
-  UserPoolId: 'us-east-1_8JaJl8ZVD',
-  ClientId: '428sfq1asso7a3pam8ugmmssdh',
+  UserPoolId,
+  ClientId,
 });
 
 class LoginForm extends React.Component {

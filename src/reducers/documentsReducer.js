@@ -34,6 +34,9 @@ const documentsReducer = (state = {}, action) => {
     case ActionTypes.DOCUMENT.COMPLETE:
       return {};
 
+    case ActionTypes.USER_SIGNOUT:
+      return {};
+
     default:
       return state;
   }

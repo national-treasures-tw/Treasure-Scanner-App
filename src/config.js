@@ -15,11 +15,13 @@ import {
   SBSDKDocumentDetectionStatusError_Noise,
 } from './Scanbot/Scanbot';
 
-const config = {
-  scanbotLicense: 'VXMvtFUgalNpBeyjO8F2kwC+KEvoooRTxemKTvEZrdTf6EmiJ+zx4I/8Fb7FTxyZoU3Vh4Z7/mYp8Yw8OEnvGCnfLc6P0Lfb8RwSopcL2SxFGou6TH3sH3nEw8giXiMTzkhdMBA0xvaGuagPA/Sk2/l3t/PRD65Q0mdEmql37nXs1i53QkMTY5Q5x4bDkDlvytopayVU8BLZhKIWcDbGdzWQWhsqPX4FodsEAGrSWdzdfdz/uiLFaQKzhb0BtzOfWoyWWTvhDokxGD2HXSjCvGRPHKGopJBIndhEG2uG7FmSLKEFWXXobQ3lzo4pG83SjuC1LWuEXrbdkpUm9Lvs7w==\nU2NhbmJvdFNESwpUTlQuVGFpd2FuLVRyZWF1c3JlCjE1MDU0MzM1OTkKNzgKMQ==\n',
+// env variable not to be checked into GH
+import { scanbotLicense, uploadUrl } from './env';
 
-  // bucket: 'https://requestb.in/11d6jet1',
-  bucket: 'https://76k76zdzzl.execute-api.us-east-1.amazonaws.com/stage/upload',
+const config = {
+  scanbotLicense,
+
+  bucket: uploadUrl,
 
   autoUploadAllButLastN: 3,
   autoArchiveAllButLastN: 5,

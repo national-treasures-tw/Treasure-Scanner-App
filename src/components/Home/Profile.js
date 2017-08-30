@@ -9,12 +9,7 @@ import { bindActionCreators } from 'redux';
 import { getToken } from '../auth';
 import { levelWidthCalculator, levelLabelCalculator } from '../../utils/levelHelper';
 import UserInfoBox from './UserInfoBox';
-
-import { CognitoUserPool } from 'react-native-aws-cognito-js';
-const userPool = new CognitoUserPool({
-  UserPoolId: 'us-east-1_8JaJl8ZVD',
-  ClientId: '428sfq1asso7a3pam8ugmmssdh',
-});
+import { userInfoUrl } from '../../env';
 
 const width = Metrics.screenWidth;
 
@@ -38,7 +33,7 @@ class MyHomeScreen extends React.Component {
 
   fetchUserInfo = (token) => {
     const { signOut, navigation } = this.props;
-    fetch(`https://76k76zdzzl.execute-api.us-east-1.amazonaws.com/stage/user?token=${token}`, {
+    fetch(`${userInfoUrl}?token=${token}`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
